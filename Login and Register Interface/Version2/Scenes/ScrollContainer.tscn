@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/cincino.jpg" type="Texture" id=1]
+[ext_resource path="res://Sprites/rowlet.jpg" type="Texture" id=2]
+[ext_resource path="res://Sprites/pika.jpg" type="Texture" id=3]
+[ext_resource path="res://Scenes/ScrollContainer.gd" type="Script" id=4]
+
+[node name="ScrollContainer" type="ScrollContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = false
+mouse_filter = 1
+script = ExtResource( 4 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 5465.0
+margin_bottom = 1588.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+margin_top = 538.0
+margin_right = 5465.0
+margin_bottom = 1050.0
+mouse_filter = 2
+custom_constants/margin_right = 1920
+custom_constants/margin_left = 1920
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer"]
+margin_left = 1920.0
+margin_right = 3545.0
+margin_bottom = 512.0
+mouse_filter = 2
+custom_constants/separation = 100
+
+[node name="CardMenu1" type="TextureRect" parent="CenterContainer/MarginContainer/HBoxContainer"]
+margin_right = 401.0
+margin_bottom = 512.0
+texture = ExtResource( 3 )
+
+[node name="CardMenu2" type="TextureRect" parent="CenterContainer/MarginContainer/HBoxContainer"]
+margin_left = 501.0
+margin_right = 1013.0
+margin_bottom = 512.0
+texture = ExtResource( 2 )
+
+[node name="CardMenu3" type="TextureRect" parent="CenterContainer/MarginContainer/HBoxContainer"]
+margin_left = 1113.0
+margin_right = 1625.0
+margin_bottom = 512.0
+texture = ExtResource( 1 )
+
+[connection signal="gui_input" from="." to="." method="_on_ScrollContainer_gui_input"]
