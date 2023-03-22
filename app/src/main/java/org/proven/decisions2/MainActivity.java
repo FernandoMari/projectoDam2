@@ -62,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (!email.matches(emailPattern)) {
             inputEmail.setError("Enter conntext Email");
-
+        } else if (password.isEmpty() || password.length() < 6) {
+            inputPassword.setError("Enter Proper Password");
         } else {
             progressDialog.setMessage("Please Wait While Login...");
             progressDialog.setTitle("Login");
@@ -89,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendUserToNextActivity() {
-       Intent intent=new Intent(MainActivity.this, SocialInterface.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent intent = new Intent(MainActivity.this, SocialInterface.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 }
