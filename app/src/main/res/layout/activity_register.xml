@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Register"
+    android:background="#FFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="15dp">
+
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/logo_decisions"/>
+
+                <TextView
+                    android:text="Register"
+                    android:textSize="31dp"
+                    android:fontFamily="@font/brown_sugar2"
+                    android:textColor="#00bac6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    >
+
+                </TextView>
+
+                <!--<TextView
+                    android:text="Mail"
+                    android:textSize="20dp"
+                    android:textColor="#000"
+                    android:layout_width="275dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+
+                    >
+                </TextView>-->
+
+                <EditText
+                    android:id="@+id/etMail"
+                    android:layout_width="275dp"
+                    android:layout_height="60dp"
+                    android:minHeight="50dp"
+                    android:background="@drawable/textbox_style"
+                    android:ems="10"
+                    android:hint="Email adress"
+                    android:inputType="textPassword"
+                    android:textSize="22dp"
+                    android:drawableStart="@drawable/custom_mail_icon"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:layout_marginBottom="10dp"/>
+
+                <!--<TextView
+                    android:text="Username"
+                    android:textSize="20dp"
+                    android:textColor="#000"
+                    android:layout_width="275dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    >
+
+                </TextView>-->
+
+                <EditText
+                    android:id="@+id/etUsername"
+                    android:layout_width="275dp"
+                    android:layout_height="60dp"
+                    android:minHeight="50dp"
+                    android:background="@drawable/textbox_style"
+                    android:ems="10"
+                    android:hint="Username"
+                    android:inputType="textPassword"
+                    android:textSize="22dp"
+                    android:drawableStart="@drawable/custom_username_icon"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:layout_marginBottom="10dp"
+                    />
+
+                <!--<TextView
+                    android:text="Password"
+                    android:textSize="20dp"
+                    android:textColor="#000"
+                    android:layout_width="275dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    >
+                </TextView>-->
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="275dp"
+                    android:layout_height="60dp"
+                    android:minHeight="50dp"
+                    android:background="@drawable/textbox_style"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:textSize="22dp"
+                    android:drawableStart="@drawable/custom_password_icon"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:layout_marginBottom="10dp"/>
+                <!--<TextView
+                    android:text="Confirm Password"
+                    android:textSize="20dp"
+                    android:textColor="#000"
+                    android:layout_width="275dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    >
+                </TextView>-->
+
+                <EditText
+                    android:id="@+id/etConfirmPassword"
+                    android:layout_width="275dp"
+                    android:layout_height="60dp"
+                    android:minHeight="50dp"
+                    android:background="@drawable/textbox_style"
+                    android:ems="10"
+                    android:hint="Confirm password"
+                    android:inputType="textPassword"
+                    android:textSize="22dp"
+                    android:drawableStart="@drawable/custom_confirm_icon"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:layout_marginBottom="10dp"/>
+
+
+
+
+
+
+                        <Button
+                            android:id="@+id/btAccept"
+                            android:text="@string/btAccept"
+                            android:layout_width="275dp"
+                            android:layout_height="60dp"
+                            android:textSize="20dp"
+                            android:layout_marginTop="20dp"
+                            android:textColor="#000"
+                            android:background="@drawable/boton_curvo"
+                            android:fontFamily="@font/montserrat_regular"
+                            >
+
+                        </Button>
+
+
+
+        </LinearLayout>
+
+</LinearLayout>
