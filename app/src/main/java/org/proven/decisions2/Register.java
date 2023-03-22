@@ -64,6 +64,9 @@ public class Register extends AppCompatActivity {
         /*Check If the email does not match the pattern, an error message is displayed in the email input field.*/
         if (!email.matches(emailPattern)) {
             inputEmail.setError("Enter conntext Email");
+        } else if (email.equals(email)) {
+            inputEmail.setError("Email exist");
+
             /*Check if the password is valid. If the password is less than 6 characters or empty, an error message is displayed in the password input field.*/
         } else if (password.isEmpty() || password.length() < 6) {
             inputPassword.setError("Enter Proper Password");
