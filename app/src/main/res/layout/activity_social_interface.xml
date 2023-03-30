@@ -1,49 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SocialInterface"
-    android:background="@drawable/main_social"
-    android:orientation="vertical">
+    android:background="@drawable/default_background"
+    >
+
+    <include layout="@layout/post_layout"></include>
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:background="@drawable/main_social"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"/>
+
+
+
+    <TextView
+        android:layout_width="260dp"
+        android:layout_height="60dp"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="18dp"
+        android:text="The Decision"
+        android:maxLength="43"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:inputType="textMultiLine"
+        android:gravity="center_vertical"
+        >
+
+    </TextView>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="740dp"
-        android:orientation="horizontal">
+        android:layout_gravity="center"
+        tools:ignore="MissingConstraints"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
         <Button
-            android:id="@+id/btajustes"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="70dp"
-            android:src="@drawable/ajustes_ico"
-            android:background="@drawable/ajustes_ico"
-            android:layout_marginTop="10dp"
-            >
-        </Button>
-
-        <Button
-            android:id="@+id/btdecisions"
-            android:layout_width="90dp"
+            android:id="@+id/btSettings"
+            android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@drawable/decisions_ico"
-            android:layout_marginRight="70dp"
-            >
-        </Button>
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/custom_settings_icon"
+            android:contentDescription="btSettings"
+            ></Button>
 
         <Button
-            android:id="@+id/btamigos"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/amigos_ico"
-            android:layout_marginTop="10dp">
-        </Button>
+            android:id="@+id/btDecisions"
+            android:layout_width="107dp"
+            android:layout_height="72dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/custom_decisions_icon"
+            android:contentDescription="buttonHome"></Button>
 
-
+        <Button
+            android:id="@+id/btFriends"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_addfriends_icon"
+            android:contentDescription="btFriends"></Button>
     </LinearLayout>
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
