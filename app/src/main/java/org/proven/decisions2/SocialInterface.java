@@ -16,62 +16,60 @@ import java.io.IOException;
 
 
 public class SocialInterface extends FragmentActivity {
-        private VerticalViewPager viewPager;
-        private ViewPagerAdapter viewAdapter;
+    private VerticalViewPager viewPager;
+    private ViewPagerAdapter viewAdapter;
 
-        Button btFriends, btDecisions, btSettings;
-        String username;
+    Button btFriends, btDecisions, btSettings;
+    String username;
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_social_interface);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_social_interface);
+        //Initialize the elements
+        initializeElements();
+        readUser();
+        btFriends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocialInterface.this, FriendsActivity.class);
+                readUser();
+                Log.d("TAG", "userIdSocial: " + username);
+                startActivity(intent);
+                finish();
 
+            }
+        });
+        btDecisions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SocialInterface.this, BeforePlayActivity.class));
+            }
+        });
 
-            viewPager = (VerticalViewPager) findViewById(R.id.viewPager);
-            viewAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-            viewPager.setAdapter(viewAdapter);
-            btFriends = findViewById(R.id.btFriends);
-            btDecisions = findViewById(R.id.btDecisions);
-            btSettings = findViewById(R.id.btSettings);
-//            Bundle extras = getIntent().getExtras();
-//            if (extras != null) {
-//                username = extras.getString("id");
-//                Log.d("TAG", "userIdSocial: " + username);
-//            }
-            readUser(username);
-            btFriends.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(SocialInterface.this, FriendsActivity.class);
-                    intent.putExtra("id", username);
-                    readUser(username);
-                    Log.d("TAG", "userIdSocial: " + username);
-                    startActivity(intent);
-                    finish();
+        btSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SocialInterface.this, SettingsActivity.class);
+                Log.d("TAG", "userIdSocial: " + username);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
 
-                }
-            });
-            btDecisions.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(SocialInterface.this, BeforePlayActivity.class));
-                }
-            });
+    /*Initialize the elements*/
+    private void initializeElements() {
+        viewPager = (VerticalViewPager) findViewById(R.id.viewPager);
+        viewAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(viewAdapter);
+        btFriends = findViewById(R.id.btFriends);
+        btDecisions = findViewById(R.id.btDecisions);
+        btSettings = findViewById(R.id.btSettings);
+    }
 
-            btSettings.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(SocialInterface.this, SettingsActivity.class);
-                    intent.putExtra("id", username);
-                    Log.d("TAG", "userIdSocial: " + username);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-        }
-
-    private void readUser(String userId) {
+    /*Method to read the login username for use in the activity*/
+    private void readUser() {
         File filename = new File(getFilesDir(), "username.txt");
         try {
             FileReader reader = new FileReader(filename);

@@ -24,22 +24,16 @@ public class SettingsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        //Initialize the elements
+        initializeElements();
 
-        btHome = findViewById(R.id.btHome);
-        btFriends = findViewById(R.id.btFriends);
-        btProfile = findViewById(R.id.btProfile);
-        btPassword = findViewById(R.id.btPassword);
-        btRemove = findViewById(R.id.btRemove);
-        btRequests = findViewById(R.id.btRequests);
-        btlogout = findViewById(R.id.btLogout);
-        btCreators = findViewById(R.id.btCreators);
+        //call the method
         readUser();
 
         btHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SettingsActivity.this, SocialInterface.class);
-                //intent.putExtra("id", userId);
                 readUser();
                 Log.d("TAG", "userIdSocial: " + userId);
                 startActivity(intent);
@@ -71,7 +65,6 @@ public class SettingsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SettingsActivity.this, RemoveFriendsActivity.class);
-                ///intent.putExtra("id", userId);
                 readUser();
                 Log.d("TAG", "userIdFriendsActivity: " + userId);
                 startActivity(intent);
@@ -102,8 +95,21 @@ public class SettingsActivity extends Activity {
 
     }
 
+    /*Initialize the elements*/
+    private void initializeElements() {
+        btHome = findViewById(R.id.btHome);
+        btFriends = findViewById(R.id.btFriends);
+        btProfile = findViewById(R.id.btProfile);
+        btPassword = findViewById(R.id.btPassword);
+        btRemove = findViewById(R.id.btRemove);
+        btRequests = findViewById(R.id.btRequests);
+        btlogout = findViewById(R.id.btLogout);
+        btCreators = findViewById(R.id.btCreators);
+    }
+
+    /*Method to read the login username for use in the activity*/
     private void readUser() {
-        File filename = new File(getFilesDir(),"username.txt");
+        File filename = new File(getFilesDir(), "username.txt");
         try {
             FileReader reader = new FileReader(filename);
             BufferedReader bufferedReader = new BufferedReader(reader);

@@ -47,27 +47,27 @@ public class FriendsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
-
+        //Initialize the elements
         initializeElements();
-//        Bundle extras = getIntent().getExtras();
-//        if (extras != null) {
-//            userName = extras.getString("id");
-//        }
-        readUser(userName);
+        //Call the method
+        readUser();
+        //Call the method
         getFriends(userName);
     }
 
+    /*Initialize the elements*/
     private void initializeElements() {
         btHome = findViewById(R.id.btHome);
         btSettings = findViewById(R.id.btSettings);
         listFriend = findViewById(R.id.lvPersons);
         searchFriend = findViewById(R.id.etSearch);
     }
-
+    /* Method to instantiate the FriendsAsyncTask and start it */
     private void getFriends(String username) {
         new FriendsAsyncTask().execute(username);
     }
 
+    /* Method to pass the list of friends and show them */
     private void setList(ArrayList<String> friendsList) {
         mFriendsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, friendsList);
         listFriend.setAdapter(mFriendsAdapter);
@@ -91,8 +91,7 @@ public class FriendsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FriendsActivity.this, SocialInterface.class);
-                //intent.putExtra("id", userName);ç
-                readUser(userName);
+                readUser();
                 Log.d("TAG", "userIdFriendsActivity: " + userName);
                 startActivity(intent);
             }
@@ -102,14 +101,14 @@ public class FriendsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FriendsActivity.this, SettingsActivity.class);
-                //intent.putExtra("id", userName);
-                readUser(userName);
+                readUser();
                 Log.d("TAG", "userIdSocial: " + userName);
                 startActivity(intent);
             }
         });
     }
 
+    /*Method to execute post requests for available users*/
     private class FriendsAsyncTask extends AsyncTask<String, Void, ArrayList<String>> {
 
         @Override
@@ -148,8 +147,8 @@ public class FriendsActivity extends Activity {
             setList(friendsNames);
         }
     }
-
-    private void readUser(String userId) {
+    /*Method to read the login username for use in the activity*/
+    private void readUser() {
         File filename = new File(getFilesDir(), "username.txt");
         try {
             FileReader reader = new FileReader(filename);

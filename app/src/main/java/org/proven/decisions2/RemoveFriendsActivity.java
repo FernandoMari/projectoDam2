@@ -42,7 +42,7 @@ public class RemoveFriendsActivity extends Activity {
         setContentView(R.layout.remove_friends_layout);
         initializeElements();
 
-        readUser(userName);
+        readUser();
         getFriends(userName);
 
     }
@@ -83,7 +83,7 @@ public class RemoveFriendsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RemoveFriendsActivity.this, SocialInterface.class);
-                readUser(userName);
+                readUser();
                 Log.d("TAG", "userIdFriendsActivity: " + userId);
                 startActivity(intent);
             }
@@ -92,7 +92,7 @@ public class RemoveFriendsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RemoveFriendsActivity.this, FriendsActivity.class);
-                readUser(userName);
+                readUser();
                 Log.d("TAG", "userIdFriendsActivity: " + userId);
                 startActivity(intent);
             }
@@ -102,7 +102,7 @@ public class RemoveFriendsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RemoveFriendsActivity.this, SettingsActivity.class);
-                readUser(userName);
+                readUser();
                 Log.d("TAG", "userIdFriendsActivity: " + userId);
                 startActivity(intent);
             }
@@ -189,7 +189,7 @@ public class RemoveFriendsActivity extends Activity {
         }
     }
 
-    private void readUser(String userId) {
+    private void readUser() {
         File filename = new File(getFilesDir(), "username.txt");
         try {
             FileReader reader = new FileReader(filename);

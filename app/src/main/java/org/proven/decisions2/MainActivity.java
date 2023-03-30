@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /*Method to initialize the elements*/
     private void initializeElements() {
         btLogin = findViewById(R.id.btLogin);
         btRegister = findViewById(R.id.btRegister);
@@ -63,14 +64,17 @@ public class MainActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
     }
 
+    /*Method to login by asking the user for the username and password*/
     private void perforLogin() {
         username = inputUsername.getText().toString();
         password = inputPassword.getText().toString();
-
+        //Check the username is not equals
         if (!username.matches(username)) {
             inputUsername.setError("Enter conntext Username");
+            //Check the username is empty
         } else if (username.isEmpty()) {
             inputUsername.setError("Enter conntext Username");
+            //Check that the password is empty or the length is correct
         } else if (password.isEmpty() || password.length() < 4) {
             inputPassword.setError("Enter Proper Password");
         } else {
@@ -79,21 +83,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /*Method to go to the next activity*/
     private void sendUserToNextActivity() {
         Intent intent = new Intent(MainActivity.this, SocialInterface.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        Bundle bundle = new Bundle();
-        bundle.putString("id", username);
-        Log.d("TAG", "userIdMainActivity: " + username);
-        intent.putExtras(bundle);
         startActivity(intent);
     }
 
+    /*Method to instantiate the asyncTask of the HttpTask and execute it*/
     private void http() {
         new HttpTask().execute();
     }
 
-
+    /*Method to execute the post requests for the login*/
     private class HttpTask extends AsyncTask<Void, Void, String> {
         @Override
         protected void onPreExecute() {
@@ -126,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        //check that the login is correct and check if the credentials are correct or incorrect
         @Override
         protected void onPostExecute(String responseData) {
             boolean loginSuccessful = false;
@@ -140,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 //Parse the response data to check if login was successful
                 if (loginSuccessful == true) {
                     progressDialog.dismiss();
-                    // redirige al usuario a la actividad siguiente
+                    // redirects the user to the next activity
                     sendUserToNextActivity();
 
                     Toast.makeText(MainActivity.this, "Login Succesfull", Toast.LENGTH_SHORT).show();
@@ -155,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    /*Method to save the username that logs in to be able to use it in other activities*/
     private void saveUser() {
         try {
             outputStream = openFileOutput(filename, Context.MODE_PRIVATE);

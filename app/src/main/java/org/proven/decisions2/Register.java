@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -66,20 +65,23 @@ public class Register extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
     }
 
+    /*Method to register by asking the user for the email, username and password*/
     private void PerforAuth() {
         email = inputEmail.getText().toString();
         username = inputusername.getText().toString();
         password = inputPassword.getText().toString();
         String confirmPassword = inputConfirmPasword.getText().toString();
-
+        //Check the email if it contains the elements of an email correctly
         if (!email.matches(emailPattern)) {
             inputEmail.setError("Enter conntext Email");
+            //Check the username is empty
             if (username.isEmpty()) {
-                inputusername.setError("Enter username");
+                inputusername.setError("Enter username please");
             }
+            //Check that the password is empty or the length is correct
         } else if (password.isEmpty() || password.length() < 4) {
             inputPassword.setError("Enter Proper Password");
-
+            //Check that the password is equals
         } else if (!password.equals(confirmPassword)) {
             inputConfirmPasword.setError("Password Not matched Both field");
         } else {
@@ -87,18 +89,19 @@ public class Register extends AppCompatActivity {
             progressDialog.setTitle("Register");
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
-
+            //call the method
             http();
 
         }
 
     }
 
+    /*Method to instantiate the asyncTask of the HttpTask and execute it*/
     private void http() {
         new HttpTask().execute();
     }
 
-
+    /*Method to execute the post requests for the register*/
     private class HttpTask extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... params) {
@@ -132,17 +135,15 @@ public class Register extends AppCompatActivity {
                     System.out.println("Respuesta" + responseData);
                 if (registerSuccessful) {
                     progressDialog.dismiss();
-                    // redirige al usuario a la actividad siguiente
+                    // redirects the user to the next activity
                     sendUserToNextActivity();
                     Toast.makeText(Register.this, "Register Succesful", Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                // Muestra un mensaje de error si no se pudo obtener la respuesta
             }
         }
     }
 
-
+    /*Method to go to the next activity*/
     private void sendUserToNextActivity() {
         Intent intent = new Intent(Register.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
