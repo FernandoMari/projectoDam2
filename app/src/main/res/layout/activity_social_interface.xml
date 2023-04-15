@@ -1,51 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SocialInterface"
-    android:background="@drawable/main_social"
+    android:background="@color/dark_blue"
     >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <include layout="@layout/post_layout"></include>
+
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/header_main"
+        android:gravity="center_horizontal"
         android:layout_gravity="center"
+        android:layout_marginBottom="15dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="92dp"
+            tools:ignore="MissingConstraints"
+            android:text="The Decision"
+            android:maxLength="60"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:inputType="textMultiLine"
+            android:gravity="center"
+            android:paddingStart="60dp"
+            android:paddingEnd="60dp">
+
+        </TextView>
+    </RelativeLayout>
 
 
-        tools:ignore="MissingConstraints"
 
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/footer_main"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        >
 
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        <LinearLayout
+            android:id="@+id/footerButtons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
 
-        <Button
-            android:id="@+id/btajustes"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="70dp"
-            android:background="@drawable/ajustes_ico"
-            android:src="@drawable/ajustes_ico"></Button>
+            <Button
+                android:id="@+id/btSettings"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/custom_settings_icon"
+                android:contentDescription="btSettings"></Button>
 
-        <Button
-            android:id="@+id/btdecisions"
-            android:layout_width="90dp"
-            android:layout_height="60dp"
-            android:layout_marginRight="70dp"
-            android:background="@drawable/decisions_ico"></Button>
+            <Button
+                android:id="@+id/btDecisions"
+                android:layout_width="105dp"
+                android:layout_height="70dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/custom_decisions_icon"
+                android:contentDescription="buttonHome"></Button>
 
-        <Button
-            android:id="@+id/btamigos"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/amigos_ico"></Button>
+            <Button
+                android:id="@+id/btFriends"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_friends_icon"
+                android:contentDescription="btFriends"
 
+                ></Button>
+        </LinearLayout>
 
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

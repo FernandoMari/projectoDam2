@@ -5,140 +5,150 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#FFF">
+    android:background="#FFF"
+    android:orientation="vertical"
+    android:layout_gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="15dp">
-
-        <ImageView
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_gravity="center"
-            android:src="@drawable/logo_decisions"/>
-
-        <TextView
-            android:text="LOGIN"
-            android:textSize="36dp"
-            android:fontFamily="@font/brown_sugar2"
-            android:textColor="#00bac6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            >
-
-        </TextView>
-
-        <!--<TextView
-           android:text="Username"
-           android:textSize="22dp"
-           android:textColor="#000"
-           android:layout_width="275dp"
-           android:layout_height="wrap_content"
-           android:fontFamily="@font/montserrat_medium"
-           >
-
-       </TextView>-->
-
-       <EditText
-           android:id="@+id/etUsername"
-           android:layout_width="275dp"
-           android:layout_height="60dp"
-           android:layout_marginBottom="20dp"
-           android:textSize="22dp"
-           android:ems="10"
-           android:hint="Username"
-           android:inputType="textPersonName"
-           android:minHeight="50dp"
-           android:selectAllOnFocus="true"
-           android:singleLine="true"
-           android:background="@drawable/textbox_style"
-           android:fontFamily="@font/montserrat_medium"
-           android:drawableStart="@drawable/custom_username_icon"
-           android:paddingStart="12dp"
-           android:paddingEnd="12dp"/>
-
-       <!--<TextView
-           android:text="Password"
-           android:textSize="22dp"
-           android:textColor="#000"
-           android:layout_width="275dp"
-           android:layout_height="wrap_content"
-           android:fontFamily="@font/montserrat_medium"
-           >
-
-        </TextView>-->
-
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="275dp"
-            android:layout_height="60dp"
-            android:minHeight="50dp"
-            android:background="@drawable/textbox_style"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:textSize="22dp"
-            android:drawableStart="@drawable/custom_password_icon"
-            android:fontFamily="@font/montserrat_medium"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:layout_marginBottom="10dp"/>
-
-        <CheckBox
-            android:layout_width="275dp"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:text="Keep signed in"
-            android:fontFamily="@font/montserrat_medium"
-            >
-        </CheckBox>
-
+        >
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:layout_marginTop="20dp">
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginBottom="40dp"
+            >
 
-            <Button
-                android:id="@+id/btLogin"
-                android:text="@string/btLogin"
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:textSize="20dp"
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="120dp"
+                android:src="@drawable/logo_decisions"/>
 
-                android:textColor="#000"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/boton_curvo"
-                android:fontFamily="@font/montserrat_regular"
+            <TextView
+                android:text="@string/login"
+                android:textSize="32dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="#00bac6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
                 >
 
-            </Button>
-            <Button
-                android:id="@+id/btRegister"
-                android:text="@string/btRegister"
-                android:layout_width="150dp"
-                android:layout_height="60dp"
-                android:textSize="20dp"
-                android:textColor="#000"
-                android:layout_gravity="center"
-                android:background="@drawable/boton_curvo"
-                android:fontFamily="@font/montserrat_regular"
-                >
-
-            </Button>
+            </TextView>
 
         </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+           <EditText
+               android:id="@+id/etUsername2"
+               android:layout_width="match_parent"
+               android:layout_height="60dp"
+               android:textSize="20dp"
+               android:ems="10"
+               android:hint="@string/username"
+               android:inputType="textPersonName"
+               android:selectAllOnFocus="true"
+               android:singleLine="true"
+               android:background="@drawable/textbox_style"
+               android:fontFamily="@font/montserrat_medium"
+               android:drawableStart="@drawable/custom_username_icon"
+               android:paddingStart="12dp"
+               android:paddingEnd="12dp"
+               android:textColor="@color/black"
+               android:textColorHint="@android:color/darker_gray"/>
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="285dp"
+                android:layout_height="1dp"
+                android:background="@color/light_blue"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:minHeight="50dp"
+                android:background="@drawable/textbox_style"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:textSize="20dp"
+                android:drawableStart="@drawable/custom_password_icon"
+                android:fontFamily="@font/montserrat_medium"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@android:color/darker_gray"/>
+
+            <CheckBox
+                android:id="@+id/cbRemember"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textSize="18dp"
+                android:text="@string/keep_signed_in"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/black"
+                android:button="@drawable/custom_checkbox"
+                android:paddingStart="3dp"
+                >
+            </CheckBox>
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center|center_horizontal"
+                android:textAlignment="center"
+                android:layout_marginTop="25dp">
+
+                <Button
+                    android:id="@+id/btLogin"
+                    android:text="@string/btEnter"
+                    android:layout_width="130dp"
+                    android:layout_height="60dp"
+                    android:textSize="22dp"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/button_style"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:stateListAnimator="@null"
+                    >
+                </Button>
+
+                <Button
+                    android:id="@+id/btRegister"
+                    android:text="@string/btRegister"
+                    android:layout_width="165dp"
+                    android:layout_height="60dp"
+                    android:textSize="22dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_style"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:stateListAnimator="@null"
+                    >
+
+                </Button>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

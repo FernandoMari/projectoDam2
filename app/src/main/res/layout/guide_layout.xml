@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/light_blue">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/header"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/games_guide"
+            android:textSize="32dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textAllCaps="true"
+            >
+        </TextView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/footer"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/footerButtons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+
+            <Button
+                android:id="@+id/btSettings"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/custom_settings_icon"
+                android:contentDescription="btSettings"
+                >
+
+            </Button>
+
+            <Button
+                android:id="@+id/btHome"
+                android:layout_width="95dp"
+                android:layout_height="90dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/custom_home_icon"
+                android:contentDescription="buttonHome"
+
+                >
+            </Button>
+
+            <Button
+                android:id="@+id/btFriends"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_friends_icon"
+                android:contentDescription="btFriends"
+
+                ></Button>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:scrollbars="vertical"
+        android:scrollIndicators="left"
+        android:layout_below="@+id/header"
+        android:layout_above="@id/footer"
+        >
+
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/footer"
+            android:fillViewport="true"
+            android:layout_centerHorizontal="true"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            android:scrollIndicators="left">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/GuideElements"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:contentPadding="10dp"
+                app:cardCornerRadius="20dp"
+                android:onClick="expand"
+                app:cardBackgroundColor="@color/white">
+                <LinearLayout
+                    android:id="@+id/layoutExpand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:animateLayoutChanges="true">
+
+                    <TextView
+                        android:id="@+id/tvElements"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/elements"
+                        android:textSize="24dp"
+                        android:textColor="@color/dark_blue"
+                        android:fontFamily="@font/montserrat_bold"
+                        ></TextView>
+
+                    <TextView
+                        android:id="@+id/tvDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/elements_guide"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textAlignment="textStart"
+                        android:visibility="gone"
+                        android:padding="10dp"
+                        ></TextView>
+
+                    <LinearLayout
+                        android:id="@+id/layoutImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:animateLayoutChanges="true"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:visibility="gone">
+
+                            <ImageView
+                                android:id="@+id/waterImg"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:background="@drawable/water_element"
+                                android:foreground="@drawable/water_element"
+                                app:srcCompat="@drawable/water_element"
+
+                                android:layout_marginRight="20dp"
+                                ></ImageView>
+
+                            <ImageView
+                                android:id="@+id/fireImg"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:background="@drawable/fire_element"
+                                app:srcCompat="@drawable/fire_element"
+                                android:layout_marginRight="20dp"></ImageView>
+
+                            <ImageView
+                                android:id="@+id/iceImg"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:background="@drawable/ice_element"
+                                android:foreground="@drawable/ice_element"
+                                app:srcCompat="@drawable/ice_element"
+                                ></ImageView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>
