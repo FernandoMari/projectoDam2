@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.ChangeBounds;
+import android.transition.ChangeScroll;
 import android.transition.TransitionManager;
 import android.view.View;
 import android.widget.Button;
@@ -63,19 +64,22 @@ public class GuideActivity extends Activity {
         iceImg = findViewById(R.id.iceImg);
         layoutExpand = findViewById(R.id.layoutExpand);
         layoutImg = findViewById(R.id.layoutImg);
-        layoutExpand.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
-        layoutImg.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+        layoutExpand.getLayoutTransition().enableTransitionType(LayoutTransition.APPEARING);
+        layoutImg.getLayoutTransition().enableTransitionType(LayoutTransition.APPEARING);
     }
 
     /*Method for the expand the game guide */
     public void expand(View view) {
-        int v = (tvDetails.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE;
-        TransitionManager.beginDelayedTransition(layoutExpand, new AutoTransition());
+        int v = (tvDetails.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
+        TransitionManager.beginDelayedTransition(layoutExpand, new ChangeScroll() {
+        });
         tvDetails.setVisibility(v);
 
         int l = (layoutImg.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE;
-        TransitionManager.beginDelayedTransition(layoutImg, new ChangeBounds());
+        TransitionManager.beginDelayedTransition(layoutImg, new ChangeScroll());
         layoutImg.setVisibility(l);
+
+
 
     }
 }

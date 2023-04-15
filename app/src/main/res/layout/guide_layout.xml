@@ -99,38 +99,43 @@
 
         <ScrollView
             android:id="@+id/scroll_view"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/footer"
             android:fillViewport="true"
             android:layout_centerHorizontal="true"
             android:overScrollMode="never"
             android:scrollbars="none"
-            android:scrollIndicators="left">
+            android:scrollIndicators="left"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/GuideElements"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                app:contentPadding="10dp"
+                app:contentPadding="20dp"
                 app:cardCornerRadius="20dp"
                 android:onClick="expand"
                 app:cardBackgroundColor="@color/white">
+
                 <LinearLayout
                     android:id="@+id/layoutExpand"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:animateLayoutChanges="true">
+                    android:animateLayoutChanges="true"
+                    >
 
                     <TextView
                         android:id="@+id/tvElements"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/elements"
                         android:textSize="24dp"
                         android:textColor="@color/dark_blue"
                         android:fontFamily="@font/montserrat_bold"
+                        android:drawableEnd="@drawable/custom_right_icon"
                         ></TextView>
 
                     <TextView
@@ -138,12 +143,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/elements_guide"
-                        android:textSize="18sp"
+                        android:textSize="19sp"
                         android:textColor="@color/black"
                         android:fontFamily="@font/montserrat_medium"
                         android:textAlignment="textStart"
                         android:visibility="gone"
-                        android:padding="10dp"
+                        android:layout_marginTop="10dp"
                         ></TextView>
 
                     <LinearLayout
@@ -154,7 +159,8 @@
                         android:animateLayoutChanges="true"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:visibility="gone">
+                        android:visibility="gone"
+                        android:layout_marginTop="10dp">
 
                             <ImageView
                                 android:id="@+id/waterImg"

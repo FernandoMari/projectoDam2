@@ -114,7 +114,7 @@
             <ListView
                 android:id="@+id/lvPersons"
                 android:layout_width="300dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@drawable/listview_style"
                 android:fontFamily="@font/montserrat_medium"
                 android:hint="Search persons"
