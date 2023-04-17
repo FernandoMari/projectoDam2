@@ -113,20 +113,15 @@ public class AddFriendsActivity extends Activity {
                 // Get the username of the selected item in the list
                 selectedUsername = (String) parent.getItemAtPosition(position);
                 Log.d("Selected username", selectedUsername);
-//                if(selectedUsername != null){
-//                    new SendFriendRequestTask().execute(selectedUsername);
-//                }else{
-//                    Toast.makeText(getApplicationContext(), "Please select a user before sending the friend request", Toast.LENGTH_SHORT).show();
-//                }
+
                 if (selectedUsername == null) {
                     Toast.makeText(getApplicationContext(), "Please select a username", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // Enviar la solicitud de amistad
+                // Send the friend request
                 new SendFriendRequestTask().execute();
             }
-
 
         });
         searchFriend.addTextChangedListener(new TextWatcher() {
@@ -161,7 +156,6 @@ public class AddFriendsActivity extends Activity {
                 String requestBodyString = "";
                 RequestBody requestBody = RequestBody.create(mediaType, requestBodyString);
                 Request request = new Request.Builder()
-                        //.url("http://5.75.251.56:7070/getUsers")
                         .url(url)
                         .post(requestBody)
                         .addHeader("content-type", "application/json")
@@ -190,7 +184,6 @@ public class AddFriendsActivity extends Activity {
     }
 
     /*Method to send friend requests to other users*/
-
     private class SendFriendRequestTask extends AsyncTask<String, Void, Boolean> {
 
         @Override

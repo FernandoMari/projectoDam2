@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.proven.decisions2.AppCompat;
 import org.proven.decisions2.R;
 import org.proven.decisions2.SocialInterface;
 
@@ -38,7 +39,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompat {
     EditText inputUsername, inputPassword;
     Button btLogin, btRegister;
     ProgressDialog progressDialog;

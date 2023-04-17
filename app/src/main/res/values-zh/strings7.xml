@@ -44,4 +44,14 @@
     <string name="hindi">印地语</string>
     <string name="german">德语</string>
     <string name="portuguese">葡萄牙语</string>
+    <string name="you_lose">你输了</string>
+    <string name="you_win">你赢了</string>
+    <string name="draw">画</string>
+    <string name="time">时间</string>
+    <string name="you_decide">你决定</string>
+    <string name="victory">胜利</string>
+    <string name="defeat">打败</string>
+    <string name="elements">元素</string>
+    <string name="games_guide">游戏指南</string>
+    <string name="elements_guide">欢迎来到令人兴奋的游戏“元素”！ 在这个游戏中，你必须在水、火和冰之间做出明智的选择来面对你的对手。 但要注意，每个元素都有其弱点和优势。 水能灭火，火能化冰，冰能冻水——神仙对决！ 你只有 15 秒的时间来做出决定，所以要快点想。 如果您未能及时选择，则选择将是随机的。 但是不要在平局时放弃，战斗将继续进行，直到分出胜负为止！ 准备好感受皮肤上元素的快感！ 您会成为掌握这三个要素并赢得比赛的那个人吗？ 来吧，不要落后！</string>
 </resources>

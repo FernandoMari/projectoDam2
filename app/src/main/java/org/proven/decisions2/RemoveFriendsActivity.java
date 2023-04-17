@@ -8,9 +8,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -33,10 +35,10 @@ public class RemoveFriendsActivity extends Activity {
     CustomListAdapter mFriendsAdapter;
     ArrayList<String> friendsNames = new ArrayList<>();
     String token;
-
+    String selectedUsername;
     String url = "http://143.47.249.102:7070/getFriends";
-    String url2 = "http://143.47.249.102:7070/getUserId";
-    int userId;
+    String url2= "http://143.47.249.102:7070/removeFriend";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class RemoveFriendsActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(RemoveFriendsActivity.this, SocialInterface.class);
                 readUser();
-                Log.d("TAG", "userIdFriendsActivity: " + userId);
+                Log.d("TAG", "userIdFriendsActivity: " + token);
                 startActivity(intent);
             }
         });
@@ -63,7 +65,7 @@ public class RemoveFriendsActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(RemoveFriendsActivity.this, FriendsActivity.class);
                 readUser();
-                Log.d("TAG", "userIdFriendsActivity: " + userId);
+                Log.d("TAG", "userIdFriendsActivity: " + token);
                 startActivity(intent);
             }
         });
@@ -73,7 +75,7 @@ public class RemoveFriendsActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(RemoveFriendsActivity.this, SettingsActivity.class);
                 readUser();
-                Log.d("TAG", "userIdFriendsActivity: " + userId);
+                Log.d("TAG", "userIdFriendsActivity: " + token);
                 startActivity(intent);
             }
         });
@@ -91,13 +93,31 @@ public class RemoveFriendsActivity extends Activity {
 
     /*Method for the get friends*/
     private void getFriends(String username) {
-        //new userIdAsyncTask().execute(username);
         new FriendsAsyncTask().execute(username);
     }
     /*Method to show friends list */
     private void setList(ArrayList<String> friendsList) {
-        mFriendsAdapter = new CustomListAdapter(this, friendsList, R.layout.remove_friends_layout);
+        mFriendsAdapter = new CustomListAdapter(this,friendsList, R.layout.list_item_remove);
         listFriend.setAdapter(mFriendsAdapter);
+        listFriend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Get the username of the selected item in the list
+                selectedUsername = (String) parent.getItemAtPosition(position);
+                Log.d("Selected username", selectedUsername);
+
+                if (selectedUsername == null) {
+                    Toast.makeText(getApplicationContext(), "Please select a username", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Send the friend request
+               new removeFriendTask().execute();
+            }
+
+
+        });
+
         searchFriend.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -128,14 +148,14 @@ public class RemoveFriendsActivity extends Activity {
             OkHttpClient client = new OkHttpClient();
             MediaType mediaType = MediaType.parse("application/json");
             if (token != null) {
-                String requestBodyString = "username=" + userId;
+                String requestBodyString = "username=" + token;
                 RequestBody requestBody = RequestBody.create(mediaType, requestBodyString);
                 Request request = new Request.Builder()
-                        //.url("http://5.75.251.56:7070/getFriends")
                         .url(url)
                         .post(requestBody)
                         .addHeader("content-type", "application/json")
                         .addHeader("cache-control", "no-cache")
+                        .addHeader("Authorization", token)
                         .build();
 
                 try {
@@ -159,44 +179,48 @@ public class RemoveFriendsActivity extends Activity {
         }
     }
 
-//    private class userIdAsyncTask extends AsyncTask<String, Void, ArrayList<String>> {
-//        @Override
-//        protected ArrayList<String> doInBackground(String... params) {
-//            userName = params[0];
-//            ArrayList<String> friendsList = new ArrayList<>();
-//            OkHttpClient client = new OkHttpClient();
-//            MediaType mediaType = MediaType.parse("application/json");
-//            if (userName != null) {
-//                String requestBodyString = "username=" + userName;
-//                System.out.println("parametro FriendsActivity" + requestBodyString);
-//                RequestBody requestBody = RequestBody.create(mediaType, requestBodyString);
-//                Request request = new Request.Builder()
-//                        //.url("http://5.75.251.56:7070/getUserId")
-//                        .url(url2)
-//                        .post(requestBody)
-//                        .addHeader("content-type", "application/json")
-//                        .addHeader("cache-control", "no-cache")
-//                        .build();
-//
-//                try {
-//                    Response response = client.newCall(request).execute();
-//                    int ur = Integer.parseInt(response.body().string());
-//                    userId = ur;
-//                    System.out.println("id" + ur);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            return friendsList;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(ArrayList<String> result) {
-//            super.onPostExecute(result);
-//            friendsNames = result;
-//            setList(friendsNames);
-//        }
-//    }
+    /*Method to execute the post delete for the friend*/
+    private class removeFriendTask extends AsyncTask<String, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+
+            OkHttpClient client = new OkHttpClient();
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody requestBody = RequestBody.create(mediaType, "username=" + selectedUsername);
+
+            Request request = new Request.Builder()
+                    .url(url2)
+                    .post(requestBody)
+                    .addHeader("content-type", "application/json")
+                    .addHeader("Authorization", token)
+                    .build();
+
+            // Send HTTP POST friend request
+            try {
+                Response response = client.newCall(request).execute();
+                if (response.isSuccessful()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+                Toast.makeText(getApplicationContext(), "The friend has been deleted " + selectedUsername, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Error delete friend  " + selectedUsername, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
 
     /*Method to read the login token for use in the activity*/
     private void readUser() {
