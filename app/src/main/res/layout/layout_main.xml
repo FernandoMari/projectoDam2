@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".LoginAndRegister.MainActivity"
     android:background="#FFF"
     android:orientation="vertical"
     android:layout_gravity="center">
@@ -81,19 +82,19 @@
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:minHeight="50dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/textbox_style"
+                android:drawableStart="@drawable/custom_password_icon"
                 android:ems="10"
+                android:fontFamily="@font/montserrat_medium"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:textSize="20dp"
-                android:drawableStart="@drawable/custom_password_icon"
-                android:fontFamily="@font/montserrat_medium"
+                android:minHeight="50dp"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
-                android:layout_marginBottom="10dp"
                 android:textColor="@color/black"
-                android:textColorHint="@android:color/darker_gray"/>
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="20dp" />
 
             <CheckBox
                 android:id="@+id/cbRemember"

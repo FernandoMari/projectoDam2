@@ -2,6 +2,7 @@ package org.proven.decisions2;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -88,6 +89,17 @@ public class RequestsFriendsActivity extends Activity {
     private void setList(ArrayList<String> friendsList) {
         mFriendsAdapter = new CustomListAdapter(this, friendsList, R.layout.list_item_request);
         listFriend.setAdapter(mFriendsAdapter);
+
+        mFriendsAdapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+               if (mFriendsAdapter.getCount()==0 || mFriendsAdapter.isEmpty() ){
+                   listFriend.setVisibility(View.INVISIBLE);// o View.INVISIBLE
+               }else {
+                   listFriend.setVisibility(View.INVISIBLE);
+               }
+            }
+        });
         listFriend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

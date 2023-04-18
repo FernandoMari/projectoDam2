@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import org.proven.decisions2.MailSender;
 import org.proven.decisions2.R;
 
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class Register extends AppCompatActivity {
 
     String email, username, password;
 
-    String url="http://143.47.249.102:7070/register";
+    String url = "http://143.47.249.102:7070/register";
 
 
     @Override
@@ -55,6 +56,8 @@ public class Register extends AppCompatActivity {
 
             }
         });
+
+
 
     }
 
@@ -102,6 +105,13 @@ public class Register extends AppCompatActivity {
     /*Method to instantiate the asyncTask of the HttpTask and execute it*/
     private void http() {
         new HttpTask().execute();
+        MailSender sender = new MailSender(
+                email,
+                "Confirmación de cambio de correo o contraseña",
+                "Tu correo o contraseña ha sido cambiado exitosamente."
+
+        );
+        sender.execute();
     }
 
     /*Method to execute the post requests for the register*/
@@ -146,6 +156,11 @@ public class Register extends AppCompatActivity {
             }
         }
     }
+
+
+
+
+
 
     /*Method to go to the next activity*/
     private void sendUserToNextActivity() {
