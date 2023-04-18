@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import org.proven.decisions2.Friends.FriendsActivity;
+import org.proven.decisions2.Settings.SettingsActivity;
+
 public class ThemeActivity extends AppCompatActivity {
 
     Button btFriends, btHome, btSettings;

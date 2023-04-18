@@ -14,24 +14,12 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-import org.proven.decisions2.AppCompat;
+import org.proven.decisions2.Settings.AppCompat;
 import org.proven.decisions2.R;
 import org.proven.decisions2.SocialInterface;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;

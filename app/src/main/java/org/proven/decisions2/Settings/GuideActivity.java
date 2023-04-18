@@ -1,11 +1,9 @@
-package org.proven.decisions2;
+package org.proven.decisions2.Settings;
 
 import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.transition.AutoTransition;
-import android.transition.ChangeBounds;
 import android.transition.ChangeScroll;
 import android.transition.TransitionManager;
 import android.view.View;
@@ -13,6 +11,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.proven.decisions2.Friends.FriendsActivity;
+import org.proven.decisions2.R;
+import org.proven.decisions2.SocialInterface;
 
 public class GuideActivity extends Activity {
 

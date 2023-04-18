@@ -1,10 +1,13 @@
-package org.proven.decisions2;
+package org.proven.decisions2.Games;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
+
+import org.proven.decisions2.R;
+import org.proven.decisions2.SocialInterface;
 
 public class ChargingGame extends Activity {
     @Override

@@ -1,4 +1,4 @@
-package org.proven.decisions2;
+package org.proven.decisions2.Settings;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import org.proven.decisions2.Friends.FriendsActivity;
 import org.proven.decisions2.LoginAndRegister.MainActivity;
+import org.proven.decisions2.R;
+import org.proven.decisions2.SocialInterface;
 
 import java.io.BufferedReader;
 import java.io.File;

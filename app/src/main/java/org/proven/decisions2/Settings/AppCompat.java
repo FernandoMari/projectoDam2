@@ -1,10 +1,11 @@
-package org.proven.decisions2;
+package org.proven.decisions2.Settings;
 
 import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+
+import org.proven.decisions2.Settings.LanguageManager;
 
 public class AppCompat extends Activity {
 

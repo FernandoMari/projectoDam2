@@ -1,20 +1,15 @@
-package org.proven.decisions2;
+package org.proven.decisions2.Settings;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
 import android.widget.Button;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import org.proven.decisions2.Friends.FriendsActivity;
+import org.proven.decisions2.R;
+import org.proven.decisions2.SocialInterface;
 
 public class LanguageActivity extends Activity {
 

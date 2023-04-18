@@ -1,4 +1,4 @@
-package org.proven.decisions2;
+package org.proven.decisions2.Settings;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.proven.decisions2.Friends.FriendsActivity;
+import org.proven.decisions2.R;
+import org.proven.decisions2.SocialInterface;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,73 +24,88 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ProfileActivity extends Activity {
+public class PasswordActivity extends Activity {
+    EditText inputNewPassword, inputConfirmNewPassword;
+    Button btFriends, btHome, btSettings, btAccept;
 
-    Button btFriends, btHome, btSettings;
-    EditText inputnewusername;
-    String url="http://143.47.249.102:7070/swichPassword";
-    String token, newusername;
+    String url = "http://143.47.249.102:7070/swichPasswordOrName";
 
+    String token, newPassword,confirmPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile_layout);
-        /*Initialize the elements*/
+        setContentView(R.layout.password_layout);
+
         initializeElements();
 
         readUser();
 
-        getFriends(token);
 
         btHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, SocialInterface.class));
+                startActivity(new Intent(PasswordActivity.this, SocialInterface.class));
             }
         });
 
         btFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, FriendsActivity.class));
+                startActivity(new Intent(PasswordActivity.this, FriendsActivity.class));
             }
         });
 
         btSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, SettingsActivity.class));
+                startActivity(new Intent(PasswordActivity.this, SettingsActivity.class));
+            }
+        });
+
+        btAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFriends(token);
+                startActivity(new Intent(PasswordActivity.this, SettingsActivity.class));
             }
         });
     }
-    /*Initialize the elements*/
+
     private void initializeElements() {
         btHome = findViewById(R.id.btHome);
         btFriends = findViewById(R.id.btFriends);
         btSettings = findViewById(R.id.btSettings);
-        inputnewusername= findViewById(R.id.etUsername3);
+        inputNewPassword = findViewById(R.id.etNewPassword);
+        inputConfirmNewPassword = findViewById(R.id.etNewConfPassword);
+        btAccept = findViewById(R.id.btConfirm2);
+
     }
 
     private void getFriends(String token) {
-        new UsernameChangeTask().execute(token);
+        new PasswordChangeTask().execute(token);
     }
 
-    private class UsernameChangeTask extends AsyncTask<String, Void, Boolean> {
+
+    private class PasswordChangeTask extends AsyncTask<String, Void, Boolean> {
 
         @Override
         protected Boolean doInBackground(String... params) {
             token=params[0];
-            newusername = inputnewusername.getText().toString();
-            if (newusername == null || newusername.trim().isEmpty()) {
+            newPassword=inputNewPassword.getText().toString();
+            confirmPassword=inputConfirmNewPassword.getText().toString();
+            if (newPassword.isEmpty() || newPassword.length() < 4)
+            {
+                return false;
+            }else if (!newPassword.equals(confirmPassword)) {
+
                 return false;
             }
 
-            System.out.println(token);
             OkHttpClient client = new OkHttpClient();
             MediaType mediaType = MediaType.parse("application/json");
-            RequestBody requestBody = RequestBody.create(mediaType, "newName=" + newusername+ "&paramether=username");
-            System.out.println("Nuevo nombre user "+newusername);
+            RequestBody requestBody = RequestBody.create(mediaType, "newValue=" + newPassword + "&paramether=password");
+
             Request request = new Request.Builder()
                     .url(url)
                     .post(requestBody)
@@ -111,9 +130,9 @@ public class ProfileActivity extends Activity {
         @Override
         protected void onPostExecute(Boolean result) {
             if (result) {
-                Toast.makeText(getApplicationContext(), "Change username "+ newusername , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Change password ", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getApplicationContext(), "Error: Please enter a valid username" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error change password ", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -132,6 +151,4 @@ public class ProfileActivity extends Activity {
         }
 
     }
-
-
 }

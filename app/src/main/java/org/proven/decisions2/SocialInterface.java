@@ -1,6 +1,5 @@
 package org.proven.decisions2;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +7,10 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.fragment.app.FragmentActivity;
+
+import org.proven.decisions2.Friends.FriendsActivity;
+import org.proven.decisions2.Games.BeforePlayActivity;
+import org.proven.decisions2.Settings.SettingsActivity;
 
 import java.io.BufferedReader;
 import java.io.File;

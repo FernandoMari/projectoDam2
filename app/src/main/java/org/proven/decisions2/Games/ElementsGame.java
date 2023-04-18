@@ -1,4 +1,4 @@
-package org.proven.decisions2;
+package org.proven.decisions2.Games;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+
+import org.proven.decisions2.R;
 
 import java.util.Random;
 

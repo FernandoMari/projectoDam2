@@ -130,6 +130,7 @@
                 android:background="@drawable/textbox_style"
                 android:drawableStart="@drawable/custom_username_icon"
                 android:fontFamily="@font/montserrat_medium"
+                android:text=""
                 android:hint="@string/new_username"
                 android:inputType="text"
                 android:paddingStart="12dp"
@@ -172,17 +173,17 @@
             </EditText>
 
             <Button
+                android:id="@+id/btAccept2"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:text="@string/btAccept"
-                android:fontFamily="@font/montserrat_bold"
-                android:textSize="22dp"
                 android:background="@drawable/button_style"
-                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_bold"
                 android:stateListAnimator="@null"
-                >
+                android:text="@string/btAccept"
+                android:textColor="@color/white"
+                android:textSize="22dp">
 
             </Button>
 

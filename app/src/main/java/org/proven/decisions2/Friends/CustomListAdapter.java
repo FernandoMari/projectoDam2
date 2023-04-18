@@ -1,4 +1,4 @@
-package org.proven.decisions2;
+package org.proven.decisions2.Friends;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+
+import org.proven.decisions2.R;
 
 import java.util.ArrayList;
 import java.util.List;

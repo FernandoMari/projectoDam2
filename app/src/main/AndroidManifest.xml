@@ -19,7 +19,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".LanguageActivity"
+            android:name=".Settings.LanguageActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -35,7 +35,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".FriendsActivity"
+            android:name=".Friends.FriendsActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -43,14 +43,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name=".Settings.SettingsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ProfileActivity"
+            android:name=".Settings.ProfileActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -58,7 +58,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".PasswordActivity"
+            android:name=".Settings.PasswordActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -66,7 +66,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddFriendsActivity"
+            android:name=".Friends.AddFriendsActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -74,7 +74,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".RemoveFriendsActivity"
+            android:name=".Friends.RemoveFriendsActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -82,7 +82,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".GuideActivity"
+            android:name=".Settings.GuideActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -90,7 +90,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".RequestsFriendsActivity"
+            android:name=".Friends.RequestsFriendsActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -105,7 +105,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".BeforePlayActivity"
+            android:name=".Games.BeforePlayActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -121,7 +121,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ElementsGame"
+            android:name=".Games.ElementsGame"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -129,7 +129,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ResultGame"
+            android:name=".Games.ResultGame"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -137,7 +137,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".CreatorsActivity"
+            android:name=".Settings.CreatorsActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data

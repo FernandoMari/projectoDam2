@@ -1,4 +1,4 @@
-package org.proven.decisions2;
+package org.proven.decisions2.Friends;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,8 +14,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.proven.decisions2.R;
+import org.proven.decisions2.Settings.SettingsActivity;
+import org.proven.decisions2.SocialInterface;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,39 +31,34 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class AddFriendsActivity extends Activity {
+public class RemoveFriendsActivity extends Activity {
+
     Button btFriends, btHome, btSettings;
-    private static ListView listFriend;
-    private static EditText searchFriend;
+    EditText searchFriend;
+    ListView listFriend;
     CustomListAdapter mFriendsAdapter;
-    private static ArrayList<String> friendsNames = new ArrayList<>();
-    private static String token;
+    ArrayList<String> friendsNames = new ArrayList<>();
+    String token;
     String selectedUsername;
-    String url = "http://143.47.249.102:7070/getUsers";
-    String url2 = "http://143.47.249.102:7070/sendFriendRequest";
+    String url = "http://143.47.249.102:7070/getFriends";
+    String url2= "http://143.47.249.102:7070/removeFriend";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.addfriends_layout);
+        setContentView(R.layout.remove_friends_layout);
         //Initialize the elements
         initializeElements();
         //Call the method
         readUser();
-
         //Call the method
         getFriends(token);
-        Log.d("TAG", "Token: " + token);
-
-
-        btHome = findViewById(R.id.btHome);
-
-        btSettings = findViewById(R.id.btSettings);
 
         btHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddFriendsActivity.this, SocialInterface.class);
+                Intent intent = new Intent(RemoveFriendsActivity.this, SocialInterface.class);
                 readUser();
                 Log.d("TAG", "userIdFriendsActivity: " + token);
                 startActivity(intent);
@@ -71,21 +67,22 @@ public class AddFriendsActivity extends Activity {
         btFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AddFriendsActivity.this, FriendsActivity.class));
-            }
-        });
-
-
-        btSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AddFriendsActivity.this, SettingsActivity.class);
+                Intent intent = new Intent(RemoveFriendsActivity.this, FriendsActivity.class);
                 readUser();
-                Log.d("TAG", "userIdSocial: " + token);
+                Log.d("TAG", "userIdFriendsActivity: " + token);
                 startActivity(intent);
             }
         });
 
+        btSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RemoveFriendsActivity.this, SettingsActivity.class);
+                readUser();
+                Log.d("TAG", "userIdFriendsActivity: " + token);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -98,14 +95,13 @@ public class AddFriendsActivity extends Activity {
         searchFriend = findViewById(R.id.etSearch);
     }
 
-    /* Method to instantiate the FriendsAsyncTask and start it */
-    private void getFriends(String token) {
-        new FriendsAsyncTask().execute(token);
+    /*Method for the get friends*/
+    private void getFriends(String username) {
+        new FriendsAsyncTask().execute(username);
     }
-
-    /* Method to pass the list of friends and show them */
+    /*Method to show friends list */
     private void setList(ArrayList<String> friendsList) {
-        mFriendsAdapter = new CustomListAdapter(this, friendsList, R.layout.list_item_add);
+        mFriendsAdapter = new CustomListAdapter(this,friendsList, R.layout.list_item_remove);
         listFriend.setAdapter(mFriendsAdapter);
         listFriend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -120,10 +116,12 @@ public class AddFriendsActivity extends Activity {
                 }
 
                 // Send the friend request
-                new SendFriendRequestTask().execute();
+               new removeFriendTask().execute();
             }
 
+
         });
+
         searchFriend.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -141,9 +139,10 @@ public class AddFriendsActivity extends Activity {
             }
         });
 
+
     }
 
-    /*Method to execute post requests for available users*/
+    /*Method to execute the post requests for the friends*/
     private class FriendsAsyncTask extends AsyncTask<String, Void, ArrayList<String>> {
 
         @Override
@@ -153,12 +152,13 @@ public class AddFriendsActivity extends Activity {
             OkHttpClient client = new OkHttpClient();
             MediaType mediaType = MediaType.parse("application/json");
             if (token != null) {
-                String requestBodyString = "";
+                String requestBodyString = "username=" + token;
                 RequestBody requestBody = RequestBody.create(mediaType, requestBodyString);
                 Request request = new Request.Builder()
                         .url(url)
                         .post(requestBody)
                         .addHeader("content-type", "application/json")
+                        .addHeader("cache-control", "no-cache")
                         .addHeader("Authorization", token)
                         .build();
 
@@ -183,8 +183,8 @@ public class AddFriendsActivity extends Activity {
         }
     }
 
-    /*Method to send friend requests to other users*/
-    private class SendFriendRequestTask extends AsyncTask<String, Void, Boolean> {
+    /*Method to execute the post delete for the friend*/
+    private class removeFriendTask extends AsyncTask<String, Void, Boolean> {
 
         @Override
         protected Boolean doInBackground(String... params) {
@@ -217,12 +217,14 @@ public class AddFriendsActivity extends Activity {
         @Override
         protected void onPostExecute(Boolean result) {
             if (result) {
-                Toast.makeText(getApplicationContext(), "The friend request was sent successfully to " + selectedUsername, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "The friend has been deleted " + selectedUsername, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getApplicationContext(), "Error sending friend request to " + selectedUsername, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error delete friend  " + selectedUsername, Toast.LENGTH_SHORT).show();
             }
         }
     }
+
+
 
     /*Method to read the login token for use in the activity*/
     private void readUser() {
@@ -233,15 +235,9 @@ public class AddFriendsActivity extends Activity {
             token = bufferedReader.readLine();
             bufferedReader.close();
             reader.close();
-            new FriendsAsyncTask().execute(token);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
     }
-
-
 }
-
-
-
