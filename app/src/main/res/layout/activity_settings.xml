@@ -169,6 +169,33 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"/>
 
+            <Button
+                android:id="@+id/btEmail"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/button_style2"
+                android:drawableEnd="@drawable/custom_right_icon"
+                android:fontFamily="@font/montserrat_medium"
+                android:gravity="left|center_vertical"
+                android:text="@string/change_email"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="19dp"
+                android:paddingStart="18dp"
+                android:stateListAnimator="@null">
+
+            </Button>
+
+
+
+            <View
+                android:layout_width="255dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:background="@color/medium_blue"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
 
             <Button
                 android:id="@+id/btLogout"

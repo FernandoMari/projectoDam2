@@ -26,9 +26,9 @@ import okhttp3.Response;
 
 public class ProfileActivity extends Activity {
 
-    Button btFriends, btHome, btSettings,btAccept;
-    EditText inputUsername ;
-    String url="http://143.47.249.102:7070/swichPasswordOrName";
+    Button btFriends, btHome, btSettings, btAccept, btCancel;
+    EditText inputUsername;
+    String url = "http://143.47.249.102:7070/swichPasswordOrName";
     String token, newUsername;
 
 
@@ -38,9 +38,8 @@ public class ProfileActivity extends Activity {
         setContentView(R.layout.profile_layout);
         /*Initialize the elements*/
         initializeElements();
-
+        //call the method
         readUser();
-
 
 
         btHome.setOnClickListener(new View.OnClickListener() {
@@ -67,42 +66,65 @@ public class ProfileActivity extends Activity {
         btAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFriends(token);
-                startActivity(new Intent(ProfileActivity.this, SettingsActivity.class));
+                changeUsername();
+                if (newUsername.isEmpty()) {
+
+                } else {
+                    startActivity(new Intent(ProfileActivity.this, SettingsActivity.class));
+                }
 
             }
         });
+        btCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, SettingsActivity.class));
+                finish();
+            }
+        });
     }
+
     /*Initialize the elements*/
     private void initializeElements() {
-        inputUsername= findViewById(R.id.etUsername3);
+        inputUsername = findViewById(R.id.etUsername3);
         btHome = findViewById(R.id.btHome);
         btFriends = findViewById(R.id.btFriends);
         btSettings = findViewById(R.id.btSettings);
-        btAccept=findViewById(R.id.btAccept2);
+        btAccept = findViewById(R.id.btConfirm);
+        btCancel = findViewById(R.id.btCancel);
 
     }
 
+    /* Method to instantiate the UsernameChangeTask and start it */
     private void getFriends(String token) {
         new UsernameChangeTask().execute(token);
     }
 
+    /*Method to change username by asking the user for the new username*/
+    private void changeUsername() {
+        newUsername = inputUsername.getText().toString();
+        if (newUsername.isEmpty()) {
+            inputUsername.setError("Enter new username");
+        } else {
+            getFriends(token);
+        }
+
+    }
+
+    /*Method to execute post change username for user*/
     private class UsernameChangeTask extends AsyncTask<String, Void, Boolean> {
 
         @Override
         protected Boolean doInBackground(String... params) {
-            token=params[0];
+            token = params[0];
             newUsername = inputUsername.getText().toString();
-            System.out.println("Algo: " +inputUsername.getText().toString());
-            if (newUsername == null || newUsername.trim().isEmpty()) {
-                return false;
-            }
+            System.out.println("Algo: " + inputUsername.getText().toString());
 
             System.out.println(token);
             OkHttpClient client = new OkHttpClient();
             MediaType mediaType = MediaType.parse("application/json");
-            RequestBody requestBody = RequestBody.create(mediaType, "newName=" + newUsername + "&paramether=username");
-            System.out.println("Nuevo nombre user "+newUsername);
+            RequestBody requestBody = RequestBody.create(mediaType, "newValue=" + newUsername + "&paramether=username");
+            System.out.println("Nuevo nombre user " + newUsername);
             Request request = new Request.Builder()
                     .url(url)
                     .post(requestBody)
@@ -127,9 +149,9 @@ public class ProfileActivity extends Activity {
         @Override
         protected void onPostExecute(Boolean result) {
             if (result) {
-                Toast.makeText(getApplicationContext(), "Change username "+ newUsername , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Change username " + newUsername, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getApplicationContext(), "Error: Please enter a valid username" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error: Please enter a valid username", Toast.LENGTH_SHORT).show();
             }
         }
     }

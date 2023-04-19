@@ -19,7 +19,7 @@ import java.io.IOException;
 
 public class SettingsActivity extends Activity {
 
-    Button btFriends, btHome, btProfile, btPassword, btCreators, btLanguage, btGuide, btlogout;
+    Button btFriends, btHome, btProfile, btPassword, btCreators, btLanguage, btGuide, btlogout, btEmail;
 
 
     String token;
@@ -78,6 +78,13 @@ public class SettingsActivity extends Activity {
             }
         });
 
+        btEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingsActivity.this, EmailActivity.class));
+            }
+        });
+
         btLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +124,7 @@ public class SettingsActivity extends Activity {
         btLanguage = findViewById(R.id.btLanguage);
         btlogout = findViewById(R.id.btLogout);
         btGuide = findViewById(R.id.btExplication);
-
+        btEmail = findViewById(R.id.btEmail);
 
     }
 

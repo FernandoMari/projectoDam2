@@ -53,4 +53,9 @@
     <string name="elements">Elements</string>
     <string name="games_guide">Games guide</string>
     <string name="elements_guide">Welcome to the exciting game \"Elements\"! In this game, you must choose wisely between water, fire and ice to face your opponent. But beware, each element has its weakness and strength. Water will extinguish fire, fire will melt ice and ice will freeze water - it\'s a duel of gods! You will have only 15 seconds to make your decision, so think fast. If you fail to choose in time, the choice will be random. But don\'t give up if you\'re tied, the battle will continue until there\'s a clear winner or loser! Get ready to feel the thrill of the elements on your skin! Will you be the one chosen to master the three elements and win the game? Come on, don\'t be left behind!</string>
+    <string name="change_email" >Change email</string>
+    <string name="actual_email">Actual email</string>
+    <string name="btConfirm" >Confirm</string>
+    <string name="btCancel" >Cancel</string>
+    <string name="actual_password" >Actual password</string>
 </resources>
