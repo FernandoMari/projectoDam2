@@ -1,4 +1,4 @@
-package org.proven.decisions2;
+package org.proven.decisions2.Settings.EmailSettings;
 
 import android.os.AsyncTask;
 

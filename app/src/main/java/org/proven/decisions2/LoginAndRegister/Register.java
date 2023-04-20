@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-import org.proven.decisions2.MailSender;
+import org.proven.decisions2.Settings.EmailSettings.MailSender;
 import org.proven.decisions2.R;
 
 import java.io.IOException;
@@ -56,7 +56,6 @@ public class Register extends AppCompatActivity {
 
             }
         });
-
 
 
     }
@@ -145,8 +144,12 @@ public class Register extends AppCompatActivity {
                 Log.d("TAG", "Response data: " + responseData);
                 //Parse the response data to check if register was successful
                 boolean registerSuccessful = true;
-                if (responseData.equalsIgnoreCase("user exists"))
+                if (responseData.equalsIgnoreCase("user exists")) {
                     System.out.println("Respuesta" + responseData);
+                    inputusername.setError("Username exist");
+                    progressDialog.dismiss();
+                    registerSuccessful=false;
+                }
                 if (registerSuccessful) {
                     progressDialog.dismiss();
                     // redirects the user to the next activity
@@ -156,10 +159,6 @@ public class Register extends AppCompatActivity {
             }
         }
     }
-
-
-
-
 
 
     /*Method to go to the next activity*/
