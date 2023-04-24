@@ -118,7 +118,6 @@ public class MainActivity extends AppCompat {
         } else if (password.isEmpty() || password.length() < 4) {
             inputPassword.setError("Enter Proper Password");
         } else {
-            saveUser();
             http();
         }
     }
@@ -176,18 +175,18 @@ public class MainActivity extends AppCompat {
         @Override
         protected void onPostExecute(String responseData) {
             boolean loginSuccessful = false;
-            String textoSinComillas = responseData.replace("\"", "");
-            if (textoSinComillas != null) {
-                if (textoSinComillas.equals("Credenciales o usuario incorrecto!!!")) {
+            String textWithoutQuotes = responseData.replace("\"", "");
+            if (textWithoutQuotes != null) {
+                if (textWithoutQuotes.equals("Credenciales o usuario incorrecto!!!")) {
+                    inputUsername.setError("User not exists");
                     loginSuccessful = false;
                 } else {
-                    token = textoSinComillas;
+                    token = textWithoutQuotes;
                     System.out.println(token);
-                    saveUser();
                     loginSuccessful = true;
                 }
 
-                Log.d("TAG", "Response data: " + textoSinComillas);
+                Log.d("TAG", "Response data: " + textWithoutQuotes);
                 //Parse the response data to check if login was successful
                 if (loginSuccessful == true) {
                     progressDialog.dismiss();
@@ -245,35 +244,25 @@ public class MainActivity extends AppCompat {
         @Override
         protected void onPostExecute(String responseData) {
             boolean loginSuccessful = false;
-            String textoSinComillas = responseData.replace("\"", "");
-            if (textoSinComillas != null) {
-                if (textoSinComillas.equals("Credenciales o usuario incorrecto!!!")) {
+            String textWithoutQuotes = responseData.replace("\"", "");
+            if (textWithoutQuotes != null) {
+                if (textWithoutQuotes.equals("Credenciales o usuario incorrecto!!!")) {
                     loginSuccessful = false;
                 } else {
-                    token = textoSinComillas;
+                    token = textWithoutQuotes;
                     System.out.println(token);
                     saveUser();
                     loginSuccessful = true;
                 }
-                Log.d("TAG", "Response data: " + textoSinComillas);
+                Log.d("TAG", "Response data: " + textWithoutQuotes);
                 //Parse the response data to check if login was successful
                 if (loginSuccessful == true) {
-                    progressDialog.dismiss();
-
-                    // redirects the user to the next activity
                     sendUserToNextActivity();
-
-                    Toast.makeText(MainActivity.this, "Login Succesfull", Toast.LENGTH_SHORT).show();
-                } else {
-                    progressDialog.dismiss();
-                    Toast.makeText(MainActivity.this, "Wrong credentials or user", Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                progressDialog.dismiss();
-                Toast.makeText(MainActivity.this, "error connection", Toast.LENGTH_SHORT).show();
             }
         }
     }
+
 
 
     /*Method to save the token that logs in to be able to use it in other activities*/

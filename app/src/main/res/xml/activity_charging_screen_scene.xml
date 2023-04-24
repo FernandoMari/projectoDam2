@@ -10,7 +10,6 @@
         motion:duration="3000"
         motion:autoTransition="animateToEnd">
         <KeyFrameSet>
-            <KeyPosition tools:ignore="MotionSceneFileValidationError"/>
             <KeyAttribute
                 motion:motionTarget="@+id/circleBack"
                 motion:framePosition="0"
