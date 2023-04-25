@@ -103,6 +103,13 @@ public class RemoveFriendsActivity extends Activity {
     private void setList(ArrayList<String> friendsList) {
         mFriendsAdapter = new CustomListAdapter(this,friendsList, R.layout.list_item_remove);
         listFriend.setAdapter(mFriendsAdapter);
+
+        if (friendsList.size()<=1){
+            listFriend.setVisibility(View.GONE);
+
+        }else{
+            listFriend.setVisibility(View.VISIBLE);
+        }
         listFriend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
