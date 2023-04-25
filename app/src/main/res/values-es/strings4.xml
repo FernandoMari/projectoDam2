@@ -53,5 +53,17 @@
     <string name="defeat">Derrota</string>
     <string name="elements">Elementos</string>
     <string name="games_guide">Guía de juegos</string>
-    <string name="elements_guide">¡Bienvenidos al emocionante juego \"Elementos\"! En este juego, deberás elegir sabiamente entre agua, fuego e hielo para enfrentarte a tu rival. Pero cuidado, cada elemento tiene su debilidad y fortaleza. El agua extinguirá al fuego, el fuego derretirá el hielo y el hielo congelará el agua. ¡Es un duelo de dioses!  Tendrás solo 15 segundos para tomar tu decisión, así que piensa rápido. Si no logras elegir a tiempo, la elección será al azar. Pero no te rindas si quedas en empate, ¡la batalla continuará hasta que haya un claro ganador o perdedor!  ¡Prepárate para sentir la emoción de los elementos en tu piel! ¿Serás tú el elegido para dominar los tres elementos y ganar la partida? ¡Vamos, no te quedes atrás!</string>
+    <string name="elements_guide">¡Bienvenidos al emocionante juego \"Elementos\"! En este juego, deberás elegir sabiamente entre agua, fuego e hielo para enfrentarte a tu rival. Pero cuidado, cada elemento tiene su debilidad y fortaleza. \n\nEl agua extinguirá al fuego, el fuego derretirá el hielo y el hielo congelará el agua. ¡Es un duelo de dioses!  \nTendrás solo 15 segundos para tomar tu decisión, así que piensa rápido. Si no logras elegir a tiempo, la elección será al azar. Pero no te rindas si quedas en empate, ¡la batalla continuará hasta que haya un claro ganador o perdedor! \n \n¡Prepárate para sentir la emoción de los elementos en tu piel! ¿Serás tú el elegido para dominar los tres elementos y ganar la partida? ¡Vamos, no te quedes atrás!</string>
+    <string name="you_are_player">Jugador</string>
+    <string name="you_are_goalkeeper">Portero</string>
+    <string name="penalties_guide">Bienvenido a \"Penaltis\" una experiencia emocionante que te permitirá poner a prueba tus habilidades de jugador y portero. \n\nEn este juego, te turnarás para chutar y para parar los penaltis en cada ronda. Tendrás cinco opciones de dirección de tiro: centro, izquierda, arriba a la izquierda, derecha y arriba a la derecha. Tu objetivo será marcar más goles que tu oponente para ganar el juego.\n \nSi después de las 10 rondas no hay un ganador, el juego entrará en una ronda de muerte súbita, donde el primer jugador en marcar un gol ganará. Cada ronda tiene un cronómetro de 15 segundos para que puedas seleccionar tu movimiento, pero si no lo haces, el juego seleccionará una opción por ti automáticamente. \n\n¿Te animas a probar tus habilidades y convertirte en el campeón del juego de penaltis? ¡Comienza a jugar ahora mismo y disfruta de la emoción del fútbol!</string>
+    <string name="penalties">Penaltis</string>
+    <string name="actual_password">Contraseña actual</string>
+    <string name="btCancel">Cancelar</string>
+    <string name="btConfirm">Confirmar</string>
+    <string name="change_email">Cambiar email</string>
+    <string name="actual_email">Email actual</string>
+    <string name="choose_modality">Elegir modalidad</string>
+    <string name="write_first_decision">Escribe la primera decisión</string>
+    <string name="write_second_decision">Escribe la segunda decisión</string>
 </resources>

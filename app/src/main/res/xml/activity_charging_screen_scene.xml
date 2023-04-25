@@ -10,6 +10,7 @@
         motion:duration="3000"
         motion:autoTransition="animateToEnd">
         <KeyFrameSet>
+
             <KeyAttribute
                 motion:motionTarget="@+id/circleBack"
                 motion:framePosition="0"

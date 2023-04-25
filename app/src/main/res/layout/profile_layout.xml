@@ -126,18 +126,19 @@
                 android:id="@+id/etUsername3"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:background="@drawable/textbox_style"
-                android:drawableStart="@drawable/custom_username_icon"
-                android:fontFamily="@font/montserrat_medium"
                 android:hint="@string/new_username"
-                android:inputType="textPersonName"
+                android:textSize="20dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:background="@drawable/textbox_style"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
+                android:drawableStart="@drawable/custom_username_icon"
+                android:layout_gravity="center"
+                android:inputType="textPersonName"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="@android:color/darker_gray"
-                android:textSize="20dp">
+                >
 
             </EditText>
 

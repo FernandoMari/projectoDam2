@@ -52,5 +52,17 @@
     <string name="defeat">Verlust</string>
     <string name="elements">Elemente</string>
     <string name="games_guide">Spielanleitung</string>
-    <string name="elements_guide">Willkommen beim spannenden Spiel der Elemente! In diesem Spiel müssen Sie weise zwischen Wasser, Feuer und Eis wählen, um sich Ihrem Gegner zu stellen. Aber Vorsicht, jedes Element hat seine Schwächen und Stärken. Wasser löscht Feuer, Feuer schmilzt Eis und Eis gefriert Wasser - es ist ein Duell der Götter! Sie haben nur 15 Sekunden Zeit, um Ihre Entscheidung zu treffen, also denken Sie schnell nach. Wenn Sie sich nicht rechtzeitig entscheiden, erfolgt die Auswahl nach dem Zufallsprinzip. Aber geben Sie nicht auf, wenn Sie unentschieden sind, der Kampf geht weiter, bis es einen klaren Gewinner oder Verlierer gibt! Machen Sie sich bereit, den Nervenkitzel der Elemente auf Ihrer Haut zu spüren! Wirst du derjenige sein, der auserwählt ist, die drei Elemente zu meistern und das Spiel zu gewinnen? Komm schon, bleib nicht zurück!</string>
+    <string name="elements_guide">Willkommen beim aufregenden Spiel \"Elemente\"! In diesem Spiel musst du klug zwischen Wasser, Feuer und Eis wählen, um deinem Gegner gegenüberzutreten. Aber Vorsicht, jedes Element hat seine Schwäche und Stärke. \n\nWasser löscht Feuer, Feuer schmilzt Eis und Eis friert Wasser ein - es ist ein Duell der Götter! \nDu hast nur 15 Sekunden Zeit, um deine Entscheidung zu treffen, also denke schnell. Wenn du nicht rechtzeitig wählst, wird die Auswahl zufällig sein. Aber gib nicht auf, wenn du unentschieden bist, der Kampf wird fortgesetzt, bis es einen klaren Gewinner oder Verlierer gibt! \n\nMach dich bereit, das Kribbeln der Elemente auf deiner Haut zu spüren! Wirst du der Auserwählte sein, der die drei Elemente beherrscht und das Spiel gewinnt? Los geht\'s, lass dich nicht zurückfallen!</string>
+    <string name="you_are_player">Spieler</string>
+    <string name="you_are_goalkeeper">Torwart</string>
+    <string name="penalties_guide">Willkommen bei \"Penalties\", einem aufregenden Erlebnis, das es dir ermöglicht, deine Fähigkeiten als Spieler und Torwart zu testen. \n\nIn diesem Spiel schießt und hält jeder Spieler in jeder Runde Elfmeter. Du hast fünf Schussrichtungsoptionen: Mitte, links, oben links, rechts und oben rechts. Dein Ziel ist es, mehr Tore als dein Gegner zu erzielen, um das Spiel zu gewinnen. \n\nWenn nach 10 Runden kein Gewinner feststeht, geht das Spiel in eine plötzliche Todesrunde über, bei der der erste Spieler, der ein Tor erzielt, gewinnt. Jede Runde hat einen 15-Sekunden-Timer, damit du deinen Zug auswählen kannst, aber wenn du es nicht tust, wählt das Spiel automatisch eine Option für dich aus.\n\nTraust du dich, deine Fähigkeiten zu testen und Champion des Elfmeterschießens zu werden? Fang jetzt an zu spielen und genieße das Kribbeln des Fußballs!</string>
+    <string name="penalties">Elfmeter</string>
+    <string name="actual_password">Aktuelles Passwort</string>
+    <string name="btCancel">Abbrechen</string>
+    <string name="btConfirm">Bestätigen</string>
+    <string name="change_email">E-Mail ändern</string>
+    <string name="actual_email">Aktuelle E-Mail</string>
+    <string name="choose_modality">Wähle die Spielart</string>
+    <string name="write_first_decision">Schreiben Sie die erste Entscheidung</string>
+    <string name="write_second_decision">Schreiben Sie die zweite Entscheidung</string>
 </resources>

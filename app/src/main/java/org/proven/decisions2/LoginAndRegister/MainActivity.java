@@ -14,8 +14,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.proven.decisions2.Settings.AppCompat;
 import org.proven.decisions2.R;
+import org.proven.decisions2.Settings.AppCompat;
 import org.proven.decisions2.SocialInterface;
 
 import java.io.FileOutputStream;
@@ -28,15 +28,22 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompat {
+    //inputUsername is to insert the name of the user, inputPassword is to insert the password of the user
     EditText inputUsername, inputPassword;
+    //btLogin is for the login in the app and next Activity SocialInterface , btRegister is for the next Activity Register for the register in the app.
     Button btLogin, btRegister;
+    //progressDialog is for the dialog in the login or and register
     ProgressDialog progressDialog;
-
+    //username the user , password the user , token the user for the login in the app
     String username, password, token;
     CheckBox cbRemember;
+    //Filename the document name for save the token username
     String filename = "token.txt";
+    //Url for the http post request for the login in the app
     String url = "http://143.47.249.102:7070/login";
+    //Url for the http post request for the getUserToken
     String url2 = "http://143.47.249.102:7070/getUserToken";
+    //Create FileOutputStream for the save the document internal
     FileOutputStream outputStream;
 
 
@@ -257,7 +264,6 @@ public class MainActivity extends AppCompat {
                 Log.d("TAG", "Response data: " + textWithoutQuotes);
                 //Parse the response data to check if login was successful
                 if (loginSuccessful == true) {
-                    sendUserToNextActivity();
                 }
             }
         }

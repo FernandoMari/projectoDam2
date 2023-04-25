@@ -53,5 +53,17 @@
     <string name="defeat">打败</string>
     <string name="elements">元素</string>
     <string name="games_guide">游戏指南</string>
-    <string name="elements_guide">欢迎来到令人兴奋的游戏“元素”！ 在这个游戏中，你必须在水、火和冰之间做出明智的选择来面对你的对手。 但要注意，每个元素都有其弱点和优势。 水能灭火，火能化冰，冰能冻水——神仙对决！ 你只有 15 秒的时间来做出决定，所以要快点想。 如果您未能及时选择，则选择将是随机的。 但是不要在平局时放弃，战斗将继续进行，直到分出胜负为止！ 准备好感受皮肤上元素的快感！ 您会成为掌握这三个要素并赢得比赛的那个人吗？ 来吧，不要落后！</string>
+    <string name="elements_guide">欢迎来到令人兴奋的游戏“元素”！在这个游戏中，你必须在水、火和冰之间做出明智的选择来面对你的对手。但要注意，每个元素都有其弱点和优势。\n\n水能灭火，火能化冰，冰能冻水——神仙对决！你只有15秒的时间来做出决定，所以要快点想。如果您未能及时选择，则选择将是随机的。但是不要在平局时放弃，战斗将继续进行，直到分出胜负为止！\n\n准备好感受皮肤上元素的快感！您会成为掌握这三个要素并赢得比赛的那个人吗？来吧，不要落后！</string>
+    <string name="you_are_player">玩家</string>
+    <string name="you_are_goalkeeper">守门员</string>
+    <string name="penalties_guide">欢迎来到“点球大战”，这是一项充满激情的游戏，可以测试你作为球员和守门员的技能。\n\n在这个游戏中，你们将轮流射门和扑救点球。你有五个射门方向选择：中央，左侧，左上方，右侧和右上方。你的目标是得分比对手更多，赢得比赛。\n\n如果10轮后仍没有赢家，游戏将进入突然死亡回合，第一个进球的球员将获胜。每轮有15秒的计时器，以便您选择您的动作，但如果您没有选择，游戏将自动为您选择选项。\n\n你敢测试你的技能并成为点球大战的冠军吗？立即开始游戏，享受足球的快感！</string>
+    <string name="penalties">点球</string>
+    <string name="actual_password">当前密码</string>
+    <string name="btCancel">取消</string>
+    <string name="btConfirm">确认</string>
+    <string name="change_email">更改电子邮件</string>
+    <string name="actual_email">当前电子邮件</string>
+    <string name="choose_modality">选择模式</string>
+    <string name="write_first_decision">写下第一个决定</string>
+    <string name="write_second_decision">写下第二个决定</string>
 </resources>

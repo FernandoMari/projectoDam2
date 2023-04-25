@@ -52,10 +52,17 @@
     <string name="defeat">Defeat</string>
     <string name="elements">Elements</string>
     <string name="games_guide">Games guide</string>
-    <string name="elements_guide">Welcome to the exciting game \"Elements\"! In this game, you must choose wisely between water, fire and ice to face your opponent. But beware, each element has its weakness and strength. Water will extinguish fire, fire will melt ice and ice will freeze water - it\'s a duel of gods! You will have only 15 seconds to make your decision, so think fast. If you fail to choose in time, the choice will be random. But don\'t give up if you\'re tied, the battle will continue until there\'s a clear winner or loser! Get ready to feel the thrill of the elements on your skin! Will you be the one chosen to master the three elements and win the game? Come on, don\'t be left behind!</string>
-    <string name="change_email" >Change email</string>
+    <string name="elements_guide">Welcome to the exciting game \"Elements\"! In this game, you must choose wisely between water, fire and ice to face your opponent. But beware, each element has its weakness and strength. \n\nWater will extinguish fire, fire will melt ice and ice will freeze water - it\'s a duel of gods! \nYou will have only 15 seconds to make your decision, so think fast. If you fail to choose in time, the choice will be random. But don\'t give up if you\'re tied, the battle will continue until there\'s a clear winner or loser! \n\nGet ready to feel the thrill of the elements on your skin! Will you be the one chosen to master the three elements and win the game? Come on, don\'t be left behind!</string>
+    <string name="you_are_player">Player</string>
+    <string name="you_are_goalkeeper">Goalkeeper</string>
+    <string name="penalties_guide">Welcome to \"Penalties\" an exciting experience that will allow you to test your skills as a player and goalkeeper. \n\nIn this game, you will take turns shooting and saving penalties in each round. You will have five shooting direction options: center, left, top left, right, and top right. Your goal will be to score more goals than your opponent to win the game. \n\nIf after 10 rounds there is no winner, the game will go into a sudden death round, where the first player to score a goal will win. Each round has a 15 second timer so you can select your move, but if you don\'t, the game will select an option for you automatically.\n\nDo you dare to test your skills and become the champion of the penalty shootout? Start playing right now and enjoy the thrill of soccer!</string>
+    <string name="penalties">Penalties</string>
+    <string name="actual_password">Actual password</string>
+    <string name="btCancel">Cancel</string>
+    <string name="btConfirm">Confirm</string>
+    <string name="change_email">Change email</string>
     <string name="actual_email">Actual email</string>
-    <string name="btConfirm" >Confirm</string>
-    <string name="btCancel" >Cancel</string>
-    <string name="actual_password" >Actual password</string>
+    <string name="choose_modality">Choose modality</string>
+    <string name="write_first_decision">Write first decision</string>
+    <string name="write_second_decision">Write second decision</string>
 </resources>

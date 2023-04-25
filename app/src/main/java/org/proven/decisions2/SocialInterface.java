@@ -9,7 +9,7 @@ import android.widget.Button;
 import androidx.fragment.app.FragmentActivity;
 
 import org.proven.decisions2.Friends.FriendsActivity;
-import org.proven.decisions2.Games.BeforePlayActivity;
+import org.proven.decisions2.Games.ChooseModality;
 import org.proven.decisions2.Settings.SettingsActivity;
 
 import java.io.BufferedReader;
@@ -47,7 +47,7 @@ public class SocialInterface extends FragmentActivity {
         btDecisions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SocialInterface.this, BeforePlayActivity.class));
+                startActivity(new Intent(SocialInterface.this, ChooseModality.class));
             }
         });
 

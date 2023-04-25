@@ -11,14 +11,16 @@ import org.proven.decisions2.R;
 import org.proven.decisions2.Settings.SettingsActivity;
 import org.proven.decisions2.SocialInterface;
 
-public class BeforePlayActivity extends Activity {
+import java.util.Random;
+
+public class PlayOfflineActivity extends Activity {
 
     Button btHome, btSettings, btFriends, btPlay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.before_play_layout);
+        setContentView(R.layout.play_offline_layout);
 
 
         btHome = findViewById(R.id.btHome);
@@ -29,27 +31,33 @@ public class BeforePlayActivity extends Activity {
         btHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BeforePlayActivity.this, SocialInterface.class));
+                startActivity(new Intent(PlayOfflineActivity.this, SocialInterface.class));
             }
         });
 
         btSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BeforePlayActivity.this, SettingsActivity.class));
+                startActivity(new Intent(PlayOfflineActivity.this, SettingsActivity.class));
             }
         });
 
         btFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BeforePlayActivity.this, FriendsActivity.class));
+                startActivity(new Intent(PlayOfflineActivity.this, FriendsActivity.class));
             }
         });
         btPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BeforePlayActivity.this, ElementsGame.class));
+                Random rand = new Random();
+                int num = rand.nextInt(2);
+                if (num == 0) {
+                    startActivity(new Intent(PlayOfflineActivity.this, PenaltisGame.class));
+                } else {
+                    startActivity(new Intent(PlayOfflineActivity.this, ElementsGame.class));
+                }
             }
         });
     }

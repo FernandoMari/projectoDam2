@@ -52,5 +52,17 @@
     <string name="defeat">Derrota</string>
     <string name="elements">Elements</string>
     <string name="games_guide">Guia de jocs</string>
-    <string name="elements_guide">Benvingut a l\'apassionant joc \"Elements\"! En aquest joc, has de triar sàviament entre aigua, foc i gel per enfrontar-te al teu oponent. Però compte, cada element té la seva debilitat i força. L\'aigua apagarà el foc, el foc fonrà el gel i el gel congelarà l\'aigua: és un duel de déus! Només tindreu 15 segons per prendre la vostra decisió, així que pensa ràpidament. Si no trieu a temps, l\'elecció serà aleatòria. Però no et rendeixis si estàs empatat, la batalla continuarà fins que hi hagi un clar guanyador o perdedor! Prepara\'t per sentir l\'emoció dels elements a la teva pell! Seràs tu l\'escollit per dominar els tres elements i guanyar el joc? Vinga, no et quedis enrere!</string>
+    <string name="elements_guide">Benvinguts al emocionant joc \"Elements\"! En aquest joc, has de triar sàviament entre l\'aigua, el foc i el gel per enfrontar-te al teu oponent. Però tingues en compte que cada element té les seves debilitats i fortaleses. \n\nL\'aigua apagarà el foc, el foc fondrà el gel i el gel congelarà l\'aigua - és un duel de déus! \nNomés tendràs 15 segons per decidir, així que pensa ràpid. Si no aconsegueixes triar a temps, la decisió serà aleatòria. Però no et donis per vençut si hi ha un empat, la batalla continuarà fins que hi hagi un clar guanyador o perdedor! \n\nPrepara\'t per sentir la emoció dels elements sobre la teva pell! Seràs el triat per dominar els tres elements i guanyar el joc? Vinga, no et quedis enrere!</string>
+    <string name="you_are_player">Jugador</string>
+    <string name="you_are_goalkeeper">Porter</string>
+    <string name="penalties_guide">Benvingut a \"Penals\", una experiència emocionant que et permetrà posar a prova les teves habilitats com a jugador i porter. \n\nEn aquest joc, prendràs el torn de tirar i aturar penals a cada ronda. Tindràs cinc opcions de direcció de tir: centre, esquerra, esquerra dalt, dreta i dreta dalt. El teu objectiu serà marcar més gols que el teu oponent per guanyar el joc. \n\nSi després de 10 rondes no hi ha un guanyador, el joc entrarà en una ronda de mort súbita, on el primer jugador que marqui un gol guanyarà. Cada ronda té un temporitzador de 15 segons perquè puguis seleccionar la teva acció, però si no ho fas, el joc seleccionarà una opció automàticament.\n\nT\'atreveixes a posar a prova les teves habilitats i convertir-te en el campió de la tanda de penals? Comença a jugar ara mateix i gaudeix de l\'emoció del futbol!</string>
+    <string name="penalties">Penals</string>
+    <string name="actual_password">Contrasenya actual</string>
+    <string name="btCancel">Cancel·lar</string>
+    <string name="btConfirm">Confirmar</string>
+    <string name="change_email">Canviar correu electrònic</string>
+    <string name="actual_email">Correu electrònic actual</string>
+    <string name="choose_modality">Escull modalitat</string>
+    <string name="write_first_decision">Escriu la primera decisió</string>
+    <string name="write_second_decision">Escriu la segona decisió</string>
 </resources>

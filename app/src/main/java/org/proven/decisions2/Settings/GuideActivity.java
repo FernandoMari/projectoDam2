@@ -18,10 +18,10 @@ import org.proven.decisions2.SocialInterface;
 
 public class GuideActivity extends Activity {
 
-    TextView tvDetails;
-    LinearLayout layoutExpand, layoutImg;
+    TextView tvDetailsElements, tvDetailsPenaltis;
+    LinearLayout layoutExpand, layoutImgElements, layoutExpandPenaltis, layoutImgPenaltis;
     Button btHome, btSettings, btFriends;
-    ImageView waterImg, fireImg, iceImg;
+    ImageView waterImg, fireImg, iceImg, robot, ball;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,28 +60,46 @@ public class GuideActivity extends Activity {
         btHome = findViewById(R.id.btHome);
         btSettings = findViewById(R.id.btSettings);
         btFriends = findViewById(R.id.btFriends);
-        tvDetails = findViewById(R.id.tvDetails);
+        tvDetailsElements = findViewById(R.id.tvDetails);
         waterImg = findViewById(R.id.waterImg);
         fireImg = findViewById(R.id.fireImg);
         iceImg = findViewById(R.id.iceImg);
         layoutExpand = findViewById(R.id.layoutExpand);
-        layoutImg = findViewById(R.id.layoutImg);
+        layoutImgElements = findViewById(R.id.layoutImg);
         layoutExpand.getLayoutTransition().enableTransitionType(LayoutTransition.APPEARING);
-        layoutImg.getLayoutTransition().enableTransitionType(LayoutTransition.APPEARING);
+        layoutImgElements.getLayoutTransition().enableTransitionType(LayoutTransition.APPEARING);
+
+        tvDetailsPenaltis = findViewById(R.id.tvDetailsPenaltis);
+        robot = findViewById(R.id.robot);
+        ball = findViewById(R.id.ball);
+        layoutExpandPenaltis = findViewById(R.id.layoutExpandPenaltis);
+        layoutImgPenaltis = findViewById(R.id.layoutImgPenaltis);
+        layoutExpandPenaltis.getLayoutTransition().enableTransitionType(LayoutTransition.APPEARING);
+        layoutImgPenaltis.getLayoutTransition().enableTransitionType(LayoutTransition.APPEARING);
     }
 
     /*Method for the expand the game guide */
-    public void expand(View view) {
-        int v = (tvDetails.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
+    public void expandElements(View view) {
+        int v = (tvDetailsElements.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
         TransitionManager.beginDelayedTransition(layoutExpand, new ChangeScroll() {
         });
-        tvDetails.setVisibility(v);
+        tvDetailsElements.setVisibility(v);
 
-        int l = (layoutImg.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE;
-        TransitionManager.beginDelayedTransition(layoutImg, new ChangeScroll());
-        layoutImg.setVisibility(l);
+        int l = (layoutImgElements.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE;
+        TransitionManager.beginDelayedTransition(layoutImgElements, new ChangeScroll());
+        layoutImgElements.setVisibility(l);
 
+    }
 
+    public void expandPenaltis(View view) {
+        int v = (tvDetailsPenaltis.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
+        TransitionManager.beginDelayedTransition(layoutExpandPenaltis, new ChangeScroll() {
+        });
+        tvDetailsPenaltis.setVisibility(v);
+
+        int l = (layoutImgPenaltis.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE;
+        TransitionManager.beginDelayedTransition(layoutImgPenaltis, new ChangeScroll());
+        layoutImgPenaltis.setVisibility(l);
 
     }
 }

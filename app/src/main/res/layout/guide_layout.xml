@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -85,6 +86,17 @@
 
     </RelativeLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_below="@+id/header"
+        android:layout_above="@id/footer"
+        android:overScrollMode="never"
+        android:scrollIndicators="left"
+        android:scrollbars="none">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -97,107 +109,181 @@
         android:layout_above="@id/footer"
         >
 
-        <ScrollView
-            android:id="@+id/scroll_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/footer"
-            android:fillViewport="true"
-            android:layout_centerHorizontal="true"
-            android:overScrollMode="never"
-            android:scrollbars="none"
-            android:scrollIndicators="left"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/GuideElements"
+
+
+            <ScrollView
+                android:id="@+id/scroll_view"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                app:contentPadding="20dp"
-                app:cardCornerRadius="20dp"
-                android:onClick="expand"
-                app:cardBackgroundColor="@color/white">
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/scrollviewPenaltis"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:overScrollMode="never"
+                android:scrollIndicators="left"
+                android:scrollbars="none">
 
-                <LinearLayout
-                    android:id="@+id/layoutExpand"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/GuideElements"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:animateLayoutChanges="true"
-                    >
-
-                    <TextView
-                        android:id="@+id/tvElements"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/elements"
-                        android:textSize="24dp"
-                        android:textColor="@color/dark_blue"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:drawableEnd="@drawable/custom_right_icon"
-                        ></TextView>
-
-                    <TextView
-                        android:id="@+id/tvDetails"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/elements_guide"
-                        android:textSize="19sp"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:textAlignment="textStart"
-                        android:visibility="gone"
-                        android:layout_marginTop="10dp"
-                        ></TextView>
+                    android:layout_height="300dp"
+                    android:onClick="expandElements"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="20dp"
+                    app:contentPadding="20dp">
 
                     <LinearLayout
-                        android:id="@+id/layoutImg"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/layoutExpand"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:animateLayoutChanges="true"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:visibility="gone"
-                        android:layout_marginTop="10dp">
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvElements"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableEnd="@drawable/custom_right_icon"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="@string/elements"
+                            android:textColor="@color/dark_blue"
+                            android:textSize="24dp"></TextView>
+
+                        <TextView
+                            android:id="@+id/tvDetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/elements_guide"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="19sp"
+                            android:visibility="gone"></TextView>
+
+                        <LinearLayout
+                            android:id="@+id/layoutImg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:animateLayoutChanges="true"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
                             <ImageView
                                 android:id="@+id/waterImg"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
-                                android:background="@drawable/water_element"
-                                android:foreground="@drawable/water_element"
-                                app:srcCompat="@drawable/water_element"
-
                                 android:layout_marginRight="20dp"
-                                ></ImageView>
+
+                                android:src="@drawable/water_element"></ImageView>
 
                             <ImageView
                                 android:id="@+id/fireImg"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
-                                android:background="@drawable/fire_element"
-                                app:srcCompat="@drawable/fire_element"
-                                android:layout_marginRight="20dp"></ImageView>
+                                android:layout_marginRight="20dp"
+                                android:src="@drawable/fire_element"></ImageView>
 
                             <ImageView
                                 android:id="@+id/iceImg"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
-                                android:background="@drawable/ice_element"
-                                android:foreground="@drawable/ice_element"
-                                app:srcCompat="@drawable/ice_element"
-                                ></ImageView>
+                                android:src="@drawable/ice_element"></ImageView>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
-                </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-            </androidx.cardview.widget.CardView>
 
-        </ScrollView>
+            </ScrollView>
+
+            <ScrollView
+                android:id="@+id/scrollviewPenaltis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/footer"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:fillViewport="true"
+                android:overScrollMode="never"
+                android:scrollIndicators="left"
+                android:scrollbars="none">
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/GuidePenaltis"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:onClick="expandPenaltis"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="20dp"
+                    app:contentPadding="20dp">
+
+                    <LinearLayout
+                        android:id="@+id/layoutExpandPenaltis"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvPenaltis"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableEnd="@drawable/custom_right_icon"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="@string/penalties"
+                            android:textColor="@color/dark_blue"
+                            android:textSize="24dp"></TextView>
+
+                        <TextView
+                            android:id="@+id/tvDetailsPenaltis"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/penalties_guide"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="19sp"
+                            android:visibility="gone"></TextView>
+
+                        <LinearLayout
+                            android:id="@+id/layoutImgPenaltis"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:animateLayoutChanges="true"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:visibility="gone"
+                            android:layout_marginTop="20dp">
+
+                            <ImageView
+                                android:id="@+id/robot"
+                                android:layout_width="420dp"
+                                android:layout_height="340dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/robot"></ImageView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </ScrollView>
 
     </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>
