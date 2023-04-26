@@ -1,6 +1,8 @@
 package org.proven.decisions2.Friends;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,14 +34,23 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class AddFriendsActivity extends Activity {
+    //The buttons of the footer to navigate in the app
     Button btFriends, btHome, btSettings;
-    private static ListView listFriend;
-    private static EditText searchFriend;
+    //Listview shows a list of friends
+     ListView listFriend;
+    //Filter for search the user in the list
+     EditText searchFriend;
+    //CustomListAdapter is a custom class that extends Android's default list adapter. It is used to customize the appearance of each item in the friends list.
     CustomListAdapter mFriendsAdapter;
-    private static ArrayList<String> friendsNames = new ArrayList<>();
-    private static String token;
+    //This the list the friends
+     ArrayList<String> friendsNames = new ArrayList<>();
+    //User authentication token
+    String token;
+    //User selected in friend list
     String selectedUsername;
+    //Url for the http post in get users
     String url = "http://143.47.249.102:7070/getUsers";
+    //Url for the http post in send friend request
     String url2 = "http://143.47.249.102:7070/sendFriendRequest";
 
     @Override
@@ -120,8 +131,21 @@ public class AddFriendsActivity extends Activity {
                     return;
                 }
 
-                // Send the friend request
-                new SendFriendRequestTask().execute();
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddFriendsActivity.this);
+                builder.setTitle("Confirm");
+                builder.setMessage(R.string.confirm_addfriend);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Send the friend request
+                        new SendFriendRequestTask().execute();
+                    }
+                });
+                builder.setNegativeButton("No", null);
+                builder.show();
+
+
+
             }
 
         });

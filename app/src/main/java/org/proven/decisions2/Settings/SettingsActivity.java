@@ -18,12 +18,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class SettingsActivity extends Activity {
-
+    //The buttons to navigate in the app
     Button btFriends, btHome, btProfile, btPassword, btCreators, btLanguage, btGuide, btlogout, btEmail;
-
-
+    //User authentication token
     String token;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +29,6 @@ public class SettingsActivity extends Activity {
         setContentView(R.layout.activity_settings);
         //Initialize the elements
         initializeElements();
-
         //call the method
         readUser();
 
@@ -127,6 +124,7 @@ public class SettingsActivity extends Activity {
         btEmail = findViewById(R.id.btEmail);
 
     }
+
 
     /*Method to read the login token for use in the activity*/
     private void readUser() {

@@ -136,9 +136,11 @@ public class MainActivity extends AppCompat {
         startActivity(intent);
     }
 
-    /*Method to instantiate the asyncTask of the HttpTask and execute it*/
+    /*Method to instantiate the asyncTask of the HttpTask and getToken and execute it*/
     private void http() {
+        // execute the HttpTask
         new HttpTask().execute();
+        // execute the getToken
         new getToken().execute();
 
     }
@@ -148,6 +150,7 @@ public class MainActivity extends AppCompat {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            //Dialog for the correct login
             progressDialog.setMessage("Please Wait While Login...");
             progressDialog.setTitle("Login");
             progressDialog.setCanceledOnTouchOutside(false);
@@ -161,7 +164,6 @@ public class MainActivity extends AppCompat {
             RequestBody requestBody = RequestBody.create(mediaType, "username=" + username + "&password=" + password);
 
             Request request = new Request.Builder()
-                    //.url("http://5.75.251.56:7070/login")
                     .url(url)
                     .post(requestBody)
                     .addHeader("content-type", "application/json")
@@ -199,7 +201,6 @@ public class MainActivity extends AppCompat {
                     progressDialog.dismiss();
                     // redirects the user to the next activity
                     sendUserToNextActivity();
-
                     Toast.makeText(MainActivity.this, "Login Succesfull", Toast.LENGTH_SHORT).show();
                 } else {
                     progressDialog.dismiss();
@@ -212,17 +213,8 @@ public class MainActivity extends AppCompat {
         }
     }
 
-    /*Method to execute the post requests for thMethod to execute post requests for login and get token */
+    /*Method to execute the post requests for login and get token */
     private class getToken extends AsyncTask<Void, Void, String> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressDialog.setMessage("Please Wait While Login...");
-            progressDialog.setTitle("Login");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
-        }
-
         @Override
         protected String doInBackground(Void... params) {
             OkHttpClient client = new OkHttpClient();
@@ -230,7 +222,6 @@ public class MainActivity extends AppCompat {
             RequestBody requestBody = RequestBody.create(mediaType, "username=" + username + "&password=" + password);
 
             Request request = new Request.Builder()
-                    //.url("http://5.75.251.56:7070/login")
                     .url(url2)
                     .post(requestBody)
                     .addHeader("content-type", "application/json")
@@ -262,13 +253,9 @@ public class MainActivity extends AppCompat {
                     loginSuccessful = true;
                 }
                 Log.d("TAG", "Response data: " + textWithoutQuotes);
-                //Parse the response data to check if login was successful
-                if (loginSuccessful == true) {
-                }
             }
         }
     }
-
 
 
     /*Method to save the token that logs in to be able to use it in other activities*/

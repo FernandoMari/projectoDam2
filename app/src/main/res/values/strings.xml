@@ -65,4 +65,7 @@
     <string name="choose_modality">Choose modality</string>
     <string name="write_first_decision">Write first decision</string>
     <string name="write_second_decision">Write second decision</string>
+    <string name="confirm_remove">Are you sure you want to remove this friend?</string>
+    <string name="confirm_requestfriend" >Are you sure you want to accept this friend request?</string>
+    <string name="confirm_addfriend">Are you sure you want to add this friend?</string>
 </resources>

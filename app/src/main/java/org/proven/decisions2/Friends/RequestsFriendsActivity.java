@@ -1,6 +1,8 @@
 package org.proven.decisions2.Friends;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.AsyncTask;
@@ -30,16 +32,21 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class RequestsFriendsActivity extends Activity {
-
+    //The buttons of the footer to navigate in the app
     Button btFriends, btHome, btSettings;
-    private static ListView listFriend;
+    //Listview shows a list of friends
+    ListView listFriend;
+    //CustomListAdapter is a custom class that extends Android's default list adapter. It is used to customize the appearance of each item in the friends list.
     CustomListAdapter mFriendsAdapter;
-    private static ArrayList<String> friendsNames = new ArrayList<>();
-    private static String token;
+    //This the list the friends
+    ArrayList<String> friendsNames = new ArrayList<>();
+    //User authentication token
+     String token;
+    //User selected in friend list
     String selectedUsername;
-
-
+    //Url for the http post in see friend Request
     String url = "http://143.47.249.102:7070/seeFriendRequest";
+    //Url for the http post in accept friend request
     String url2 = "http://143.47.249.102:7070/aceptFriendRequest";
 
     @Override
@@ -94,16 +101,14 @@ public class RequestsFriendsActivity extends Activity {
         mFriendsAdapter = new CustomListAdapter(this, friendsList, R.layout.list_item_request);
         listFriend.setAdapter(mFriendsAdapter);
 
-        mFriendsAdapter.registerDataSetObserver(new DataSetObserver() {
-            @Override
-            public void onChanged() {
-               if (mFriendsAdapter.getCount()==0 || mFriendsAdapter.isEmpty() ){
-                   listFriend.setVisibility(View.INVISIBLE);// o View.INVISIBLE
-               }else {
-                   listFriend.setVisibility(View.INVISIBLE);
-               }
-            }
-        });
+        if (friendsList.isEmpty() || friendsList.size() == 0 || friendsList.contains("")) {
+
+            listFriend.setVisibility(View.GONE);
+
+        } else {
+            listFriend.setVisibility(View.VISIBLE);
+        }
+
         listFriend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -116,9 +121,22 @@ public class RequestsFriendsActivity extends Activity {
                     return;
                 }
 
-                // Accept the friend request
-                new friendRequestTask().execute();
+                AlertDialog.Builder builder = new AlertDialog.Builder(RequestsFriendsActivity.this);
+                builder.setTitle("Confirm");
+                builder.setMessage(R.string.confirm_requestfriend);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Accept the friend request
+                        new friendRequestTask().execute();
+                    }
+                });
+                builder.setNegativeButton("No", null);
+                builder.show();
+
             }
+
+
         });
     }
 
@@ -203,6 +221,7 @@ public class RequestsFriendsActivity extends Activity {
             }
         }
     }
+
 
     /*Method to read the login token for use in the activity*/
     private void readUser() {

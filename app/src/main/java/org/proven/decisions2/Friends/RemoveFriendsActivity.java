@@ -1,6 +1,10 @@
 package org.proven.decisions2.Friends;
 
+import static android.app.PendingIntent.getActivity;
+
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,15 +36,23 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class RemoveFriendsActivity extends Activity {
-
+    //The buttons of the footer to navigate in the app
     Button btFriends, btHome, btSettings;
+    //Filter for search the user in the list
     EditText searchFriend;
+    //Listview shows a list of friends
     ListView listFriend;
+    //CustomListAdapter is a custom class that extends Android's default list adapter. It is used to customize the appearance of each item in the friends list.
     CustomListAdapter mFriendsAdapter;
+    //This the list the friends
     ArrayList<String> friendsNames = new ArrayList<>();
+    //User authentication token
     String token;
+    //User selected in friend list
     String selectedUsername;
+    //Url for the http post in get friends
     String url = "http://143.47.249.102:7070/getFriends";
+    //Url for the http post in remove friend
     String url2= "http://143.47.249.102:7070/removeFriend";
 
 
@@ -104,7 +116,8 @@ public class RemoveFriendsActivity extends Activity {
         mFriendsAdapter = new CustomListAdapter(this,friendsList, R.layout.list_item_remove);
         listFriend.setAdapter(mFriendsAdapter);
 
-        if (friendsList.size()<=1){
+        if (friendsList.isEmpty() || friendsList.size() == 0 || friendsList.contains("")){
+
             listFriend.setVisibility(View.GONE);
 
         }else{
@@ -122,8 +135,19 @@ public class RemoveFriendsActivity extends Activity {
                     return;
                 }
 
-                // Send the friend request
-               new removeFriendTask().execute();
+                AlertDialog.Builder builder= new AlertDialog.Builder(RemoveFriendsActivity.this);
+                builder.setTitle("Confirm");
+                builder.setMessage(R.string.confirm_remove);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Send the friend request
+                        new removeFriendTask().execute();
+                    }
+                });
+                builder.setNegativeButton("No",null);
+                builder.show();
+
             }
 
 
@@ -230,6 +254,7 @@ public class RemoveFriendsActivity extends Activity {
             }
         }
     }
+
 
 
 

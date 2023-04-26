@@ -140,7 +140,6 @@
             android:layout_height="wrap_content"
             android:background="@drawable/listview_style"
             android:fontFamily="@font/montserrat_medium"
-            android:hint="Search persons"
             android:overScrollMode="never"
             android:scrollbars="none"
             android:listSelector="@drawable/list_selector"
