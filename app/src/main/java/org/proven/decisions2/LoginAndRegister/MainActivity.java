@@ -36,8 +36,9 @@ public class MainActivity extends AppCompat {
     ProgressDialog progressDialog;
     //username the user , password the user , token the user for the login in the app
     String username, password, token;
+    //The CheckBox is used to allow the user to remember their session
     CheckBox cbRemember;
-    //Filename the document name for save the token username
+    //Filename the document name for save the token
     String filename = "token.txt";
     //Url for the http post request for the login in the app
     String url = "http://143.47.249.102:7070/login";
@@ -59,18 +60,20 @@ public class MainActivity extends AppCompat {
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                perforLogin();//call the method for the login
+                //call the method for the login
+                perforLogin();
             }
         });
         cbRemember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                //Check the compoundButton is checked
                 if (compoundButton.isChecked()) {
                     SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("cbremember", "true");
                     editor.apply();
-
+                    //Check the compoundButton is not checked
                 } else if (!compoundButton.isChecked()) {
                     SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
@@ -93,9 +96,11 @@ public class MainActivity extends AppCompat {
     private void checkboxInitialize() {
         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
         String checkbox = preferences.getString("cbremember", "");
+        //Check the combobox is in true
         if (checkbox.equals("true")) {
             startActivity(new Intent(MainActivity.this, SocialInterface.class));
             finish();
+            //Check the combobox is in false
         } else if (checkbox.equals("false")) {
             Toast.makeText(this, "Please sign in", Toast.LENGTH_SHORT).show();
         }
@@ -125,6 +130,7 @@ public class MainActivity extends AppCompat {
         } else if (password.isEmpty() || password.length() < 4) {
             inputPassword.setError("Enter Proper Password");
         } else {
+            //call the method for execute de asyncTask
             http();
         }
     }

@@ -64,12 +64,6 @@ public class AddFriendsActivity extends Activity {
 
         //Call the method
         getFriends(token);
-        Log.d("TAG", "Token: " + token);
-
-
-        btHome = findViewById(R.id.btHome);
-
-        btSettings = findViewById(R.id.btSettings);
 
         btHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +125,7 @@ public class AddFriendsActivity extends Activity {
                     return;
                 }
 
+                //Dialog for the user confirm
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddFriendsActivity.this);
                 builder.setTitle("Confirm");
                 builder.setMessage(R.string.confirm_addfriend);

@@ -26,14 +26,17 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class Register extends AppCompatActivity {
-
+    //inputEmail is to insert the email the user, inputUsername is to insert the name of the user, inputPassword is to insert the password of the user
     EditText inputEmail, inputusername, inputPassword, inputConfirmPasword;
+    //Button for the confirm the register
     Button btnRegister;
+    //Correct format for email
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    //progressDialog is for the dialog in the register
     ProgressDialog progressDialog;
-
+    //email the user, username the user, password the user
     String email, username, password;
-
+    //Url for the http post request for the register in the app
     String url = "http://143.47.249.102:7070/register";
 
 
@@ -48,7 +51,9 @@ public class Register extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PerforAuth(); //call the method for the register
+                //call the method for the register
+                PerforAuth();
+                //Change the checkbox in false
                 SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("cbremember", "false");
@@ -90,11 +95,12 @@ public class Register extends AppCompatActivity {
         } else if (!password.equals(confirmPassword)) {
             inputConfirmPasword.setError("Password Not matched Both field");
         } else {
+            //Dialog for the correct register
             progressDialog.setMessage("Please Wait While Register...");
             progressDialog.setTitle("Register");
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
-            //call the method
+            //call the method for execute de asyncTask
             http();
 
         }
@@ -104,10 +110,11 @@ public class Register extends AppCompatActivity {
     /*Method to instantiate the asyncTask of the HttpTask and execute it*/
     private void http() {
         new HttpTask().execute();
+        //Call the MailSender class to be able to send an email
         MailSender sender = new MailSender(
                 email,
-                "Confirmación de cambio de correo o contraseña",
-                "Tu correo o contraseña ha sido cambiado exitosamente."
+                "Email or password change confirmation",
+                "Your email or password has been successfully changed."
 
         );
         sender.execute();
@@ -148,7 +155,7 @@ public class Register extends AppCompatActivity {
                     System.out.println("Respuesta" + responseData);
                     inputusername.setError("Username exist");
                     progressDialog.dismiss();
-                    registerSuccessful=false;
+                    registerSuccessful = false;
                 }
                 if (registerSuccessful) {
                     progressDialog.dismiss();
