@@ -152,6 +152,7 @@ public class AddFriendsActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //search for friends by their username
                 mFriendsAdapter.getFilter().filter(s);
             }
 

@@ -16,19 +16,14 @@ import org.proven.decisions2.R;
 import java.util.Random;
 
 public class ElementsGame extends Activity {
-
     // Declare a CountDownTimer variable called countDownTimer
     CountDownTimer countDownTimer;
-
     // Declare CardView variables called btWater, btFire, btIce, machine, and player
     CardView btWater, btFire, btIce, machine, player;
-
     // Declare a View.OnClickListener variable called listener
     View.OnClickListener listener;
-
     // Declare a TextView variable called tvResult
     TextView tvResult;
-
     // Declare integer variables called election, rival, and value.
     int election, rival, value;
 

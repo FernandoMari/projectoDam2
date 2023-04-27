@@ -82,12 +82,11 @@ public class Register extends AppCompatActivity {
         password = inputPassword.getText().toString();
         String confirmPassword = inputConfirmPasword.getText().toString();
         //Check the email if it contains the elements of an email correctly
-        if (!email.matches(emailPattern)) {
-            inputEmail.setError("Enter conntext Email");
+        if (!email.matches(emailPattern) || email.isEmpty()) {
+            inputEmail.setError("Enter correct format Email");
             //Check the username is empty
-            if (username.isEmpty()) {
-                inputusername.setError("Enter username please");
-            }
+        } else if (username.isEmpty()) {
+            inputusername.setError("Enter username please");
             //Check that the password is empty or the length is correct
         } else if (password.isEmpty() || password.length() < 4) {
             inputPassword.setError("Enter Proper Password");
@@ -111,10 +110,8 @@ public class Register extends AppCompatActivity {
     private void http() {
         new HttpTask().execute();
         //Call the MailSender class to be able to send an email
-        MailSender sender = new MailSender(
-                email,
-                "Email or password change confirmation",
-                "Your email or password has been successfully changed."
+        MailSender sender = new MailSender(email, "Email or password change confirmation", "Your email or password has been successfully changed."
+
 
         );
         sender.execute();
@@ -130,11 +127,7 @@ public class Register extends AppCompatActivity {
 
             Request request = new Request.Builder()
                     //.url("http://5.75.251.56:7070/register")
-                    .url(url)
-                    .post(requestBody)
-                    .addHeader("content-type", "application/json")
-                    .addHeader("cache-control", "no-cache")
-                    .build();
+                    .url(url).post(requestBody).addHeader("content-type", "application/json").addHeader("cache-control", "no-cache").build();
 
             try {
                 Response response = client.newCall(request).execute();

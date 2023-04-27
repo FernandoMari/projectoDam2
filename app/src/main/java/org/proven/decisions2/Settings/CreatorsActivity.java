@@ -11,17 +11,15 @@ import org.proven.decisions2.R;
 import org.proven.decisions2.SocialInterface;
 
 public class CreatorsActivity extends Activity {
-
+    //The buttons the navigate in the app
     Button btHome, btSettings, btFriends;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.creators_layout);
-
-        btHome = findViewById(R.id.btHome);
-        btSettings = findViewById(R.id.btSettings);
-        btFriends = findViewById(R.id.btFriends);
+        //Initialize the elements
+        initializeElements();
 
         btHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,5 +41,12 @@ public class CreatorsActivity extends Activity {
                 startActivity(new Intent(CreatorsActivity.this, FriendsActivity.class));
             }
         });
+    }
+
+    /*Initialize the elements*/
+    private void initializeElements() {
+        btHome = findViewById(R.id.btHome);
+        btSettings = findViewById(R.id.btSettings);
+        btFriends = findViewById(R.id.btFriends);
     }
 }

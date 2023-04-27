@@ -14,9 +14,11 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class MailSender extends AsyncTask<Void, Void, Void> {
-
+    // mRecipient is the recipient of the email
     private String mRecipient;
+    //mSubject is the subject of the email
     private String mSubject;
+    //mMessage is the content of the message
     private String mMessage;
 
     public MailSender(String recipient, String subject, String message) {

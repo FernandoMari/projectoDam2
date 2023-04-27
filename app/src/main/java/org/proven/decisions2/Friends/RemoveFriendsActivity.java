@@ -53,7 +53,7 @@ public class RemoveFriendsActivity extends Activity {
     //Url for the http post in get friends
     String url = "http://143.47.249.102:7070/getFriends";
     //Url for the http post in remove friend
-    String url2= "http://143.47.249.102:7070/removeFriend";
+    String url2 = "http://143.47.249.102:7070/removeFriend";
 
 
     @Override
@@ -111,16 +111,18 @@ public class RemoveFriendsActivity extends Activity {
     private void getFriends(String username) {
         new FriendsAsyncTask().execute(username);
     }
+
     /*Method to show friends list */
     private void setList(ArrayList<String> friendsList) {
-        mFriendsAdapter = new CustomListAdapter(this,friendsList, R.layout.list_item_remove);
+        mFriendsAdapter = new CustomListAdapter(this, friendsList, R.layout.list_item_remove);
         listFriend.setAdapter(mFriendsAdapter);
-
-        if (friendsList.isEmpty() || friendsList.size() == 0 || friendsList.contains("")){
-
+        //check the list friend is empty or size is zero or contains is a empty string
+        if (friendsList.isEmpty() || friendsList.size() == 0 || friendsList.contains("")) {
+            //list is gone
             listFriend.setVisibility(View.GONE);
 
-        }else{
+        } else {
+            //list is visible
             listFriend.setVisibility(View.VISIBLE);
         }
         listFriend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -134,8 +136,8 @@ public class RemoveFriendsActivity extends Activity {
                     Toast.makeText(getApplicationContext(), "Please select a username", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                AlertDialog.Builder builder= new AlertDialog.Builder(RemoveFriendsActivity.this);
+                //Dialog for the user confirm
+                AlertDialog.Builder builder = new AlertDialog.Builder(RemoveFriendsActivity.this);
                 builder.setTitle("Confirm");
                 builder.setMessage(R.string.confirm_remove);
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -145,11 +147,10 @@ public class RemoveFriendsActivity extends Activity {
                         new removeFriendTask().execute();
                     }
                 });
-                builder.setNegativeButton("No",null);
+                builder.setNegativeButton("No", null);
                 builder.show();
 
             }
-
 
         });
 
@@ -254,8 +255,6 @@ public class RemoveFriendsActivity extends Activity {
             }
         }
     }
-
-
 
 
     /*Method to read the login token for use in the activity*/

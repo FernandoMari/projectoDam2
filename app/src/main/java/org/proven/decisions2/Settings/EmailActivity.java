@@ -25,13 +25,15 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class EmailActivity extends Activity {
+    //inputActualEmail is to insert the email the user, inputNewEmail is to insert the new email of the user, inputActualPassword is to insert the password of the user
     EditText inputActualEmail, inputNewEmail, inputActualPassword;
+    //Button for the navigate in the change email or in the app
     Button btFriends, btHome, btSettings, btAccept, btCancel;
-
+    //Correct format for email
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
+    //actual email the user, new email the user, actual password the user,
     String token, actualEmail, newEmail, actualPassword;
-
+    //Url for the http post request for the change email in the app
     String url = "http://143.47.249.102:7070/swichEmail";
 
     @Override
@@ -67,15 +69,8 @@ public class EmailActivity extends Activity {
         btAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //call the method for the change email
                 changeEmail();
-                if (!actualEmail.matches(actualEmail)) {
-
-                } else if (!newEmail.matches(emailPattern)) {
-                } else if (actualPassword.isEmpty()) {
-
-                } else {
-                    startActivity(new Intent(EmailActivity.this, SettingsActivity.class));
-                }
             }
         });
 
@@ -101,26 +96,35 @@ public class EmailActivity extends Activity {
 
     }
 
-    /* Method to instantiate the EmailChangeTask and start it */
-    private void getFriends(String token) {
-        new EmailChangeTask().execute(token);
-    }
 
     /*Method to change email by asking the user for the actual email, new email and actual password*/
     private void changeEmail() {
         actualEmail = inputActualEmail.getText().toString();
         newEmail = inputNewEmail.getText().toString();
         actualPassword = inputActualPassword.getText().toString();
+        //Check the email if it contains the elements of an email correctly
         if (!actualEmail.matches(emailPattern)) {
-            inputActualEmail.setError("Enter your actual email");
+            inputActualEmail.setError("Enter correct format Email");
+            //Check the actual email is empty
+        } else if (actualEmail.isEmpty()) {
+            inputActualEmail.setError("Enter your email");
+            //Check the email if it contains the elements of an email correctly
         } else if (!newEmail.matches(emailPattern)) {
-            inputNewEmail.setError("Enter conntext Email");
-
+            inputNewEmail.setError("Enter correct format Email");
+            //Check the password is empty
         } else if (actualPassword.isEmpty()) {
             inputActualPassword.setError("Enter your password actual");
         } else {
-            getFriends(token);
+            //call the method for execute de asyncTask
+            changesEmail(token);
+            //go back to activity settings
+            startActivity(new Intent(EmailActivity.this, SettingsActivity.class));
         }
+    }
+
+    /* Method to instantiate the EmailChangeTask and start it */
+    private void changesEmail(String token) {
+        new EmailChangeTask().execute(token);
     }
 
 
@@ -130,8 +134,6 @@ public class EmailActivity extends Activity {
         @Override
         protected String doInBackground(String... params) {
             token = params[0];
-
-            System.out.println("Nuevo email: " + newEmail);
             OkHttpClient client = new OkHttpClient();
             MediaType mediaType = MediaType.parse("application/json");
             RequestBody requestBody = RequestBody.create(mediaType, "newMail=" + newEmail);

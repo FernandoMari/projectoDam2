@@ -41,7 +41,7 @@ public class CustomListAdapter extends ArrayAdapter<String> implements Filterabl
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView;
         if (convertView == null) {
-            // Inflar el layout correspondiente según el valor de layoutResourceId
+            // Inflate the corresponding layout according to the value of layoutResourceId
             if (layoutResourceId == R.layout.list_item_add) {
                 rowView = inflater.inflate(R.layout.list_item_add, null, true);
             } else if (layoutResourceId == R.layout.list_item_remove) {
@@ -53,7 +53,7 @@ public class CustomListAdapter extends ArrayAdapter<String> implements Filterabl
             rowView = convertView;
         }
 
-        // Asignar los valores correspondientes a las vistas en el layout
+        // Assign the corresponding values to the views in the layout
         TextView tUsername = (TextView) rowView.findViewById(R.id.tUsername);
         tUsername.setText(filteredValues.get(position));
 

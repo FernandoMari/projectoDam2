@@ -21,9 +21,10 @@ import java.io.IOException;
 public class SocialInterface extends FragmentActivity {
     private VerticalViewPager viewPager;
     private ViewPagerAdapter viewAdapter;
-
+    //The buttons to navigate in the app
     Button btFriends, btDecisions, btSettings;
-    String username;
+    //User authentication token
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class SocialInterface extends FragmentActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SocialInterface.this, FriendsActivity.class);
                 readUser();
-                Log.d("TAG", "userIdSocial: " + username);
+                Log.d("TAG", "userIdSocial: " + token);
                 startActivity(intent);
                 finish();
 
@@ -55,7 +56,7 @@ public class SocialInterface extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SocialInterface.this, SettingsActivity.class);
-                Log.d("TAG", "userIdSocial: " + username);
+                Log.d("TAG", "userIdSocial: " + token);
                 startActivity(intent);
                 finish();
             }
@@ -78,7 +79,7 @@ public class SocialInterface extends FragmentActivity {
         try {
             FileReader reader = new FileReader(filename);
             BufferedReader bufferedReader = new BufferedReader(reader);
-            username = bufferedReader.readLine();
+            token = bufferedReader.readLine();
             bufferedReader.close();
             reader.close();
         } catch (IOException e) {

@@ -16,10 +16,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class FriendsActivity extends Activity {
-
+    //The buttons of the menu friends to navigate
     Button btHome, btSettings, btAdd, btRemove, btRequests;
-
-    private static String userName;
+    //User authentication token
+    String token;
 
 
     @Override
@@ -83,13 +83,13 @@ public class FriendsActivity extends Activity {
 
     }
 
-//    /*Method to read the login token for use in the activity*/
+    //    /*Method to read the login token for use in the activity*/
     private void readUser() {
         File filename = new File(getFilesDir(), "token.txt");
         try {
             FileReader reader = new FileReader(filename);
             BufferedReader bufferedReader = new BufferedReader(reader);
-            userName = bufferedReader.readLine();
+            token = bufferedReader.readLine();
             bufferedReader.close();
             reader.close();
         } catch (IOException e) {

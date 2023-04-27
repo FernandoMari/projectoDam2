@@ -17,20 +17,15 @@ import org.proven.decisions2.R;
 import java.util.Random;
 
 public class PenaltisGame extends Activity {
-
     // Declaration of CardView buttons to touch to play and CountDownTimer to the time
     CardView btDown, btRight, btLeft, btRightUp, btLeftUp;
     CountDownTimer countDownTimer;
-
     // Declaration of integer variables for keeping score and round count
     int electionPlayer, electionMachine, golPlayer = 0, golMachine = 0, round = 0,round2 = 0, value = 0;
-
     // Declaration of TextViews for displaying score, timer and game result
     TextView tvTimer, tvGolsPlayer, tvGolsMachine, tvResult;
-
     // Boolean variables to keep track of player and goalie turn, game finish and win/loss state
     boolean turnPlayer, turnGoalie, finish = false, win = false, lose = false;
-
     // Declaration of ImageViews for penalties points, robot, ball and other game elements
     ImageView p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, robot, ball;
 

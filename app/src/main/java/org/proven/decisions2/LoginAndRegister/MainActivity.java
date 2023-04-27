@@ -194,6 +194,7 @@ public class MainActivity extends AppCompat {
             if (textWithoutQuotes != null) {
                 if (textWithoutQuotes.equals("Credenciales o usuario incorrecto!!!")) {
                     inputUsername.setError("User not exists");
+                    inputPassword.setError("password incorrect");
                     loginSuccessful = false;
                 } else {
                     token = textWithoutQuotes;

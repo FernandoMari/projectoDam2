@@ -18,7 +18,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class SettingsActivity extends Activity {
-    //The buttons to navigate in the app
+    //The buttons to navigate in the app and in the settings menu
     Button btFriends, btHome, btProfile, btPassword, btCreators, btLanguage, btGuide, btlogout, btEmail;
     //User authentication token
     String token;
@@ -100,6 +100,7 @@ public class SettingsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+                //change the checkbox in false for the logout the app
                 SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("cbremember", "false");

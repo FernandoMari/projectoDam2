@@ -100,12 +100,13 @@ public class RequestsFriendsActivity extends Activity {
     private void setList(ArrayList<String> friendsList) {
         mFriendsAdapter = new CustomListAdapter(this, friendsList, R.layout.list_item_request);
         listFriend.setAdapter(mFriendsAdapter);
-
+        //check the list friend is empty or size is zero or contains is a empty string
         if (friendsList.isEmpty() || friendsList.size() == 0 || friendsList.contains("")) {
-
+            //list is gone
             listFriend.setVisibility(View.GONE);
 
         } else {
+            //list is visible
             listFriend.setVisibility(View.VISIBLE);
         }
 

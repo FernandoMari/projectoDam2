@@ -25,10 +25,13 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ProfileActivity extends Activity {
-
+    //Button for the navigate in the change profile or in the app
     Button btFriends, btHome, btSettings, btAccept, btCancel;
+    //inputUsername is to insert the username the user,
     EditText inputUsername;
+    //Url for the http post request for the change username in the app
     String url = "http://143.47.249.102:7070/swichPasswordOrName";
+    //new username for the user and token the user for the login in the app
     String token, newUsername;
 
 
@@ -67,12 +70,6 @@ public class ProfileActivity extends Activity {
             @Override
             public void onClick(View v) {
                 changeUsername();
-                if (newUsername.isEmpty()) {
-
-                } else {
-                    startActivity(new Intent(ProfileActivity.this, SettingsActivity.class));
-                }
-
             }
         });
         btCancel.setOnClickListener(new View.OnClickListener() {
@@ -103,10 +100,15 @@ public class ProfileActivity extends Activity {
     /*Method to change username by asking the user for the new username*/
     private void changeUsername() {
         newUsername = inputUsername.getText().toString();
+        //check the new username is empty
         if (newUsername.isEmpty()) {
             inputUsername.setError("Enter new username");
         } else {
+            //call the method for execute de asyncTask
             getFriends(token);
+            //go back to activity settings
+            startActivity(new Intent(ProfileActivity.this, SettingsActivity.class));
+
         }
 
     }
@@ -117,14 +119,10 @@ public class ProfileActivity extends Activity {
         @Override
         protected Boolean doInBackground(String... params) {
             token = params[0];
-            newUsername = inputUsername.getText().toString();
-            System.out.println("Algo: " + inputUsername.getText().toString());
-
-            System.out.println(token);
             OkHttpClient client = new OkHttpClient();
+            // Change username
             MediaType mediaType = MediaType.parse("application/json");
             RequestBody requestBody = RequestBody.create(mediaType, "newValue=" + newUsername + "&paramether=username");
-            System.out.println("Nuevo nombre user " + newUsername);
             Request request = new Request.Builder()
                     .url(url)
                     .post(requestBody)

@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.proven.decisions2.Friends.FriendsActivity;
-import org.proven.decisions2.LoginAndRegister.MainActivity;
 import org.proven.decisions2.R;
 import org.proven.decisions2.SocialInterface;
 
@@ -67,14 +66,8 @@ public class PasswordActivity extends Activity {
         btAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //call the method for the change password
                 changePassword();
-                if (actualPassword.isEmpty()) {
-
-                } else if (!newPassword.equals(confirmPassword)) {
-
-                } else {
-                    startActivity(new Intent(PasswordActivity.this, SettingsActivity.class));
-                }
             }
         });
         btCancel.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +93,7 @@ public class PasswordActivity extends Activity {
     }
 
     /* Method to instantiate the  PasswordChangeTask and start it */
-    private void getFriends(String token) {
+    private void changesPassword(String token) {
         new PasswordChangeTask().execute(token);
     }
 
@@ -109,17 +102,23 @@ public class PasswordActivity extends Activity {
         actualPassword = inputActualPassword.getText().toString();
         newPassword = inputNewPassword.getText().toString();
         confirmPassword = inputConfirmNewPassword.getText().toString();
+        //Check that the actual password is equal
         if (!actualPassword.matches(actualPassword)) {
             inputActualPassword.setError("Enter actual password");
-            if (actualPassword.isEmpty()) {
-                inputActualPassword.setError("Enter actual password please");
-            }
+            //Check the actual password is empty
+        } else if (actualPassword.isEmpty()) {
+            inputActualPassword.setError("Enter actual password please");
+            //Check that the new password is empty or the length is correct
         } else if (newPassword.isEmpty() || newPassword.length() < 4) {
             inputNewPassword.setError("Enter New Password");
+            //Check that the password is equals
         } else if (!newPassword.equals(confirmPassword)) {
             inputConfirmNewPassword.setError("Password Not matched Both field");
         } else {
-            getFriends(token);
+            //call the method for execute de asyncTask
+            changesPassword(token);
+            //go back to activity settings
+            startActivity(new Intent(PasswordActivity.this, SettingsActivity.class));
         }
 
     }
