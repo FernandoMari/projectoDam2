@@ -66,4 +66,16 @@
     <string name="choose_modality">Escolha a modalidade</string>
     <string name="write_first_decision">Escreva a primeira decisão</string>
     <string name="write_second_decision">Escreva a segunda decisão</string>
+    <string name="confirm_remove">Tem certeza de que deseja remover este amigo?</string>
+    <string name="confirm_requestfriend">Tem certeza de que deseja aceitar esta solicitação de amizade?</string>
+    <string name="confirm_addfriend">Tem certeza de que deseja adicionar este amigo?</string>
+    <string name="you_don_t_have_more_friends">Você não tem amigos</string>
+    <string name="you_don_t_have_more_requests">Você não tem solicitações</string>
+    <string name="question_quiz">Questionário de perguntas</string>
+    <string name="quiz_guide">Bem-vindo ao "Questionário de perguntas", o emocionante mini-jogo onde você irá testar seus conhecimentos. Você está pronto para o desafio final? \n\nVocê terá que responder entre 5 e 10 perguntas aleatórias sobre diferentes categorias, com 4 possíveis respostas, mas apenas uma correta. Mas cuidado, você só terá 30 segundos para selecionar sua resposta! Se o tempo acabar, você perderá uma vida. \n\nMas não se preocupe, você terá algumas vidas extras. Se você conseguir responder todas as perguntas corretamente sem perder todas as suas vidas, você ganhará! E jogando online, o jogador mais rápido será o vencedor. Mantenha um olho no canto superior esquerdo da tela para ver em qual pergunta você está e quantas ainda restam para responder. \n\nEntão, você está pronto para enfrentar o desafio e mostrar seus conhecimentos? Vamos jogar o Questionário de Perguntas! </string>
+    <string name="geography">Geografia</string>
+    <string name="science">Ciência</string>
+    <string name="art">Arte</string>
+    <string name="tecno">Tecnologia</string>
+    <string name="astro">Astrologia</string>
 </resources>

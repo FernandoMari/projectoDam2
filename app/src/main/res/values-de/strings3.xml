@@ -65,4 +65,16 @@
     <string name="choose_modality">Wähle die Spielart</string>
     <string name="write_first_decision">Schreiben Sie die erste Entscheidung</string>
     <string name="write_second_decision">Schreiben Sie die zweite Entscheidung</string>
+    <string name="confirm_remove">Sind Sie sicher, dass Sie diesen Freund entfernen möchten?</string>
+    <string name="confirm_requestfriend" >Sind Sie sicher, dass Sie diese Freundschaftsanfrage akzeptieren möchten?</string>
+    <string name="confirm_addfriend">Sind Sie sicher, dass Sie diesen Freund hinzufügen möchten?</string>
+    <string name="you_don_t_have_more_friends">Sie haben keine weiteren Freunde</string>
+    <string name="you_don_t_have_more_requests">Sie haben keine weiteren Anfragen</string>
+    <string name="question_quiz">Fragenfragebogen</string>
+    <string name="quiz_guide">Willkommen bei \"Fragenfragebogen\", dem aufregenden Mini-Spiel, in dem Sie Ihr Wissen testen werden. Sind Sie bereit für die ultimative Herausforderung?\n\nSie müssen zwischen 5 und 10 zufälligen Fragen zu verschiedenen Kategorien beantworten, mit 4 möglichen Antworten, aber nur einer korrekten. Aber Vorsicht, Sie haben nur 30 Sekunden Zeit, um Ihre Antwort auszuwählen! Wenn die Zeit abläuft, verlieren Sie ein Leben.\n\nAber keine Sorge, Sie haben ein paar Leben übrig. Wenn Sie alle Fragen richtig beantworten, ohne alle Ihre Leben zu verlieren, gewinnen Sie! Und beim Online-Spielen gewinnt der schnellste Spieler. Behalten Sie das obere linke Ecke des Bildschirms im Auge, um zu sehen, welche Frage Sie beantworten und wie viele Sie noch zu beantworten haben.\n\nAlso, sind Sie bereit, sich der Herausforderung zu stellen und Ihr Wissen zu zeigen? Lass uns "Fragenfragebogen" spielen! </string>
+    <string name="geography">Geographie</string>
+    <string name="science">Wissenschaft</string>
+    <string name="art">Kunst</string>
+    <string name="tecno">Technologie</string>
+    <string name="astro">Astrologie</string>
 </resources>

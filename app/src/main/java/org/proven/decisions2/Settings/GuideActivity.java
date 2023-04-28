@@ -18,8 +18,8 @@ import org.proven.decisions2.SocialInterface;
 
 public class GuideActivity extends Activity {
 
-    TextView tvDetailsElements, tvDetailsPenaltis;
-    LinearLayout layoutExpand, layoutImgElements, layoutExpandPenaltis, layoutImgPenaltis;
+    TextView tvDetailsElements, tvDetailsPenaltis, tvDetailsQuiz;
+    LinearLayout layoutExpand, layoutImgElements, layoutExpandPenaltis, layoutImgPenaltis, layoutExpandQuiz, layoutImgQuiz;
     Button btHome, btSettings, btFriends;
     ImageView waterImg, fireImg, iceImg, robot, ball;
 
@@ -60,6 +60,7 @@ public class GuideActivity extends Activity {
         btHome = findViewById(R.id.btHome);
         btSettings = findViewById(R.id.btSettings);
         btFriends = findViewById(R.id.btFriends);
+
         tvDetailsElements = findViewById(R.id.tvDetails);
         waterImg = findViewById(R.id.waterImg);
         fireImg = findViewById(R.id.fireImg);
@@ -76,6 +77,12 @@ public class GuideActivity extends Activity {
         layoutImgPenaltis = findViewById(R.id.layoutImgPenaltis);
         layoutExpandPenaltis.getLayoutTransition().enableTransitionType(LayoutTransition.APPEARING);
         layoutImgPenaltis.getLayoutTransition().enableTransitionType(LayoutTransition.APPEARING);
+
+        tvDetailsQuiz = findViewById(R.id.tvDetailsQuiz);
+        layoutExpandQuiz = findViewById(R.id.layoutExpandQuiz);
+        layoutImgQuiz = findViewById(R.id.layoutImgQuiz);
+        layoutExpandQuiz.getLayoutTransition().enableTransitionType(LayoutTransition.APPEARING);
+        layoutImgQuiz.getLayoutTransition().enableTransitionType(LayoutTransition.APPEARING);
     }
 
     /*Method for the expand the game guide */
@@ -100,6 +107,18 @@ public class GuideActivity extends Activity {
         int l = (layoutImgPenaltis.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE;
         TransitionManager.beginDelayedTransition(layoutImgPenaltis, new ChangeScroll());
         layoutImgPenaltis.setVisibility(l);
+
+    }
+
+    public void expandQuiz(View view) {
+        int v = (tvDetailsQuiz.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
+        TransitionManager.beginDelayedTransition(layoutExpandQuiz, new ChangeScroll() {
+        });
+        tvDetailsQuiz.setVisibility(v);
+
+        int l = (layoutImgQuiz.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE;
+        TransitionManager.beginDelayedTransition(layoutImgQuiz, new ChangeScroll());
+        layoutImgQuiz.setVisibility(l);
 
     }
 }

@@ -70,5 +70,11 @@
     <string name="confirm_addfriend">Are you sure you want to add this friend?</string>
     <string name="you_don_t_have_more_friends">You don\'t have friends aggregates</string>
     <string name="you_don_t_have_more_requests">You don\'t have requests</string>
-    <string name="question_quiz">question quiz</string>
+    <string name="question_quiz">Question Quiz</string>
+    <string name="quiz_guide">Welcome to \"Question Quiz\", the thrilling mini-game where you\'ll put your knowledge to the test! Are you ready for the ultimate challenge? \n\nYou\'ll have to answer between 5 and 10 random trivia questions from various categories, with 4 possible answers but only one correct. But beware, you only have 30 seconds to select your answer! If time runs out, you\'ll lose a life. \n\nBut don\'t worry, you\'ll have a few lives to spare. If you manage to answer all the questions correctly without losing all your lives, you win! And when playing online, the fastest player will come out on top! Keep an eye on the top left corner of your screen to see which question you\'re on and how many you have left to answer. \n\nSo, are you ready to take on the challenge and show off your knowledge? Let\'s play Question Quiz!</string>
+    <string name="geography">Geography</string>
+    <string name="science">Science</string>
+    <string name="art">Art</string>
+    <string name="tecno">Technology</string>
+    <string name="astro">Astrology</string>
 </resources>

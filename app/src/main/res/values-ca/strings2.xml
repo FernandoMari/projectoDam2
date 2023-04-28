@@ -65,4 +65,16 @@
     <string name="choose_modality">Escull modalitat</string>
     <string name="write_first_decision">Escriu la primera decisió</string>
     <string name="write_second_decision">Escriu la segona decisió</string>
+    <string name="confirm_remove">Esteu segur que voleu eliminar aquest amic?</string>
+    <string name="confirm_requestfriend" >Esteu segur que voleu acceptar aquesta sol·licitud d\'amic?</string>
+    <string name="confirm_addfriend">Esteu segur que voleu afegir aquest amic?</string>
+    <string name="you_don_t_have_more_friends">No tens amics agregats</string>
+    <string name="you_don_t_have_more_requests">No tens sol·licituds</string>
+    <string name="question_quiz">Qüestionari de preguntes</string>
+    <string name="quiz_guide">Benvingut a \"Qüestionari de preguntes\", l\'emocionant mini-joc on posaràs a prova els teus coneixements. Estàs llest per al desafiament definitiu? \n\nHauràs de respondre entre 5 i 10 preguntes aleatòries sobre diferents categories, amb 4 possibles respostes però només una correcta. Però cuidat, només tindràs 30 segons per seleccionar la teva resposta! Si s\'acaba el temps, perdràs una vida. \n\nPerò no et preocupis, tindràs algunes vides de sobra. Si aconsegueixes respondre totes les preguntes correctament sense perdre totes les teves vides, guanyaràs! I al jugar en línia, el jugador més ràpid serà el guanyador. Mantingues un ull a la cantonada superior esquerra de la pantalla per veure en quina pregunta estàs i quantes et queden per respondre. \n\nAixí doncs, estàs llest per enfrontar el desafiament i mostrar els teus coneixements? Jugem a Qüestionari de preguntes!</string>
+    <string name="geography">Geografia</string>
+    <string name="science">Ciència</string>
+    <string name="art">Art</string>
+    <string name="tecno">Tecnologia</string>
+    <string name="astro">Astrologia</string>
 </resources>

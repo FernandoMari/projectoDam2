@@ -151,9 +151,7 @@ public class QuestionQuizGame extends AppCompat {
             // If the timer finishes, randomly select an element for the rival and check for a win
             @Override
             public void onFinish() {
-                Random rand = new Random();
-                selectedAnswer = rand.nextInt(4) + 1;
-                changeCardColor();
+                selectedAnswer = 5;
                 checkAnswerDelayed();
             }
         }.start();

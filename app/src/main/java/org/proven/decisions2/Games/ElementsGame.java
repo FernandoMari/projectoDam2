@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -16,19 +17,31 @@ import org.proven.decisions2.R;
 import java.util.Random;
 
 public class ElementsGame extends Activity {
+
     // Declare a CountDownTimer variable called countDownTimer
     CountDownTimer countDownTimer;
+
     // Declare CardView variables called btWater, btFire, btIce, machine, and player
     CardView btWater, btFire, btIce, machine, player;
+
     // Declare a View.OnClickListener variable called listener
     View.OnClickListener listener;
+
     // Declare a TextView variable called tvResult
     TextView tvResult;
+
     // Declare integer variables called election, rival, and value.
     int election, rival, value;
 
+    //To control the back button
+    Boolean charge=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Set the window to fullscreen
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
 
         // Set the layout for this activity to elements_animation_layout.xml
@@ -40,6 +53,7 @@ public class ElementsGame extends Activity {
             public void run() {
                 // After 6.5 seconds, change the layout to elements_game_layout.xml
                 setContentView(R.layout.elements_game_layout);
+                charge=true;
 
                 // Call initializeElements() method to initialize the game
                 initializeElements();
@@ -236,12 +250,14 @@ public class ElementsGame extends Activity {
         value = 0;
     }
 
-    // This method overrides the default behavior of the back button press.
+    // This method overrides the default behavior of the back button press in the activity
     @Override
     public void onBackPressed() {
-        // Cancels the countdown timer.
-        countDownTimer.cancel();
-        // Calls the super method to perform the default behavior of back button press.
-        super.onBackPressed();
+        if (charge){
+            // Cancels the countdown timer associated with the activity
+            countDownTimer.cancel();
+            // Calls the parent class method to handle the back button press
+            super.onBackPressed();
+        }
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,20 +18,29 @@ import org.proven.decisions2.R;
 import java.util.Random;
 
 public class PenaltisGame extends Activity {
+
     // Declaration of CardView buttons to touch to play and CountDownTimer to the time
     CardView btDown, btRight, btLeft, btRightUp, btLeftUp;
     CountDownTimer countDownTimer;
+
     // Declaration of integer variables for keeping score and round count
     int electionPlayer, electionMachine, golPlayer = 0, golMachine = 0, round = 0,round2 = 0, value = 0;
+
     // Declaration of TextViews for displaying score, timer and game result
     TextView tvTimer, tvGolsPlayer, tvGolsMachine, tvResult;
+
     // Boolean variables to keep track of player and goalie turn, game finish and win/loss state
-    boolean turnPlayer, turnGoalie, finish = false, win = false, lose = false;
+    boolean turnPlayer, turnGoalie, finish = false, win = false, lose = false, charge=false;
+
     // Declaration of ImageViews for penalties points, robot, ball and other game elements
     ImageView p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, robot, ball;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Set the window to fullscreen
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.penaltis_animation_layout);
 
@@ -41,6 +51,7 @@ public class PenaltisGame extends Activity {
 
                 // Set content view to the main layout
                 setContentView(R.layout.penaltis_layout);
+                charge=true;
 
                 // Initialize UI elements
                 instantiateElements();
@@ -551,9 +562,11 @@ public class PenaltisGame extends Activity {
     // This method overrides the default behavior of the back button press in the activity
     @Override
     public void onBackPressed() {
-        // Cancels the countdown timer associated with the activity
-        countDownTimer.cancel();
-        // Calls the parent class method to handle the back button press
-        super.onBackPressed();
+        if (charge){
+            // Cancels the countdown timer associated with the activity
+            countDownTimer.cancel();
+            // Calls the parent class method to handle the back button press
+            super.onBackPressed();
+        }
     }
 }

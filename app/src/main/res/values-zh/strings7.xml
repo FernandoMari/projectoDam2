@@ -66,4 +66,16 @@
     <string name="choose_modality">选择模式</string>
     <string name="write_first_decision">写下第一个决定</string>
     <string name="write_second_decision">写下第二个决定</string>
+    <string name="confirm_remove">您确定要删除这位好友吗？</string>
+    <string name="confirm_requestfriend" >您确定要接受这个好友请求吗？</string>
+    <string name="confirm_addfriend">您确定要添加这位好友吗？</string>
+    <string name="you_don_t_have_more_friends">您没有更多的好友了</string>
+    <string name="you_don_t_have_more_requests">您没有更多的请求了</string>
+    <string name="question_quiz">问题问卷</string>
+    <string name="quiz_guide">欢迎来到“问题问卷”，这是一个充满挑战的小游戏，您将在其中测试自己的知识。您准备好迎接终极挑战了吗？\n\n您需要回答5到10个有关不同类别的随机问题，每个问题都有4个可能的答案，但只有一个正确答案。但要小心，您只有30秒钟选择您的答案！如果时间用完，您将失去一条生命。\n\n但不用担心，您将有一些额外的生命。如果您能在不失去所有生命的情况下回答所有问题，您将赢得比赛！在线游戏中，最快的玩家将是胜利者。请注意屏幕左上角显示您正在回答的问题和剩余问题的数量。\n\n那么，您准备好接受挑战并展示您的知识了吗？让我们来玩“问题问卷”吧！</string>
+    <string name="geography">地理</string>
+    <string name="science">科学</string>
+    <string name="art">艺术</string>
+    <string name="tecno">技术</string>
+    <string name="astro">占星术</string>
 </resources>

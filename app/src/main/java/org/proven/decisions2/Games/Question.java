@@ -1,9 +1,13 @@
 package org.proven.decisions2.Games;
 
 
+import android.app.Activity;
+
+import org.proven.decisions2.R;
+
 import java.util.Locale;
 
-public class Question {
+public class Question extends Activity {
 
     public static String question[] ={
             // Geography
@@ -71,7 +75,7 @@ public class Question {
 
     public static int correctAnswer[] = {
             // Geography
-            0, 2, 2, 3, 0, 3, 3, 1, 1,
+            1, 2, 2, 3, 0, 3, 3, 1, 1,
             // Science
             3, 2, 0, 1,
             // Art and Culture
@@ -82,12 +86,12 @@ public class Question {
             2, 1
     };
 
-    public static String category[] = {
-            "Geography", "Geography", "Geography", "Geography", "Geography", "Geography", "Geography", "Geography",
-            "Science", "Science", "Science", "Science", "Science",
-            "Art and Culture", "Art and Culture", "Art and Culture", "Art and Culture", "Art and Culture",
-            "Technology", "Technology", "Technology", "Technology",
-            "Astrology", "Astrology"
+    public static int category[] = {
+            R.string.geography, R.string.geography, R.string.geography, R.string.geography, R.string.geography, R.string.geography, R.string.geography, R.string.geography, R.string.geography,
+            R.string.science, R.string.science, R.string.science, R.string.science,
+            R.string.art, R.string.art, R.string.art, R.string.art, R.string.art,
+            R.string.tecno, R.string.tecno, R.string.tecno, R.string.tecno,
+            R.string.astro, R.string.astro
     };
 
 }
