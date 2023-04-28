@@ -130,7 +130,7 @@ public class ProfileActivity extends Activity {
                     .addHeader("Authorization", token)
                     .build();
 
-            // Send HTTP POST friend request
+            // Send HTTP POST
             try {
                 Response response = client.newCall(request).execute();
                 if (response.isSuccessful()) {

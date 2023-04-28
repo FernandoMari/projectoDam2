@@ -19,7 +19,7 @@
 
     <color name="gray">#3d3d3d</color>
     <color name="green">#00ff00</color>
-    <color name="transparent">#00000000 </color>
+    <color name="transparent">#00ffffff</color>
     <color name="red">#ff0000 </color>
     <color name="yellow">#fff600 </color>
     <color name="pink">#ab35ff </color>

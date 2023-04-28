@@ -68,4 +68,7 @@
     <string name="confirm_remove">Are you sure you want to remove this friend?</string>
     <string name="confirm_requestfriend" >Are you sure you want to accept this friend request?</string>
     <string name="confirm_addfriend">Are you sure you want to add this friend?</string>
+    <string name="you_don_t_have_more_friends">You don\'t have friends aggregates</string>
+    <string name="you_don_t_have_more_requests">You don\'t have requests</string>
+    <string name="question_quiz">question quiz</string>
 </resources>

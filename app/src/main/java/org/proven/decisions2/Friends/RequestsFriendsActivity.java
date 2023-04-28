@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.proven.decisions2.R;
@@ -34,6 +35,8 @@ import okhttp3.Response;
 public class RequestsFriendsActivity extends Activity {
     //The buttons of the footer to navigate in the app
     Button btFriends, btHome, btSettings;
+    //Text to inform the user
+    TextView infoText;
     //Listview shows a list of friends
     ListView listFriend;
     //CustomListAdapter is a custom class that extends Android's default list adapter. It is used to customize the appearance of each item in the friends list.
@@ -41,7 +44,7 @@ public class RequestsFriendsActivity extends Activity {
     //This the list the friends
     ArrayList<String> friendsNames = new ArrayList<>();
     //User authentication token
-     String token;
+    String token;
     //User selected in friend list
     String selectedUsername;
     //Url for the http post in see friend Request
@@ -89,6 +92,7 @@ public class RequestsFriendsActivity extends Activity {
         btFriends = findViewById(R.id.btFriends);
         btSettings = findViewById(R.id.btSettings);
         listFriend = findViewById(R.id.lvPersons);
+        infoText = findViewById(R.id.infoText);
     }
 
     /* Method to instantiate the FriendsAsyncTask and start it */
@@ -104,10 +108,14 @@ public class RequestsFriendsActivity extends Activity {
         if (friendsList.isEmpty() || friendsList.size() == 0 || friendsList.contains("")) {
             //list is gone
             listFriend.setVisibility(View.GONE);
+            infoText.setVisibility(View.VISIBLE);
+
 
         } else {
             //list is visible
             listFriend.setVisibility(View.VISIBLE);
+            infoText.setVisibility(View.GONE);
+
         }
 
         listFriend.setOnItemClickListener(new AdapterView.OnItemClickListener() {

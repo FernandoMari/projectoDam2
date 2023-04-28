@@ -166,6 +166,7 @@ public class MainActivity extends AppCompat {
         @Override
         protected String doInBackground(Void... params) {
             OkHttpClient client = new OkHttpClient();
+            //Confirm the username and password the user
             MediaType mediaType = MediaType.parse("application/json");
             RequestBody requestBody = RequestBody.create(mediaType, "username=" + username + "&password=" + password);
 

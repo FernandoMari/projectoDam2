@@ -21,12 +21,8 @@ public class PlayOfflineActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_offline_layout);
-
-
-        btHome = findViewById(R.id.btHome);
-        btSettings = findViewById(R.id.btSettings);
-        btFriends = findViewById(R.id.btFriends);
-        btPlay = findViewById(R.id.btPlay);
+        //initialize elements
+        initializeElements();
 
         btHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,5 +56,12 @@ public class PlayOfflineActivity extends Activity {
                 }
             }
         });
+    }
+    //Method that initializes the elements
+    private void initializeElements() {
+        btHome = findViewById(R.id.btHome);
+        btSettings = findViewById(R.id.btSettings);
+        btFriends = findViewById(R.id.btFriends);
+        btPlay = findViewById(R.id.btPlay);
     }
 }

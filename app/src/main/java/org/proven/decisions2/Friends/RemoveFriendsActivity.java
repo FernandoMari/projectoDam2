@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.proven.decisions2.R;
@@ -38,10 +39,14 @@ import okhttp3.Response;
 public class RemoveFriendsActivity extends Activity {
     //The buttons of the footer to navigate in the app
     Button btFriends, btHome, btSettings;
+    //Text to inform the user
+    TextView infoText;
     //Filter for search the user in the list
     EditText searchFriend;
     //Listview shows a list of friends
     ListView listFriend;
+    //hide the line
+    View line;
     //CustomListAdapter is a custom class that extends Android's default list adapter. It is used to customize the appearance of each item in the friends list.
     CustomListAdapter mFriendsAdapter;
     //This the list the friends
@@ -105,6 +110,8 @@ public class RemoveFriendsActivity extends Activity {
         btSettings = findViewById(R.id.btSettings);
         listFriend = findViewById(R.id.lvPersons);
         searchFriend = findViewById(R.id.etSearch);
+        infoText = findViewById(R.id.infoText);
+        line = findViewById(R.id.line);
     }
 
     /*Method for the get friends*/
@@ -120,10 +127,22 @@ public class RemoveFriendsActivity extends Activity {
         if (friendsList.isEmpty() || friendsList.size() == 0 || friendsList.contains("")) {
             //list is gone
             listFriend.setVisibility(View.GONE);
+            //info text is visible
+            infoText.setVisibility(View.VISIBLE);
+            //search friend is gone
+            searchFriend.setVisibility(View.GONE);
+            //line is gone
+            line.setVisibility(View.GONE);
 
         } else {
             //list is visible
             listFriend.setVisibility(View.VISIBLE);
+            //info text is gone
+            infoText.setVisibility(View.GONE);
+            //search friend is visible
+            searchFriend.setVisibility(View.VISIBLE);
+            //line is visible
+            line.setVisibility(View.VISIBLE);
         }
         listFriend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
