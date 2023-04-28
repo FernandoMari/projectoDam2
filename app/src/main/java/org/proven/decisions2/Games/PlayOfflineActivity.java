@@ -48,11 +48,13 @@ public class PlayOfflineActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Random rand = new Random();
-                int num = rand.nextInt(2);
+                int num = rand.nextInt(3);
                 if (num == 0) {
                     startActivity(new Intent(PlayOfflineActivity.this, PenaltisGame.class));
-                } else {
+                } else if (num==1){
                     startActivity(new Intent(PlayOfflineActivity.this, ElementsGame.class));
+                }else {
+                    startActivity(new Intent(PlayOfflineActivity.this, QuestionQuizGame.class));
                 }
             }
         });
