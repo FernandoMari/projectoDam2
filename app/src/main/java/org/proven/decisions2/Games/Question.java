@@ -5,40 +5,38 @@ import android.app.Activity;
 
 import org.proven.decisions2.R;
 
-import java.util.Locale;
-
 public class Question extends Activity {
 
-    public static String question[] ={
+    public static int question[] ={
             // Geography
-            "What is the largest continent in the world by area?",
-            "What is the smallest country in the world?",
-            "What is the highest mountain in the world?",
-            "What is the largest country in South America?",
-            "What is the capital of Egypt?",
-            "What is the currency of Brazil?",
-            "What is the capital of Australia?",
-            "Which city is the capital of Japan?",
-            "Which river is the longest in the world?",
+            R.string.geo1,
+            R.string.geo2,
+            R.string.geo3,
+            R.string.geo4,
+            R.string.geo5,
+            R.string.geo6,
+            R.string.geo7,
+            R.string.geo8,
+            R.string.geo9,
             // Science
-            "Which famous physicist developed the theory of relativity?",
-            "What is the largest organ in the human body?",
-            "What is the chemical symbol for gold?",
-            "Who discovered penicillin?",
+            R.string.sci1,
+            R.string.sci2,
+            R.string.sci3,
+            R.string.sci4,
             // Art and Culture
-            "Which famous artist painted the Mona Lisa?",
-            "Who painted the famous work 'Starry Night'?",
-            "Who wrote the novel 'To Kill a Mockingbird'?",
-            "Who wrote the play 'Romeo and Juliet'?",
-            "Who directed the movie 'Jaws'?",
+            R.string.art1,
+            R.string.art2,
+            R.string.art3,
+            R.string.art4,
+            R.string.art5,
             // Technology
-            "Which company owns the Android?",
-            "Which company owns the Apple?",
-            "What app was founded in 2005?",
-            "Which one is not a programming language?",
+            R.string.tec1,
+            R.string.tec2,
+            R.string.tec3,
+            R.string.tec4,
             // Astrology
-            "Which planet in our solar system is the largest?",
-            "What is the smallest planet in our solar system?",
+            R.string.ast1,
+            R.string.ast2,
     };
 
     public static String answers[][] = {
@@ -79,7 +77,7 @@ public class Question extends Activity {
             // Science
             3, 2, 0, 1,
             // Art and Culture
-            2, 0, 2, 0, 2,
+            2, 2, 1, 0, 2,
             // Technology
             2, 2, 3, 3,
             // Astrology

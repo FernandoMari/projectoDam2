@@ -127,16 +127,16 @@ public class AddFriendsActivity extends Activity {
 
                 //Dialog for the user confirm
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddFriendsActivity.this);
-                builder.setTitle("Confirm");
+                builder.setTitle(getString(R.string.btConfirm));
                 builder.setMessage(R.string.confirm_addfriend);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Send the friend request
                         new SendFriendRequestTask().execute();
                     }
                 });
-                builder.setNegativeButton("No", null);
+                builder.setNegativeButton(R.string.no, null);
                 builder.show();
 
 
@@ -238,7 +238,7 @@ public class AddFriendsActivity extends Activity {
         @Override
         protected void onPostExecute(Boolean result) {
             if (result) {
-                Toast.makeText(getApplicationContext(), "The friend request was sent successfully to " + selectedUsername, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.request_sent) + selectedUsername, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), "Error sending friend request to " + selectedUsername, Toast.LENGTH_SHORT).show();
             }

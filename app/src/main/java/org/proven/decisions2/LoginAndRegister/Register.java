@@ -1,7 +1,5 @@
 package org.proven.decisions2.LoginAndRegister;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,9 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-import org.proven.decisions2.Settings.EmailSettings.MailSender;
 import org.proven.decisions2.R;
+import org.proven.decisions2.Settings.EmailSettings.MailSender;
 
 import java.io.IOException;
 
@@ -47,7 +46,6 @@ public class Register extends AppCompatActivity {
         /*Initialize the elements*/
         initializeElements();
 
-
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,8 +59,6 @@ public class Register extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     /*Initialize the elements*/
@@ -83,16 +79,16 @@ public class Register extends AppCompatActivity {
         String confirmPassword = inputConfirmPasword.getText().toString();
         //Check the email if it contains the elements of an email correctly
         if (!email.matches(emailPattern) || email.isEmpty()) {
-            inputEmail.setError("Enter correct format Email");
+            inputEmail.setError(getString(R.string.format_email));
             //Check the username is empty
         } else if (username.isEmpty()) {
-            inputusername.setError("Enter username please");
+            inputusername.setError(getString(R.string.username_empty));
             //Check that the password is empty or the length is correct
         } else if (password.isEmpty() || password.length() < 4) {
-            inputPassword.setError("Enter Proper Password");
+            inputPassword.setError(getString(R.string.password_correct));
             //Check that the password is equals
         } else if (!password.equals(confirmPassword)) {
-            inputConfirmPasword.setError("Password Not matched Both field");
+            inputConfirmPasword.setError(getString(R.string.equal_password));
         } else {
             //Dialog for the correct register
             progressDialog.setMessage("Please Wait While Register...");
@@ -146,7 +142,7 @@ public class Register extends AppCompatActivity {
                 boolean registerSuccessful = true;
                 if (responseData.equalsIgnoreCase("user exists")) {
                     System.out.println("Respuesta" + responseData);
-                    inputusername.setError("Username exist");
+                    inputusername.setError(getString(R.string.username_exists));
                     progressDialog.dismiss();
                     registerSuccessful = false;
                 }
@@ -154,7 +150,7 @@ public class Register extends AppCompatActivity {
                     progressDialog.dismiss();
                     // redirects the user to the next activity
                     sendUserToNextActivity();
-                    Toast.makeText(Register.this, "Register Succesful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, getString(R.string.register_succesful), Toast.LENGTH_SHORT).show();
                 }
             }
         }

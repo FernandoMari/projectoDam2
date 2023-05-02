@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -131,16 +130,16 @@ public class RequestsFriendsActivity extends Activity {
                 }
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(RequestsFriendsActivity.this);
-                builder.setTitle("Confirm");
+                builder.setTitle(getString(R.string.btConfirm));
                 builder.setMessage(R.string.confirm_requestfriend);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Accept the friend request
                         new friendRequestTask().execute();
                     }
                 });
-                builder.setNegativeButton("No", null);
+                builder.setNegativeButton(R.string.no, null);
                 builder.show();
 
             }
@@ -224,7 +223,7 @@ public class RequestsFriendsActivity extends Activity {
         @Override
         protected void onPostExecute(Boolean result) {
             if (result) {
-                Toast.makeText(getApplicationContext(), "Accept the friend" + selectedUsername, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.accept_friend) + selectedUsername, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), "Error accept  friend  " + selectedUsername, Toast.LENGTH_SHORT).show();
             }

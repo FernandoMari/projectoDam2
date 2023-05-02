@@ -1,7 +1,5 @@
 package org.proven.decisions2.Friends;
 
-import static android.app.PendingIntent.getActivity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -132,7 +130,7 @@ public class RemoveFriendsActivity extends Activity {
             //search friend is gone
             searchFriend.setVisibility(View.GONE);
             //line is gone
-            line.setVisibility(View.GONE);
+            line.setVisibility(View.INVISIBLE);
 
         } else {
             //list is visible
@@ -157,16 +155,16 @@ public class RemoveFriendsActivity extends Activity {
                 }
                 //Dialog for the user confirm
                 AlertDialog.Builder builder = new AlertDialog.Builder(RemoveFriendsActivity.this);
-                builder.setTitle("Confirm");
+                builder.setTitle(getString(R.string.btConfirm));
                 builder.setMessage(R.string.confirm_remove);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Send the friend request
                         new removeFriendTask().execute();
                     }
                 });
-                builder.setNegativeButton("No", null);
+                builder.setNegativeButton(R.string.no, null);
                 builder.show();
 
             }
@@ -268,7 +266,7 @@ public class RemoveFriendsActivity extends Activity {
         @Override
         protected void onPostExecute(Boolean result) {
             if (result) {
-                Toast.makeText(getApplicationContext(), "The friend has been deleted " + selectedUsername, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.friend_deleted) + selectedUsername, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), "Error delete friend  " + selectedUsername, Toast.LENGTH_SHORT).show();
             }

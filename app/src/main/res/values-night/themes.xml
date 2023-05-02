@@ -1,7 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.Decisions2" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Primary brand color. -->
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <!-- Primary brand color. -->
@@ -13,6 +12,10 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MaterialComponents.MediumComponent</item>
+
     </style>
+
+
 </resources>

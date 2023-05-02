@@ -49,7 +49,7 @@ public class PlayOnlineActivity extends Activity {
         btPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PlayOnlineActivity.this, QuestionQuizGame.class));
+                //startActivity(new Intent(PlayOnlineActivity.this, QuestionQuizGame.class));
             }
         });
     }

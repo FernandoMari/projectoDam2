@@ -100,9 +100,6 @@ public class MainActivity extends AppCompat {
         if (checkbox.equals("true")) {
             startActivity(new Intent(MainActivity.this, SocialInterface.class));
             finish();
-            //Check the combobox is in false
-        } else if (checkbox.equals("false")) {
-            Toast.makeText(this, "Please sign in", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -122,14 +119,17 @@ public class MainActivity extends AppCompat {
         password = inputPassword.getText().toString();
         //Check the username is not equals
         if (!username.matches(username)) {
-            inputUsername.setError("Enter conntext Username");
+            inputUsername.setError(getString(R.string.correct_username));
             //Check the username is empty
         } else if (username.isEmpty()) {
-            inputUsername.setError("Enter conntext Username");
+            inputUsername.setError(getString(R.string.username_empty));
             //Check that the password is empty or the length is correct
-        } else if (password.isEmpty() || password.length() < 4) {
-            inputPassword.setError("Enter Proper Password");
-        } else {
+        } else if (password.isEmpty()) {
+            inputPassword.setError(getString(R.string.password_empty));
+        }else if(password.length() < 4){
+            inputPassword.setError(getString(R.string.password_correct));
+        }
+        else {
             //call the method for execute de asyncTask
             http();
         }
@@ -157,8 +157,8 @@ public class MainActivity extends AppCompat {
         protected void onPreExecute() {
             super.onPreExecute();
             //Dialog for the correct login
-            progressDialog.setMessage("Please Wait While Login...");
-            progressDialog.setTitle("Login");
+            progressDialog.setMessage(getString(R.string.wait_login));
+            progressDialog.setTitle(R.string.login);
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
         }
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompat {
             if (textWithoutQuotes != null) {
                 if (textWithoutQuotes.equals("Credenciales o usuario incorrecto!!!")) {
                     inputUsername.setError("User not exists");
-                    inputPassword.setError("password incorrect");
+                    inputPassword.setError("Password incorrect");
                     loginSuccessful = false;
                 } else {
                     token = textWithoutQuotes;
@@ -209,14 +209,14 @@ public class MainActivity extends AppCompat {
                     progressDialog.dismiss();
                     // redirects the user to the next activity
                     sendUserToNextActivity();
-                    Toast.makeText(MainActivity.this, "Login Succesfull", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Login succesfull", Toast.LENGTH_SHORT).show();
                 } else {
                     progressDialog.dismiss();
                     Toast.makeText(MainActivity.this, "Wrong credentials or user", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 progressDialog.dismiss();
-                Toast.makeText(MainActivity.this, "error connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Error connection", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -278,6 +278,4 @@ public class MainActivity extends AppCompat {
         }
 
     }
-
-
 }
