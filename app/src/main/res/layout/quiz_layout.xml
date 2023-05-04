@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +9,7 @@
     android:id="@+id/quizLayout"
     >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,275 +63,277 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    android:id="@+id/tvTimer"
+                <LinearLayout
+                    android:id="@+id/cardLifes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="15dp"
-                    android:text="@string/time"
-                    android:textColor="@color/black"
-                    android:textSize="22dp"
-                    android:textAlignment="center"
                     android:gravity="center"
+                    android:paddingRight="8dp"
+                    android:paddingLeft="3dp"
                     >
 
-                </TextView>
+                    <ImageView
+                        android:id="@+id/life1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_heart"
+                        android:layout_gravity="center"
+                        ></ImageView>
+
+                    <ImageView
+                        android:id="@+id/life2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_heart"
+                        android:layout_gravity="center"
+                        ></ImageView>
+
+                    <ImageView
+                        android:id="@+id/life3"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_heart"
+                        android:layout_gravity="center"
+                        ></ImageView>
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardLifes"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="50dp"
-            app:strokeColor="@color/black"
-            app:strokeWidth="2dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="15dp"
-            tools:ignore="MissingConstraints"
-            >
+    </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:padding="10dp"
-                >
-
-                <ImageView
-                    android:id="@+id/life1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_heart"
-                    android:layout_gravity="center"
-                    ></ImageView>
-
-                <ImageView
-                    android:id="@+id/life2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_heart"
-                    android:layout_gravity="center"
-                    ></ImageView>
-
-                <ImageView
-                    android:id="@+id/life3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_heart"
-                    android:layout_gravity="center"
-                    ></ImageView>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/questionLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/answerLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header"
+        android:layout_below="@id/header"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp">
 
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:cardCornerRadius="3dp"
-            app:strokeColor="@color/black"
-            app:strokeWidth="2dp"
-            app:cardBackgroundColor="@color/electric_blue"
-            >
-
-            <TextView
-                android:id="@+id/tvCategory"
-                android:layout_width="wrap_content"
-                android:maxWidth="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="Category"
-                android:fontFamily="@font/montserrat_semibold"
-                android:textAllCaps="true"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="24dp"
-                ></TextView>
-
-        </com.google.android.material.card.MaterialCardView>
-
-
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:strokeColor="@color/black"
-            app:strokeWidth="4dp"
-            app:cardBackgroundColor="@color/white">
+            android:orientation="vertical"
+            android:gravity="center"
+            >
 
-            <TextView
-                android:id="@+id/tvQuestion"
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cardCornerRadius="3dp"
+                app:strokeColor="@color/black"
+                app:strokeWidth="2dp"
+                app:cardBackgroundColor="@color/electric_blue"
+                >
+
+                <TextView
+                    android:id="@+id/tvCategory"
+                    android:layout_width="wrap_content"
+                    android:maxWidth="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="12dp"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="Category"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textAllCaps="true"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="24dp"
+                    ></TextView>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="20dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="20dp"
-                android:text="Question"
-                android:fontFamily="@font/montserrat_semibold"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="22dp"></TextView>
-        </com.google.android.material.card.MaterialCardView>
+                app:cardCornerRadius="20dp"
+                app:strokeColor="@color/black"
+                app:strokeWidth="4dp"
+                app:cardBackgroundColor="@color/white">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tvQuestion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="20dp"
+                    android:text="Question"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="22dp"></TextView>
+            </com.google.android.material.card.MaterialCardView>
 
-    <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:strokeColor="@color/black"
+                app:strokeWidth="2dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                app:cardCornerRadius="2dp">
+
+                <ProgressBar
+                    android:id="@+id/pb"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:max="30"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:progressDrawable="@drawable/custom_progress_bar"
+                    />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+    <ScrollView
         android:id="@+id/answerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questionLayout"
+        android:layout_below="@id/questionLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="50dp"
-        android:layout_marginLeft="50dp">
+        android:layout_marginBottom="10dp"
+        android:overScrollMode="never"
+        android:scrollbars="none">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/btAnswer1"
+        <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:strokeWidth="4dp"
-            app:strokeColor="@color/electric_blue"
-            app:cardCornerRadius="50dp"
-            app:cardBackgroundColor="@color/white"
-            android:layout_marginTop="10dp"
-            >
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvAnswer1"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btAnswer1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="answer1"
-                android:textSize="20sp"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:fontFamily="@font/montserrat_medium"
-                ></TextView>
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="50dp"
+                app:strokeColor="@color/electric_blue"
+                app:strokeWidth="4dp">
 
-        </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:id="@+id/tvAnswer1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingStart="20dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="20dp"
+                    android:text="answer1"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"></TextView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/btAnswer2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:strokeWidth="4dp"
-            app:strokeColor="@color/electric_blue"
-            app:cardCornerRadius="50dp"
-            app:cardBackgroundColor="@color/white"
-            android:layout_marginTop="10dp"
-            >
+            </com.google.android.material.card.MaterialCardView>
 
-            <TextView
-                android:id="@+id/tvAnswer2"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btAnswer2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="answer2"
-                android:textSize="20sp"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:fontFamily="@font/montserrat_medium"
-                ></TextView>
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="50dp"
+                app:strokeColor="@color/electric_blue"
+                app:strokeWidth="4dp">
 
-        </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:id="@+id/tvAnswer2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingStart="20dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="20dp"
+                    android:text="answer2"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"></TextView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/btAnswer3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:strokeWidth="4dp"
-            app:strokeColor="@color/electric_blue"
-            app:cardCornerRadius="50dp"
-            app:cardBackgroundColor="@color/white"
-            android:layout_marginTop="10dp"
-            >
+            </com.google.android.material.card.MaterialCardView>
 
-            <TextView
-                android:id="@+id/tvAnswer3"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btAnswer3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="answer3"
-                android:textSize="20sp"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:fontFamily="@font/montserrat_medium"
-                ></TextView>
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="50dp"
+                app:strokeColor="@color/electric_blue"
+                app:strokeWidth="4dp">
 
-        </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:id="@+id/tvAnswer3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingStart="20dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="20dp"
+                    android:text="answer3"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"></TextView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/btAnswer4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:strokeWidth="4dp"
-            app:strokeColor="@color/electric_blue"
-            app:cardCornerRadius="50dp"
-            app:cardBackgroundColor="@color/white"
-            android:layout_marginTop="10dp"
-            >
+            </com.google.android.material.card.MaterialCardView>
 
-            <TextView
-                android:id="@+id/tvAnswer4"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btAnswer4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="answer4"
-                android:textSize="20sp"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:fontFamily="@font/montserrat_medium"
-                ></TextView>
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="50dp"
+                app:strokeColor="@color/electric_blue"
+                app:strokeWidth="4dp">
 
-        </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:id="@+id/tvAnswer4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingStart="20dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="20dp"
+                    android:text="answer4"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"></TextView>
 
-    </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
+</RelativeLayout>

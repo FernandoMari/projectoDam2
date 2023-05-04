@@ -15,11 +15,23 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.proven.decisions2.R;
+import org.proven.decisions2.SecureConnection;
 import org.proven.decisions2.Settings.AppCompat;
 import org.proven.decisions2.SocialInterface;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -41,22 +53,30 @@ public class MainActivity extends AppCompat {
     //Filename the document name for save the token
     String filename = "token.txt";
     //Url for the http post request for the login in the app
-    String url = "http://143.47.249.102:7070/login";
+    //String url = "http://143.47.249.102:7070/login";
+    String url = "https://5.75.251.56:8443/login";
+    //String url = "http://5.75.251.56:7070/login";
     //Url for the http post request for the getUserToken
-    String url2 = "http://143.47.249.102:7070/getUserToken";
+    //String url2 = "http://143.47.249.102:7070/getUserToken";
+    String url2 = "https://5.75.251.56:8443/getUserToken";
+    // url2 = "http://5.75.251.56:7070/getUserToken";
     //Create FileOutputStream for the save the document internal
     FileOutputStream outputStream;
-
+    //Method returns an OkHttpClient object that can be used to make HTTP requests, but ignores any SSL certificate issues that might arise when establishing an HTTPS connection.
+    SecureConnection secureConnection = new SecureConnection();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
+//        n = new NukeSSLCerts();
+
         /*Initialize the elements*/
         initializeElements();
         /* Initialize the checkbox*/
         checkboxInitialize();
-
+        //Save user token
+        saveUser();
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,7 +185,7 @@ public class MainActivity extends AppCompat {
 
         @Override
         protected String doInBackground(Void... params) {
-            OkHttpClient client = new OkHttpClient();
+            OkHttpClient client = secureConnection.getClient();
             //Confirm the username and password the user
             MediaType mediaType = MediaType.parse("application/json");
             RequestBody requestBody = RequestBody.create(mediaType, "username=" + username + "&password=" + password);
@@ -225,7 +245,8 @@ public class MainActivity extends AppCompat {
     private class getToken extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... params) {
-            OkHttpClient client = new OkHttpClient();
+            OkHttpClient client = secureConnection.getClient();
+
             MediaType mediaType = MediaType.parse("application/json");
             RequestBody requestBody = RequestBody.create(mediaType, "username=" + username + "&password=" + password);
 
@@ -269,9 +290,13 @@ public class MainActivity extends AppCompat {
     /*Method to save the token that logs in to be able to use it in other activities*/
     private void saveUser() {
         try {
-            outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-            outputStream.write(token.getBytes());
-            outputStream.close();
+            if (token !=null){
+                outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+                outputStream.write(token.getBytes());
+                outputStream.close();
+            }else{
+                // handle the null case
+            }
         } catch (
                 Exception e) {
             e.printStackTrace();

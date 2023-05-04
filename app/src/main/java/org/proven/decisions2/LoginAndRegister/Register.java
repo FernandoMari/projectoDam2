@@ -14,9 +14,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.proven.decisions2.R;
+import org.proven.decisions2.SecureConnection;
 import org.proven.decisions2.Settings.EmailSettings.MailSender;
 
 import java.io.IOException;
+import java.security.cert.CertificateException;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -36,7 +43,11 @@ public class Register extends AppCompatActivity {
     //email the user, username the user, password the user
     String email, username, password;
     //Url for the http post request for the register in the app
-    String url = "http://143.47.249.102:7070/register";
+    //String url = "http://143.47.249.102:7070/register";
+    String url = "https://5.75.251.56:8443/register";
+    //String url = "http://5.75.251.56:7070/register";
+    //Method returns an OkHttpClient object that can be used to make HTTP requests, but ignores any SSL certificate issues that might arise when establishing an HTTPS connection.
+    SecureConnection secureConnection = new SecureConnection();
 
 
     @Override
@@ -117,7 +128,7 @@ public class Register extends AppCompatActivity {
     private class HttpTask extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... params) {
-            OkHttpClient client = new OkHttpClient();
+            OkHttpClient client = secureConnection.getClient();
             MediaType mediaType = MediaType.parse("application/json");
             RequestBody requestBody = RequestBody.create(mediaType, "mail=" + email + "&username=" + username + "&password=" + password);
 

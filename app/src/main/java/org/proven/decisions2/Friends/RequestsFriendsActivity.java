@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.proven.decisions2.R;
+import org.proven.decisions2.SecureConnection;
 import org.proven.decisions2.Settings.SettingsActivity;
 import org.proven.decisions2.SocialInterface;
 
@@ -48,8 +49,11 @@ public class RequestsFriendsActivity extends Activity {
     String selectedUsername;
     //Url for the http post in see friend Request
     String url = "http://143.47.249.102:7070/seeFriendRequest";
+    //String url = "https://5.75.251.56:8443/seeFriendRequest";
     //Url for the http post in accept friend request
     String url2 = "http://143.47.249.102:7070/aceptFriendRequest";
+    //String url2 = "https://5.75.251.56:8443/aceptFriendRequest";
+    SecureConnection secureConnection = new SecureConnection();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +159,7 @@ public class RequestsFriendsActivity extends Activity {
         protected ArrayList<String> doInBackground(String... params) {
             token = params[0];
             ArrayList<String> friendsList = new ArrayList<>();
-            OkHttpClient client = new OkHttpClient();
+            OkHttpClient client = secureConnection.getClient();
             MediaType mediaType = MediaType.parse("application/json");
             if (token != null) {
                 System.out.println("Algo " + token);
@@ -195,7 +199,7 @@ public class RequestsFriendsActivity extends Activity {
         @Override
         protected Boolean doInBackground(String... params) {
 
-            OkHttpClient client = new OkHttpClient();
+            OkHttpClient client = secureConnection.getClient();
             MediaType mediaType = MediaType.parse("application/json");
             RequestBody requestBody = RequestBody.create(mediaType, "username=" + selectedUsername);
 

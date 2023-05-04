@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.proven.decisions2.R;
+import org.proven.decisions2.SecureConnection;
 import org.proven.decisions2.Settings.SettingsActivity;
 import org.proven.decisions2.SocialInterface;
 
@@ -55,9 +56,13 @@ public class RemoveFriendsActivity extends Activity {
     String selectedUsername;
     //Url for the http post in get friends
     String url = "http://143.47.249.102:7070/getFriends";
+    //String url = "https://5.75.251.56:8443/getFriends";
     //Url for the http post in remove friend
     String url2 = "http://143.47.249.102:7070/removeFriend";
+    //String url2 = "https://5.75.251.56:8443/removeFriend";
 
+    //Method returns an OkHttpClient object that can be used to make HTTP requests, but ignores any SSL certificate issues that might arise when establishing an HTTPS connection.
+    SecureConnection secureConnection = new SecureConnection();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,7 +203,7 @@ public class RemoveFriendsActivity extends Activity {
         protected ArrayList<String> doInBackground(String... params) {
             token = params[0];
             ArrayList<String> friendsList = new ArrayList<>();
-            OkHttpClient client = new OkHttpClient();
+            OkHttpClient client =secureConnection.getClient();
             MediaType mediaType = MediaType.parse("application/json");
             if (token != null) {
                 String requestBodyString = "username=" + token;
@@ -238,7 +243,7 @@ public class RemoveFriendsActivity extends Activity {
         @Override
         protected Boolean doInBackground(String... params) {
 
-            OkHttpClient client = new OkHttpClient();
+            OkHttpClient client =secureConnection.getClient();
             MediaType mediaType = MediaType.parse("application/json");
             RequestBody requestBody = RequestBody.create(mediaType, "username=" + selectedUsername);
 
