@@ -50,11 +50,11 @@ public class AddFriendsActivity extends Activity {
     //User selected in friend list
     String selectedUsername;
     //Url for the http post in get users
-    //String url = "http://143.47.249.102:7070/getUsers";
-    String url = "https://5.75.251.56:8443/getUsers";
+    String url = "http://143.47.249.102:7070/getUsers";
+    //String url = "https://5.75.251.56:8443/getUsers";
     //Url for the http post in send friend request
-    //String url2 = "http://143.47.249.102:7070/sendFriendRequest";
-    String url2 = "https://5.75.251.56:8443/sendFriendRequest";
+    String url2 = "http://143.47.249.102:7070/sendFriendRequest";
+    //String url2 = "https://5.75.251.56:8443/sendFriendRequest";
     //Method returns an OkHttpClient object that can be used to make HTTP requests, but ignores any SSL certificate issues that might arise when establishing an HTTPS connection.
     SecureConnection secureConnection = new SecureConnection();
 
@@ -117,7 +117,8 @@ public class AddFriendsActivity extends Activity {
 
     /* Method to pass the list of friends and show them */
     private void setList(ArrayList<String> friendsList) {
-        mFriendsAdapter = new CustomListAdapter(this, friendsList, R.layout.list_item_add);
+        ArrayList<String> firstTenFriends = new ArrayList<>(friendsList.subList(0, 10));
+        mFriendsAdapter = new CustomListAdapter(this, firstTenFriends, R.layout.list_item_add);
         listFriend.setAdapter(mFriendsAdapter);
         listFriend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

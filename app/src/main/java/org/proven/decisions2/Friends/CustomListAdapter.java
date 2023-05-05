@@ -83,7 +83,7 @@ public class CustomListAdapter extends ArrayAdapter<String> implements Filterabl
                 String filterString = constraint.toString().toUpperCase();
                 List<String> filteredList = new ArrayList<>();
                 for (String value : values) {
-                    if (value.toUpperCase().contains(filterString)) {
+                    if (value.toUpperCase().startsWith(filterString)) {
                         filteredList.add(value);
                     }
                 }

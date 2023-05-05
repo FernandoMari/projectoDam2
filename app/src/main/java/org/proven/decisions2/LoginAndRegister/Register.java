@@ -43,8 +43,8 @@ public class Register extends AppCompatActivity {
     //email the user, username the user, password the user
     String email, username, password;
     //Url for the http post request for the register in the app
-    //String url = "http://143.47.249.102:7070/register";
-    String url = "https://5.75.251.56:8443/register";
+    String url = "http://143.47.249.102:7070/register";
+    //String url = "https://5.75.251.56:8443/register";
     //String url = "http://5.75.251.56:7070/register";
     //Method returns an OkHttpClient object that can be used to make HTTP requests, but ignores any SSL certificate issues that might arise when establishing an HTTPS connection.
     SecureConnection secureConnection = new SecureConnection();
