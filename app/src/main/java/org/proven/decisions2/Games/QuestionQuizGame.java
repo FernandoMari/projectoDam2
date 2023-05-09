@@ -149,7 +149,7 @@ public class QuestionQuizGame extends AppCompat {
         }
         // If the user has run out of lives, the user loses.
         else if (lifes == 0) {
-            tvQuestion.setText(getString(R.string.you_lose));
+            tvQuestion.setText(getString(R.string.you_lost));
             finish = true;
             lose = true;
         }

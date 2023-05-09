@@ -2,6 +2,8 @@ package org.proven.decisions2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +27,7 @@ public class SocialInterface extends FragmentActivity {
     Button btFriends, btDecisions, btSettings;
     //User authentication token
     String token;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

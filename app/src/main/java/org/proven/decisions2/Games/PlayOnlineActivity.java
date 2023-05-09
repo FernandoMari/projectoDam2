@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import org.proven.decisions2.Friends.FriendsActivity;
+import org.proven.decisions2.PublicDecision.CameraActivity;
 import org.proven.decisions2.R;
 import org.proven.decisions2.Settings.SettingsActivity;
 import org.proven.decisions2.SocialInterface;
@@ -49,7 +50,7 @@ public class PlayOnlineActivity extends Activity {
         btPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(PlayOnlineActivity.this, QuestionQuizGame.class));
+                startActivity(new Intent(PlayOnlineActivity.this, CameraActivity.class));
             }
         });
     }

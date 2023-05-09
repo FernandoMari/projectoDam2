@@ -120,5 +120,4 @@
     <string name="result_game">परिणाम खेल</string>
     <string name="sorry_only_the_winner_can_publish_the_decision_you_have_made_n_nperhaps_next_time_you_ll_win">माफ़ कीजिए, केवल विजेता उस फैसले को प्रकाशित कर सकता है जिसे आपने लिया है।\n\nशायद अगली बार आप जीत जाएँगे।</string>
     <string name="you_lost_against_the_robot_can_you_share_its_decision_by_posting_a_photo">आप रोबोट के खिलाफ हार गए, क्या आप फोटो पोस्ट करके उसके फैसले को साझा कर सकते हैं?</string>
-    <string name="post_this_photo">यह तस्वीर पोस्ट करें?</string>
 </resources>

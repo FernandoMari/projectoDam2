@@ -120,5 +120,4 @@
     <string name="result_game">Resultat del joc</string>
     <string name="sorry_only_the_winner_can_publish_the_decision_you_have_made_n_nperhaps_next_time_you_ll_win">Ho sentim, només el guanyador pot publicar la decisió que has pres. \n\nPotser la propera vegada guanyaràs.</string>
     <string name="you_lost_against_the_robot_can_you_share_its_decision_by_posting_a_photo">Has perdut contra el robot, pots compartir la seva decisió publicant una foto</string>
-    <string name="post_this_photo">Publicar aquesta foto?</string>
 </resources>

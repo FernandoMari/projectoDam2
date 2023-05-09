@@ -55,7 +55,7 @@ public class Question extends Activity {
             {"Brain", "Heart", "Skin", "Liver"},
             {"Au", "Cu", "Fe", "Ag"},
             {"Louis Pasteur", "Marie Curie", "Charles Darwin", "Alexander Fleming"},
-            // Art and Culture
+            // Art
             {"Claude Monet", "Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh"},
             {"Pablo Picasso", "Leonardo da Vinci", "Vincent van Gogh", "Salvador Dali"},
             {"Ernest Hemingway", "Harper Lee", "Mark Twain", "J.D. Salinger"},
@@ -77,7 +77,7 @@ public class Question extends Activity {
             // Science
             3, 2, 0, 1,
             // Art and Culture
-            2, 2, 1, 0, 2,
+            1, 2, 1, 0, 2,
             // Technology
             2, 2, 3, 3,
             // Astrology

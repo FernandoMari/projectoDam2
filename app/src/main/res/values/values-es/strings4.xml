@@ -119,7 +119,6 @@
     <string name="share_your_decision_with_your_friends_posting_a_photo">Comparte tu decisión con tus amigos publicando una foto</string>
     <string name="take_a_photo">Tomar una foto</string>
     <string name="result_game">Resultado del juego</string>
-    <string name="sorry_only_the_winner_can_publish_the_decision_you_have_made_n_nperhaps_next_time_you_ll_win">Lo siento, solo el ganador puede publicar la decisión que habéis tomado. \n\nQuizás la próxima vez ganas.</string>
+    <string name="sorry_only_the_winner_can_publish_the_decision_you_have_made_n_nperhaps_next_time_you_ll_win">Lo siento, solo el ganador puede publicar la decisión que habéis tomado. \n\nQuizás la próxima vez ganarás.</string>
     <string name="you_lost_against_the_robot_can_you_share_its_decision_by_posting_a_photo">Perdiste contra el robot, puedes compartir su decisión publicando una foto</string>
-    <string name="post_this_photo">¿Publicar esta foto?</string>
 </resources>

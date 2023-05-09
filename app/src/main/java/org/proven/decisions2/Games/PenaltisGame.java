@@ -417,7 +417,7 @@ public class PenaltisGame extends Activity {
             win = true;
         } else if(golMachine - golPlayer >= 4){
             finish = true;
-            tvResult.setText(R.string.you_lose);
+            tvResult.setText(R.string.you_lost);
             lose = true;
         }
         // Check if the player wins or loses by 3 goals or more difference
@@ -427,7 +427,7 @@ public class PenaltisGame extends Activity {
             win = true;
         } else if(golMachine - golPlayer >= 3){
             finish = true;
-            tvResult.setText(R.string.you_lose);
+            tvResult.setText(R.string.you_lost);
             lose = true;
         }
         // Check if the player wins or loses at the end of the 5 rounds
@@ -437,7 +437,7 @@ public class PenaltisGame extends Activity {
                 finish = true;
                 win = true;
             }else if (golMachine == 5 && golPlayer < 4){
-                tvResult.setText(R.string.you_lose);
+                tvResult.setText(R.string.you_lost);
                 finish = true;
                 lose = true;
             }
@@ -447,7 +447,7 @@ public class PenaltisGame extends Activity {
                 win = true;
             } else if(golMachine - golPlayer >= 2){
                 finish = true;
-                tvResult.setText(R.string.you_lose);
+                tvResult.setText(R.string.you_lost);
                 lose = true;
             }
             if (golPlayer - golMachine >= 3) {
@@ -456,7 +456,7 @@ public class PenaltisGame extends Activity {
                 win = true;
             } else if(golMachine - golPlayer >= 3){
                 finish = true;
-                tvResult.setText(R.string.you_lose);
+                tvResult.setText(R.string.you_lost);
                 lose = true;
             }
             if (round==5 && round2==5){
@@ -466,7 +466,7 @@ public class PenaltisGame extends Activity {
                     win = true;
                 } else if(golMachine - golPlayer >= 1){
                     finish = true;
-                    tvResult.setText(R.string.you_lose);
+                    tvResult.setText(R.string.you_lost);
                     lose = true;
                 }
             }
@@ -480,7 +480,7 @@ public class PenaltisGame extends Activity {
                 win = true;
             } else if(golMachine - golPlayer >= 1){
                 finish = true;
-                tvResult.setText(R.string.you_lose);
+                tvResult.setText(R.string.you_lost);
                 lose = true;
             }
         }

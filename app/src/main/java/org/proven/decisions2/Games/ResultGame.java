@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import org.proven.decisions2.PublicDecision.CameraActivity;
 import org.proven.decisions2.Friends.FriendsActivity;
 import org.proven.decisions2.R;
 import org.proven.decisions2.Settings.SettingsActivity;
@@ -13,7 +14,7 @@ import org.proven.decisions2.SocialInterface;
 
 public class ResultGame extends Activity {
 
-    Button btHome, btSettings, btFriends;
+    Button btHome, btSettings, btFriends, btPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +26,14 @@ public class ResultGame extends Activity {
             setContentView(R.layout.result_win_layout);
         }else if(result == 1){
             setContentView(R.layout.result_lose_layout);
+        }else if(result == 2){
+            setContentView(R.layout.result_lose_machine_layout);
         }
 
         btHome = findViewById(R.id.btHome);
         btSettings = findViewById(R.id.btSettings);
         btFriends = findViewById(R.id.btFriends);
+        btPhoto = findViewById(R.id.btPhoto);
 
         btHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +55,14 @@ public class ResultGame extends Activity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ResultGame.this, FriendsActivity.class));
+                finishAndRemoveTask();
+            }
+        });
+
+        btPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ResultGame.this, CameraActivity.class));
                 finishAndRemoveTask();
             }
         });

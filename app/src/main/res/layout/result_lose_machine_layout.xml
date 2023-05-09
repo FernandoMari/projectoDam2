@@ -65,22 +65,11 @@
                     android:id="@+id/youWin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/you_win"
+                    android:text="@string/you_lost"
                     android:textColor="@color/white"
                     android:textSize="40dp"
                     android:fontFamily="@font/brown_sugar2"
 
-                    />
-
-                <TextView
-                    android:id="@+id/youDecide"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/you_decide"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white"
-                    android:textSize="40dp"
-                    android:fontFamily="@font/brown_sugar2"
                     />
 
                 <com.google.android.material.card.MaterialCardView
@@ -112,7 +101,7 @@
                                 android:layout_weight="1"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/montserrat_semibold"
-                                android:text="@string/share_your_decision_with_your_friends_posting_a_photo"
+                                android:text="@string/you_lost_against_the_robot_can_you_share_its_decision_by_posting_a_photo"
                                 android:textColor="@color/black"
                                 android:textSize="22dp"></TextView>
 
@@ -125,7 +114,6 @@
                         </LinearLayout>
 
                         <Button
-                            android:id="@+id/btPhoto"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="20dp"

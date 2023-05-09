@@ -120,5 +120,4 @@
     <string name="result_game">Resultado do jogo</string>
     <string name="sorry_only_the_winner_can_publish_the_decision_you_have_made_n_nperhaps_next_time_you_ll_win">Desculpe, apenas o vencedor pode publicar a decisão que você tomou. \n\nTalvez da próxima vez você vença.</string>
     <string name="you_lost_against_the_robot_can_you_share_its_decision_by_posting_a_photo">Você perdeu para o robô, você pode compartilhar sua decisão postando uma foto</string>
-    <string name="post_this_photo">Postar esta foto?</string>
 </resources>

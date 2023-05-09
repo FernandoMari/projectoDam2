@@ -121,5 +121,4 @@
     <string name="result_game">游戏结果</string>
     <string name="sorry_only_the_winner_can_publish_the_decision_you_have_made_n_nperhaps_next_time_you_ll_win">很抱歉，只有赢家可以发布您所做的决定。\n\n也许下次您会赢。</string>
     <string name="you_lost_against_the_robot_can_you_share_its_decision_by_posting_a_photo">您输给了机器人，您可以通过发布照片分享它的决定</string>
-    <string name="post_this_photo">发布这张照片？</string>
 </resources>

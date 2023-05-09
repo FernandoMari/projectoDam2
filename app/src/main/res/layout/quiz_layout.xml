@@ -137,7 +137,6 @@
                 <TextView
                     android:id="@+id/tvCategory"
                     android:layout_width="wrap_content"
-                    android:maxWidth="200dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingRight="12dp"
