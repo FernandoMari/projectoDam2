@@ -28,6 +28,8 @@ public class SocialInterface extends FragmentActivity {
     //User authentication token
     String token;
 
+    private int[] initialImageIds = {}; // Arreglo inicial de IDs de imágenes
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,17 @@ public class SocialInterface extends FragmentActivity {
         initializeElements();
         //call the method
         readUser();
+        // Recuperar el ID de la imagen de los datos extras del Intent
+        int imageId = getIntent().getIntExtra("uploadedImageId", -1);
+        System.out.println("Imagen id "+imageId);
+
+        // Si se ha proporcionado un nuevo ID de imagen, agregarlo al arreglo inicial de IDs
+        if (imageId != -1) {
+            int[] newImageIds = new int[initialImageIds.length + 1];
+            System.arraycopy(initialImageIds, 0, newImageIds, 0, initialImageIds.length);
+            newImageIds[initialImageIds.length] = imageId;
+            initialImageIds = newImageIds;
+        }
         btFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +82,7 @@ public class SocialInterface extends FragmentActivity {
     /*Initialize the elements*/
     private void initializeElements() {
         viewPager = (VerticalViewPager) findViewById(R.id.viewPager);
-        viewAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewAdapter = new ViewPagerAdapter(getSupportFragmentManager(),initialImageIds);
         viewPager.setAdapter(viewAdapter);
         btFriends = findViewById(R.id.btFriends);
         btDecisions = findViewById(R.id.btDecisions);

@@ -1,6 +1,5 @@
 package org.proven.decisions2;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,92 +19,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
-import java.security.AccessController;
 
-//public class ChildFragment extends Fragment {
-//
-//    TextView tvTarget;
-//    ImageView imageView;
-//
-//    public ChildFragment() {
-//
-//    }
-//
-//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//
-//        View view = inflater.inflate(R.layout.fragment_child, container, false);
-//        tvTarget = (TextView) view.findViewById(R.id.tvTarget);
-//
-//        Bundle bundle = getArguments();
-//        tvTarget.setText("Target: " + bundle.getString("target"));
-//
-//        // Cargar la imagen desde el servidor
-//        imageView = view.findViewById(R.id.fragmentImageView);
-//
-//        if (imageView == null) {
-//            Log.e("ChildFragment", "imageView is null");
-//        }
-//
-//        return view;
-//    }
-//
-//
-//    public void setImage(Bitmap bitmap) {
-//        if (imageView != null) {
-//            Glide.with(this).load(bitmap).into(imageView);
-//        }
-//    }
-//
-//}
-//public class ChildFragment extends Fragment {
-//
-//    TextView tvTarget;
-//    ImageView imageView;
-//
-//    public ChildFragment() {
-//
-//    }
-//
-//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//
-//        View view = inflater.inflate(R.layout.fragment_child, container, false);
-//        tvTarget = (TextView) view.findViewById(R.id.tvTarget);
-//
-//        Bundle bundle = getArguments();
-//        tvTarget.setText("Target: " + bundle.getString("target"));
-//
-//        // Cargar la imagen desde el servidor
-//        imageView = view.findViewById(R.id.fragmentImageView);
-//
-//        if (imageView == null) {
-//            Log.e("ChildFragment", "imageView is null");
-//        }
-//
-//        return view;
-//    }
-//
-//    public void setImage(String imageUrl) {
-//        if (imageView != null) {
-//            Glide.with(this)
-//                    .load(imageUrl)
-//                    .listener(new RequestListener<Drawable>() {
-//                        @Override
-//                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-//                            Log.e("ChildFragment", "Error al cargar la imagen", e);
-//                            return false;
-//                        }
-//
-//                        @Override
-//                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-//                            return false;
-//                        }
-//                    })
-//                    .into(imageView);
-//        }
-//    }
-//
-//
-//}
 
 public class ChildFragment extends Fragment {
 
@@ -148,11 +62,13 @@ public class ChildFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Bundle bundle = getArguments();
+        String imageUrl = bundle.getString("imageUrl");
         setImage(imageUrl);
     }
 
     public void setImage(String imageUrl) {
-        if (imageView != null) {
+        if (imageView != null && imageUrl != null && !imageUrl.isEmpty()) {
             Glide.with(this)
                     .load(imageUrl)
                     .listener(new RequestListener<Drawable>() {
@@ -171,10 +87,8 @@ public class ChildFragment extends Fragment {
         }
     }
 
-    public ImageView getImageView() {
-        return imageView;
-    }
 }
+
 
 
 
