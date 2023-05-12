@@ -121,4 +121,36 @@
     <string name="sorry_only_the_winner_can_publish_the_decision_you_have_made_n_nperhaps_next_time_you_ll_win">Ho sentim, només el guanyador pot publicar la decisió que has pres. \n\nPotser la propera vegada guanyaràs.</string>
     <string name="you_lost_against_the_robot_can_you_share_its_decision_by_posting_a_photo">Has perdut contra el robot, pots compartir la seva decisió publicant una foto</string>
     <string name="post_this_photo">Publicar aquesta foto?</string>
+
+    <string name="ast3">Què és una supernova?</string>
+    <string name="ast4">Què és conegut com a una massa de matèria còsmica celestial, difusa i lluminosa, que té l\'aparença d\'una núvol?</string>
+    <string name="htr1">Qui va ser el primer emperador romà?</string>
+    <string name="htr2">En quin any es va produir la Revolució Francesa?</string>
+    <string name="htr3">Quin va ser el primer país a enviar un satèl\·lit artificial a l\'espai?</string>
+    <string name="htr4">Quin esdeveniment va desencadenar la participació dels Estats Units a la Segona Guerra Mundial?</string>
+    <string name="htr5">Qui va ser el líder de la Revolució Russa de 1917?</string>
+    <string name="htr6">Quina important invenció va patentar Alexander Graham Bell el 1876?</string>
+    <string name="histo">Història</string>
+    <string name="sci5">Quin és el procés pel qual les plantes converteixen l\'energia solar en energia química?</string>
+    <string name="sci6">Com es diu el procés pel qual les cèl·lules es divideixen en dues cèl·lules filles idèntiques?</string>
+    <string name="tec5">Quin dels següents materials és el millor conductor elèctric?</string>
+    <string name="tec6">Quin tipus d\'energia s\'utilitza per alimentar vehicles elèctrics?</string>
+    <string name="sci7">Quin és l\'animal més ràpid del món?</string>
+    <string name="sci8">Quantos ossos té el cos humà?</string>
+    <string name="sci9">Quantes capes té la Terra?</string>
+    <string name="sci10">Quin és l\'oceà més gran del món?</string>
+    <string name="spt1">Quin és el nombre màxim de jugadors en un equip de futbol?</string>
+    <string name="spt2">Quina és l\'alçada d\'una cistella de bàsquet estàndard?</string>
+    <string name="spt3">Com es diu el primer gran torneig de tennis de l\'any?</string>
+    <string name="spt4">En el futbol americà, quantos punts val un touchdown?</string>
+    <string name="spt5">Com es diu la cursa de ciclisme més famosa del món?</string>
+    <string name="spt6">En beisbol, quantes sortides són necessàries per a acabar una entrada?</string>
+    <string name="sport">Esport</string>
+
+    <string name="sorry_the_connection_between_both_players_has_been_lost_nthis_could_have_been_caused_by_the_interruption_of_the_minigame_of_one_or_both_players_or_because_of_the_internet_connection">Ho sentim, s\'ha perdut la connexió entre els dos jugadors. \nAixò podria haver estat causat per la interrupció del minijoc d\'un o els dos jugadors, o bé per la connexió a internet.</string>
+    <string name="lost_connection">Connexió perduda</string>
+    <string name="select_element">Selecciona l\'element</string>
+    <string name="one_player_dont_select">Un jugador no ha seleccionat</string>
+    <string name="play_with">\"Juga amb \"</string>
+    <string name="waiting">Esperant que el teu amic accepti...</string>
 </resources>

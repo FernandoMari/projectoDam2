@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/write_your_decision"
                 android:textSize="20dp"
-                android:fontFamily="@font/montserrat_medium"
+                android:fontFamily="@font/montserrat_semibold"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/black">
             </TextView>
@@ -140,7 +140,6 @@
                 ></EditText>
 
             <View
-                android:id="@+id/line"
                 android:layout_width="285dp"
                 android:layout_height="1dp"
                 android:background="@color/medium_blue"
@@ -151,9 +150,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/connect_with_friend"
+                android:text="Send request"
                 android:textSize="20dp"
-                android:fontFamily="@font/montserrat_medium"
+                android:fontFamily="@font/montserrat_semibold"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/black">
             </TextView>
@@ -161,34 +160,84 @@
             <ListView
                 android:id="@+id/lvConnect"
                 android:layout_width="300dp"
-                android:layout_height="120dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/listview_style"
                 android:fontFamily="@font/montserrat_medium"
                 android:hint="Search persons"
                 android:textSize="20dp"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                android:listSelector="@drawable/list_selector"
+                android:divider="@drawable/custom_divider"
+                android:dividerHeight="1dp"
                 tools:ignore="MissingConstraints">
 
             </ListView>
 
-            <Button
-                android:id="@+id/btPlay"
-                android:layout_width="300dp"
-                android:layout_height="60dp"
+            <TextView
+                android:id="@+id/infoConnect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="You don't have friends to play"
+                android:textSize="18dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:background="@drawable/button_style"
-                android:text="@string/play"
-                android:fontFamily="@font/montserrat_semibold"
-                android:textSize="22dp"
-                android:layout_marginTop="35dp"
-                android:textColor="@color/white"
-                android:stateListAnimator="@null"
-                >
-            </Button>
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"
+                android:visibility="gone">
+            </TextView>
 
+            <View
+                android:layout_width="285dp"
+                android:layout_height="1dp"
+                android:background="@color/medium_blue"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Accept request"
+                android:textSize="20dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black">
+            </TextView>
+
+            <ListView
+                android:id="@+id/lvAccept"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/listview_style"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="Search persons"
+                android:textSize="20dp"
+                android:listSelector="@drawable/list_selector"
+                android:divider="@drawable/custom_divider"
+                android:dividerHeight="1dp"
+                tools:ignore="MissingConstraints">
+            </ListView>
+
+            <TextView
+                android:id="@+id/infoRequests"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="You don't have requests to play"
+                android:textSize="18dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"
+                android:visibility="gone">
+            </TextView>
 
         </LinearLayout>
 
     </ScrollView>
-
 
 </RelativeLayout>

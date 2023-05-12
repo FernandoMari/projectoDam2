@@ -34,7 +34,7 @@ public class ProfileActivity extends Activity {
     //new username for the user and token the user for the login in the app
     String token, newUsername;
 
-
+//Falta capar que el nombre de usuario no sea uno que exista en la base de datos
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

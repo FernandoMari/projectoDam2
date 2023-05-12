@@ -20,7 +20,7 @@ public class ResultGame extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int result = getIntent().getIntExtra("result",1);
+        int result = getIntent().getIntExtra("result",0);
 
         if (result == 0){
             setContentView(R.layout.result_win_layout);
@@ -28,6 +28,8 @@ public class ResultGame extends Activity {
             setContentView(R.layout.result_lose_layout);
         }else if(result == 2){
             setContentView(R.layout.result_lose_machine_layout);
+        }else{
+            setContentView(R.layout.result_lost_connection_layout);
         }
 
         btHome = findViewById(R.id.btHome);

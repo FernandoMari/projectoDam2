@@ -36,6 +36,7 @@ public class EmailActivity extends Activity {
     //Url for the http post request for the change email in the app
     String url = "http://143.47.249.102:7070/swichEmail";
 
+    //Capar que el correo no sea el mismo que introduce nuevamente
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

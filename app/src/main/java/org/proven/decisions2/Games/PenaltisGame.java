@@ -509,7 +509,7 @@ public class PenaltisGame extends Activity {
                 }
             }, 2000); // 2000 milliseconds = 2 seconds delay
         }else if (lose) {
-            value = 1;
+            value = 2;
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

@@ -122,4 +122,35 @@
     <string name="sorry_only_the_winner_can_publish_the_decision_you_have_made_n_nperhaps_next_time_you_ll_win">很抱歉，只有赢家可以发布您所做的决定。\n\n也许下次您会赢。</string>
     <string name="you_lost_against_the_robot_can_you_share_its_decision_by_posting_a_photo">您输给了机器人，您可以通过发布照片分享它的决定</string>
     <string name="post_this_photo">发布这张照片？</string>
+
+    <string name="ast3">什么是超新星？</string>
+    <string name="ast4">什么被称为宇宙中的一团巨大的、弥散的、发光的物质，外观像云？</string>
+    <string name="htr1">谁是第一位罗马皇帝？</string>
+    <string name="htr2">法国大革命是在哪一年发生的？</string>
+    <string name="htr3">哪个国家是第一个把人造卫星送入太空的国家？</string>
+    <string name="htr4">什么事件引发了美国参加第二次世界大战？</string>
+    <string name="htr5">谁是1917年俄国革命的领导人？</string>
+    <string name="htr6">亚历山大·格雷厄姆·贝尔于1876年申请专利的重要发明是什么？</string>
+    <string name="histo">历史</string>
+    <string name="sci5">植物将太阳能转化为化学能的过程是什么？</string>
+    <string name="sci6">什么是细胞分裂成两个相同的女儿细胞的过程的名称？</string>
+    <string name="tec5">以下哪种材料是最好的导电材料？</string>
+    <string name="tec6">电动汽车使用的是哪种能源？</string>
+    <string name="sci7">世界上最快的动物是什么？</string>
+    <string name="sci8">人体有多少根骨头？</string>
+    <string name="sci9">地球有多少个层次？</string>
+    <string name="sci10">世界上最大的海洋是什么？</string>
+    <string name="spt1">足球队的最大球员人数是多少？</string>
+    <string name="spt2">标准篮球框的高度是多少？</string>
+    <string name="spt3">一年中第一个重要的网球比赛的名称是什么？</string>
+    <string name="spt4">在美式足球中，touchdown的得分是多少分？</string>
+    <string name="spt5">世界上最著名的自行车比赛的名称是什么？</string>
+    <string name="spt6">在棒球比赛中，一个球队需要多少个出局才能结束一局比赛？</string>
+    <string name="sport">体育</string>
+    <string name="sorry_the_connection_between_both_players_has_been_lost_nthis_could_have_been_caused_by_the_interruption_of_the_minigame_of_one_or_both_players_or_because_of_the_internet_connection">抱歉，两位玩家之间的连接已经丢失。\n这可能是由于一位或两位玩家的小游戏中断，或因为网络连接问题引起的。</string>
+    <string name="lost_connection">连接已丢失</string>
+    <string name="select_element">选择元素</string>
+    <string name="one_player_dont_select">一位玩家没有选择</string>
+    <string name="play_with">\"一起玩 \"</string>
+    <string name="waiting">等待你的朋友接受...</string>
 </resources>

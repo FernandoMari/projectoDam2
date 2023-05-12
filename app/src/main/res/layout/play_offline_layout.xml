@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/write_first_decision"
                 android:textSize="20dp"
-                android:fontFamily="@font/montserrat_medium"
+                android:fontFamily="@font/montserrat_semibold"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/black">
             </TextView>
@@ -153,7 +153,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/write_second_decision"
                 android:textSize="20dp"
-                android:fontFamily="@font/montserrat_medium"
+                android:fontFamily="@font/montserrat_semibold"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/black">
             </TextView>

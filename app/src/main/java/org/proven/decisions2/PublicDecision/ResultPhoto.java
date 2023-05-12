@@ -81,7 +81,7 @@ public class ResultPhoto extends Activity {
         btNo = findViewById(R.id.btNo);
         btYes = findViewById(R.id.btYes);
     }
-//Esto funciona
+//Esto funciona sin la id
 //    private void uploadImage() {
 //        // Comprueba si tienes un bitmap válido para cargar
 //        if (bitmap == null) {

@@ -37,20 +37,20 @@
             android:orientation="vertical"
             android:textAlignment="center">
 
-            <TextView
-                android:id="@+id/tvTarget"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Target: "
-                android:textSize="30dp"
-                android:textColor="@color/white"
-                android:fontFamily="@font/montserrat_semibold"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="10dp"
-                android:background="@color/dark_blue"
-                >
+<!--            <TextView-->
+<!--                android:id="@+id/tvTarget"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Target: "-->
+<!--                android:textSize="30dp"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:fontFamily="@font/montserrat_semibold"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:background="@color/dark_blue"-->
+<!--                >-->
 
-            </TextView>
+<!--            </TextView>-->
 
         </LinearLayout>
 

@@ -121,4 +121,36 @@
     <string name="sorry_only_the_winner_can_publish_the_decision_you_have_made_n_nperhaps_next_time_you_ll_win">Entschuldigung, nur der Gewinner kann die von dir getroffene Entscheidung veröffentlichen. \n\nVielleicht gewinnst du nächstes Mal.</string>
     <string name="you_lost_against_the_robot_can_you_share_its_decision_by_posting_a_photo">Du hast gegen den Roboter verloren. Kannst du seine Entscheidung teilen, indem du ein Foto postest?</string>
     <string name="post_this_photo">Dieses Foto posten?</string>
+
+    <string name="ast3">Was ist eine Supernova?</string>
+    <string name="ast4">Was wird als eine Masse kosmischer Materie bezeichnet, die diffus und leuchtend ist und das Aussehen einer Wolke hat?</string>
+    <string name="htr1">Wer war der erste römische Kaiser?</string>
+    <string name="htr2">In welchem Jahr fand die Französische Revolution statt?</string>
+    <string name="htr3">Welches Land war das erste, das einen künstlichen Satelliten ins Weltall schickte?</string>
+    <string name="htr4">Welches Ereignis löste den Eintritt der Vereinigten Staaten in den Zweiten Weltkrieg aus?</string>
+    <string name="htr5">Wer war der Anführer der Russischen Revolution von 1917?</string>
+    <string name="htr6">Welche wichtige Erfindung wurde von Alexander Graham Bell im Jahr 1876 patentiert?</string>
+    <string name="histo">Geschichte</string>
+    <string name="sci5">Was ist der Prozess, bei dem Pflanzen Sonnenenergie in chemische Energie umwandeln?</string>
+    <string name="sci6">Wie heißt der Prozess, bei dem Zellen sich in zwei identische Tochterzellen teilen?</string>
+    <string name="tec5">Welches der folgenden Materialien ist der beste elektrische Leiter?</string>
+    <string name="tec6">Welche Art von Energie wird verwendet, um Elektrofahrzeuge zu betreiben?</string>
+    <string name="sci7">Was ist das schnellste Tier der Welt?</string>
+    <string name="sci8">Wie viele Knochen hat der menschliche Körper?</string>
+    <string name="sci9">Wie viele Schichten hat die Erde?</string>
+    <string name="sci10">Was ist der größte Ozean der Welt?</string>
+    <string name="spt1">Wie viele Spieler dürfen maximal in einer Fußballmannschaft sein?</string>
+    <string name="spt2">Wie hoch ist ein Standard-Basketballkorb?</string>
+    <string name="spt3">Wie heißt das erste bedeutende Tennis-Turnier des Jahres?</string>
+    <string name="spt4">Wie viele Punkte ist ein Touchdown im American Football wert?</string>
+    <string name="spt5">Wie heißt das berühmteste Radsportrennen der Welt?</string>
+    <string name="spt6">Wie viele Outs sind im Baseball erforderlich, damit eine Mannschaft eine Inning beenden kann?</string>
+    <string name="sport">Sport</string>
+
+    <string name="sorry_the_connection_between_both_players_has_been_lost_nthis_could_have_been_caused_by_the_interruption_of_the_minigame_of_one_or_both_players_or_because_of_the_internet_connection">Entschuldigung, die Verbindung zwischen beiden Spielern wurde unterbrochen. \nDies könnte durch die Unterbrechung des Minispiels eines oder beider Spieler oder aufgrund der Internetverbindung verursacht worden sein.</string>
+    <string name="lost_connection">Verbindung verloren</string>
+    <string name="select_element">Element auswählen</string>
+    <string name="one_player_dont_select">Ein Spieler hat nicht ausgewählt</string>
+    <string name="play_with">\"Spielen mit \"</string>
+    <string name="waiting">Warten auf die Akzeptanz deines Freundes...</string>
 </resources>

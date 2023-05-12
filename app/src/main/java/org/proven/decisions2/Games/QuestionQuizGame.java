@@ -319,7 +319,7 @@ public class QuestionQuizGame extends AppCompat {
         // If the player loses the game, show the result screen after a 2-second delay and hide the life card view
         else if (lose) {
             cardLifes.setVisibility(View.GONE);
-            value = 1;
+            value = 2;
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

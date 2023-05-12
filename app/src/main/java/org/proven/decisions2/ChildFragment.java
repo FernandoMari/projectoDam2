@@ -42,10 +42,10 @@ public class ChildFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_child, container, false);
-        tvTarget = (TextView) view.findViewById(R.id.tvTarget);
+       // tvTarget = (TextView) view.findViewById(R.id.tvTarget);
 
         Bundle bundle = getArguments();
-        tvTarget.setText("Target: " + bundle.getString("target"));
+        //tvTarget.setText("Target: " + bundle.getString("target"));
 
         // Obtiene la URL de la imagen del Bundle
         imageUrl = bundle.getString("imageUrl");

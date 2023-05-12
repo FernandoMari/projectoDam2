@@ -46,8 +46,12 @@ public class CustomListAdapter extends ArrayAdapter<String> implements Filterabl
                 rowView = inflater.inflate(R.layout.list_item_add, null, true);
             } else if (layoutResourceId == R.layout.list_item_remove) {
                 rowView = inflater.inflate(R.layout.list_item_remove, null, true);
-            } else {
+            } else if (layoutResourceId == R.layout.list_item_request){
                 rowView = inflater.inflate(R.layout.list_item_request, null, true);
+            }else if (layoutResourceId == R.layout.list_item_send){
+                rowView = inflater.inflate(R.layout.list_item_send, null, true);
+            }else{
+                rowView = inflater.inflate(R.layout.list_item_play, null, true);
             }
         } else {
             rowView = convertView;

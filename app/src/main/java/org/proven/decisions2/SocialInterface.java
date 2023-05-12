@@ -28,7 +28,7 @@ public class SocialInterface extends FragmentActivity {
     //User authentication token
     String token;
 
-    private int[] initialImageIds = {}; // Arreglo inicial de IDs de imágenes
+    private int[] initialImageIds = {1,2,4,6,8,9,10,11,13,14,16,17,18,19,20}; // Arreglo inicial de IDs de imágenes
 
 
     @Override

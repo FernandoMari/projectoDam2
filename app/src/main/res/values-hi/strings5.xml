@@ -121,4 +121,35 @@
     <string name="sorry_only_the_winner_can_publish_the_decision_you_have_made_n_nperhaps_next_time_you_ll_win">माफ़ कीजिए, केवल विजेता उस फैसले को प्रकाशित कर सकता है जिसे आपने लिया है।\n\nशायद अगली बार आप जीत जाएँगे।</string>
     <string name="you_lost_against_the_robot_can_you_share_its_decision_by_posting_a_photo">आप रोबोट के खिलाफ हार गए, क्या आप फोटो पोस्ट करके उसके फैसले को साझा कर सकते हैं?</string>
     <string name="post_this_photo">यह तस्वीर पोस्ट करें?</string>
+
+    <string name="ast3">एक सुपरनोवा क्या होता है?</string>
+    <string name="ast4">क्या ज्ञात है जो एक आकाशीय, विस्तृत और ज्योतिर्मय कॉस्मिक पदार्थ के रूप में जो एक बादल की तरह दिखता है?</string>
+    <string name="htr1">पहला रोमन सम्राट कौन था?</string>
+    <string name="htr2">फ्रांसीसी क्रांति किस वर्ष हुई थी?</string>
+    <string name="htr3">कौन सा देश ने अधिकृत रूप से अपना एक कृत्रिम उपग्रह अंतरिक्ष में भेजा था?</string>
+    <string name="htr4">कौन संघर्ष ने संयुक्त राज्यों को द्वितीय विश्व युद्ध में शामिल होने के लिए उत्तेजित किया था?</string>
+    <string name="htr5">1917 रूसी क्रांति के नेता कौन थे?</string>
+    <string name="htr6">1876 में अलेक्जेंडर ग्राहम बेल द्वारा कौन सा महत्वपूर्ण आविष्कार लाइसेंस प्राप्त हुआ था?</string>
+    <string name="histo">इतिहास</string>
+    <string name="sci5">पौधों द्वारा सौर ऊर्जा को रासायनिक ऊर्जा में बदलने की प्रक्रिया क्या है?</string>
+    <string name="sci6">कोशिकाओं को दो विस्तृत समान बेटियों में विभाजित करने की प्रक्रिया का नाम क्या है?</string>
+    <string name="tec5">निम्नलिखित में से कौन सा पदार्थ सबसे अच्छा विद्युत चालक है?</string>
+    <string name="tec6">इलेक्ट्रिक वाहन चलाने के लिए कौन सी ऊर्जा का उपयोग किया जाता है?</string>
+    <string name="sci7">दुनिया में सबसे तेज जानवर कौन है?</string>
+    <string name="sci8">मानव शरीर में कितनी हड्डियां होती हैं?</string>
+    <string name="sci9">पृथ्वी के कितने ताल होते हैं?</string>
+    <string name="sci10">दुनिया का सबसे बड़ा सागर कौन सा है?</string>
+    <string name="spt1">फुटबॉल टीम पर अधिकतम कितने खिलाड़ी हो सकते हैं?</string>
+    <string name="spt2">एक मानक बास्केटबॉल हूप की ऊंचाई क्या होती है?</string>
+    <string name="spt3">वर्ष के पहले बड़े टेनिस टूर्नामेंट का नाम क्या है?</string>
+    <string name="spt4">अमेरिकी फुटबॉल में, टचडाउन कितने अंकों का होता है?</string>
+    <string name="spt5">दुनिया के सबसे प्रसिद्ध साइक्लिंग रेस का नाम क्या है?</string>
+    <string name="spt6">बेसबॉल में, एक इनिंग समाप्त करने के लिए कितने आउट जरुरी होते हैं?</string>
+    <string name="sport">खेल</string>
+    <string name="sorry_the_connection_between_both_players_has_been_lost_nthis_could_have_been_caused_by_the_interruption_of_the_minigame_of_one_or_both_players_or_because_of_the_internet_connection">माफ़ कीजिए, दोनों खिलाड़ियों के बीच कनेक्शन खो गया है। \nयह एक या दोनों खिलाड़ियों के मिनीगेम के बाधित होने या इंटरनेट कनेक्शन के कारण हो सकता है।</string>
+    <string name="lost_connection">कनेक्शन खो गया</string>
+    <string name="select_element">तत्व चुनें</string>
+    <string name="one_player_dont_select">एक खिलाड़ी ने चयन नहीं किया</string>
+    <string name="play_with">\"साथ खेलें \"</string>
+    <string name="waiting">आपके दोस्त की स्वीकृति का इंतजार कर रहे हैं...</string>
 </resources>
