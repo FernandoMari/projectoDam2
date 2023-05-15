@@ -138,7 +138,7 @@ public class EmailActivity extends Activity {
             token = params[0];
             OkHttpClient client = new OkHttpClient();
             MediaType mediaType = MediaType.parse("application/json");
-            RequestBody requestBody = RequestBody.create(mediaType, "newMail=" + newEmail +"&currentEmail="+actualEmail+ "&currentPassword="+actualPassword);
+            RequestBody requestBody = RequestBody.create(mediaType, "newMail=" + newEmail + "&currentEmail=" + actualEmail + "&currentPassword=" + actualPassword);
 
             Request request = new Request.Builder()
                     .url(url)
@@ -162,90 +162,17 @@ public class EmailActivity extends Activity {
 
         @Override
         protected void onPostExecute(String result) {
-            if (result.equals("Successful email change")){
+            if (result.equals("Successful email change")) {
                 Toast.makeText(EmailActivity.this, "Change email " + newEmail, Toast.LENGTH_SHORT).show();
                 //go back to activity settings
                 startActivity(new Intent(EmailActivity.this, SettingsActivity.class));
-            }else {
+            } else {
                 inputActualEmail.setError(getString(R.string.enter_actual_email));
                 inputActualPassword.setError(getString(R.string.enter_actual_password));
             }
 
         }
     }
-
-//    private class EmailChangeTask extends AsyncTask<String, Void, String> {
-//
-//        @Override
-//        protected String doInBackground(String... params) {
-//            token = params[0];
-//            OkHttpClient client = new OkHttpClient();
-//            MediaType mediaType = MediaType.parse("application/json");
-//            RequestBody requestBody = RequestBody.create(mediaType, "newMail=" + newEmail);
-//
-//            Request request = new Request.Builder()
-//                    .url(url)
-//                    .post(requestBody)
-//                    .addHeader("content-type", "application/json")
-//                    .addHeader("Authorization", token)
-//                    .build();
-//
-//            try {
-//                Response response = client.newCall(request).execute();
-//                if (response.isSuccessful()) {
-//                    return "Cambio de correo electrónico exitoso";
-//                } else {
-//                    inputActualEmail.setError(getString(R.string.enter_actual_email));
-//                    return "Error al cambiar el correo electrónico";
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                return "Error al cambiar el correo electrónico";
-//            }
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String result) {
-//            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
-
-//    private class EmailChangeTask extends AsyncTask<String, Void, String> {
-//
-//        @Override
-//        protected String doInBackground(String... params) {
-//            token = params[0];
-//            OkHttpClient client = new OkHttpClient();
-//            MediaType mediaType = MediaType.parse("application/json");
-//            RequestBody requestBody = RequestBody.create(mediaType, "newMail=" + newEmail);
-//
-//            Request request = new Request.Builder()
-//                    .url(url)
-//                    .post(requestBody)
-//                    .addHeader("content-type", "application/json")
-//                    .addHeader("Authorization", token)
-//                    .build();
-//
-//            // Send HTTP POST friend request
-//            try {
-//                Response response = client.newCall(request).execute();
-//                if (response.isSuccessful()) {
-//                    return "Change email";
-//                } else {
-//                    return "Error change email";
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                return "Error change email";
-//            }
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String result) {
-//            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-//        }
-//    }
 
     /*Method to read the login token for use in the activity*/
     private void readUser() {

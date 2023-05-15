@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.proven.decisions2.Games.ResultGame;
 import org.proven.decisions2.R;
 
 import java.util.Random;
@@ -64,7 +65,6 @@ public class PenaltiesGameOnline extends Activity {
                 // Set content view to the main layout
                 setContentView(R.layout.penaltis_layout);
 
-                earlyerInit();
 
                 // Initialize UI elements
                 instantiateElements();
@@ -74,7 +74,8 @@ public class PenaltiesGameOnline extends Activity {
                 tvGolsPlayer.setText(""+golPlayer);
 
                 // Initialize turn and timer
-                initTurn();
+                //initTurn();
+                earlyerInit();
                 initCrono();
 
                 // Set up button listeners
@@ -82,7 +83,8 @@ public class PenaltiesGameOnline extends Activity {
                     @Override
                     public void onClick(View v) {
                         sendDepending(3);
-
+                        electionPlayer = 3;
+                        disable(3);
                     }
                 });
 
@@ -90,14 +92,16 @@ public class PenaltiesGameOnline extends Activity {
                     @Override
                     public void onClick(View v) {
                         sendDepending(5);
-
+                        electionPlayer = 5;
+                        disable(5);
                     }
                 });
                 btLeft.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         sendDepending(2);
-
+                        electionPlayer = 2;
+                        disable(2);
                     }
                 });
 
@@ -105,7 +109,8 @@ public class PenaltiesGameOnline extends Activity {
                     @Override
                     public void onClick(View v) {
                         sendDepending(4);
-
+                        electionPlayer = 4;
+                        disable(4);
                     }
                 });
 
@@ -113,32 +118,12 @@ public class PenaltiesGameOnline extends Activity {
                     @Override
                     public void onClick(View v) {
                         sendDepending(1);
-
+                        electionPlayer = 1;
+                        disable(1);
                     }
                 });
             }
         }, 6500); // 6500 milliseconds = 6.5 seconds delay
-    }
-
-    // This method initializes the turn of the game
-    private void initTurn(){
-        // Creating a new Random object
-        Random random = new Random();
-        // Generating a random number between 0 and 1
-        int randomNumber = random.nextInt(2);
-
-        // If the random number is 0, it's the player's turn
-        if (randomNumber == 0) {
-            turnPlayer = true;
-            // Setting the text of a TextView to a string resource with the message "You are player"
-            tvResult.setText(R.string.you_are_player);
-        }
-        // If the random number is 1, it's the goalkeeper's turn
-        else {
-            turnGoalie = true;
-            // Setting the text of a TextView to a string resource with the message "You are goalkeeper"
-            tvResult.setText(R.string.you_are_goalkeeper);
-        }
     }
 
     // This method is responsible for initializing all the elements of the UI.
@@ -181,8 +166,16 @@ public class PenaltiesGameOnline extends Activity {
 
             if(roomName.equals(playerName)){
                 role="host";
+
+                turnPlayer = true;
+                // Setting the text of a TextView to a string resource with the message "You are player"
+                tvResult.setText(getString(R.string.you_are_player));
             }else{
                 role="guest";
+
+                turnGoalie = true;
+                // Setting the text of a TextView to a string resource with the message "You are goalkeeper"
+                tvResult.setText(getString(R.string.you_are_goalkeeper));
             }
         }
     }
@@ -202,6 +195,18 @@ public class PenaltiesGameOnline extends Activity {
         }
     }
 
+    private void forceNonSelected(){
+        guestEle = database.getReference("rooms/"+roomName+"/message");
+        message = "guest:"+0;
+        electionMachine=0;
+        guestEle.setValue(message);
+
+        hostEle = database.getReference("rooms/"+roomName+"/hostele");
+        message = "host:"+0;
+        electionPlayer=0;
+        hostEle.setValue(message);
+    }
+
     private void addRoomEventListener(){
         guestEle.addValueEventListener(new ValueEventListener() {
             @Override
@@ -216,7 +221,7 @@ public class PenaltiesGameOnline extends Activity {
                     if(snapshot.getValue(String.class) != null){
                         String alter = snapshot.getValue(String.class).replace("guest:","");
                         if(alter.matches("\\d+") && electionPlayer != 0){
-                            //aqui tengo que quiza crear una variable
+
                             electionMachine = Integer.parseInt(alter);
                         }
                     }
@@ -258,7 +263,7 @@ public class PenaltiesGameOnline extends Activity {
     // Method to initialize the countdown timer
     private void initCrono(){
         // Create a new CountDownTimer object with a duration of 15 seconds and a tick interval of 1 second
-        countDownTimer = new CountDownTimer(15000, 1000){
+        countDownTimer = new CountDownTimer(10000, 1000){
 
             @Override
             // Method to be called on each tick of the countdown timer
@@ -267,11 +272,6 @@ public class PenaltiesGameOnline extends Activity {
                 long segPendiente=time/1000;
                 // Set the text of the tvTimer TextView to show the remaining time in seconds
                 tvTimer.setText(getString(R.string.time)+": "+segPendiente);
-
-                if(electionMachine != 0 && electionPlayer != 0){
-                    checkTirada();
-                    checkWinDelayed();
-                }
             }
 
             @Override
@@ -279,29 +279,67 @@ public class PenaltiesGameOnline extends Activity {
             public void onFinish() {
                 // Create a new Random object
                 Random rand = new Random();
+                int ra = rand.nextInt(5)+1;
 
-                // Randomly select an element for the rival
-                //electionPlayer = rand.nextInt(5) + 1;
+                if(electionMachine != 0 && electionPlayer != 0){
+                    checkTirada();
+                    checkWinDelayed();
+                    restartColor();
+                    System.out.println("HOST: "+electionPlayer);
+                    System.out.println("GUEST: "+electionMachine);
 
-                // Call the tiradaMaquina() method
-                //tiradaMaquina();
+                    // Switch the turn between the player and the goalie.
+                    if (role.equals("host")) {
+                        if (turnPlayer) {
+                            turnPlayer = false;
+                            turnGoalie = true;
+                            tvResult.setText(R.string.you_are_goalkeeper);
+                        } else if (turnGoalie) {
+                            turnPlayer = true;
+                            turnGoalie = false;
+                            tvResult.setText(R.string.you_are_player);
+                        }
+                    }
+                    if (role.equals("guest")){
+                        if (turnPlayer){
+                            turnPlayer = false;
+                            turnGoalie = true;
+                            tvResult.setText(R.string.you_are_goalkeeper);
+                        }else if (turnGoalie){
+                            turnPlayer = true;
+                            turnGoalie = false;
+                            tvResult.setText(R.string.you_are_player);
+                        }
+                    }
 
-                // Call the checkTirada() method
-                checkTirada();
-                // Call the checkWinDelayed() method
-                checkWinDelayed();
+                }else if(electionPlayer == 0 && electionMachine == 0){
+                    //sendDepending(ra);
+                    reset();
+                    System.out.println("Both no select");
+                    System.out.println("HOST: "+electionPlayer);
+                    System.out.println("GUEST: "+electionMachine);
+                }else if(electionMachine == 0){
+                    //sendDepending(ra);
+                    restartColor();
+                    reset();
+                    System.out.println("Guest no select");
+                    System.out.println("HOST: "+electionPlayer);
+                    System.out.println("GUEST: "+electionMachine);
+                }else if (electionPlayer == 0){
+                    //sendDepending(ra);
+                    restartColor();
+                    reset();
+                    System.out.println("Host no select");
+                    System.out.println("HOST: "+electionPlayer);
+                    System.out.println("GUEST: "+electionMachine);
+                }
+                forceNonSelected();
+
             }
         }.start();
 
     }
 
-    // Method to randomly select an element for the machine player
-    public void tiradaMaquina(){
-        // Create a new Random object
-        Random rand = new Random();
-        // Randomly select an element for the machine player
-        electionMachine = rand.nextInt(5) + 1;
-    }
 
     // Method to check the outcome of the player's move
     public void checkTirada(){
@@ -316,43 +354,89 @@ public class PenaltiesGameOnline extends Activity {
         // Hide the ball ImageView
         ball.setVisibility(View.INVISIBLE);
         // Check if it's the player's turn
-        if(turnPlayer){
-            // Increase the round counter
-            round++;
-            // Set the robot ImageView to show the player's chosen element
-            setRobot();
-            // Set the ball ImageView to the player's position
-            setBall();
-            // Check if the player's element is different from the machine player's element
-            if(electionPlayer != electionMachine){
-                // Increase the player's score
-                golPlayer++;
-                // Set the text of the tvGolsPlayer TextView to show the player's score
-                tvGolsPlayer.setText(""+golPlayer);
-                // Set the gol ImageView to show the player's goal
-                setGol(round);
-            }else{
-                // Set the error ImageView to show the player's error
-                setError(round);
+        if(role.equals("host")){
+            if (turnGoalie) {
+                // Increase the round counter
+                round++;
+                // Set the robot ImageView to show the player's chosen element
+                setRobot();
+                // Set the ball ImageView to the player's position
+                setBall();
+                // Check if the player's element is different from the machine player's element
+                if (electionPlayer != electionMachine) {
+                    // Increase the machine player's score
+                    golMachine++;
+                    System.out.println("Guest goals: " + golMachine);
+                    // Set the text of the tvGolsMachine TextView to show the machine player's score
+                    tvGolsMachine.setText(Integer.toString(golMachine));
+                    // Set the gol ImageView to show the machine player's goal
+                    setGol(round);
+                } else {
+                    // Set the error ImageView to show the machine player's error
+                    setError(round);
+                }
+            }else if (turnPlayer){
+                // Increase the round counter
+                round2++;
+                // Set the robot ImageView to show the player's chosen element
+                setRobot();
+                // Set the ball ImageView to the player's position
+                setBall();
+                // Check if the player's element is different from the machine player's element
+                if (electionPlayer != electionMachine) {
+                    // Increase the machine player's score
+                    golPlayer++;
+                    System.out.println("Host goals: " + golPlayer);
+                    // Set the text of the tvGolsMachine TextView to show the machine player's score
+                    tvGolsPlayer.setText(Integer.toString(golPlayer));
+                    // Set the gol ImageView to show the machine player's goal
+                    setGol(round2);
+                } else {
+                    // Set the error ImageView to show the machine player's error
+                    setError(round2);
+                }
             }
-        }else if(turnGoalie){
-            // Increase the round counter
-            round2++;
-            // Set the robot ImageView to show the player's chosen element
-            setRobot();
-            // Set the ball ImageView to the player's position
-            setBall();
-            // Check if the player's element is different from the machine player's element
-            if (electionPlayer != electionMachine){
-                // Increase the machine player's score
-                golMachine++;
-                // Set the text of the tvGolsMachine TextView to show the machine player's score
-                tvGolsMachine.setText(Integer.toString(golMachine));
-                // Set the gol ImageView to show the machine player's goal
-                setGol(round2);
-            }else{
-                // Set the error ImageView to show the machine player's error
-                setError(round2);
+        }else if(role.equals("guest")){
+            if (turnGoalie) {
+                // Increase the round counter
+                round2++;
+                // Set the robot ImageView to show the player's chosen element
+                setRobot();
+                // Set the ball ImageView to the player's position
+                setBall();
+                // Check if the player's element is different from the machine player's element
+                if (electionPlayer != electionMachine) {
+                    // Increase the host player's score
+                    golPlayer++;
+                    System.out.println("Host goals: " + golPlayer);
+                    // Set the text of the tvGolsMachine TextView to show the machine player's score
+                    tvGolsMachine.setText(Integer.toString(golPlayer));
+                    // Set the gol ImageView to show the machine player's goal
+                    setGol(round2);
+                } else {
+                    // Set the error ImageView to show the machine player's error
+                    setError(round2);
+                }
+            }else if (turnPlayer){
+                // Increase the round counter
+                round++;
+                // Set the robot ImageView to show the player's chosen element
+                setRobot();
+                // Set the ball ImageView to the player's position
+                setBall();
+                // Check if the player's element is different from the machine player's element
+                if (electionPlayer != electionMachine) {
+                    // Increase the machine player's score
+                    golMachine++;
+                    System.out.println("Guest goals: " + golMachine);
+                    // Set the text of the tvGolsMachine TextView to show the machine player's score
+                    tvGolsPlayer.setText(Integer.toString(golMachine));
+                    // Set the gol ImageView to show the machine player's goal
+                    setGol(round);
+                } else {
+                    // Set the error ImageView to show the machine player's error
+                    setError(round);
+                }
             }
         }
     }
@@ -644,16 +728,39 @@ public class PenaltiesGameOnline extends Activity {
         // Make the ball visible again.
         ball.setVisibility(View.VISIBLE);
 
-        // Switch the turn between the player and the goalie.
-        if (turnPlayer){
-            turnPlayer = false;
-            turnGoalie = true;
-            tvResult.setText(R.string.you_are_goalkeeper);
-        }else if (turnGoalie){
-            turnPlayer = true;
-            turnGoalie = false;
-            tvResult.setText(R.string.you_are_player);
+
+    }
+
+    public void disable(int op){
+        btDown.setEnabled(false);
+        btRight.setEnabled(false);
+        btLeft.setEnabled(false);
+        btRightUp.setEnabled(false);
+        btLeftUp.setEnabled(false);
+
+        int color = getResources().getColor(R.color.light_blue);
+
+        if(op == 1){
+            btLeftUp.setCardBackgroundColor(color);
+        }else if(op == 2){
+            btLeft.setCardBackgroundColor(color);
+        }else if(op == 3){
+            btDown.setCardBackgroundColor(color);
+        }else if(op == 4){
+            btRightUp.setCardBackgroundColor(color);
+        }else if(op == 5){
+            btRight.setCardBackgroundColor(color);
         }
+    }
+
+    public void restartColor(){
+        int color = getResources().getColor(R.color.white);
+
+        btLeftUp.setCardBackgroundColor(color);
+        btLeft.setCardBackgroundColor(color);
+        btDown.setCardBackgroundColor(color);
+        btRightUp.setCardBackgroundColor(color);
+        btRight.setCardBackgroundColor(color);
     }
 
     // This method overrides the default behavior of the back button press in the activity
