@@ -101,7 +101,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/montserrat_semibold"
-                                android:text="@string/sorry_the_connection_between_both_players_has_been_lost_nthis_could_have_been_caused_by_the_interruption_of_the_minigame_of_one_or_both_players_or_because_of_the_internet_connection"
+                                android:text="@string/sorry_the_connection_between_both_players_has_been_lost_this_could_have_been_caused_by_the_interruption_of_the_minigame_of_one_or_both_players_or_because_of_the_internet_connection"
                                 android:textColor="@color/black"
                                 android:textSize="22dp"></TextView>
 

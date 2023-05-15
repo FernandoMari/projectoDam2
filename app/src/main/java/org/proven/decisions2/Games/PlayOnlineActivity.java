@@ -61,6 +61,7 @@ public class PlayOnlineActivity extends Activity {
     boolean rivalFound, waiting=false;
 
     String playerName = "";
+    String verify = "";
     String roomName = "";
     ProgressDialog dialog;
 
@@ -77,14 +78,14 @@ public class PlayOnlineActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_online_layout);
 
-
+        readUser();
 
         initelements();
+
         initButtons();
-        checkPlayerExists();
-        readUser();
+
         getFriends(username);
-        roomName = playerName;
+
         getsPlayer();
         getRooms();
 
@@ -130,13 +131,22 @@ public class PlayOnlineActivity extends Activity {
 
     }
 
+
+
     private void checkPlayerExists(){
         SharedPreferences preferences = getSharedPreferences("PREFS",0);
-        playerName = preferences.getString("playerName","");
-        if(!playerName.equals("")){
+        verify = preferences.getString("playerName","");
+
+        System.out.println("nombre: "+playerName);
+
+        if(!verify.equals("")){
             playerRef = database.getReference("player/"+playerName);
             addEventListener();
             playerRef.setValue("");
+        }else{
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("playerName",playerName);
+            editor.commit();
         }
     }
 
@@ -144,6 +154,8 @@ public class PlayOnlineActivity extends Activity {
         playerRef = database.getReference("player/"+playerName);
         addEventListener();
         playerRef.setValue("");
+
+        System.out.println(playerName);
     }
 
     private void assignPlayerToRoom(){
@@ -170,6 +182,8 @@ public class PlayOnlineActivity extends Activity {
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("playerName",playerName);
                     editor.apply();
+
+                    System.out.println(playerName);
                 }
             }
 
@@ -243,7 +257,7 @@ public class PlayOnlineActivity extends Activity {
 
                     } else if(snapshot.getValue(String.class).contains("start")){
 
-                        Intent intent = new Intent(getApplicationContext(), ElementsGameOnline.class);
+                        Intent intent = new Intent(getApplicationContext(), PenaltiesGameOnline.class);
                         intent.putExtra("roomName", roomNa);
                         startActivity(intent);
                     }
@@ -282,16 +296,16 @@ public class PlayOnlineActivity extends Activity {
                 }
 
                 AlertDialog.Builder builder= new AlertDialog.Builder(PlayOnlineActivity.this);
-                builder.setTitle("Confirm");
-                builder.setMessage(" Play with "+ selectedUsername +"?");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder.setTitle(R.string.btConfirm);
+                builder.setMessage(getString(R.string.play_with) + " " + selectedUsername +"?");
+                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         assignPlayerToRoom();
                         asignSecondPlayer(selectedUsername);
 
-                        PlayOnlineActivity.this.dialog.setMessage(getString(R.string.waiting));
+                        PlayOnlineActivity.this.dialog.setMessage("Waiting for the opponent to accept");
                         PlayOnlineActivity.this.dialog.setCanceledOnTouchOutside(false);
                         PlayOnlineActivity.this.dialog.show();
 
@@ -300,10 +314,6 @@ public class PlayOnlineActivity extends Activity {
                         checkCanPlay.setValue("waiting");
                         System.out.println("Check can play: "+checkCanPlay);
                         waiting=true;
-
-                        if (waiting=false){
-                            PlayOnlineActivity.this.dialog.dismiss();
-                        }
 
 
                         if (rivalFound){
@@ -322,7 +332,7 @@ public class PlayOnlineActivity extends Activity {
 
                     }
                 });
-                builder.setNegativeButton("No",null);
+                builder.setNegativeButton(R.string.no,null);
                 builder.show();
 
             }
@@ -333,7 +343,7 @@ public class PlayOnlineActivity extends Activity {
 
 
     private void setListOfPetitions(ArrayList<String> friendsList) {
-        mFriendsAdapter = new CustomListAdapter(this,friendsList, R.layout.list_item_play);
+        mFriendsAdapter = new CustomListAdapter(this,friendsList, R.layout.list_item_request);
         listOfPetitions.setAdapter(mFriendsAdapter);
 
         if (friendsList.isEmpty() || friendsList.size() == 0 || friendsList.contains("")){
@@ -358,7 +368,7 @@ public class PlayOnlineActivity extends Activity {
                 }
                 AlertDialog.Builder builder= new AlertDialog.Builder(PlayOnlineActivity.this);
                 builder.setTitle(R.string.btConfirm);
-                builder.setMessage(getString(R.string.play_with)+ selectedUsername +"?");
+                builder.setMessage(" Play with "+ selectedUsername +"?");
                 builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -382,7 +392,6 @@ public class PlayOnlineActivity extends Activity {
         } else if(waiting==true){
             deleteRoom(roomName);
             PlayOnlineActivity.this.dialog.dismiss();
-            checkCanPlay.setValue("");
             waiting = !waiting;
             System.out.println("Waiting canceled");
         }
@@ -454,8 +463,10 @@ public class PlayOnlineActivity extends Activity {
                     String toSplit = response.body().string();
                     String textoSinComillas = toSplit.replace("\"", "");
                     String textoSinCorchetes = textoSinComillas.replace("[", "").replace("]", "");
-                    readUser();
+
                     playerName = textoSinCorchetes;
+                    checkPlayerExists();
+                    roomName = playerName;
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -482,4 +493,5 @@ public class PlayOnlineActivity extends Activity {
     private void deleteRoom(String roomName) {
         database.getReference("rooms/" + roomName).removeValue();
     }
+
 }

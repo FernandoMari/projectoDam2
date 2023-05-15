@@ -99,6 +99,9 @@ public class SettingsActivity extends Activity {
         btlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clearNamePref();
+
+
                 startActivity(new Intent(SettingsActivity.this, MainActivity.class));
                 //change the checkbox in false for the logout the app
                 SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
@@ -141,5 +144,11 @@ public class SettingsActivity extends Activity {
         }
 
     }
-}
 
+    private void clearNamePref(){
+        SharedPreferences preferences = getSharedPreferences("PREFS",0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("playerName","");
+        editor.commit();
+    }
+}

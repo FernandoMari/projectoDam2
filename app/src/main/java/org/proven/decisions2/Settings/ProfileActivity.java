@@ -34,7 +34,7 @@ public class ProfileActivity extends Activity {
     //new username for the user and token the user for the login in the app
     String token, newUsername;
 
-//Falta capar que el nombre de usuario no sea uno que exista en la base de datos
+    //Falta capar que el nombre de usuario no sea uno que exista en la base de datos
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,22 +102,21 @@ public class ProfileActivity extends Activity {
         newUsername = inputUsername.getText().toString();
         //check the new username is empty
         if (newUsername.isEmpty()) {
-            inputUsername.setError("Enter new username");
+            inputUsername.setError(getString(R.string.username_empty));
         } else {
             //call the method for execute de asyncTask
             getFriends(token);
-            //go back to activity settings
-            startActivity(new Intent(ProfileActivity.this, SettingsActivity.class));
+
 
         }
 
     }
 
     /*Method to execute post change username for user*/
-    private class UsernameChangeTask extends AsyncTask<String, Void, Boolean> {
+    private class UsernameChangeTask extends AsyncTask<String, Void, String> {
 
         @Override
-        protected Boolean doInBackground(String... params) {
+        protected String doInBackground(String... params) {
             token = params[0];
             OkHttpClient client = new OkHttpClient();
             // Change username
@@ -134,22 +133,27 @@ public class ProfileActivity extends Activity {
             try {
                 Response response = client.newCall(request).execute();
                 if (response.isSuccessful()) {
-                    return true;
+                    // Check if the response indicates successful username change
+                    String responseBody = response.body().string();
+                    return responseBody;
                 } else {
-                    return false;
+                    return "Error: Please enter a valid username";
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                return false;
+                return "Error: Failed to connect to the server";
             }
         }
 
         @Override
-        protected void onPostExecute(Boolean result) {
-            if (result) {
-                Toast.makeText(getApplicationContext(), "Change username " + newUsername, Toast.LENGTH_SHORT).show();
+        protected void onPostExecute(String result) {
+            // Operaciones de la interfaz de usuario aquí
+            if (result.equals("Change successful")) {
+                Toast.makeText(ProfileActivity.this, "Change username " + newUsername, Toast.LENGTH_SHORT).show();
+                //go back to activity settings
+                startActivity(new Intent(ProfileActivity.this, SettingsActivity.class));
             } else {
-                Toast.makeText(getApplicationContext(), "Error: Please enter a valid username", Toast.LENGTH_SHORT).show();
+                inputUsername.setError(getString(R.string.username_exists));
             }
         }
     }

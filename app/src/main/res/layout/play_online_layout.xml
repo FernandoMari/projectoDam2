@@ -150,7 +150,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Send request"
+                android:text="@string/send_request"
                 android:textSize="20dp"
                 android:fontFamily="@font/montserrat_semibold"
                 android:layout_marginBottom="10dp"
@@ -161,6 +161,7 @@
                 android:id="@+id/lvConnect"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@drawable/listview_style"
                 android:fontFamily="@font/montserrat_medium"
                 android:hint="Search persons"
@@ -178,7 +179,7 @@
                 android:id="@+id/infoConnect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="You don't have friends to play"
+                android:text="@string/you_don_t_have_friends_to_play"
                 android:textSize="18dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:layout_marginBottom="10dp"
@@ -200,7 +201,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Accept request"
+                android:text="@string/accept_request"
                 android:textSize="20dp"
                 android:fontFamily="@font/montserrat_semibold"
                 android:layout_marginBottom="10dp"
@@ -211,21 +212,21 @@
                 android:id="@+id/lvAccept"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@drawable/listview_style"
-                android:fontFamily="@font/montserrat_medium"
-                android:hint="Search persons"
-                android:textSize="20dp"
-                android:listSelector="@drawable/list_selector"
                 android:divider="@drawable/custom_divider"
                 android:dividerHeight="1dp"
-                tools:ignore="MissingConstraints">
-            </ListView>
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="Search persons"
+                android:listSelector="@drawable/list_selector"
+                android:textSize="20dp"
+                tools:ignore="MissingConstraints"></ListView>
 
             <TextView
                 android:id="@+id/infoRequests"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="You don't have requests to play"
+                android:text="@string/you_don_t_have_requests_to_play"
                 android:textSize="18dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:layout_marginBottom="10dp"

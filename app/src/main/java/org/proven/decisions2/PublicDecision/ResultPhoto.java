@@ -135,6 +135,7 @@ public class ResultPhoto extends Activity {
 //            }
 //        });
 //    }
+
 //Esto funciona con la id
     private int uploadImage() {
         // Comprueba si tienes un bitmap válido para cargar

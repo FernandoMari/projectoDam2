@@ -104,21 +104,20 @@ public class PasswordActivity extends Activity {
         confirmPassword = inputConfirmNewPassword.getText().toString();
         //Check that the actual password is equal
         if (!actualPassword.matches(actualPassword)) {
-            inputActualPassword.setError("Enter actual password");
+            inputActualPassword.setError(getString(R.string.enter_actual_password));
             //Check the actual password is empty
         } else if (actualPassword.isEmpty()) {
-            inputActualPassword.setError("Enter actual password please");
+            inputActualPassword.setError(getString(R.string.password_empty));
             //Check that the new password is empty or the length is correct
         } else if (newPassword.isEmpty() || newPassword.length() < 4) {
-            inputNewPassword.setError("Enter New Password");
+            inputNewPassword.setError(getString(R.string.password_correct));
             //Check that the password is equals
         } else if (!newPassword.equals(confirmPassword)) {
-            inputConfirmNewPassword.setError("Password Not matched Both field");
+            inputConfirmNewPassword.setError(getString(R.string.equal_password));
         } else {
             //call the method for execute de asyncTask
             changesPassword(token);
-            //go back to activity settings
-            startActivity(new Intent(PasswordActivity.this, SettingsActivity.class));
+
         }
 
     }
@@ -133,7 +132,7 @@ public class PasswordActivity extends Activity {
             System.out.println("Nueva contraseña: " + newPassword);
             OkHttpClient client = new OkHttpClient();
             MediaType mediaType = MediaType.parse("application/json");
-            RequestBody requestBody = RequestBody.create(mediaType, "newValue=" + newPassword + "&paramether=password");
+            RequestBody requestBody = RequestBody.create(mediaType, "newValue=" + newPassword + "&paramether=password" + "&currentPassword=" + actualPassword);
 
             Request request = new Request.Builder()
                     .url(url)
@@ -146,19 +145,30 @@ public class PasswordActivity extends Activity {
             try {
                 Response response = client.newCall(request).execute();
                 if (response.isSuccessful()) {
-                    return "Change password";
+                    return response.body().string();
                 } else {
-                    return "Error change password";
+                    return null;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                return "Error change password";
+                return null;
             }
         }
 
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+            if (result != null) {
+                if (result.equals("Change successful")) {
+                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                    // go to next activity SettingsActivity
+                    startActivity(new Intent(PasswordActivity.this, SettingsActivity.class));
+                } else {
+                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                    inputActualPassword.setError(getString(R.string.enter_actual_password));
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), "Error occurred", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
