@@ -1,4 +1,4 @@
-package org.proven.decisions2;
+package org.proven.decisions2.SeePost;
 
 import android.content.Context;
 import android.util.AttributeSet;

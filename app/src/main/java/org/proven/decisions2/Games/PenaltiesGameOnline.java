@@ -20,7 +20,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.proven.decisions2.Games.ResultGame;
 import org.proven.decisions2.R;
 
 import java.util.Random;
@@ -263,7 +262,7 @@ public class PenaltiesGameOnline extends Activity {
     // Method to initialize the countdown timer
     private void initCrono(){
         // Create a new CountDownTimer object with a duration of 15 seconds and a tick interval of 1 second
-        countDownTimer = new CountDownTimer(10000, 1000){
+        countDownTimer = new CountDownTimer(2000, 1000){
 
             @Override
             // Method to be called on each tick of the countdown timer
@@ -294,23 +293,29 @@ public class PenaltiesGameOnline extends Activity {
                             turnPlayer = false;
                             turnGoalie = true;
                             tvResult.setText(R.string.you_are_goalkeeper);
-                        } else if (turnGoalie) {
+                        }
+                        if (turnGoalie) {
                             turnPlayer = true;
                             turnGoalie = false;
                             tvResult.setText(R.string.you_are_player);
                         }
+
                     }
                     if (role.equals("guest")){
                         if (turnPlayer){
                             turnPlayer = false;
                             turnGoalie = true;
                             tvResult.setText(R.string.you_are_goalkeeper);
-                        }else if (turnGoalie){
+                        }
+                        if (turnGoalie){
                             turnPlayer = true;
                             turnGoalie = false;
                             tvResult.setText(R.string.you_are_player);
                         }
+
                     }
+                    System.out.println("HOST ROL " + tvResult.getText());
+                    System.out.println("GUEST ROL " + tvResult.getText());
 
                 }else if(electionPlayer == 0 && electionMachine == 0){
                     //sendDepending(ra);

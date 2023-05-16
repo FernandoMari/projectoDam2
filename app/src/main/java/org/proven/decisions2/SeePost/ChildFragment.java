@@ -1,4 +1,4 @@
-package org.proven.decisions2;
+package org.proven.decisions2.SeePost;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,6 +19,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
+import org.proven.decisions2.R;
 
 
 public class ChildFragment extends Fragment {

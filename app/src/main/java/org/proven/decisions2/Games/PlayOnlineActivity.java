@@ -257,7 +257,7 @@ public class PlayOnlineActivity extends Activity {
 
                     } else if(snapshot.getValue(String.class).contains("start")){
 
-                        Intent intent = new Intent(getApplicationContext(), PenaltiesGameOnline.class);
+                        Intent intent = new Intent(getApplicationContext(), ElementsGameOnline.class);
                         intent.putExtra("roomName", roomNa);
                         startActivity(intent);
                     }
@@ -272,7 +272,7 @@ public class PlayOnlineActivity extends Activity {
 
 
     private void setList(ArrayList<String> friendsList) {
-        mFriendsAdapter = new CustomListAdapter(this,friendsList, R.layout.list_item_send);
+        mFriendsAdapter = new CustomListAdapter(this,friendsList, R.layout.list_item_add);
         listFriend.setAdapter(mFriendsAdapter);
 
         if (friendsList.isEmpty() || friendsList.size() == 0 || friendsList.contains("")){
@@ -296,9 +296,9 @@ public class PlayOnlineActivity extends Activity {
                 }
 
                 AlertDialog.Builder builder= new AlertDialog.Builder(PlayOnlineActivity.this);
-                builder.setTitle(R.string.btConfirm);
-                builder.setMessage(getString(R.string.play_with) + " " + selectedUsername +"?");
-                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                builder.setTitle("Confirm");
+                builder.setMessage(" Play with "+ selectedUsername +"?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -332,7 +332,7 @@ public class PlayOnlineActivity extends Activity {
 
                     }
                 });
-                builder.setNegativeButton(R.string.no,null);
+                builder.setNegativeButton("No",null);
                 builder.show();
 
             }
@@ -343,7 +343,7 @@ public class PlayOnlineActivity extends Activity {
 
 
     private void setListOfPetitions(ArrayList<String> friendsList) {
-        mFriendsAdapter = new CustomListAdapter(this,friendsList, R.layout.list_item_request);
+        mFriendsAdapter = new CustomListAdapter(this,friendsList, R.layout.list_item_remove);
         listOfPetitions.setAdapter(mFriendsAdapter);
 
         if (friendsList.isEmpty() || friendsList.size() == 0 || friendsList.contains("")){
@@ -398,8 +398,8 @@ public class PlayOnlineActivity extends Activity {
     }
 
     private void getFriends(String username) {
-        new GetUserName().execute(username);
-        new PlayFriend().execute(username);
+        new PlayOnlineActivity.GetUserName().execute(username);
+        new PlayOnlineActivity.PlayFriend().execute(username);
     }
 
     private class PlayFriend extends AsyncTask<String, Void, ArrayList<String>> {

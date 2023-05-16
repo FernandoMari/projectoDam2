@@ -38,13 +38,13 @@ public class AddFriendsActivity extends Activity {
     //The buttons of the footer to navigate in the app
     Button btFriends, btHome, btSettings;
     //Listview shows a list of friends
-     ListView listFriend;
+    ListView listFriend;
     //Filter for search the user in the list
-     EditText searchFriend;
+    EditText searchFriend;
     //CustomListAdapter is a custom class that extends Android's default list adapter. It is used to customize the appearance of each item in the friends list.
     CustomListAdapter mFriendsAdapter;
     //This the list the friends
-     ArrayList<String> friendsNames = new ArrayList<>();
+    ArrayList<String> friendsNames = new ArrayList<>();
     //User authentication token
     String token;
     //User selected in friend list
@@ -117,8 +117,8 @@ public class AddFriendsActivity extends Activity {
 
     /* Method to pass the list of friends and show them */
     private void setList(ArrayList<String> friendsList) {
-        ArrayList<String> firstTenFriends = new ArrayList<>(friendsList.subList(0, 10));
-        mFriendsAdapter = new CustomListAdapter(this, firstTenFriends, R.layout.list_item_add);
+        ArrayList<String>[] filteredFriendsList = new ArrayList[]{new ArrayList<>(friendsList.subList(0, Math.min(15, friendsList.size())))};
+        mFriendsAdapter = new CustomListAdapter(this, filteredFriendsList[0], R.layout.list_item_add);
         listFriend.setAdapter(mFriendsAdapter);
         listFriend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -147,7 +147,6 @@ public class AddFriendsActivity extends Activity {
                 builder.show();
 
 
-
             }
 
         });
@@ -159,8 +158,22 @@ public class AddFriendsActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //search for friends by their username
-                mFriendsAdapter.getFilter().filter(s);
+                String searchText = s.toString().toLowerCase();
+
+                if (searchText.isEmpty()) {
+                    filteredFriendsList[0] = new ArrayList<>(friendsList.subList(0, Math.min(15, friendsList.size())));
+                } else {
+                    //Filter entire list based on search text
+                    filteredFriendsList[0].clear();
+                    for (String friend : friendsList) {
+                        if (friend.toLowerCase().startsWith(searchText)) {
+                            filteredFriendsList[0].add(friend);
+                        }
+                    }
+                }
+
+                mFriendsAdapter = new CustomListAdapter(AddFriendsActivity.this, filteredFriendsList[0], R.layout.list_item_add);
+                listFriend.setAdapter(mFriendsAdapter);
             }
 
             @Override

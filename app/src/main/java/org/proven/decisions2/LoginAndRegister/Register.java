@@ -156,6 +156,10 @@ public class Register extends AppCompatActivity {
                     inputusername.setError(getString(R.string.username_exists));
                     progressDialog.dismiss();
                     registerSuccessful = false;
+                }else if(responseData.equalsIgnoreCase("mail aready used")){
+                    inputEmail.setError("email alredy used");
+                    progressDialog.dismiss();
+                    registerSuccessful = false;
                 }
                 if (registerSuccessful) {
                     progressDialog.dismiss();
