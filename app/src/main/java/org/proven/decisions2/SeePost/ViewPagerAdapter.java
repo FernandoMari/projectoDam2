@@ -133,6 +133,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         child.setArguments(bundle);
 
         if (imageIds.length == 0) {
+
             // No hay IDs de imagen disponibles, puedes mostrar una imagen de carga o un mensaje de espera
         } else {
             int imageId = imageIds[position];

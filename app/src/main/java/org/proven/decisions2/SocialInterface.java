@@ -221,7 +221,7 @@ public class SocialInterface extends FragmentActivity {
     Button btFriends, btDecisions, btSettings;
     // User authentication token
     String token;
-    private Handler handler;
+
     private int[] imageIds; // Arreglo de IDs de imágenes
 
     @Override
@@ -230,12 +230,12 @@ public class SocialInterface extends FragmentActivity {
         setContentView(R.layout.activity_social_interface);
         // Initialize the elements
         initializeElements();
-        handler = new android.os.Handler(Looper.getMainLooper());
+
         // Solicitar permiso WRITE_EXTERNAL_STORAGE en tiempo de ejecución si no está concedido
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         } else {
-            // Call the method
+            //call the method
             readUser();
         }
 
@@ -300,7 +300,7 @@ public class SocialInterface extends FragmentActivity {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://5.75.251.56:7070/imagen/ids")
+                        .url("http://5.75.251.56:7070/imagen")
                         .get()
                         .build();
 

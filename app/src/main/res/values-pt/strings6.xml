@@ -334,4 +334,6 @@
     <string name="enter_actual_password">Digite a senha atual</string>
     <string name="enter_actual_email">Digite o email atual</string>
     <string name="email_empty">O email está vazio</string>
+    <string name="do_you_have_an_account">Você não tem uma conta?</string>
+    <string name="you_are_already_registered">Você já está registrado?</string>
 </resources>

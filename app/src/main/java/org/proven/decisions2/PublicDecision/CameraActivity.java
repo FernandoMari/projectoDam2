@@ -62,13 +62,11 @@ public class CameraActivity extends Activity {
 
     private static final String[] PERMISSIONS={
             Manifest.permission.CAMERA,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE
     };
 
     private static final int REQUEST_PERMISSIONS = 34;
 
-    private static final int PERMISSIONS_COUNT = 3;
+    private static final int PERMISSIONS_COUNT = 1;
 
     private boolean arePermissionsDenied(){
         for (int i = 0; i< PERMISSIONS_COUNT ; i++){
@@ -269,7 +267,7 @@ public class CameraActivity extends Activity {
 
             // Convierte el bitmap en un array de bytes
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 60, stream);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, stream);
             byte[] byteArray = stream.toByteArray();
 
             // Crea un Intent para pasar los bytes de la imagen a la siguiente actividad

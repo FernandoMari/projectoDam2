@@ -336,4 +336,6 @@
     <string name="enter_actual_password">Introduïu la contrasenya actual</string>
     <string name="enter_actual_email">Introduïu el correu electrònic actual</string>
     <string name="email_empty">El correu electrònic està buit</string>
+    <string name="do_you_have_an_account">No tens un compte?</string>
+    <string name="you_are_already_registered">Ja estàs registrat?</string>
 </resources>

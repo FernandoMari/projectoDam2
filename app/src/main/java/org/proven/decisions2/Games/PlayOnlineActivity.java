@@ -257,7 +257,7 @@ public class PlayOnlineActivity extends Activity {
 
                     } else if(snapshot.getValue(String.class).contains("start")){
 
-                        Intent intent = new Intent(getApplicationContext(), ElementsGameOnline.class);
+                        Intent intent = new Intent(getApplicationContext(), PenaltiesGameOnline.class);
                         intent.putExtra("roomName", roomNa);
                         startActivity(intent);
                     }
@@ -272,7 +272,7 @@ public class PlayOnlineActivity extends Activity {
 
 
     private void setList(ArrayList<String> friendsList) {
-        mFriendsAdapter = new CustomListAdapter(this,friendsList, R.layout.list_item_add);
+        mFriendsAdapter = new CustomListAdapter(this,friendsList, R.layout.list_item_send);
         listFriend.setAdapter(mFriendsAdapter);
 
         if (friendsList.isEmpty() || friendsList.size() == 0 || friendsList.contains("")){
@@ -343,7 +343,7 @@ public class PlayOnlineActivity extends Activity {
 
 
     private void setListOfPetitions(ArrayList<String> friendsList) {
-        mFriendsAdapter = new CustomListAdapter(this,friendsList, R.layout.list_item_remove);
+        mFriendsAdapter = new CustomListAdapter(this,friendsList, R.layout.list_item_request);
         listOfPetitions.setAdapter(mFriendsAdapter);
 
         if (friendsList.isEmpty() || friendsList.size() == 0 || friendsList.contains("")){
@@ -398,8 +398,8 @@ public class PlayOnlineActivity extends Activity {
     }
 
     private void getFriends(String username) {
-        new PlayOnlineActivity.GetUserName().execute(username);
-        new PlayOnlineActivity.PlayFriend().execute(username);
+        new GetUserName().execute(username);
+        new PlayFriend().execute(username);
     }
 
     private class PlayFriend extends AsyncTask<String, Void, ArrayList<String>> {

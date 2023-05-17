@@ -35,7 +35,7 @@ public class Register extends AppCompatActivity {
     //inputEmail is to insert the email the user, inputUsername is to insert the name of the user, inputPassword is to insert the password of the user
     EditText inputEmail, inputusername, inputPassword, inputConfirmPasword;
     //Button for the confirm the register
-    Button btnRegister;
+    Button btnRegister, btLogin;
     //Correct format for email
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     //progressDialog is for the dialog in the register
@@ -70,6 +70,20 @@ public class Register extends AppCompatActivity {
 
             }
         });
+
+        btLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Register.this, MainActivity.class));
+                overridePendingTransition(R.anim.slide_left, R.anim.slide_out_right);
+                //Change the checkbox in false
+                SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("cbremember", "false");
+                editor.apply();
+
+            }
+        });
     }
 
     /*Initialize the elements*/
@@ -79,6 +93,7 @@ public class Register extends AppCompatActivity {
         inputPassword = findViewById(R.id.etPassword);
         inputConfirmPasword = findViewById(R.id.etConfirmPassword);
         btnRegister = findViewById(R.id.btAccept);
+        btLogin = findViewById(R.id.btLogin);
         progressDialog = new ProgressDialog(this);
     }
 

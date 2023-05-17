@@ -113,6 +113,7 @@
                 android:layout_height="60dp"
                 android:inputType="text"
                 android:drawableStart="@drawable/custom_search_icon"
+                android:drawablePadding="5dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:hint="@string/search_persons"
                 android:paddingStart="12dp"

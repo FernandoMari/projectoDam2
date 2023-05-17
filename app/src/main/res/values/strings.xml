@@ -27,7 +27,7 @@
     <string name="write_here">Write here...</string>
     <string name="connect_with_friend">Connect with friend</string>
     <string name="play">Play</string>
-    <string name="login">Login</string>
+    <string name="login">Log in</string>
     <string name="keep_signed_in">Keep signed in</string>
     <string name="new_password">New password</string>
     <string name="confirm_new_password">Confirm new password</string>
@@ -332,4 +332,6 @@
     <string name="enter_actual_password">Enter actual password</string>
     <string name="enter_actual_email">Enter actual Email</string>
     <string name="email_empty">Email is empty</string>
+    <string name="do_you_have_an_account">Don\'t have an account?</string>
+    <string name="you_are_already_registered">You are already registered?</string>
 </resources>

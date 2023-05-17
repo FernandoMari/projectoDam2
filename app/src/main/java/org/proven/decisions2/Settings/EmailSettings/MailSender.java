@@ -21,10 +21,37 @@ public class MailSender extends AsyncTask<Void, Void, Void> {
     //mMessage is the content of the message
     private String mMessage;
 
+    public MailSender() {
+    }
+
     public MailSender(String recipient, String subject, String message) {
         mRecipient = recipient;
         mSubject = subject;
         mMessage = message;
+    }
+
+    public String getmRecipient() {
+        return mRecipient;
+    }
+
+    public void setmRecipient(String mRecipient) {
+        this.mRecipient = mRecipient;
+    }
+
+    public String getmSubject() {
+        return mSubject;
+    }
+
+    public void setmSubject(String mSubject) {
+        this.mSubject = mSubject;
+    }
+
+    public String getmMessage() {
+        return mMessage;
+    }
+
+    public void setmMessage(String mMessage) {
+        this.mMessage = mMessage;
     }
 
     @Override

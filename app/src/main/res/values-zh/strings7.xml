@@ -337,4 +337,6 @@
     <string name="enter_actual_password">输入实际密码</string>
     <string name="enter_actual_email">输入实际电子邮件</string>
     <string name="email_empty">电子邮件为空</string>
+    <string name="do_you_have_an_account">没有账号吗？</string>
+    <string name="you_are_already_registered">您已经注册了吗？</string>
 </resources>

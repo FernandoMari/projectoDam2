@@ -1,7 +1,9 @@
 package org.proven.decisions2.LoginAndRegister;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -12,11 +14,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.proven.decisions2.R;
 import org.proven.decisions2.SecureConnection;
 import org.proven.decisions2.Settings.AppCompat;
+import org.proven.decisions2.Settings.EmailSettings.MailSender;
 import org.proven.decisions2.SocialInterface;
 
 import java.io.FileOutputStream;
@@ -65,6 +69,12 @@ public class MainActivity extends AppCompat {
     //Method returns an OkHttpClient object that can be used to make HTTP requests, but ignores any SSL certificate issues that might arise when establishing an HTTPS connection.
     SecureConnection secureConnection = new SecureConnection();
 
+    String url3 = "http://143.47.249.102:7070/getPassword";
+
+    String email = "";
+
+    TextView forgot;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +120,12 @@ public class MainActivity extends AppCompat {
                 overridePendingTransition(R.anim.slide_right, R.anim.slide_out_left);
             }
         });
+        forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initRecoverPass();
+            }
+        });
     }
 
     /*Method to initialize the checkbox to keep me logged in*/
@@ -130,6 +146,7 @@ public class MainActivity extends AppCompat {
         inputUsername = findViewById(R.id.etUsername2);
         inputPassword = findViewById(R.id.etPassword);
         cbRemember = findViewById(R.id.cbRemember);
+        forgot = findViewById(R.id.forgot);
         progressDialog = new ProgressDialog(this);
     }
 
@@ -302,5 +319,90 @@ public class MainActivity extends AppCompat {
             e.printStackTrace();
         }
 
+    }
+
+    private void initRecoverPass(){
+        // Crear el diálogo de alerta
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Insert your Gmail");
+
+        // Crear un EditText para que el usuario pueda introducir texto
+        final EditText editText = new EditText(this);
+        editText.requestFocus(); // Solicitar el foco en el EditText
+        builder.setView(editText);
+
+        // Agregar botones de "Aceptar" y "Cancelar"
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Obtener el texto introducido por el usuario
+                email = editText.getText().toString();
+                // Hacer algo con el texto introducido
+                // ...
+
+                new getPassword().execute();
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // El usuario ha cancelado el diálogo
+                dialog.cancel();
+            }
+        });
+
+        // Mostrar el diálogo
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private class getPassword extends AsyncTask<Void, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            OkHttpClient client = secureConnection.getClient();
+            //Confirm the username and password the user
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody requestBody = RequestBody.create(mediaType, "mail=" + email);
+
+            Request request = new Request.Builder()
+                    .url(url3)
+                    .post(requestBody)
+                    .addHeader("content-type", "application/json")
+                    .addHeader("cache-control", "no-cache")
+                    .build();
+
+            try {
+                Response response = client.newCall(request).execute();
+                return response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        //check that the login is correct and check if the credentials are correct or incorrect
+        @Override
+        protected void onPostExecute(String responseData) {
+            String textWithoutQuotes = responseData.replace("\"", "");
+
+            if (textWithoutQuotes  == "" || textWithoutQuotes.isEmpty()){
+
+            }else {
+                MailSender sender = new MailSender();
+                sender.setmRecipient(email);
+                sender.setmSubject("Contraseña olvidada");
+                sender.setmMessage("<html><body style=\\\"text-align: center;\\\">\n" +
+                        "        <h1>Contraseña</h1>\n" +
+                        "        <p>Su contraseña es: "+textWithoutQuotes+"</p>\n" +
+                        "        </body></html>");
+
+                sender.execute();
+            }
+        }
     }
 }

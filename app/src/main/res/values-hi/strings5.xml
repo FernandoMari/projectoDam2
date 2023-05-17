@@ -334,4 +334,6 @@
     <string name="enter_actual_password">वास्तविक पासवर्ड दर्ज करें</string>
     <string name="enter_actual_email">वास्तविक ईमेल दर्ज करें</string>
     <string name="email_empty">ईमेल खाली है</string>
+    <string name="do_you_have_an_account">क्या आपके पास खाता है?</string>
+    <string name="you_are_already_registered">क्या आप पहले से पंजीकृत हैं?</string>
 </resources>
