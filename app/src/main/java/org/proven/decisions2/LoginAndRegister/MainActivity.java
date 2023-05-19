@@ -57,19 +57,21 @@ public class MainActivity extends AppCompat {
     //Filename the document name for save the token
     String filename = "token.txt";
     //Url for the http post request for the login in the app
-    String url = "http://143.47.249.102:7070/login";
+    //String url = "http://143.47.249.102:7070/login";
     //String url = "https://5.75.251.56:8443/login";
-    //String url = "http://5.75.251.56:7070/login";
+    String url = "http://5.75.251.56:7070/login";
     //Url for the http post request for the getUserToken
-    String url2 = "http://143.47.249.102:7070/getUserToken";
+    //String url2 = "http://143.47.249.102:7070/getUserToken";
     //String url2 = "https://5.75.251.56:8443/getUserToken";
-    // url2 = "http://5.75.251.56:7070/getUserToken";
+     String url2 = "http://5.75.251.56:7070/getUserToken";
     //Create FileOutputStream for the save the document internal
     FileOutputStream outputStream;
     //Method returns an OkHttpClient object that can be used to make HTTP requests, but ignores any SSL certificate issues that might arise when establishing an HTTPS connection.
     SecureConnection secureConnection = new SecureConnection();
 
     String url3 = "http://143.47.249.102:7070/getPassword";
+    //String url3="http://5.75.251.56:8443/getPassword";
+    //String url3="http://5.75.251.56:7070/getPassword";
 
     String email = "";
 

@@ -50,11 +50,13 @@ public class AddFriendsActivity extends Activity {
     //User selected in friend list
     String selectedUsername;
     //Url for the http post in get users
-    String url = "http://143.47.249.102:7070/getUsers";
-    //String url = "https://5.75.251.56:8443/getUsers";
+    //String url = "http://143.47.249.102:7070/getUsers";
+    String url = "https://5.75.251.56:8443/getUsers";
+    //String url = "http://5.75.251.56:7070/getUsers";
     //Url for the http post in send friend request
-    String url2 = "http://143.47.249.102:7070/sendFriendRequest";
-    //String url2 = "https://5.75.251.56:8443/sendFriendRequest";
+    //String url2 = "http://143.47.249.102:7070/sendFriendRequest";
+    String url2 = "https://5.75.251.56:8443/sendFriendRequest";
+    //String url2 = "http://5.75.251.56:7070/sendFriendRequest";
     //Method returns an OkHttpClient object that can be used to make HTTP requests, but ignores any SSL certificate issues that might arise when establishing an HTTPS connection.
     SecureConnection secureConnection = new SecureConnection();
 

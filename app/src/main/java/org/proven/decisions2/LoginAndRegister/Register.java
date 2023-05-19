@@ -43,9 +43,9 @@ public class Register extends AppCompatActivity {
     //email the user, username the user, password the user
     String email, username, password;
     //Url for the http post request for the register in the app
-    String url = "http://143.47.249.102:7070/register";
+    //String url = "http://143.47.249.102:7070/register";
     //String url = "https://5.75.251.56:8443/register";
-    //String url = "http://5.75.251.56:7070/register";
+    String url = "http://5.75.251.56:7070/register";
     //Method returns an OkHttpClient object that can be used to make HTTP requests, but ignores any SSL certificate issues that might arise when establishing an HTTPS connection.
     SecureConnection secureConnection = new SecureConnection();
 
@@ -148,7 +148,7 @@ public class Register extends AppCompatActivity {
             RequestBody requestBody = RequestBody.create(mediaType, "mail=" + email + "&username=" + username + "&password=" + password);
 
             Request request = new Request.Builder()
-                    //.url("http://5.75.251.56:7070/register")
+
                     .url(url).post(requestBody).addHeader("content-type", "application/json").addHeader("cache-control", "no-cache").build();
 
             try {
@@ -171,7 +171,7 @@ public class Register extends AppCompatActivity {
                     inputusername.setError(getString(R.string.username_exists));
                     progressDialog.dismiss();
                     registerSuccessful = false;
-                }else if(responseData.equalsIgnoreCase("mail aready used")){
+                } else if (responseData.equalsIgnoreCase("mail aready used")) {
                     inputEmail.setError("email alredy used");
                     progressDialog.dismiss();
                     registerSuccessful = false;

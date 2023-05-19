@@ -20,15 +20,15 @@ public class ResultGame extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int result = getIntent().getIntExtra("result",0);
+        int result = getIntent().getIntExtra("result", 0);
 
-        if (result == 0){
+        if (result == 0) {
             setContentView(R.layout.result_win_layout);
-        }else if(result == 1){
+        } else if (result == 1) {
             setContentView(R.layout.result_lose_layout);
-        }else if(result == 2){
+        } else if (result == 2) {
             setContentView(R.layout.result_lose_machine_layout);
-        }else{
+        } else {
             setContentView(R.layout.result_lost_connection_layout);
         }
 
@@ -64,7 +64,15 @@ public class ResultGame extends Activity {
         btPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ResultGame.this, CameraActivity.class));
+                Intent intent = getIntent();
+                String textoDecision1 = intent.getStringExtra("decision1");
+                String textoDecision2 = intent.getStringExtra("decision2");
+                System.out.println("ResultGame "+textoDecision1);
+                System.out.println("ResultGame "+textoDecision2);
+                Intent intent3 = new Intent(ResultGame.this, CameraActivity.class);
+                intent3.putExtra("decision1", textoDecision1);
+                intent3.putExtra("decision2", textoDecision2);
+                startActivity(intent3);
                 finishAndRemoveTask();
             }
         });

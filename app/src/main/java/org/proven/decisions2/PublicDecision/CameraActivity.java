@@ -267,15 +267,21 @@ public class CameraActivity extends Activity {
 
             // Convierte el bitmap en un array de bytes
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, stream);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
             byte[] byteArray = stream.toByteArray();
 
             // Crea un Intent para pasar los bytes de la imagen a la siguiente actividad
-            Intent intent = new Intent(CameraActivity.this, ResultPhoto.class);
-            intent.putExtra("photo", byteArray);
-
+            Intent intent = getIntent();
+            String textoDecision1 = intent.getStringExtra("decision1");
+            String textoDecision2 = intent.getStringExtra("decision2");
+            System.out.println("CameraActivity "+textoDecision1);
+            System.out.println("CameraActivity "+textoDecision2);
+            Intent intent4 = new Intent(CameraActivity.this, ResultPhoto.class);
+            intent4.putExtra("photo", byteArray);
+            intent4.putExtra("decision1", textoDecision1);
+            intent4.putExtra("decision2", textoDecision2);
             // Inicie la siguiente actividad
-            startActivity(intent);
+            startActivity(intent4);
 
         }
     };

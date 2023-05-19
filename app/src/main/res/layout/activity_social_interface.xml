@@ -21,19 +21,21 @@
         android:gravity="center_horizontal"
         android:layout_gravity="center"
         android:layout_marginBottom="15dp">
+
         <TextView
+            android:id="@+id/decision"
             android:layout_width="match_parent"
             android:layout_height="92dp"
-            tools:ignore="MissingConstraints"
-            android:text="The Decision"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
+            android:inputType="textMultiLine"
             android:maxLength="60"
+            android:paddingStart="60dp"
+            android:paddingEnd="60dp"
+            android:text="The Decision"
             android:textColor="@color/black"
             android:textSize="20dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:inputType="textMultiLine"
-            android:gravity="center"
-            android:paddingStart="60dp"
-            android:paddingEnd="60dp">
+            tools:ignore="MissingConstraints">
 
         </TextView>
     </RelativeLayout>

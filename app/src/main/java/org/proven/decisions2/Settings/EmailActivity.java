@@ -34,7 +34,8 @@ public class EmailActivity extends Activity {
     //actual email the user, new email the user, actual password the user,
     String token, actualEmail, newEmail, actualPassword;
     //Url for the http post request for the change email in the app
-    String url = "http://143.47.249.102:7070/swichEmail";
+    //String url = "http://143.47.249.102:7070/switchEmail";
+    String url = "http://5.75.251.56:7070/switchEmail";
 
     //Capar que el correo no sea el mismo que introduce nuevamente
     @Override

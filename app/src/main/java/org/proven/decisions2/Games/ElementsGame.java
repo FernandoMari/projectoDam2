@@ -195,9 +195,16 @@ public class ElementsGame extends Activity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(ElementsGame.this, ResultGame.class);
+                    Intent intent = getIntent();
+                    String textoDecision1 = intent.getStringExtra("decision1");
+                    String textoDecision2 = intent.getStringExtra("decision2");
+                    System.out.println("ElementsGame "+textoDecision1);
+                    System.out.println("ElementsGame "+textoDecision2);
+                    Intent intent2 = new Intent(ElementsGame.this, ResultGame.class);
+                    intent2.putExtra("decision1", textoDecision1);
+                    intent2.putExtra("decision2", textoDecision2);
                     intent.putExtra("result", value);
-                    startActivity(intent);
+                    startActivity(intent2);
                     finish();
                 }
             }, 2000); // 2000 milliseconds = 2 seconds delay
@@ -212,9 +219,15 @@ public class ElementsGame extends Activity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(ElementsGame.this, ResultGame.class);
-                    intent.putExtra("result", value);
-                    startActivity(intent);
+                    Intent intent = getIntent();
+                    String textoDecision1 = intent.getStringExtra("decision1");
+                    String textoDecision2 = intent.getStringExtra("decision2");
+                    System.out.println("ElementsGame "+textoDecision1);
+                    Intent intent2 = new Intent(ElementsGame.this, ResultGame.class);
+                    intent2.putExtra("result", value);
+                    intent2.putExtra("decision1", textoDecision1);
+                    intent2.putExtra("decision2", textoDecision2);
+                    startActivity(intent2);
                     finish();
                 }
             }, 2000); // 2000 milliseconds = 2 seconds delay

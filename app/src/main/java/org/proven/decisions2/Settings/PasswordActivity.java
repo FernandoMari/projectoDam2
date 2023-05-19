@@ -27,9 +27,8 @@ import okhttp3.Response;
 public class PasswordActivity extends Activity {
     EditText inputActualPassword, inputNewPassword, inputConfirmNewPassword;
     Button btFriends, btHome, btSettings, btAccept, btCancel;
-
-    String url = "http://143.47.249.102:7070/swichPasswordOrName";
-
+    //    String url = "http://143.47.249.102:7070/switchPassword";
+    String url = "http://5.75.251.56:7070/switchPassword";
     String token, actualPassword, newPassword, confirmPassword;
 
     @Override

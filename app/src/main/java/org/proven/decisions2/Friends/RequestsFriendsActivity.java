@@ -48,11 +48,13 @@ public class RequestsFriendsActivity extends Activity {
     //User selected in friend list
     String selectedUsername;
     //Url for the http post in see friend Request
-    String url = "http://143.47.249.102:7070/seeFriendRequest";
-    //String url = "https://5.75.251.56:8443/seeFriendRequest";
+    //String url = "http://143.47.249.102:7070/seeFriendRequest";
+    String url = "https://5.75.251.56:8443/seeFriendRequest";
+    //String url = "http://5.75.251.56:7070/seeFriendRequest";
     //Url for the http post in accept friend request
-    String url2 = "http://143.47.249.102:7070/aceptFriendRequest";
-    //String url2 = "https://5.75.251.56:8443/aceptFriendRequest";
+    //String url2 = "http://143.47.249.102:7070/aceptFriendRequest";
+    String url2 = "https://5.75.251.56:8443/aceptFriendRequest";
+    //String url2 = "http://5.75.251.56:7070/aceptFriendRequest";
     SecureConnection secureConnection = new SecureConnection();
 
     @Override

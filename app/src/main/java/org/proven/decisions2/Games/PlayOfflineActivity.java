@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import org.proven.decisions2.Friends.FriendsActivity;
 import org.proven.decisions2.R;
@@ -16,6 +17,7 @@ import java.util.Random;
 public class PlayOfflineActivity extends Activity {
 
     Button btHome, btSettings, btFriends, btPlay;
+    EditText decision1, decision2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class PlayOfflineActivity extends Activity {
         setContentView(R.layout.play_offline_layout);
         //initialize elements
         initializeElements();
+
 
         btHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,23 +50,58 @@ public class PlayOfflineActivity extends Activity {
         btPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Random rand = new Random();
-                int num = rand.nextInt(3);
-                if (num == 0) {
-                    startActivity(new Intent(PlayOfflineActivity.this, PenaltisGame.class));
-                } else if (num==1){
-                    startActivity(new Intent(PlayOfflineActivity.this, ElementsGame.class));
-                }else {
-                    startActivity(new Intent(PlayOfflineActivity.this, QuestionQuizGame.class));
+                if (validarEditText()) {
+                    Random rand = new Random();
+                    int num = rand.nextInt(3);
+                    String textoDecision1 = decision1.getText().toString();
+                    String textoDecision2 = decision2.getText().toString();
+                    System.out.println("PlayOffline "+textoDecision1);
+                    System.out.println("PlayOffline "+textoDecision2);
+                    Intent intent;
+                    if (num == 0) {
+                        intent = new Intent(PlayOfflineActivity.this, ElementsGame.class);
+                    } else if (num == 1) {
+                        intent = new Intent(PlayOfflineActivity.this, ElementsGame.class);
+                    } else {
+                        intent = new Intent(PlayOfflineActivity.this, ElementsGame.class);
+                    }
+
+                    intent.putExtra("decision1", textoDecision1);
+                    intent.putExtra("decision2", textoDecision2);
+                    startActivity(intent);
                 }
             }
         });
+
     }
+
     //Method that initializes the elements
     private void initializeElements() {
         btHome = findViewById(R.id.btHome);
         btSettings = findViewById(R.id.btSettings);
         btFriends = findViewById(R.id.btFriends);
         btPlay = findViewById(R.id.btPlay);
+        decision1 = findViewById(R.id.etDecision1);
+        decision2 = findViewById(R.id.etDecision2);
+
     }
+
+    private boolean validarEditText() {
+        String textoDecision1 = decision1.getText().toString();
+        String textoDecision2 = decision2.getText().toString();
+
+        if (textoDecision1.isEmpty()) {
+            decision1.setError("Este campo es requerido");
+            return false;
+        }
+
+        if (textoDecision2.isEmpty()) {
+            decision2.setError("Este campo es requerido");
+            return false;
+        }
+
+        return true;
+    }
+
+
 }

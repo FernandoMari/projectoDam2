@@ -30,7 +30,8 @@ public class ProfileActivity extends Activity {
     //inputUsername is to insert the username the user,
     EditText inputUsername;
     //Url for the http post request for the change username in the app
-    String url = "http://143.47.249.102:7070/swichPasswordOrName";
+//    String url = "http://143.47.249.102:7070/switchUsername";
+    String url="http://5.75.251.56:7070/switchUsername";
     //new username for the user and token the user for the login in the app
     String token, newUsername;
 

@@ -118,7 +118,7 @@
             </TextView>
 
             <EditText
-                android:id="@+id/etSearch"
+                android:id="@+id/decisions"
                 android:layout_width="300dp"
                 android:layout_height="120dp"
                 android:fontFamily="@font/montserrat_medium"

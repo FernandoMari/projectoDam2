@@ -55,11 +55,13 @@ public class RemoveFriendsActivity extends Activity {
     //User selected in friend list
     String selectedUsername;
     //Url for the http post in get friends
-    String url = "http://143.47.249.102:7070/getFriends";
-    //String url = "https://5.75.251.56:8443/getFriends";
+    //String url = "http://143.47.249.102:7070/getFriends";
+    String url = "https://5.75.251.56:8443/getFriends";
+    //String url = "http://5.75.251.56:7070/getFriends";
     //Url for the http post in remove friend
-    String url2 = "http://143.47.249.102:7070/removeFriend";
-    //String url2 = "https://5.75.251.56:8443/removeFriend";
+    //String url2 = "http://143.47.249.102:7070/removeFriend";
+    String url2 = "https://5.75.251.56:8443/removeFriend";
+    //String url2 = "http://5.75.251.56:7070/removeFriend";
 
     //Method returns an OkHttpClient object that can be used to make HTTP requests, but ignores any SSL certificate issues that might arise when establishing an HTTPS connection.
     SecureConnection secureConnection = new SecureConnection();

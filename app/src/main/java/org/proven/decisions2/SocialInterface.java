@@ -10,13 +10,16 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.proven.decisions2.Friends.FriendsActivity;
 import org.proven.decisions2.Games.ChooseModality;
 import org.proven.decisions2.SeePost.VerticalViewPager;
@@ -221,6 +224,7 @@ public class SocialInterface extends FragmentActivity {
     Button btFriends, btDecisions, btSettings;
     // User authentication token
     String token;
+    TextView decisions;
 
     private int[] imageIds; // Arreglo de IDs de imágenes
 
@@ -279,6 +283,7 @@ public class SocialInterface extends FragmentActivity {
         btFriends = findViewById(R.id.btFriends);
         btDecisions = findViewById(R.id.btDecisions);
         btSettings = findViewById(R.id.btSettings);
+        decisions = findViewById(R.id.decision);
     }
 
     @Override
@@ -288,11 +293,69 @@ public class SocialInterface extends FragmentActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permiso concedido, puedes acceder al archivo token.txt aquí
                 readUser();
+
             } else {
                 // Permiso denegado, maneja el escenario en consecuencia
             }
         }
     }
+
+//    private void getPhotos() {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                OkHttpClient client = new OkHttpClient();
+//                Request request = new Request.Builder()
+//                        .url("http://5.75.251.56:7070/imagen")
+//                        .get()
+//                        .build();
+//
+//                try {
+//                    Response response = client.newCall(request).execute();
+//                    if (response.isSuccessful()) {
+//                        String jsonResponse = response.body().string();
+//                        JSONArray jsonArray = new JSONArray(jsonResponse);
+//
+//                        List<Integer> ids = new ArrayList<>();
+//                        List<String> decisions = new ArrayList<>(); // Lista para almacenar los textos de las decisiones
+//
+//                        for (int i = 0; i < jsonArray.length(); i++) {
+//                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                            int id = jsonObject.getInt("id");
+//                            String decision = jsonObject.getString("decision");
+//
+//                            ids.add(id);
+//                            decisions.add(decision);
+//                        }
+//
+//                        // Actualizar el arreglo imageIds y notificar al adaptador
+//                        imageIds = new int[ids.size()];
+//                        for (int i = 0; i < ids.size(); i++) {
+//                            imageIds[i] = ids.get(i);
+//                        }
+//                        updateAdapterWithImageIds();
+//
+//                        // Mostrar el texto de la decisión en el TextView (asumiendo que solo hay una imagen mostrada)
+//                        if (!decisions.isEmpty()) {
+//                            String decisionText = decisions.get(0);
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    SocialInterface.this.decisions.setText(decisionText);
+//                                }
+//                            });
+//                        }
+//                    } else {
+//                        // Manejar la respuesta no exitosa
+//                        System.out.println("Error en la respuesta: " + response.code() + " " + response.message());
+//                    }
+//                } catch (IOException | JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        }).start();
+//    }
 
     private void getPhotos() {
         new Thread(new Runnable() {
@@ -311,9 +374,15 @@ public class SocialInterface extends FragmentActivity {
                         JSONArray jsonArray = new JSONArray(jsonResponse);
 
                         List<Integer> ids = new ArrayList<>();
+                        List<String> decisions = new ArrayList<>(); // Lista para almacenar los textos de las decisiones
+
                         for (int i = 0; i < jsonArray.length(); i++) {
-                            int id = jsonArray.getInt(i);
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            int id = jsonObject.getInt("id");
+                            String decision = jsonObject.getString("decision");
+
                             ids.add(id);
+                            decisions.add(decision);
                         }
 
                         // Actualizar el arreglo imageIds y notificar al adaptador
@@ -322,6 +391,44 @@ public class SocialInterface extends FragmentActivity {
                             imageIds[i] = ids.get(i);
                         }
                         updateAdapterWithImageIds();
+
+                        // Mostrar el texto de la decisión correspondiente a la foto inicial
+                        if (!decisions.isEmpty()) {
+                            String decisionText = decisions.get(0);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    SocialInterface.this.decisions.setText(decisionText);
+                                }
+                            });
+                        }
+
+                        // Establecer el listener para detectar cambios de página en el ViewPager
+                        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                            @Override
+                            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                                // No se requiere implementación
+                            }
+
+                            @Override
+                            public void onPageSelected(int position) {
+                                // Mostrar el texto de la decisión correspondiente a la foto seleccionada
+                                if (!decisions.isEmpty() && position < decisions.size()) {
+                                    String decisionText = decisions.get(position);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            SocialInterface.this.decisions.setText(decisionText);
+                                        }
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onPageScrollStateChanged(int state) {
+                                // No se requiere implementación
+                            }
+                        });
                     } else {
                         // Manejar la respuesta no exitosa
                         System.out.println("Error en la respuesta: " + response.code() + " " + response.message());
@@ -329,9 +436,11 @@ public class SocialInterface extends FragmentActivity {
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
+
             }
         }).start();
     }
+
 
     private void updateAdapterWithImageIds() {
         runOnUiThread(new Runnable() {
