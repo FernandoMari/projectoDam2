@@ -50,8 +50,10 @@ public class PlayOnlineActivity extends Activity {
     ListView listFriend,listOfPetitions;
     CustomListAdapter mFriendsAdapter;
     String selectedUsername;
-    String url = "http://143.47.249.102:7070/getFriends";
-    String url2 = "http://143.47.249.102:7070/getNameOfUser";
+    //String url = "http://143.47.249.102:7070/getFriends";
+    String url= "http://5.75.251.56:7070/getFriends";
+    //String url2 = "http://143.47.249.102:7070/getNameOfUser";
+    String url2= "http://5.75.251.56:7070/getNameOfUser";
 
 
 
