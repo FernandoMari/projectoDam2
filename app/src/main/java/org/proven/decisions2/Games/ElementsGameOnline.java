@@ -36,7 +36,7 @@ public class ElementsGameOnline extends Activity {
     TextView tvResult;
 
     // Declare integer variables called election, rival, and value.
-    int election, rival, value;
+    int election, rival, value, afk;
 
     String playerName;
     String roomName;
@@ -73,6 +73,7 @@ public class ElementsGameOnline extends Activity {
 
                 // Call initCrono() method to initialize the timer
                 initCrono();
+                countDownTimer.start();
 
                 // Set the foreground drawable of the machine ImageView to question.png
                 machine.setForeground(ContextCompat.getDrawable(ElementsGameOnline.this, R.drawable.question));
@@ -103,22 +104,50 @@ public class ElementsGameOnline extends Activity {
                 if(rival != 0 && election != 0){
                     checkWin(election,rival);
                 }else{
+                    afk++;
                     if(rival == 0 && election == 0){
                         tvResult.setText(R.string.select_element);
                     } else if(rival == 0 || election == 0) {
                         tvResult.setText(R.string.one_player_dont_select);
                     }
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            restartGame();
-                        }
-                    }, 3000); // 3000 milisegundos = 3 segundos
 
+                    if (afk==1){
+                        countDownTimer.cancel();
+                        afkDesconnection();
+
+                    }
+
+                    if (afk<1){
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                forceGuestHostEmpty();
+                                restartGame();
+                            }
+                        }, 2000); // 2000 milisegundos = 3 segundos
+                    }
                 }
             }
-        }.start(); // Start the countdown timer
+        };
     }
+
+    private void afkDesconnection(){
+        countDownTimer.cancel();
+        tvResult.setText(R.string.afk_disconnection);
+        value = 3;
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent afkresult = new Intent(ElementsGameOnline.this, ResultGame.class);
+                afkresult.putExtra("result", value);
+                startActivity(afkresult);
+                finish();
+            }
+        }, 2000); // 2000 milliseconds = 2 seconds delay
+        deleteRoom(roomName);
+    }
+
 
     // Initialize the views and set the click listener for the element buttons
     public void initializeElements(){
@@ -270,8 +299,12 @@ public class ElementsGameOnline extends Activity {
     // This method is used to check if the user has won or lost the game
     // It takes an integer argument "election" which represents the user's choice of element
     public void checkWin(int electio, int rivae){
+
         countDownTimer.cancel();
-        // Generates a random number to represent the rival's choice of element
+
+        btWater.setEnabled(false);
+        btFire.setEnabled(false);
+        btIce.setEnabled(false);
 
 
         // Sets the drawable ID for the rival's element based on the randomly generated number
@@ -355,18 +388,13 @@ public class ElementsGameOnline extends Activity {
                     return;
                 }
             }, 2000); // 2000 milliseconds = 2 seconds delay
-
         }
-
-        btWater.setEnabled(false);
-        btFire.setEnabled(false);
-        btIce.setEnabled(false);
-
     }
 
     // This method restarts the game by enabling all the buttons, resetting the result text view, initializing the chronometer,
     // resetting the player and machine foregrounds, and setting the value to zero.
     private void restartGame() {
+        countDownTimer.start();
         btWater.setEnabled(true);
         btFire.setEnabled(true);
         btIce.setEnabled(true);
@@ -380,7 +408,6 @@ public class ElementsGameOnline extends Activity {
         initCrono();
         player.setForeground(null);
         machine.setForeground(ContextCompat.getDrawable(ElementsGameOnline.this, R.drawable.question));
-        value = 0;
     }
 
     // This method overrides the default behavior of the back button press in the activity
@@ -411,18 +438,15 @@ public class ElementsGameOnline extends Activity {
             btIce.setCardBackgroundColor(color);
         }
     }
-
     @Override
     protected void onDestroy() {
+        countDownTimer.cancel();
         super.onDestroy();
         onExit = database.getReference("rooms/"+roomName+"/status");
         message = "exited";
         onExit.setValue(message);
-        onExit.setValue(message);
+        deleteRoom(roomName);
     }
-
-
-
     private void setOnExit(){
         value=5;
         onExit.addValueEventListener(new ValueEventListener() {
@@ -437,6 +461,7 @@ public class ElementsGameOnline extends Activity {
                         intent.putExtra("result", value);
                         startActivity(intent);
                         finish();
+                        deleteRoom(roomName);
                     }
                 }
             }
@@ -446,6 +471,16 @@ public class ElementsGameOnline extends Activity {
                 System.out.println("Cositas");
             }
         });
+    }
+
+    private void forceGuestHostEmpty(){
+
+        hostEle = database.getReference("rooms/"+roomName+"/hostele");
+        message = "host:"+0;
+        election=0;
+        rival = 0;
+        hostEle.setValue(message);
+
     }
 
     private void deleteRoom(String roomName) {

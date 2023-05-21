@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.proven.decisions2.R;
+import org.proven.decisions2.SocialInterface;
 
 import java.util.Random;
 
@@ -31,13 +32,13 @@ public class PenaltiesGameOnline extends Activity {
     CountDownTimer countDownTimer;
 
     // Declaration of integer variables for keeping score and round count
-    int electionPlayer, electionMachine, golPlayer = 0, golMachine = 0, round = 0,round2 = 0, value = 0;
+    int electionPlayer, electionMachine, golPlayer = 0, golMachine = 0, round = 0,round2 = 0, value = 0, afk = 0;
 
     // Declaration of TextViews for displaying score, timer and game result
     TextView tvTimer, tvGolsPlayer, tvGolsMachine, tvResult;
 
     // Boolean variables to keep track of player and goalie turn, game finish and win/loss state
-    boolean turnPlayer, turnGoalie, finish = false, win = false, lose = false;
+    boolean turnPlayer, turnGoalie, finish = false, win = false, lose = false, charge = false;
 
     // Declaration of ImageViews for penalties points, robot, ball and other game elements
     ImageView p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, robot, ball;
@@ -50,6 +51,7 @@ public class PenaltiesGameOnline extends Activity {
     FirebaseDatabase database;
     DatabaseReference guestEle;
     DatabaseReference hostEle;
+    DatabaseReference onExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class PenaltiesGameOnline extends Activity {
 
                 // Set content view to the main layout
                 setContentView(R.layout.penaltis_layout);
-
+                charge = true;
 
                 // Initialize UI elements
                 instantiateElements();
@@ -75,6 +77,7 @@ public class PenaltiesGameOnline extends Activity {
                 // Initialize turn and timer
                 //initTurn();
                 earlyerInit();
+                System.out.println(roomName);
                 initCrono();
 
                 // Set up button listeners
@@ -177,6 +180,10 @@ public class PenaltiesGameOnline extends Activity {
                 tvResult.setText(getString(R.string.you_are_goalkeeper));
             }
         }
+
+        onExit = database.getReference("rooms/"+roomName+"/status");
+        setExit();
+
     }
 
     private void sendDepending(int i){
@@ -194,16 +201,20 @@ public class PenaltiesGameOnline extends Activity {
         }
     }
 
-    private void forceNonSelected(){
-        guestEle = database.getReference("rooms/"+roomName+"/message");
-        message = "guest:"+0;
-        electionMachine=0;
-        guestEle.setValue(message);
+
+
+    private void forceGuestHostEmpty(){
 
         hostEle = database.getReference("rooms/"+roomName+"/hostele");
         message = "host:"+0;
         electionPlayer=0;
         hostEle.setValue(message);
+
+        guestEle = database.getReference("rooms/"+roomName+"/message");
+        message = "guest:"+0;
+        electionMachine=0;
+        guestEle.setValue(message);
+
     }
 
     private void addRoomEventListener(){
@@ -262,7 +273,7 @@ public class PenaltiesGameOnline extends Activity {
     // Method to initialize the countdown timer
     private void initCrono(){
         // Create a new CountDownTimer object with a duration of 15 seconds and a tick interval of 1 second
-        countDownTimer = new CountDownTimer(2000, 1000){
+        countDownTimer = new CountDownTimer(5000, 1000){
 
             @Override
             // Method to be called on each tick of the countdown timer
@@ -276,74 +287,21 @@ public class PenaltiesGameOnline extends Activity {
             @Override
             // Method to be called when the countdown timer finishes
             public void onFinish() {
-                // Create a new Random object
-                Random rand = new Random();
-                int ra = rand.nextInt(5)+1;
 
-                if(electionMachine != 0 && electionPlayer != 0){
-                    checkTirada();
-                    checkWinDelayed();
-                    restartColor();
-                    System.out.println("HOST: "+electionPlayer);
-                    System.out.println("GUEST: "+electionMachine);
+                checkTirada();
+                checkWinDelayed();
+                restartColor();
 
-                    // Switch the turn between the player and the goalie.
-                    if (role.equals("host")) {
-                        if (turnPlayer) {
-                            turnPlayer = false;
-                            turnGoalie = true;
-                            tvResult.setText(R.string.you_are_goalkeeper);
-                        }
-                        if (turnGoalie) {
-                            turnPlayer = true;
-                            turnGoalie = false;
-                            tvResult.setText(R.string.you_are_player);
-                        }
-
-                    }
-                    if (role.equals("guest")){
-                        if (turnPlayer){
-                            turnPlayer = false;
-                            turnGoalie = true;
-                            tvResult.setText(R.string.you_are_goalkeeper);
-                        }
-                        if (turnGoalie){
-                            turnPlayer = true;
-                            turnGoalie = false;
-                            tvResult.setText(R.string.you_are_player);
-                        }
-
-                    }
-                    System.out.println("HOST ROL " + tvResult.getText());
-                    System.out.println("GUEST ROL " + tvResult.getText());
-
-                }else if(electionPlayer == 0 && electionMachine == 0){
-                    //sendDepending(ra);
+                forceGuestHostEmpty();
+                // Reset the game state
+                if (afk<3){
                     reset();
-                    System.out.println("Both no select");
-                    System.out.println("HOST: "+electionPlayer);
-                    System.out.println("GUEST: "+electionMachine);
-                }else if(electionMachine == 0){
-                    //sendDepending(ra);
-                    restartColor();
-                    reset();
-                    System.out.println("Guest no select");
-                    System.out.println("HOST: "+electionPlayer);
-                    System.out.println("GUEST: "+electionMachine);
-                }else if (electionPlayer == 0){
-                    //sendDepending(ra);
-                    restartColor();
-                    reset();
-                    System.out.println("Host no select");
-                    System.out.println("HOST: "+electionPlayer);
-                    System.out.println("GUEST: "+electionMachine);
                 }
-                forceNonSelected();
-
             }
         }.start();
 
     }
+
 
 
     // Method to check the outcome of the player's move
@@ -356,61 +314,105 @@ public class PenaltiesGameOnline extends Activity {
         btLeftUp.setEnabled(false);
         // Cancel the countdown timer
         countDownTimer.cancel();
-        // Hide the ball ImageView
-        ball.setVisibility(View.INVISIBLE);
+
         // Check if it's the player's turn
         if(role.equals("host")){
             if (turnGoalie) {
-                // Increase the round counter
-                round++;
-                // Set the robot ImageView to show the player's chosen element
-                setRobot();
-                // Set the ball ImageView to the player's position
-                setBall();
+
                 // Check if the player's element is different from the machine player's element
-                if (electionPlayer != electionMachine) {
+                if (electionPlayer != electionMachine && electionPlayer != 0) {
+                    // Hide the ball ImageView
+                    ball.setVisibility(View.INVISIBLE);
+                    // Increase the round counter
+                    round2++;
+                    // Set the robot ImageView to show the player's chosen element
+                    setRobot();
+                    // Set the ball ImageView to the player's position
+                    setBall();
                     // Increase the machine player's score
                     golMachine++;
                     System.out.println("Guest goals: " + golMachine);
                     // Set the text of the tvGolsMachine TextView to show the machine player's score
                     tvGolsMachine.setText(Integer.toString(golMachine));
                     // Set the gol ImageView to show the machine player's goal
-                    setGol(round);
-                } else {
+                    setGol(round2);
+                    System.out.println("A");
+                    changeTurn();
+                } else if (electionPlayer == 0 || electionMachine ==0){
+                    System.out.println("RESTART1");
+                    System.out.println(electionMachine);
+                    System.out.println(electionPlayer);
+                    afk++;
+                }else{
+                    // Hide the ball ImageView
+                    ball.setVisibility(View.INVISIBLE);
+                    // Increase the round counter
+                    round2++;
+                    // Set the robot ImageView to show the player's chosen element
+                    setRobot();
+                    // Set the ball ImageView to the player's position
+                    setBall();
                     // Set the error ImageView to show the machine player's error
-                    setError(round);
+                    setError(round2);
+                    System.out.println("C");
+                    System.out.println(electionMachine);
+                    System.out.println(electionPlayer);
+                    changeTurn();
                 }
             }else if (turnPlayer){
-                // Increase the round counter
-                round2++;
-                // Set the robot ImageView to show the player's chosen element
-                setRobot();
-                // Set the ball ImageView to the player's position
-                setBall();
+
                 // Check if the player's element is different from the machine player's element
-                if (electionPlayer != electionMachine) {
+                if (electionPlayer != electionMachine && electionPlayer != 0) {
+                    // Hide the ball ImageView
+                    ball.setVisibility(View.INVISIBLE);
+                    // Increase the round counter
+                    round++;
+                    // Set the robot ImageView to show the player's chosen element
+                    setRobot();
+                    // Set the ball ImageView to the player's position
+                    setBall();
                     // Increase the machine player's score
                     golPlayer++;
                     System.out.println("Host goals: " + golPlayer);
                     // Set the text of the tvGolsMachine TextView to show the machine player's score
                     tvGolsPlayer.setText(Integer.toString(golPlayer));
                     // Set the gol ImageView to show the machine player's goal
-                    setGol(round2);
-                } else {
+                    setGol(round);
+                    System.out.println("D");
+                    changeTurn();
+                } else if (electionPlayer == 0 || electionMachine ==0){
+                    System.out.println("RESTART2");
+                    System.out.println(electionMachine);
+                    System.out.println(electionPlayer);
+                    afk++;
+                }else{
+                    // Hide the ball ImageView
+                    ball.setVisibility(View.INVISIBLE);
+                    // Increase the round counter
+                    round++;
+                    // Set the robot ImageView to show the player's chosen element
+                    setRobot();
+                    // Set the ball ImageView to the player's position
+                    setBall();
                     // Set the error ImageView to show the machine player's error
-                    setError(round2);
+                    setError(round);
+                    System.out.println("F");
+                    changeTurn();
                 }
             }
         }else if(role.equals("guest")){
             if (turnGoalie) {
-                // Increase the round counter
-                round2++;
-                // Set the robot ImageView to show the player's chosen element
-                setRobot();
-                // Set the ball ImageView to the player's position
-                setBall();
                 // Check if the player's element is different from the machine player's element
-                if (electionPlayer != electionMachine) {
+                if (electionPlayer != electionMachine && electionMachine != 0) {
+                    // Hide the ball ImageView
+                    ball.setVisibility(View.INVISIBLE);
+                    // Increase the round counter
+                    round2++;
+                    // Set the robot ImageView to show the player's chosen element
+                    setRobot();
+                    // Set the ball ImageView to the player's position
+                    setBall();
+
                     // Increase the host player's score
                     golPlayer++;
                     System.out.println("Host goals: " + golPlayer);
@@ -418,19 +420,40 @@ public class PenaltiesGameOnline extends Activity {
                     tvGolsMachine.setText(Integer.toString(golPlayer));
                     // Set the gol ImageView to show the machine player's goal
                     setGol(round2);
-                } else {
-                    // Set the error ImageView to show the machine player's error
+                    System.out.println("G");
+                    changeTurn();
+                } else if (electionPlayer == 0 || electionMachine ==0){
+                    System.out.println("RESTART3");
+                    System.out.println(electionMachine);
+                    System.out.println(electionPlayer);
+                    afk++;
+                }else{
+                    // Hide the ball ImageView
+                    ball.setVisibility(View.INVISIBLE);
+                    // Increase the round counter
+                    round2++;
+                    // Set the robot ImageView to show the player's chosen element
+                    setRobot();
+                    // Set the ball ImageView to the player's position
+                    setBall();
                     setError(round2);
+                    System.out.println("ELSE");
+                    System.out.println(electionPlayer);
+                    System.out.println(electionMachine);
+                    changeTurn();
                 }
             }else if (turnPlayer){
-                // Increase the round counter
-                round++;
-                // Set the robot ImageView to show the player's chosen element
-                setRobot();
-                // Set the ball ImageView to the player's position
-                setBall();
+
                 // Check if the player's element is different from the machine player's element
-                if (electionPlayer != electionMachine) {
+                if (electionPlayer != electionMachine && electionMachine != 0) {
+                    // Hide the ball ImageView
+                    ball.setVisibility(View.INVISIBLE);
+                    // Increase the round counter
+                    round++;
+                    // Set the robot ImageView to show the player's chosen element
+                    setRobot();
+                    // Set the ball ImageView to the player's position
+                    setBall();
                     // Increase the machine player's score
                     golMachine++;
                     System.out.println("Guest goals: " + golMachine);
@@ -438,9 +461,26 @@ public class PenaltiesGameOnline extends Activity {
                     tvGolsPlayer.setText(Integer.toString(golMachine));
                     // Set the gol ImageView to show the machine player's goal
                     setGol(round);
-                } else {
+                    System.out.println("J");
+                    changeTurn();
+                } else if (electionPlayer == 0 || electionMachine ==0){
+                    System.out.println("RESTART4");
+                    System.out.println(electionMachine);
+                    System.out.println(electionPlayer);
+                    afk++;
+                }else{
+                    // Hide the ball ImageView
+                    ball.setVisibility(View.INVISIBLE);
+                    // Increase the round counter
+                    round++;
+                    // Set the robot ImageView to show the player's chosen element
+                    setRobot();
+                    // Set the ball ImageView to the player's position
+                    setBall();
                     // Set the error ImageView to show the machine player's error
                     setError(round);
+                    System.out.println("L");
+                    changeTurn();
                 }
             }
         }
@@ -453,7 +493,7 @@ public class PenaltiesGameOnline extends Activity {
             public void run() {
                 checkwin();
             }
-        }, 1000); // delay in milliseconds
+        }, 2000); // delay in milliseconds
     }
 
     // This method sets the background resource of the corresponding ImageView based on the value of the round and turnPlayer variables
@@ -593,49 +633,21 @@ public class PenaltiesGameOnline extends Activity {
 
     // This method checks if the player wins or loses the penalty shootout game
     private void checkwin() {
-        // Reset the game state
-        reset();
 
-        // Check if the player wins or loses by 4 goals or more difference
-        if (golPlayer - golMachine >= 4) {
-            finish = true;
-            tvResult.setText(R.string.you_win);
-            win = true;
-        } else if(golMachine - golPlayer >= 4){
-            finish = true;
-            tvResult.setText(R.string.you_lost);
-            lose = true;
-        }
-        // Check if the player wins or loses by 3 goals or more difference
-        if (golPlayer - golMachine >= 3) {
-            finish = true;
-            tvResult.setText(R.string.you_win);
-            win = true;
-        } else if(golMachine - golPlayer >= 3){
-            finish = true;
-            tvResult.setText(R.string.you_lost);
-            lose = true;
-        }
-        // Check if the player wins or loses at the end of the 5 rounds
-        if (round==5 || round2==5){
-            if (golPlayer == 5 && golMachine < 4){
-                tvResult.setText(R.string.you_win);
-                finish = true;
-                win = true;
-            }else if (golMachine == 5 && golPlayer < 4){
-                tvResult.setText(R.string.you_lost);
-                finish = true;
-                lose = true;
-            }
-            if (golPlayer - golMachine >= 2) {
+
+
+        if (role.equals("host")){
+            // Check if the player wins or loses by 4 goals or more difference
+            if (golPlayer - golMachine >= 4) {
                 finish = true;
                 tvResult.setText(R.string.you_win);
                 win = true;
-            } else if(golMachine - golPlayer >= 2){
+            } else if(golMachine - golPlayer >= 4){
                 finish = true;
                 tvResult.setText(R.string.you_lost);
                 lose = true;
             }
+            // Check if the player wins or loses by 3 goals or more difference
             if (golPlayer - golMachine >= 3) {
                 finish = true;
                 tvResult.setText(R.string.you_win);
@@ -645,7 +657,8 @@ public class PenaltiesGameOnline extends Activity {
                 tvResult.setText(R.string.you_lost);
                 lose = true;
             }
-            if (round==5 && round2==5){
+            // Check if the player wins or loses after 5 rounds
+            if (round > 5 || round2 > 5) {
                 if (golPlayer - golMachine >= 1) {
                     finish = true;
                     tvResult.setText(R.string.you_win);
@@ -656,20 +669,144 @@ public class PenaltiesGameOnline extends Activity {
                     lose = true;
                 }
             }
-        }
+            // Check if the player wins or loses at the end of the 5 rounds
+            if (round==5 || round2==5){
+                if (golPlayer == 5 && golMachine < 4){
+                    tvResult.setText(R.string.you_win);
+                    finish = true;
+                    win = true;
+                }else if (golMachine == 5 && golPlayer < 4){
+                    tvResult.setText(R.string.you_lost);
+                    finish = true;
+                    lose = true;
+                }
+                if (golPlayer - golMachine >= 2) {
+                    finish = true;
+                    tvResult.setText(R.string.you_win);
+                    win = true;
+                } else if(golMachine - golPlayer >= 2){
+                    finish = true;
+                    tvResult.setText(R.string.you_lost);
+                    lose = true;
+                }
+                if (golPlayer - golMachine >= 3) {
+                    finish = true;
+                    tvResult.setText(R.string.you_win);
+                    win = true;
+                } else if(golMachine - golPlayer >= 3){
+                    finish = true;
+                    tvResult.setText(R.string.you_lost);
+                    lose = true;
+                }
+                if (round==5 && round2==5){
+                    if (golPlayer - golMachine >= 1) {
+                        finish = true;
+                        tvResult.setText(R.string.you_win);
+                        win = true;
+                    } else if(golMachine - golPlayer >= 1){
+                        finish = true;
+                        tvResult.setText(R.string.you_lost);
+                        lose = true;
+                    }
+                }
+            }
 
-        // Check if the player wins or loses after 5 rounds
-        if (round > 5 || round2 > 5) {
-            if (golPlayer - golMachine >= 1) {
+
+        }else if(role.equals("guest")){
+
+            // Check if the player wins or loses by 4 goals or more difference
+            if (golMachine - golPlayer >= 4) {
                 finish = true;
                 tvResult.setText(R.string.you_win);
                 win = true;
-            } else if(golMachine - golPlayer >= 1){
+            } else if(golPlayer - golMachine >= 4){
                 finish = true;
                 tvResult.setText(R.string.you_lost);
                 lose = true;
             }
+            // Check if the player wins or loses by 3 goals or more difference
+            if (golMachine - golPlayer >= 3) {
+                finish = true;
+                tvResult.setText(R.string.you_win);
+                win = true;
+            } else if(golPlayer - golMachine >= 3){
+                finish = true;
+                tvResult.setText(R.string.you_lost);
+                lose = true;
+            }
+            // Check if the player wins or loses after 5 rounds
+            if (round > 5 || round2 > 5) {
+                if (golMachine - golPlayer >= 1) {
+                    finish = true;
+                    tvResult.setText(R.string.you_win);
+                    win = true;
+                } else if(golPlayer - golMachine >= 1){
+                    finish = true;
+                    tvResult.setText(R.string.you_lost);
+                    lose = true;
+                }
+            }
+            // Check if the player wins or loses at the end of the 5 rounds
+            if (round==5 || round2==5) {
+                if (golMachine == 5 && golPlayer < 4) {
+                    tvResult.setText(R.string.you_win);
+                    finish = true;
+                    win = true;
+                } else if (golPlayer == 5 && golMachine < 4) {
+                    tvResult.setText(R.string.you_lost);
+                    finish = true;
+                    lose = true;
+                }
+                if (golMachine - golPlayer >= 2) {
+                    finish = true;
+                    tvResult.setText(R.string.you_win);
+                    win = true;
+                } else if (golPlayer - golMachine >= 2) {
+                    finish = true;
+                    tvResult.setText(R.string.you_lost);
+                    lose = true;
+                }
+                if (golMachine - golPlayer >= 3) {
+                    finish = true;
+                    tvResult.setText(R.string.you_win);
+                    win = true;
+                } else if (golPlayer - golMachine >= 3) {
+                    finish = true;
+                    tvResult.setText(R.string.you_lost);
+                    lose = true;
+                }
+                if (round == 5 && round2 == 5) {
+                    if (golMachine - golPlayer >= 1) {
+                        finish = true;
+                        tvResult.setText(R.string.you_win);
+                        win = true;
+                    } else if (golPlayer - golMachine >= 1) {
+                        finish = true;
+                        tvResult.setText(R.string.you_lost);
+                        lose = true;
+                    }
+                }
+            }
         }
+
+        if (afk==3){
+            countDownTimer.cancel();
+            finish=true;
+            tvResult.setText(R.string.afk_disconnection);
+            value = 3;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(PenaltiesGameOnline.this, ResultGame.class);
+                    intent.putExtra("result", value);
+                    startActivity(intent);
+                    finishAffinity();
+                }
+            }, 2000); // 2000 milliseconds = 2 seconds delay
+            deleteRoom(roomName);
+        }
+
+
 
         // Disable all buttons and stop the countdown timer if the game is finished
         if (finish){
@@ -706,6 +843,8 @@ public class PenaltiesGameOnline extends Activity {
                 }
             }, 2000); // 2000 milliseconds = 2 seconds delay
         }
+
+
     }
 
     // This method is used to reset the game and start a new round.
@@ -732,8 +871,6 @@ public class PenaltiesGameOnline extends Activity {
 
         // Make the ball visible again.
         ball.setVisibility(View.VISIBLE);
-
-
     }
 
     public void disable(int op){
@@ -768,12 +905,80 @@ public class PenaltiesGameOnline extends Activity {
         btRight.setCardBackgroundColor(color);
     }
 
+    public void changeTurn(){
+        // Switch the turn between the player and the goalie.
+        if (role.equals("host")) {
+            if (turnPlayer) {
+                turnPlayer = false;
+                turnGoalie = true;
+                tvResult.setText(R.string.you_are_goalkeeper);
+            }else if (turnGoalie) {
+                turnPlayer = true;
+                turnGoalie = false;
+                tvResult.setText(R.string.you_are_player);
+            }
+
+        }
+        if (role.equals("guest")){
+            if (turnPlayer) {
+                turnPlayer = false;
+                turnGoalie = true;
+                tvResult.setText(R.string.you_are_goalkeeper);
+            } else if (turnGoalie) {
+                turnPlayer = true;
+                turnGoalie = false;
+                tvResult.setText(R.string.you_are_player);
+            }
+        }
+    }
+
     // This method overrides the default behavior of the back button press in the activity
     @Override
     public void onBackPressed() {
-        // Cancels the countdown timer associated with the activity
+        if (charge){
+            // Cancels the countdown timer associated with the activity
+            countDownTimer.cancel();
+            // Calls the parent class method to handle the back button press
+            deleteRoom(roomName);
+            super.onBackPressed();
+            finish();
+        }
+    }
+    @Override
+    protected void onDestroy() {
         countDownTimer.cancel();
-        // Calls the parent class method to handle the back button press
-        super.onBackPressed();
+        super.onDestroy();
+        onExit = database.getReference("rooms/"+roomName+"/status");
+        message = "exited";
+        onExit.setValue(message);
+        deleteRoom(roomName);
+    }
+    private void setExit(){
+        value=5;
+        onExit.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue(String.class) != null){
+                    System.out.println(snapshot.getValue(String.class));
+                    if(snapshot.getValue(String.class).equals("exited")){
+                        System.out.println("Open Result Game: Lost Connection");
+                        countDownTimer.cancel();
+                        Intent intent = new Intent(PenaltiesGameOnline.this, ResultGame.class);
+                        intent.putExtra("result", value);
+                        startActivity(intent);
+                        finish();
+                        deleteRoom(roomName);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("Cositas");
+            }
+        });
+    }
+
+    private void deleteRoom(String roomName) {
+        database.getReference("rooms/" + roomName).removeValue();
     }
 }

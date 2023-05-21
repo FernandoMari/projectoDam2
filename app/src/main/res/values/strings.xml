@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Decisions</string>
     <string name="btEnter">Enter</string>
-    <string name="btRegister">Register</string>
+    <string name="btRegister">Sign in</string>
     <string name="btAccept">Accept</string>
     <string name="search_persons">Search persons</string>
     <string name="add_friends">Add friends</string>
-    <string name="register">Register</string>
+    <string name="register">Sign in</string>
     <string name="email_adress">Email address</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -333,5 +333,7 @@
     <string name="enter_actual_email">Enter actual Email</string>
     <string name="email_empty">Email is empty</string>
     <string name="do_you_have_an_account">Don\'t have an account?</string>
-    <string name="you_are_already_registered">You are already registered?</string>
+    <string name="you_are_already_registered">Are you registered?</string>
+    <string name="sorry_the_game_connection_has_been_closed_because_one_or_both_players_have_not_selected_for_3_rounds">Sorry the game connection has been closed because one or both players have not selected for 3 rounds.</string>
+    <string name="afk_disconnection">AFK disconnection</string>
 </resources>

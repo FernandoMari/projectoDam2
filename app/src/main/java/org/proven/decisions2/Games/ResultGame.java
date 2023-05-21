@@ -20,15 +20,17 @@ public class ResultGame extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int result = getIntent().getIntExtra("result", 0);
+        int result = getIntent().getIntExtra("result",0);
 
-        if (result == 0) {
+        if (result == 0){
             setContentView(R.layout.result_win_layout);
-        } else if (result == 1) {
+        }else if(result == 1){
             setContentView(R.layout.result_lose_layout);
-        } else if (result == 2) {
+        }else if(result == 2) {
             setContentView(R.layout.result_lose_machine_layout);
-        } else {
+        }else if (result==3){
+            setContentView(R.layout.result_afk_layout);
+        }else{
             setContentView(R.layout.result_lost_connection_layout);
         }
 
@@ -78,3 +80,4 @@ public class ResultGame extends Activity {
         });
     }
 }
+
