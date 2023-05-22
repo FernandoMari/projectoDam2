@@ -63,7 +63,7 @@ public class MainActivity extends AppCompat {
     //Url for the http post request for the getUserToken
     //String url2 = "http://143.47.249.102:7070/getUserToken";
     //String url2 = "https://5.75.251.56:8443/getUserToken";
-     String url2 = "http://5.75.251.56:7070/getUserToken";
+    String url2 = "http://5.75.251.56:7070/getUserToken";
     //Create FileOutputStream for the save the document internal
     FileOutputStream outputStream;
     //Method returns an OkHttpClient object that can be used to make HTTP requests, but ignores any SSL certificate issues that might arise when establishing an HTTPS connection.
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompat {
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initRecoverPass();
+                startActivity(new Intent(MainActivity.this, RecoverPassword.class));
             }
         });
     }
@@ -165,10 +165,9 @@ public class MainActivity extends AppCompat {
             //Check that the password is empty or the length is correct
         } else if (password.isEmpty()) {
             inputPassword.setError(getString(R.string.password_empty));
-        }else if(password.length() < 4){
+        } else if (password.length() < 4) {
             inputPassword.setError(getString(R.string.password_correct));
-        }
-        else {
+        } else {
             //call the method for execute de asyncTask
             http();
         }
@@ -309,11 +308,11 @@ public class MainActivity extends AppCompat {
     /*Method to save the token that logs in to be able to use it in other activities*/
     private void saveUser() {
         try {
-            if (token !=null){
+            if (token != null) {
                 outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
                 outputStream.write(token.getBytes());
                 outputStream.close();
-            }else{
+            } else {
                 // handle the null case
             }
         } catch (
@@ -323,88 +322,5 @@ public class MainActivity extends AppCompat {
 
     }
 
-    private void initRecoverPass(){
-        // Crear el diálogo de alerta
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Insert your Gmail");
 
-        // Crear un EditText para que el usuario pueda introducir texto
-        final EditText editText = new EditText(this);
-        editText.requestFocus(); // Solicitar el foco en el EditText
-        builder.setView(editText);
-
-        // Agregar botones de "Aceptar" y "Cancelar"
-        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Obtener el texto introducido por el usuario
-                email = editText.getText().toString();
-                // Hacer algo con el texto introducido
-                // ...
-
-                new getPassword().execute();
-            }
-        });
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // El usuario ha cancelado el diálogo
-                dialog.cancel();
-            }
-        });
-
-        // Mostrar el diálogo
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-    private class getPassword extends AsyncTask<Void, Void, String> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-            OkHttpClient client = secureConnection.getClient();
-            //Confirm the username and password the user
-            MediaType mediaType = MediaType.parse("application/json");
-            RequestBody requestBody = RequestBody.create(mediaType, "mail=" + email);
-
-            Request request = new Request.Builder()
-                    .url(url3)
-                    .post(requestBody)
-                    .addHeader("content-type", "application/json")
-                    .addHeader("cache-control", "no-cache")
-                    .build();
-
-            try {
-                Response response = client.newCall(request).execute();
-                return response.body().string();
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        //check that the login is correct and check if the credentials are correct or incorrect
-        @Override
-        protected void onPostExecute(String responseData) {
-            String textWithoutQuotes = responseData.replace("\"", "");
-
-            if (textWithoutQuotes  == "" || textWithoutQuotes.isEmpty()){
-
-            }else {
-                MailSender sender = new MailSender();
-                sender.setmRecipient(email);
-                sender.setmSubject("Contraseña olvidada");
-                sender.setmMessage("<html><body style=\\\"text-align: center;\\\">\n" +
-                        "        <h1>Contraseña</h1>\n" +
-                        "        <p>Su contraseña es: "+textWithoutQuotes+"</p>\n" +
-                        "        </body></html>");
-
-                sender.execute();
-            }
-        }
-    }
 }

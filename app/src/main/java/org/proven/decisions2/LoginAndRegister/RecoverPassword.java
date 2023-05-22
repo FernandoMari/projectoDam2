@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -31,14 +32,16 @@ public class RecoverPassword extends Activity {
 
     LinearLayout layoutIntroduceCode, layoutGeneral;
 
-    EditText inputemail;
-    String email;
+    EditText inputemail, inputRecovery, inputNewPassword, inputConfirmpassword;
+    String email, newPassword, recoveryToken, confirmPassword;
+
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     SecureConnection secureConnection = new SecureConnection();
 
     String url = "http://5.75.251.56:7070/recover-password";
 
-    String url2="http://5.75.251.56:7070/reset-password";
+    String url2 = "http://5.75.251.56:7070/reset-password";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +73,7 @@ public class RecoverPassword extends Activity {
         btAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                recoveryPasswordWithToken();
 
             }
         });
@@ -82,16 +86,50 @@ public class RecoverPassword extends Activity {
         layoutGeneral = findViewById(R.id.layoutGeneral);
         btAccept = findViewById(R.id.btAccept);
         inputemail = findViewById(R.id.etMail);
+        inputRecovery = findViewById(R.id.etTemporalCode);
+        inputNewPassword = findViewById(R.id.etNewPassword);
+        inputConfirmpassword = findViewById(R.id.etConfirmPassword);
     }
 
 
     private void initRecoverPass() {
-        // Obtener el texto introducido por el usuario
         email = inputemail.getText().toString();
-        // Hacer algo con el texto introducido
-        // ...
-
+        // Realizar la comprobación del correo electrónico
+        if (email.isEmpty() || !email.matches(emailPattern)) {
+            // El campo de correo electrónico está vacío o no tiene el formato correcto
+            inputemail.setError(getString(R.string.format_email));
+            return; // Salir de la función sin continuar con las comprobaciones
+        }
+        // Llamar al método getPassword() solo después de la comprobación exitosa del correo electrónico
         new getPassword().execute();
+
+    }
+
+    private void recoveryPasswordWithToken() {
+        recoveryToken = inputRecovery.getText().toString();
+        newPassword = inputNewPassword.getText().toString();
+        confirmPassword = inputConfirmpassword.getText().toString();
+        // Comprobar si el token de recuperación es válido
+        if (recoveryToken.isEmpty()) {
+            // El token de recuperación no es válido
+            inputRecovery.setError("Invalid recovery token");
+            return; // Salir de la función sin continuar con las comprobaciones
+        }
+
+        // Comprobar el resto de los campos y realizar las comprobaciones adicionales aquí
+        if (newPassword.isEmpty() || newPassword.length() < 4) {
+            // El campo de nueva contraseña está vacío o no cumple los requisitos
+            inputNewPassword.setError(getString(R.string.password_correct));
+            return; // Salir de la función sin continuar con las comprobaciones
+        }
+
+        if (!newPassword.equals(confirmPassword)) {
+            // La nueva contraseña y la confirmación de contraseña no coinciden
+            inputConfirmpassword.setError(getString(R.string.equal_password));
+            return; // Salir de la función sin continuar con las comprobaciones
+        }
+        // Todas las comprobaciones son exitosas, llamar al método recoveryPassword()
+        new recoveryPassword().execute();
     }
 
 
@@ -105,15 +143,10 @@ public class RecoverPassword extends Activity {
         protected String doInBackground(Void... params) {
             OkHttpClient client = secureConnection.getClient();
             //Confirm the username and password the user
-            MediaType mediaType = MediaType.parse("application/json");
+            MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
             RequestBody requestBody = RequestBody.create(mediaType, "mail=" + email);
 
-            Request request = new Request.Builder()
-                    .url(url)
-                    .post(requestBody)
-                    .addHeader("content-type", "application/json")
-                    .addHeader("cache-control", "no-cache")
-                    .build();
+            Request request = new Request.Builder().url(url).post(requestBody).addHeader("content-type", "application/x-www-form-urlencoded").addHeader("cache-control", "no-cache").build();
 
             try {
                 Response response = client.newCall(request).execute();
@@ -124,7 +157,6 @@ public class RecoverPassword extends Activity {
             }
         }
 
-        //check that the login is correct and check if the credentials are correct or incorrect
         @Override
         protected void onPostExecute(String responseData) {
             String textWithoutQuotes = responseData.replace("\"", "");
@@ -135,16 +167,63 @@ public class RecoverPassword extends Activity {
                 MailSender sender = new MailSender();
                 sender.setmRecipient(email);
                 sender.setmSubject("Contraseña olvidada");
-                sender.setmMessage("<html><body style=\\\"text-align: center;\\\">\n" +
-                        "        <h1>Contraseña</h1>\n" +
-                        "        <p>Su token de recuperacion es: " + textWithoutQuotes + "</p>\n" +
-                        "        </body></html>");
+                sender.setmMessage("<html><body style=\\\"text-align: center;\\\">\n" + "        " +
+                        "<h1>Contraseña</h1>\n" + "        " +
+                        "<p>Su token de recuperacion es: " + textWithoutQuotes + "</p>\n" + "      " +
+                        "  </body></html>");
 
                 sender.execute();
             }
         }
     }
 
+    private class recoveryPassword extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected String doInBackground(Void... params) {
+            OkHttpClient client = new OkHttpClient();
+
+            // Construir los parámetros de la solicitud
+            MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
+            String requestBody = "recoveryToken=" + recoveryToken + "&newPassword=" + newPassword;
+
+            Request request = new Request.Builder()
+                    .url(url2)
+                    .post(RequestBody.create(mediaType, requestBody))
+                    .addHeader("content-type", "application/x-www-form-urlencoded")
+                    .build();
+
+            try {
+                Response response = client.newCall(request).execute();
+                if (response.isSuccessful()) {
+                    // La solicitud fue exitosa, puedes obtener el cuerpo de la respuesta
+                    return response.body().string();
+                } else {
+                    // La solicitud no fue exitosa, manejar el error apropiadamente
+                    return null;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Manejar la excepción de conexión o lectura/escritura de datos
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            if (result != null) {
+                // La solicitud fue exitosa, puedes hacer algo con la respuesta
+                Toast.makeText(RecoverPassword.this, "Password updated successfully", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(RecoverPassword.this, MainActivity.class));
+                System.out.println("Respuesta del servidor: " + result);
+            } else {
+                // La solicitud no fue exitosa, manejar el error apropiadamente
+                Toast.makeText(RecoverPassword.this, "Invalid recovery token", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
 
 }
