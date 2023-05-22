@@ -31,7 +31,9 @@
             android:text="timer"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="30sp"></TextView>
+            android:textSize="30sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"></TextView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/machine"

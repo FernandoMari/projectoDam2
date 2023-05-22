@@ -336,4 +336,10 @@
     <string name="email_empty">O email está vazio</string>
     <string name="do_you_have_an_account">Você não tem uma conta?</string>
     <string name="you_are_already_registered">Você já está registrado?</string>
+    <string name="sorry_the_game_connection_has_been_closed_because_one_or_both_players_have_not_selected_for_3_rounds">Desculpe, a conexão do jogo foi encerrada porque um ou ambos os jogadores não selecionaram por 3 rodadas.</string>
+    <string name="afk_disconnection">Desconexão AFK</string>
+    <string name="recover_your_password">Recuperar sua senha?</string>
+    <string name="recover_password">Recuperar senha</string>
+    <string name="temporal_code">Código temporal</string>
+    <string name="return_to">Retornar a</string>
 </resources>

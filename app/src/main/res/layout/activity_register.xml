@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF"
+    android:background="@drawable/background_login"
     android:layout_gravity="center_horizontal|center"
     android:orientation="vertical">
 
@@ -19,7 +19,6 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/semi_circle"
-                    android:backgroundTint="@color/blue"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintHeight_percent="0.5"
                     app:layout_constraintWidth_percent="1.0"

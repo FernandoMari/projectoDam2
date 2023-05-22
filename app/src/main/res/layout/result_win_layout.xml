@@ -173,7 +173,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
 
             <Button
                 android:id="@+id/btSettings"
@@ -182,7 +183,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="40dp"
                 android:background="@drawable/custom_settings_icon"
-                android:contentDescription="btSettings">
+                android:contentDescription="btSettings"
+                >
 
             </Button>
 

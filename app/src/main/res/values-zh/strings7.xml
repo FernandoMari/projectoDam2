@@ -339,4 +339,11 @@
     <string name="email_empty">电子邮件为空</string>
     <string name="do_you_have_an_account">没有账号吗？</string>
     <string name="you_are_already_registered">您已经注册了吗？</string>
+
+    <string name="sorry_the_game_connection_has_been_closed_because_one_or_both_players_have_not_selected_for_3_rounds">很抱歉，游戏连接已关闭，因为一个或两个玩家连续3轮未进行选择。</string>
+    <string name="afk_disconnection">离开游戏断开连接</string>
+    <string name="recover_your_password">找回您的密码？</string>
+    <string name="recover_password">找回密码</string>
+    <string name="temporal_code">临时代码</string>
+    <string name="return_to">返回</string>
 </resources>
