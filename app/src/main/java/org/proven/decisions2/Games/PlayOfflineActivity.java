@@ -61,9 +61,9 @@ public class PlayOfflineActivity extends Activity {
                     if (num == 0) {
                         intent = new Intent(PlayOfflineActivity.this, ElementsGame.class);
                     } else if (num == 1) {
-                        intent = new Intent(PlayOfflineActivity.this, ElementsGame.class);
+                        intent = new Intent(PlayOfflineActivity.this, PenaltisGame.class);
                     } else {
-                        intent = new Intent(PlayOfflineActivity.this, ElementsGame.class);
+                        intent = new Intent(PlayOfflineActivity.this, QuestionQuizGame.class);
                     }
 
                     intent.putExtra("decision1", textoDecision1);

@@ -40,8 +40,12 @@ public class RecoverPassword extends Activity {
     SecureConnection secureConnection = new SecureConnection();
 
     String url = "http://5.75.251.56:7070/recover-password";
+    //String url="http://5.75.251.56:8443/recover-password";
+    //String url="http://5.75.251.56:7070/recover-password";
 
     String url2 = "http://5.75.251.56:7070/reset-password";
+    //String url2="http://5.75.251.56:8443/reset-password";
+    //String url2="http://5.75.251.56:7070/reset-password";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -168,8 +172,8 @@ public class RecoverPassword extends Activity {
                 sender.setmRecipient(email);
                 sender.setmSubject("Contraseña olvidada");
                 sender.setmMessage("<html><body style=\\\"text-align: center;\\\">\n" + "        " +
-                        "<h1>Contraseña</h1>\n" + "        " +
-                        "<p>Su token de recuperacion es: " + textWithoutQuotes + "</p>\n" + "      " +
+                        "<h1>Restablecer contraseña</h1>\n" + "        " +
+                        "<p>Su code para restablecer su contraseña es: " + textWithoutQuotes + "</p>\n" + "      " +
                         "  </body></html>");
 
                 sender.execute();

@@ -149,7 +149,7 @@ public class ProfileActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
             // Operaciones de la interfaz de usuario aquí
-            if (result.equals("Change successful")) {
+            if (result.equals("Username change successful")) {
                 Toast.makeText(ProfileActivity.this, "Change username " + newUsername, Toast.LENGTH_SHORT).show();
                 //go back to activity settings
                 startActivity(new Intent(ProfileActivity.this, SettingsActivity.class));

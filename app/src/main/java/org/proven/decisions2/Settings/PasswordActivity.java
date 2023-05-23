@@ -157,7 +157,7 @@ public class PasswordActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-                if (result.equals("Change successful")) {
+                if (result.equals("Password change successful")) {
                     Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
                     // go to next activity SettingsActivity
                     startActivity(new Intent(PasswordActivity.this, SettingsActivity.class));

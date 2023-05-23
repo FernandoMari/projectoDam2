@@ -132,7 +132,7 @@ public class Register extends AppCompatActivity {
     private void http() {
         new HttpTask().execute();
         //Call the MailSender class to be able to send an email
-        MailSender sender = new MailSender(email, "Email or password change confirmation", "Your email or password has been successfully changed."
+        MailSender sender = new MailSender(email, "Successful registration", "Welcome to the app Decision"
 
 
         );

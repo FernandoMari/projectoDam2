@@ -70,8 +70,7 @@ public class MainActivity extends AppCompat {
     SecureConnection secureConnection = new SecureConnection();
 
     String url3 = "http://143.47.249.102:7070/getPassword";
-    //String url3="http://5.75.251.56:8443/getPassword";
-    //String url3="http://5.75.251.56:7070/getPassword";
+
 
     String email = "";
 
