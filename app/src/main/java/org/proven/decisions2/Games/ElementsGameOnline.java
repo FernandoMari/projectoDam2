@@ -111,13 +111,13 @@ public class ElementsGameOnline extends Activity {
                         tvResult.setText(R.string.one_player_dont_select);
                     }
 
-                    if (afk==1){
+                    if (afk==3){
                         countDownTimer.cancel();
-                        afkDesconnection();
+                        afkDisconnection();
 
                     }
 
-                    if (afk<1){
+                    if (afk<3){
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -131,21 +131,20 @@ public class ElementsGameOnline extends Activity {
         };
     }
 
-    private void afkDesconnection(){
-        countDownTimer.cancel();
-        tvResult.setText(R.string.afk_disconnection);
-        value = 3;
-
+    private void afkDisconnection(){
+        countDownTimer.cancel(); // Cancels the countdown timer
+        tvResult.setText(R.string.afk_disconnection); // Sets the text of a TextView to the string resource "afk_disconnection"
+        value = 3; // Sets the value variable to 3
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent afkresult = new Intent(ElementsGameOnline.this, ResultGame.class);
-                afkresult.putExtra("result", value);
-                startActivity(afkresult);
-                finish();
+                Intent afkResult = new Intent(ElementsGameOnline.this, ResultGame.class); // Creates a new Intent to navigate to the ResultGame activity
+                afkResult.putExtra("result", value); // Adds the value variable as an extra to the intent with the key "result"
+                startActivity(afkResult); // Starts the ResultGame activity with the created intent
+                finish(); // Finishes the current activity
             }
-        }, 2000); // 2000 milliseconds = 2 seconds delay
-        deleteRoom(roomName);
+        }, 2000); // Delays the execution of the code inside the runnable by 2000 milliseconds (2 seconds)
+        deleteRoom(roomName); // Calls a method to delete a room with the specified roomName
     }
 
 
@@ -160,24 +159,20 @@ public class ElementsGameOnline extends Activity {
         database = FirebaseDatabase.getInstance();
         setOnClickListener();
         instanciateListener();
-
-        onExit = database.getReference("rooms/"+roomName+"/status");
-        setOnExit();
     }
 
     public void earlyerInit(){
+        SharedPreferences preferences = getSharedPreferences("PREFS",0); // Retrieves the SharedPreferences object with the name "PREFS"
+        playerName = preferences.getString("playerName",""); // Retrieves the value of the "playerName" key from the SharedPreferences, with a default value of ""
 
-        SharedPreferences preferences = getSharedPreferences("PREFS",0);
-        playerName = preferences.getString("playerName","");
-
-        Bundle extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras(); // Retrieves the extras from the intent that started the activity
         if(extras != null){
-            roomName = extras.getString("roomName");
+            roomName = extras.getString("roomName"); // Retrieves the value associated with the key "roomName" from the extras
 
-            if(roomName.equals(playerName)){
-                role="host";
+            if(roomName.equals(playerName)){ // Checks if the roomName is equal to the playerName
+                role="host"; // Sets the role variable to "host"
             }else{
-                role="guest";
+                role="guest"; // Sets the role variable to "guest"
             }
         }
     }
@@ -229,17 +224,17 @@ public class ElementsGameOnline extends Activity {
     }
 
     private void sendDepending(int i){
-        if(role.equals("guest")){
-            messageRef = database.getReference("rooms/"+roomName+"/message");
-            message = role+":"+i;
-            addRoomEventListener();
-            messageRef.setValue(message);
+        if(role.equals("guest")){ // Checks if the role is "guest"
+            messageRef = database.getReference("rooms/"+roomName+"/message"); // Gets the database reference to the "message" node in the specific room
+            message = role+":"+i; // Constructs the message string with the role and the value of i
+            addRoomEventListener(); // Adds a listener to the database reference for handling events
+            messageRef.setValue(message); // Sets the value of the database reference to the constructed message
 
-        }else if(role.equals("host")){
-            hostEle = database.getReference("rooms/"+roomName+"/hostele");
-            message = role+":"+i;
-            getHostEventListener();
-            hostEle.setValue(message);
+        }else if(role.equals("host")){ // Checks if the role is "host"
+            hostEle = database.getReference("rooms/"+roomName+"/hostele"); // Gets the database reference to the "hostele" node in the specific room
+            message = role+":"+i; // Constructs the message string with the role and the value of i
+            getHostEventListener(); // Retrieves a listener for the host event handling
+            hostEle.setValue(message); // Sets the value of the database reference to the constructed message
         }
     }
 
@@ -247,18 +242,16 @@ public class ElementsGameOnline extends Activity {
         messageRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(role.equals("guest")){
-                    if (snapshot.getValue(String.class) != null){
-                        hostEle = database.getReference("rooms/"+roomName+"/hostele");
-                        getHostEventListener();
+                if(role.equals("guest")){ // Checks if the role is "guest"
+                    if (snapshot.getValue(String.class) != null){ // Checks if the snapshot has a non-null value
+                        hostEle = database.getReference("rooms/"+roomName+"/hostele"); // Gets the database reference to the "hostele" node in the specific room
+                        getHostEventListener(); // Retrieves a listener for the host event handling
                     }
-                }else if(role.equals("host")){
-                    // capar null
-                    if(snapshot.getValue(String.class) != null){
-                        String alter = snapshot.getValue(String.class).replace("guest:","");
-                        if(alter.matches("\\d+") && election != 0){
-                            //aqui tengo que quiza crear una variable
-                            rival = Integer.parseInt(alter);
+                }else if(role.equals("host")){ // Checks if the role is "host"
+                    if(snapshot.getValue(String.class) != null){ // Checks if the snapshot has a non-null value
+                        String alter = snapshot.getValue(String.class).replace("guest:",""); // Removes the "guest:" prefix from the snapshot value
+                        if(alter.matches("\\d+") && election != 0){ // Checks if the altered value is a number and election is not 0
+                            rival = Integer.parseInt(alter); // Parses the altered value to an integer and assigns it to the rival variable
                         }
                     }
                 }
@@ -266,7 +259,7 @@ public class ElementsGameOnline extends Activity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                System.out.println("Error creating room: "+error);
             }
         });
     }
@@ -275,23 +268,22 @@ public class ElementsGameOnline extends Activity {
         hostEle.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(role.equals("guest")){
-                    if(snapshot.getValue(String.class) != null){
-                        String alter = snapshot.getValue(String.class).replace("host:","");
-                        if(alter.matches("\\d+") && election != 0){
-                            //aqui tengo que quiza crear una variable
-                            rival = Integer.parseInt(alter);
+                if(role.equals("guest")){ // Checks if the role is "guest"
+                    if(snapshot.getValue(String.class) != null){ // Checks if the snapshot has a non-null value
+                        String alter = snapshot.getValue(String.class).replace("host:",""); // Removes the "host:" prefix from the snapshot value
+                        if(alter.matches("\\d+") && election != 0){ // Checks if the altered value is a number and election is not 0
+                            rival = Integer.parseInt(alter); // Parses the altered value to an integer and assigns it to the rival variable
                         }
                     }
-                }else if(role.equals("host")){
-                    messageRef = database.getReference("rooms/"+roomName+"/message");
-                    addRoomEventListener();
+                }else if(role.equals("host")){ // Checks if the role is "host"
+                    messageRef = database.getReference("rooms/"+roomName+"/message"); // Gets the database reference to the "message" node in the specific room
+                    addRoomEventListener(); // Adds a listener to the messageRef for handling events
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                System.out.println("Error getting host: "+error); // Prints an error message if there is a database error
             }
         });
     }
@@ -321,7 +313,7 @@ public class ElementsGameOnline extends Activity {
                 break;
         }
 
-// Sets the drawable ID for the user's chosen element based on the argument passed to the method
+        // Sets the drawable ID for the user's chosen element based on the argument passed to the method
         int playerDrawableId = 0;
         switch (electio) {
             case 1:
@@ -371,9 +363,16 @@ public class ElementsGameOnline extends Activity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(ElementsGameOnline.this, ResultGame.class);
+                    Intent intent = getIntent();
+                    String textoDecision1 = intent.getStringExtra("decision1");
+                    String textoDecision2 = intent.getStringExtra("decision2");
+                    System.out.println("ElementsGameOnline "+textoDecision1);
+                    System.out.println("ElementsGameOnline "+textoDecision2);
+                    Intent intent2 = new Intent(ElementsGameOnline.this, ResultGame.class);
+                    intent2.putExtra("decision1", textoDecision1);
+                    intent2.putExtra("decision2", textoDecision2);
                     intent.putExtra("result", value);
-                    startActivity(intent);
+                    startActivity(intent2);
                     finish();
                     deleteRoom(roomName);
                 }
@@ -385,7 +384,6 @@ public class ElementsGameOnline extends Activity {
                 @Override
                 public void run() {
                     restartGame(); //call the method for the restart
-                    return;
                 }
             }, 2000); // 2000 milliseconds = 2 seconds delay
         }
@@ -410,80 +408,56 @@ public class ElementsGameOnline extends Activity {
         machine.setForeground(ContextCompat.getDrawable(ElementsGameOnline.this, R.drawable.question));
     }
 
-    // This method overrides the default behavior of the back button press in the activity
-    @Override
-    public void onBackPressed() {
-        if (charge){
-            // Cancels the countdown timer associated with the activity
-            countDownTimer.cancel();
-            // Calls the parent class method to handle the back button press
-            deleteRoom(roomName);
-            super.onBackPressed();
-            finish();
+    private void disableBt(int id){
+        btWater.setEnabled(false); // Disables the btWater button
+        btFire.setEnabled(false); // Disables the btFire button
+        btIce.setEnabled(false); // Disables the btIce button
+
+        int color = getResources().getColor(R.color.light_blue); // Retrieves the color defined in the resources with the name "light_blue"
+
+        if(id == 1){ // Checks if the id is 1
+            btFire.setCardBackgroundColor(color); // Sets the background color of btFire button to the defined color
+        }else if(id == 2){ // Checks if the id is 2
+            btWater.setCardBackgroundColor(color); // Sets the background color of btWater button to the defined color
+        }else if(id == 3){ // Checks if the id is 3
+            btIce.setCardBackgroundColor(color); // Sets the background color of btIce button to the defined color
         }
     }
 
-    private void disableBt(int id){
-        btWater.setEnabled(false);
-        btFire.setEnabled(false);
-        btIce.setEnabled(false);
-
-        int color = getResources().getColor(R.color.light_blue);
-
-        if(id == 1){
-            btFire.setCardBackgroundColor(color);
-        }else if(id == 2){
-            btWater.setCardBackgroundColor(color);
-        }else if(id == 3){
-            btIce.setCardBackgroundColor(color);
+    // This method overrides the default behavior of the back button press in the activity
+    @Override
+    public void onBackPressed() {
+        if (charge) {
+            super.onBackPressed();
+            // Cancels the countdown timer associated with the activity
+            countDownTimer.cancel();
+            Intent intent = new Intent(ElementsGameOnline.this, ResultGame.class);
+            intent.putExtra("result", value);
+            startActivity(intent);
+            finish();
+            deleteRoom(roomName);
         }
     }
     @Override
     protected void onDestroy() {
-        countDownTimer.cancel();
         super.onDestroy();
-        onExit = database.getReference("rooms/"+roomName+"/status");
-        message = "exited";
-        onExit.setValue(message);
-        deleteRoom(roomName);
-    }
-    private void setOnExit(){
-        value=5;
-        onExit.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                System.out.println(snapshot.getValue(String.class));
-                if(snapshot.getValue(String.class) != null){
-                    System.out.println(snapshot.getValue(String.class));
-                    if(snapshot.getValue(String.class).equals("exited")){
-                        System.out.println("Open Result Game: Lost Connection");
-                        Intent intent = new Intent(ElementsGameOnline.this, ResultGame.class);
-                        intent.putExtra("result", value);
-                        startActivity(intent);
-                        finish();
-                        deleteRoom(roomName);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                System.out.println("Cositas");
-            }
-        });
-    }
-
-    private void forceGuestHostEmpty(){
-
-        hostEle = database.getReference("rooms/"+roomName+"/hostele");
-        message = "host:"+0;
-        election=0;
-        rival = 0;
-        hostEle.setValue(message);
-
+        if (countDownTimer != null) {
+            countDownTimer.cancel(); // Cancels the countDownTimer if it is not null
+        }
+        deleteRoom(roomName); // Calls the deleteRoom method passing the roomName to delete the room from the database
     }
 
     private void deleteRoom(String roomName) {
-        database.getReference("rooms/" + roomName).removeValue();
+        if (database != null) { // Checks if the database reference is not null
+            database.getReference("rooms/" + roomName).removeValue(); // Removes the specified room from the database
+        }
+    }
+
+    private void forceGuestHostEmpty(){
+        hostEle = database.getReference("rooms/"+roomName+"/hostele"); // Gets the database reference to the "hostele" node in the specific room
+        message = "host:"+0; // Sets the message to "host:0"
+        election=0; // Sets the election variable to 0
+        rival = 0; // Sets the rival variable to 0
+        hostEle.setValue(message); // Sets the value of the hostEle reference to the message
     }
 }

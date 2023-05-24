@@ -8,6 +8,8 @@
     android:orientation="vertical"
     app:layoutDescription="@xml/penaltis_animation_layout_scene">
 
+
+
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/ball"
         android:layout_width="match_parent"
@@ -29,6 +31,8 @@
         app:layout_constraintStart_toStartOf="parent">
 
     </ImageView>
+
+
 
     <TextView
         android:id="@+id/title"
@@ -56,6 +60,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
        ></View>
+
 
     <ImageView
         android:id="@id/logoDecisions"

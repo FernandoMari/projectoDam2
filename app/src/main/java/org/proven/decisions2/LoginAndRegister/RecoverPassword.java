@@ -1,7 +1,12 @@
 package org.proven.decisions2.LoginAndRegister;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -51,7 +56,7 @@ public class RecoverPassword extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recover_password_layout);
-
+        /* Initialize the elements */
         initElements();
 
         btLogin.setOnClickListener(new View.OnClickListener() {
@@ -64,25 +69,27 @@ public class RecoverPassword extends Activity {
         btSendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                layoutIntroduceCode.setVisibility(View.VISIBLE);
+                if (!isNetworkAvailable()){
+                    showNoInternetDialog();
+                    return;
+                }
                 initRecoverPass();
-                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) layoutGeneral.getLayoutParams();
-                layoutParams.setMargins(0, 0, 0, 0);
-                layoutGeneral.setLayoutParams(layoutParams);
 
-                layoutGeneral.setGravity(Gravity.CENTER);
             }
         });
 
         btAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!isNetworkAvailable()){
+                    showNoInternetDialog();
+                    return;
+                }
                 recoveryPasswordWithToken();
-
             }
         });
     }
-
+    /* Initialize the elements */
     private void initElements() {
         btSendEmail = findViewById(R.id.btSendEmail);
         btLogin = findViewById(R.id.btLogin);
@@ -98,13 +105,19 @@ public class RecoverPassword extends Activity {
 
     private void initRecoverPass() {
         email = inputemail.getText().toString();
-        // Realizar la comprobación del correo electrónico
+        // Perform email check
         if (email.isEmpty() || !email.matches(emailPattern)) {
-            // El campo de correo electrónico está vacío o no tiene el formato correcto
+            // The email field is empty or not in the correct format
             inputemail.setError(getString(R.string.format_email));
-            return; // Salir de la función sin continuar con las comprobaciones
+            return;
         }
-        // Llamar al método getPassword() solo después de la comprobación exitosa del correo electrónico
+        //Set visible layout to change password
+        layoutIntroduceCode.setVisibility(View.VISIBLE);
+        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) layoutGeneral.getLayoutParams();
+        layoutParams.setMargins(0, 0, 0, 0);
+        layoutGeneral.setLayoutParams(layoutParams);
+        layoutGeneral.setGravity(Gravity.CENTER);
+        // Call getPassword() method only after successful email check
         new getPassword().execute();
 
     }
@@ -113,26 +126,24 @@ public class RecoverPassword extends Activity {
         recoveryToken = inputRecovery.getText().toString();
         newPassword = inputNewPassword.getText().toString();
         confirmPassword = inputConfirmpassword.getText().toString();
-        // Comprobar si el token de recuperación es válido
+        // Check if the recovery token is valid
         if (recoveryToken.isEmpty()) {
             // El token de recuperación no es válido
-            inputRecovery.setError("Invalid recovery token");
-            return; // Salir de la función sin continuar con las comprobaciones
+            inputRecovery.setError(getString(R.string.invalid_code));
+            return;
         }
 
-        // Comprobar el resto de los campos y realizar las comprobaciones adicionales aquí
         if (newPassword.isEmpty() || newPassword.length() < 4) {
-            // El campo de nueva contraseña está vacío o no cumple los requisitos
+            // The new password field is empty or does not meet the requirements
             inputNewPassword.setError(getString(R.string.password_correct));
-            return; // Salir de la función sin continuar con las comprobaciones
+            return;
         }
-
         if (!newPassword.equals(confirmPassword)) {
-            // La nueva contraseña y la confirmación de contraseña no coinciden
+            // The new password and the confirmation password do not match
             inputConfirmpassword.setError(getString(R.string.equal_password));
-            return; // Salir de la función sin continuar con las comprobaciones
+            return;
         }
-        // Todas las comprobaciones son exitosas, llamar al método recoveryPassword()
+        // All checks are successful, call the recoveryPassword() method
         new recoveryPassword().execute();
     }
 
@@ -163,29 +174,34 @@ public class RecoverPassword extends Activity {
 
         @Override
         protected void onPostExecute(String responseData) {
-            String textWithoutQuotes = responseData.replace("\"", "");
+            if (responseData != null){
+                String textWithoutQuotes = responseData.replace("\"", "");
 
-            if (responseData.equals("Invalid email")){
-                inputemail.setError("email invalid");
-            }
-            else if (textWithoutQuotes == "" || textWithoutQuotes.isEmpty()) {
-                // No se recibió ningún código de recuperación válido
-                // Aquí puedes manejar la lógica para mostrar un mensaje de error o realizar otras acciones si es necesario
-            } else {
-                // El correo electrónico es válido y se recibió un código de recuperación
-                MailSender sender = new MailSender();
-                sender.setmRecipient(email);
-                sender.setmSubject("Contraseña olvidada");
-                sender.setmMessage("<html><body style=\\\"text-align: center;\\\">\n" + "        " +
-                        "<h1>Restablecer contraseña</h1>\n" + "        " +
-                        "<p>Su código para restablecer su contraseña es: " + textWithoutQuotes + "</p>\n" + "      " +
-                        "  </body></html>");
+                if (responseData.equals("Invalid email")){
+                    inputemail.setError(getString(R.string.format_email));
+                }
+                else if (textWithoutQuotes == "" || textWithoutQuotes.isEmpty()) {
+                    // No valid recovery code received
+                    // Here you can handle the logic to display an error message or perform other actions if necessary
+                } else {
+                    // The email is valid and a recovery code was received
+                    MailSender sender = new MailSender();
+                    sender.setmRecipient(email);
+                    sender.setmSubject(getString(R.string.recover_password));
+                    sender.setmMessage("<html><body style=\\\"text-align: center;\\\">\n" + "        " +
+                            "<h1>"+getString(R.string.restore_password)+"</h1>\n" + "        " +
+                            "<p>"+ getString(R.string.your_code_is) + " " + textWithoutQuotes + "</p>\n" + "      " +
+                            "  </body></html>");
 
-                sender.execute();
+                    sender.execute();
+                }
+            }else{
+                showServerConnectDialog();
             }
+
         }
     }
-
+    //Method
     private class recoveryPassword extends AsyncTask<Void, Void, String> {
 
         @Override
@@ -205,15 +221,15 @@ public class RecoverPassword extends Activity {
             try {
                 Response response = client.newCall(request).execute();
                 if (response.isSuccessful()) {
-                    // La solicitud fue exitosa, puedes obtener el cuerpo de la respuesta
+                    // The request was successful, you can get the response body
                     return response.body().string();
                 } else {
-                    // La solicitud no fue exitosa, manejar el error apropiadamente
+                    // The request was not successful, handle the error appropriately
                     return null;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                // Manejar la excepción de conexión o lectura/escritura de datos
+                // Handle connection or data read/write exception
                 return null;
             }
         }
@@ -223,17 +239,94 @@ public class RecoverPassword extends Activity {
             super.onPostExecute(result);
 
             if (result != null) {
-                // La solicitud fue exitosa, puedes hacer algo con la respuesta
-                Toast.makeText(RecoverPassword.this, "Password updated successfully", Toast.LENGTH_SHORT).show();
+                // The request was successful, you can do something with the response
+                Toast.makeText(RecoverPassword.this, getString(R.string.password_change), Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(RecoverPassword.this, MainActivity.class));
-                System.out.println("Respuesta del servidor: " + result);
             } else {
-                // La solicitud no fue exitosa, manejar el error apropiadamente
-                Toast.makeText(RecoverPassword.this, "Invalid recovery token", Toast.LENGTH_SHORT).show();
+                showServerConnectDialog();
             }
         }
     }
 
+    //Return if is network available
+    private boolean isNetworkAvailable() {
+        // Get the ConnectivityManager system service
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        // Get the active network info
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        // Check if network info is not null and network is connected
+        return networkInfo != null && networkInfo.isConnected();
+    }
 
+    //Show a dialog for internet connection error
+    private void showNoInternetDialog() {
+        // Create an AlertDialog builder with the MainActivity context
+        AlertDialog.Builder builder = new AlertDialog.Builder(RecoverPassword.this);
+        // Set the title of the dialog
+        builder.setTitle(R.string.no_internet_connection);
+        // Set the message of the dialog
+        builder.setMessage(R.string.check_your_connection);
+
+        // Set the positive button for retrying
+        builder.setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Check if network is available
+                if (isNetworkAvailable()) {
+                    dialogInterface.dismiss();
+                } else {
+                    showNoInternetDialog();
+                }
+            }
+        });
+
+        // Set the negative button for canceling
+        builder.setNegativeButton(R.string.btCancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        // Create and show the dialog
+        AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false); // Prevent the dialog from being closed by touching outside of it
+        dialog.show();
+    }
+
+    //Show a dialog for server connection error
+    private void showServerConnectDialog() {
+        // Create an AlertDialog builder with the MainActivity context
+        AlertDialog.Builder builder = new AlertDialog.Builder(RecoverPassword.this);
+        // Set the title of the dialog
+        builder.setTitle(R.string.error_connect_server);
+        // Set the message of the dialog
+        builder.setMessage(R.string.problem_with_server);
+
+        // Set the positive button for retrying
+        builder.setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Check if network is available
+                if (isNetworkAvailable()) {
+                    dialogInterface.dismiss();
+                }
+            }
+        });
+
+        // Set the negative button for closing the app
+        builder.setNegativeButton(R.string.close_app, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finishAndRemoveTask();
+            }
+        });
+
+        // Create and show the dialog
+        AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false); // Prevent the dialog from being closed by touching outside of it
+        dialog.show();
+    }
 }
-

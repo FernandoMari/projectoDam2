@@ -5,20 +5,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-                <TextView
-                    android:id="@+id/tUsername"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nombre"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:layout_gravity="center"
-                    android:paddingStart="12dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="20dp"
-                    android:paddingBottom="10dp"
-                    android:drawableEnd="@drawable/custom_play_icon"
-                    />
+        <TextView
+            android:id="@+id/tUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_gravity="center"
+            android:paddingStart="12dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
+            android:drawableEnd="@drawable/custom_play_icon"
+            />
 
 </LinearLayout>

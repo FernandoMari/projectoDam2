@@ -344,4 +344,20 @@
     <string name="recover_password">पासवर्ड पुनर्प्राप्त करें</string>
     <string name="temporal_code">अस्थायी कोड</string>
     <string name="return_to">वापस जाएं</string>
+
+    <string name="retry">पुनः प्रयास करें</string>
+    <string name="check_your_connection">अपना कनेक्शन जांचें और पुनः प्रयास करें।</string>
+    <string name="no_internet_connection">इंटरनेट कनेक्शन नहीं है</string>
+    <string name="close_app">ऐप बंद करें</string>
+    <string name="error_connect_server">सर्वर से कनेक्ट करने में त्रुटि</string>
+    <string name="problem_with_server">सर्वर में समस्या हुई है, बाद में लॉगिन करने का प्रयास करें।</string>
+    <string name="please_wait_register">रजिस्टर होने के दौरान कृपया प्रतीक्षा करें...</string>
+    <string name="invalid_code">अमान्य रिकवरी कोड</string>
+    <string name="successful_registration">सफल रजिस्ट्रेशन</string>
+    <string name="welcome_decisions">ऐप डिसीजन्स में आपका स्वागत है</string>
+    <string name="password_change">पासवर्ड सफलतापूर्वक अपडेट किया गया</string>
+    <string name="restore_password">पासवर्ड पुनर्स्थापित करें</string>
+    <string name="your_code_is">आपका पासवर्ड रीसेट करने के लिए आपका कोड है:</string>
+    <string name="cc_license">क्रिएटिव कामन्स लाइसेंस</string>
+    <string name="cc_licence_text">यह कार्य Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) लाइसेंस के तहत लाइसेंस प्राप्त है।\n\nआप इसके लिए स्वतंत्र हैं:\n\n· साझा करें: सामग्री को किसी भी माध्यम या प्रारूप में कॉपी और पुनर्वितरित करें।\n · अनुकूलन: रीमिक्स, रूपांतरण, और सामग्री पर निर्माण।\n\nनिम्नलिखित शर्तों के तहत:\n\n· श्रेय: आपको उचित क्रेडिट देना होगा, लाइसेंस के लिए एक लिंक प्रदान करना होगा, और इंगित करना होगा कि परिवर्तन किए गए थे या नहीं। आप ऐसा किसी भी उचित तरीके से कर सकते हैं, लेकिन ऐसा किसी भी तरीके से नहीं जिससे पता चलता है कि लाइसेंसर आपको या आपके उपयोग का समर्थन करता है।\n· गैर-वाणिज्यिक: आप व्यावसायिक उद्देश्यों के लिए सामग्री का उपयोग नहीं कर सकते हैं। कानूनी शर्तें या तकनीकी उपाय जो कानूनी रूप से दूसरों को ऐसा कुछ भी करने से रोकते हैं जिसकी लाइसेंस अनुमति देता है।</string>
 </resources>

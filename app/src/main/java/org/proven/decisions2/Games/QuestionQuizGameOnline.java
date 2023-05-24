@@ -612,9 +612,13 @@ public class QuestionQuizGameOnline extends AppCompat {
                 if(snapshot.getValue(String.class) != null){
                     if(snapshot.getValue(String.class).replace("winner:","").equals("guest")){
                         if(role.equals("guest")){
-                            Intent intent = new Intent(QuestionQuizGameOnline.this, ResultGame.class);
+                            Intent intent = getIntent();
+                            String textoDecision1 = intent.getStringExtra("decision1");
+                            System.out.println("QuestionQuizGameOnline "+textoDecision1);
+                            Intent intent2 = new Intent(QuestionQuizGameOnline.this, ResultGame.class);
+                            intent2.putExtra("decision1", textoDecision1);
                             intent.putExtra("result", 0);
-                            startActivity(intent);
+                            startActivity(intent2);
                             finish();
                         }else{
                             Intent intent = new Intent(QuestionQuizGameOnline.this, ResultGame.class);
@@ -624,9 +628,13 @@ public class QuestionQuizGameOnline extends AppCompat {
                         }
                     } else if(snapshot.getValue(String.class).replace("winner:","").equals("host")){
                         if(role.equals("host")){
-                            Intent intent = new Intent(QuestionQuizGameOnline.this, ResultGame.class);
+                            Intent intent = getIntent();
+                            String textoDecision2 = intent.getStringExtra("decision2");
+                            System.out.println("QuestionQuizGameOnline "+textoDecision2);
+                            Intent intent2 = new Intent(QuestionQuizGameOnline.this, ResultGame.class);
+                            intent2.putExtra("decision2", textoDecision2);
                             intent.putExtra("result", 0);
-                            startActivity(intent);
+                            startActivity(intent2);
                             finish();
                         }else{
                             Intent intent = new Intent(QuestionQuizGameOnline.this, ResultGame.class);

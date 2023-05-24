@@ -346,4 +346,21 @@
     <string name="recover_password">找回密码</string>
     <string name="temporal_code">临时代码</string>
     <string name="return_to">返回</string>
+
+    <string name="retry">重试</string>
+    <string name="check_your_connection">请检查您的连接并重试。</string>
+    <string name="no_internet_connection">没有网络连接</string>
+    <string name="close_app">关闭应用</string>
+    <string name="error_connect_server">连接服务器时出错</string>
+    <string name="problem_with_server">服务器出现问题，请稍后尝试登录。</string>
+    <string name="please_wait_register">注册中，请稍候...</string>
+    <string name="invalid_code">无效的恢复代码</string>
+    <string name="successful_registration">注册成功</string>
+    <string name="welcome_decisions">欢迎使用 Decisions 应用</string>
+    <string name="password_change">密码已成功更新</string>
+
+    <string name="restore_password">恢复密码</string>
+    <string name="your_code_is">您重置密码的验证码是：</string>
+    <string name="cc_license">知识共享许可</string>
+    <string name="cc_licence_text">本作品根据 Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) License 获得许可。\n\n您可以自由地：\n\n· 分享：以任何媒体或格式复制和重新分发材料。\n · 改编：重新混合、转换和构建材料。\n\n根据以下条款：\n\n· 署名：您必须给予适当的信任，提供许可链接，并指明是否进行了更改。 您可以以任何合理的方式这样做，但不得以任何方式暗示许可人认可您或您的使用。\n· 非商业：您不得将材料用于商业目的。\n· 无附加限制：您不得申请 合法限制他人做许可允许的任何事情的法律条款或技术措施。\n\n有关此许可的更多信息，请访问 Creative Commons 网站 https://creativecommons.org/licenses/by-nc/4.0/。</string>
 </resources>

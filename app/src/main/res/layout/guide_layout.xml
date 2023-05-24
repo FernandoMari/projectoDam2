@@ -6,6 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/light_blue">
 
+
+
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -30,6 +32,8 @@
             >
         </TextView>
     </RelativeLayout>
+
+
 
     <RelativeLayout
         android:id="@+id/footer"
@@ -85,6 +89,7 @@
         </LinearLayout>
 
     </RelativeLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -200,6 +205,8 @@
 
             </ScrollView>
 
+
+
             <ScrollView
                 android:id="@+id/scrollviewPenaltis"
                 android:layout_width="match_parent"
@@ -277,6 +284,8 @@
                 </androidx.cardview.widget.CardView>
 
             </ScrollView>
+
+
 
             <ScrollView
                 android:id="@+id/scrollviewQuiz"

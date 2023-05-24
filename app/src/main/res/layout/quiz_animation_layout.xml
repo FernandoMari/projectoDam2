@@ -7,6 +7,8 @@
     app:layoutDescription="@xml/quiz_animation_layout_scene"
     android:background="@color/white">
 
+
+
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/question_1"
         android:layout_width="match_parent"
@@ -22,6 +24,7 @@
         android:src="@drawable/brain_gif"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints"></pl.droidsonroids.gif.GifImageView>
+
 
     <TextView
         android:id="@+id/title"
@@ -51,6 +54,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></pl.droidsonroids.gif.GifImageView>
 
+
+
     <View
         android:id="@+id/background"
         android:layout_width="match_parent"
@@ -61,6 +66,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></View>
+
 
     <ImageView
         android:id="@id/logoDecisions"

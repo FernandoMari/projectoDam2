@@ -21,9 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.proven.decisions2.R;
-import org.proven.decisions2.SocialInterface;
-
-import java.util.Random;
 
 public class PenaltiesGameOnline extends Activity {
 
@@ -36,7 +33,6 @@ public class PenaltiesGameOnline extends Activity {
 
     // Declaration of TextViews for displaying score, timer and game result
     TextView tvTimer, tvGolsPlayer, tvGolsMachine, tvResult;
-    TextView youUsr, hesUrs;
 
     // Boolean variables to keep track of player and goalie turn, game finish and win/loss state
     boolean turnPlayer, turnGoalie, finish = false, win = false, lose = false, charge = false;
@@ -48,12 +44,10 @@ public class PenaltiesGameOnline extends Activity {
     String roomName;
     String role;
     String message;
-    String secondUsr;
 
     FirebaseDatabase database;
     DatabaseReference guestEle;
     DatabaseReference hostEle;
-    DatabaseReference onExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +61,7 @@ public class PenaltiesGameOnline extends Activity {
 
                 // Set content view to the main layout
                 setContentView(R.layout.penaltis_layout);
+
                 charge = true;
 
                 // Initialize UI elements
@@ -76,11 +71,12 @@ public class PenaltiesGameOnline extends Activity {
                 tvGolsMachine.setText(""+golMachine);
                 tvGolsPlayer.setText(""+golPlayer);
 
-                // Initialize turn and timer
                 //initTurn();
                 earlyerInit();
-                System.out.println(roomName);
+
+                // Initialize timer
                 initCrono();
+                countDownTimer.start();
 
                 // Set up button listeners
                 btDown.setOnClickListener(new View.OnClickListener() {
@@ -142,8 +138,6 @@ public class PenaltiesGameOnline extends Activity {
         tvGolsPlayer = findViewById(R.id.gols1);
         tvGolsMachine = findViewById(R.id.gols2);
         tvResult = findViewById(R.id.result);
-        youUsr = findViewById(R.id.youUsr);
-        hesUrs = findViewById(R.id.hesUsr);
 
         database = FirebaseDatabase.getInstance();
 
@@ -162,15 +156,17 @@ public class PenaltiesGameOnline extends Activity {
         ball = findViewById(R.id.ball);
     }
 
+    // Retrieving player name from shared preferences
     public void earlyerInit(){
         SharedPreferences preferences = getSharedPreferences("PREFS",0);
         playerName = preferences.getString("playerName","");
 
+        // Getting extras from intent
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             roomName = extras.getString("roomName");
-            secondUsr = extras.getString("secondUsr");
 
+            // Checking if the room name matches the player name
             if(roomName.equals(playerName)){
                 role="host";
 
@@ -185,24 +181,17 @@ public class PenaltiesGameOnline extends Activity {
                 tvResult.setText(getString(R.string.you_are_goalkeeper));
             }
         }
-        if(role.equals("guest")){
-            youUsr.setText(playerName);
-            hesUrs.setText(roomName);
-        }else if(role.equals("host")){
-            youUsr.setText(playerName);
-            hesUrs.setText(secondUsr);
-        }
-
     }
 
     private void sendDepending(int i){
         if(role.equals("guest")){
+            // Sending message as guest
             guestEle = database.getReference("rooms/"+roomName+"/message");
             message = role+":"+i;
             addRoomEventListener();
             guestEle.setValue(message);
-
         }else if(role.equals("host")){
+            // Sending message as host
             hostEle = database.getReference("rooms/"+roomName+"/hostele");
             message = role+":"+i;
             getHostEventListener();
@@ -210,10 +199,8 @@ public class PenaltiesGameOnline extends Activity {
         }
     }
 
-
-
+    // Emptying guest and host elements and resetting election variables
     private void forceGuestHostEmpty(){
-
         hostEle = database.getReference("rooms/"+roomName+"/hostele");
         message = "host:"+0;
         electionPlayer=0;
@@ -223,24 +210,24 @@ public class PenaltiesGameOnline extends Activity {
         message = "guest:"+0;
         electionMachine=0;
         guestEle.setValue(message);
-
     }
 
+    // Adding a value event listener to the guest element
     private void addRoomEventListener(){
         guestEle.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(role.equals("guest")){
                     if (snapshot.getValue(String.class) != null){
+                        // If there is a value, get the host element and its event listener
                         hostEle = database.getReference("rooms/"+roomName+"/hostele");
                         getHostEventListener();
                     }
                 }else if(role.equals("host")){
-                    // capar null
                     if(snapshot.getValue(String.class) != null){
+                        // Parsing the value and updating the election machine variable
                         String alter = snapshot.getValue(String.class).replace("guest:","");
                         if(alter.matches("\\d+") && electionPlayer != 0){
-
                             electionMachine = Integer.parseInt(alter);
                         }
                     }
@@ -254,19 +241,21 @@ public class PenaltiesGameOnline extends Activity {
         });
     }
 
+    // Adding a value event listener to the host element
     private void getHostEventListener(){
         hostEle.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(role.equals("guest")){
                     if(snapshot.getValue(String.class) != null){
+                        // Parsing the value and updating the election machine variable
                         String alter = snapshot.getValue(String.class).replace("host:","");
                         if(alter.matches("\\d+") && electionPlayer != 0){
-                            //aqui tengo que quiza crear una variable
                             electionMachine = Integer.parseInt(alter);
                         }
                     }
                 }else if(role.equals("host")){
+                    // If there is a value, get the guest element and its event listener
                     guestEle = database.getReference("rooms/"+roomName+"/message");
                     addRoomEventListener();
                 }
@@ -296,26 +285,35 @@ public class PenaltiesGameOnline extends Activity {
             @Override
             // Method to be called when the countdown timer finishes
             public void onFinish() {
-                checkTirada();
-                afkDisconnection();
+
+                checkMove();
                 checkWinDelayed();
                 restartColor();
 
                 forceGuestHostEmpty();
-
                 // Reset the game state
-                if (afk<3){
-                    reset();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Reset the game state
+                        if (afk < 3) {
+                            reset();
+                        }
+                    }
+                }, 2000); // Delay of 2000 miliseconds (2 seconds)
+                if (afk == 0){
+                    changeTurn();
                 }
             }
-        }.start();
+        };
 
     }
 
 
 
-    // Method to check the outcome of the player's move
-    public void checkTirada(){
+    // Method to check the outcome of the player's move and set goals, errors, and images
+    public void checkMove(){
         // Disable all buttons
         btDown.setEnabled(false);
         btRight.setEnabled(false);
@@ -328,31 +326,26 @@ public class PenaltiesGameOnline extends Activity {
         // Check if it's the player's turn
         if(role.equals("host")){
             if (turnGoalie) {
-                // Set the robot ImageView to show the player's chosen element
-                setRobot();
-                // Set the ball ImageView to the player's position
-                setBall();
-                System.out.println(electionPlayer);
-                System.out.println(electionMachine);
+
                 // Check if the player's element is different from the machine player's element
                 if (electionPlayer != electionMachine && electionMachine != 0) {
                     // Hide the ball ImageView
                     ball.setVisibility(View.INVISIBLE);
                     // Increase the round counter
                     round2++;
+                    // Set the robot ImageView to show the player's chosen element
+                    setRobot();
+                    // Set the ball ImageView to the player's position
+                    setBall();
                     // Increase the machine player's score
                     golMachine++;
-                    System.out.println("Guest goals: " + golMachine);
                     // Set the text of the tvGolsMachine TextView to show the machine player's score
                     tvGolsMachine.setText(Integer.toString(golMachine));
                     // Set the gol ImageView to show the machine player's goal
                     setGol(round2);
-                    System.out.println("A");
-                    changeTurn();
+                    afk=0;
+
                 } else if (electionPlayer == 0 || electionMachine ==0){
-                    System.out.println("RESTART1");
-                    System.out.println(electionMachine);
-                    System.out.println(electionPlayer);
                     afk++;
                 }else{
                     // Hide the ball ImageView
@@ -365,38 +358,29 @@ public class PenaltiesGameOnline extends Activity {
                     setBall();
                     // Set the error ImageView to show the machine player's error
                     setError(round2);
-                    System.out.println("C");
-                    System.out.println(electionMachine);
-                    System.out.println(electionPlayer);
-                    changeTurn();
+                    afk=0;
                 }
             }else if (turnPlayer){
-                // Set the robot ImageView to show the player's chosen element
-                setRobot();
-                // Set the ball ImageView to the player's position
-                setBall();
-                System.out.println(electionPlayer);
-                System.out.println(electionMachine);
+
                 // Check if the player's element is different from the machine player's element
                 if (electionPlayer != electionMachine && electionMachine != 0) {
                     // Hide the ball ImageView
                     ball.setVisibility(View.INVISIBLE);
                     // Increase the round counter
                     round++;
-
+                    // Set the robot ImageView to show the player's chosen element
+                    setRobot();
+                    // Set the ball ImageView to the player's position
+                    setBall();
                     // Increase the machine player's score
                     golPlayer++;
-                    System.out.println("Host goals: " + golPlayer);
                     // Set the text of the tvGolsMachine TextView to show the machine player's score
                     tvGolsPlayer.setText(Integer.toString(golPlayer));
                     // Set the gol ImageView to show the machine player's goal
                     setGol(round);
-                    System.out.println("D");
-                    changeTurn();
+                    afk=0;
+
                 } else if (electionPlayer == 0 || electionMachine ==0){
-                    System.out.println("RESTART2");
-                    System.out.println(electionMachine);
-                    System.out.println(electionPlayer);
                     afk++;
                 }else{
                     // Hide the ball ImageView
@@ -409,39 +393,30 @@ public class PenaltiesGameOnline extends Activity {
                     setBall();
                     // Set the error ImageView to show the machine player's error
                     setError(round);
-                    System.out.println("F");
-                    changeTurn();
+                    afk=0;
                 }
             }
         }else if(role.equals("guest")){
             if (turnGoalie) {
-                // Set the robot ImageView to show the player's chosen element
-                setRobot();
-                // Set the ball ImageView to the player's position
-                setBall();
-                System.out.println(electionPlayer);
-                System.out.println(electionMachine);
                 // Check if the player's element is different from the machine player's element
-                if (electionPlayer != electionMachine && electionPlayer != 0) {
+                if (electionPlayer != electionMachine && electionMachine != 0) {
                     // Hide the ball ImageView
                     ball.setVisibility(View.INVISIBLE);
                     // Increase the round counter
                     round2++;
-
+                    // Set the robot ImageView to show the player's chosen element
+                    setRobot();
+                    // Set the ball ImageView to the player's position
+                    setBall();
 
                     // Increase the host player's score
                     golPlayer++;
-                    System.out.println("Host goals: " + golPlayer);
                     // Set the text of the tvGolsMachine TextView to show the machine player's score
                     tvGolsMachine.setText(Integer.toString(golPlayer));
                     // Set the gol ImageView to show the machine player's goal
                     setGol(round2);
-                    System.out.println("G");
-                    changeTurn();
+                    afk=0;
                 } else if (electionPlayer == 0 || electionMachine ==0){
-                    System.out.println("RESTART3");
-                    System.out.println(electionMachine);
-                    System.out.println(electionPlayer);
                     afk++;
                 }else{
                     // Hide the ball ImageView
@@ -453,38 +428,29 @@ public class PenaltiesGameOnline extends Activity {
                     // Set the ball ImageView to the player's position
                     setBall();
                     setError(round2);
-                    System.out.println("ELSE");
-                    System.out.println(electionPlayer);
-                    System.out.println(electionMachine);
-                    changeTurn();
+                    afk=0;
                 }
             }else if (turnPlayer){
-                // Set the robot ImageView to show the player's chosen element
-                setRobot();
-                // Set the ball ImageView to the player's position
-                setBall();
-                System.out.println(electionPlayer);
-                System.out.println(electionMachine);
+
                 // Check if the player's element is different from the machine player's element
-                if (electionPlayer != electionMachine && electionPlayer != 0) {
+                if (electionPlayer != electionMachine && electionMachine != 0) {
                     // Hide the ball ImageView
                     ball.setVisibility(View.INVISIBLE);
                     // Increase the round counter
                     round++;
-
+                    // Set the robot ImageView to show the player's chosen element
+                    setRobot();
+                    // Set the ball ImageView to the player's position
+                    setBall();
                     // Increase the machine player's score
                     golMachine++;
-                    System.out.println("Guest goals: " + golMachine);
                     // Set the text of the tvGolsMachine TextView to show the machine player's score
                     tvGolsPlayer.setText(Integer.toString(golMachine));
                     // Set the gol ImageView to show the machine player's goal
                     setGol(round);
-                    System.out.println("J");
-                    changeTurn();
+                    afk=0;
+
                 } else if (electionPlayer == 0 || electionMachine ==0){
-                    System.out.println("RESTART4");
-                    System.out.println(electionMachine);
-                    System.out.println(electionPlayer);
                     afk++;
                 }else{
                     // Hide the ball ImageView
@@ -497,19 +463,18 @@ public class PenaltiesGameOnline extends Activity {
                     setBall();
                     // Set the error ImageView to show the machine player's error
                     setError(round);
-                    System.out.println("L");
-                    changeTurn();
+                    afk=0;
                 }
             }
         }
     }
 
-    // This method uses a Handler to delay the execution of checkwin() by 1000 milliseconds
+    // This method uses a Handler to delay the execution of checkWin() by 1000 milliseconds
     public void checkWinDelayed(){
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                checkwin();
+                checkWin();
             }
         }, 2000); // delay in milliseconds
     }
@@ -650,9 +615,7 @@ public class PenaltiesGameOnline extends Activity {
 
 
     // This method checks if the player wins or loses the penalty shootout game
-    private void checkwin() {
-
-
+    private void checkWin() {
 
         if (role.equals("host")){
             // Check if the player wins or loses by 4 goals or more difference
@@ -807,6 +770,29 @@ public class PenaltiesGameOnline extends Activity {
             }
         }
 
+
+        // Check if AFK count is 3
+        if (afk == 3) {
+            countDownTimer.cancel();
+            finish = true;
+            tvResult.setText(R.string.afk_disconnection);
+            value = 3;
+
+            // Delay the execution by 2 seconds
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // Start ResultGame activity with the result value
+                    Intent intent = new Intent(PenaltiesGameOnline.this, ResultGame.class);
+                    intent.putExtra("result", value);
+                    startActivity(intent);
+                    finish();
+                }
+            }, 2000); // 2000 milliseconds = 2 seconds delay
+
+            deleteRoom(roomName);
+        }
+
         // Disable all buttons and stop the countdown timer if the game is finished
         if (finish){
             btDown.setEnabled(false);
@@ -824,9 +810,16 @@ public class PenaltiesGameOnline extends Activity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(PenaltiesGameOnline.this, ResultGame.class);
+                    Intent intent = getIntent();
+                    String textoDecision1 = intent.getStringExtra("decision1");
+                    String textoDecision2 = intent.getStringExtra("decision2");
+                    System.out.println("PenaltiesGameOnline "+textoDecision1);
+                    System.out.println("PenaltiesGameOnline "+textoDecision2);
+                    Intent intent2 = new Intent(PenaltiesGameOnline.this, ResultGame.class);
+                    intent2.putExtra("decision1", textoDecision1);
+                    intent2.putExtra("decision2", textoDecision2);
                     intent.putExtra("result", value);
-                    startActivity(intent);
+                    startActivity(intent2);
                     finish();
                 }
             }, 2000); // 2000 milliseconds = 2 seconds delay
@@ -843,30 +836,6 @@ public class PenaltiesGameOnline extends Activity {
             }, 2000); // 2000 milliseconds = 2 seconds delay
         }
     }
-
-    private void afkDisconnection(){
-        if (afk==3){
-            forceGuestHostEmpty();
-            golMachine=0;
-            golPlayer=0;
-            countDownTimer.cancel();
-            finish=true;
-            tvTimer.setVisibility(View.GONE);
-            tvResult.setText(R.string.afk_disconnection);
-            value = 3;
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(PenaltiesGameOnline.this, ResultGame.class);
-                    intent.putExtra("result", value);
-                    startActivity(intent);
-                    finish();
-                }
-            }, 2000);
-            deleteRoom(roomName);
-        }
-    }
-
 
     // This method is used to reset the game and start a new round.
     public void reset(){
@@ -956,17 +925,16 @@ public class PenaltiesGameOnline extends Activity {
     // This method overrides the default behavior of the back button press in the activity
     @Override
     public void onBackPressed() {
-        if (charge) {
-            super.onBackPressed();
-            value = 5;
-            // Cancels the countdown timer associated with the activity
-            countDownTimer.cancel();
-            Intent intent = new Intent(PenaltiesGameOnline.this, ResultGame.class);
-            intent.putExtra("result", value);
-            startActivity(intent);
-            finish();
-            deleteRoom(roomName);
-        }
+        super.onBackPressed();
+        value = 5;
+        // Cancels the countdown timer associated with the activity
+        countDownTimer.cancel();
+        Intent intent = new Intent(PenaltiesGameOnline.this, ResultGame.class);
+        intent.putExtra("result", value);
+        startActivity(intent);
+        finish();
+        deleteRoom(roomName);
+
     }
 
     @Override

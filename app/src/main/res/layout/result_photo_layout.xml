@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <ImageView
         android:id="@+id/bitmapResult"
         android:layout_width="match_parent"
@@ -11,6 +12,7 @@
         android:scaleType="centerCrop"
         android:src="@drawable/ejemplo2"
         ></ImageView>
+
 
     <RelativeLayout
         android:id="@+id/header"
@@ -36,6 +38,7 @@
         </TextView>
 
     </RelativeLayout>
+
 
     <RelativeLayout
         android:id="@+id/footer"
@@ -76,7 +79,5 @@
         </LinearLayout>
 
     </RelativeLayout>
-
-
 
 </RelativeLayout>

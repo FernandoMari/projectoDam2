@@ -9,6 +9,7 @@
     android:id="@+id/quizLayout"
     >
 
+
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -105,6 +106,8 @@
         </com.google.android.material.card.MaterialCardView>
 
     </RelativeLayout>
+
+
 
     <RelativeLayout
         android:id="@+id/questionLayout"
@@ -203,6 +206,8 @@
 
 
     </RelativeLayout>
+
+
 
     <ScrollView
         android:id="@+id/answerLayout"

@@ -343,4 +343,21 @@
     <string name="recover_password">Passwort wiederherstellen</string>
     <string name="temporal_code">Temporärer Code</string>
     <string name="return_to">Zurück zu</string>
+
+    <string name="retry">Wiederholen</string>
+    <string name="check_your_connection">Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.</string>
+    <string name="no_internet_connection">Es besteht keine Internetverbindung</string>
+    <string name="close_app">App schließen</string>
+    <string name="error_connect_server">Fehler bei der Verbindung mit dem Server</string>
+    <string name="problem_with_server">Es gab ein Problem mit dem Server. Versuchen Sie es später erneut.</string>
+    <string name="please_wait_register">Bitte warten Sie, während Sie sich registrieren...</string>
+    <string name="invalid_code">Ungültiger Wiederherstellungscode</string>
+    <string name="successful_registration">Erfolgreiche Registrierung</string>
+    <string name="welcome_decisions">Willkommen bei der App Decisions</string>
+    <string name="password_change">Passwort erfolgreich aktualisiert</string>
+
+    <string name="restore_password">Passwort wiederherstellen</string>
+    <string name="your_code_is">Ihr Code zum Zurücksetzen Ihres Passworts lautet:</string>
+    <string name="cc_license">Creative commons license</string>
+    <string name="cc_licence_text"></string>
 </resources>

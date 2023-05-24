@@ -85,18 +85,18 @@ public class PlayOfflineActivity extends Activity {
         decision2 = findViewById(R.id.etDecision2);
 
     }
-
+    //Method Validate editText
     private boolean validarEditText() {
-        String textoDecision1 = decision1.getText().toString();
-        String textoDecision2 = decision2.getText().toString();
+        String textDecision1 = decision1.getText().toString();
+        String textDecision2 = decision2.getText().toString();
 
-        if (textoDecision1.isEmpty()) {
-            decision1.setError("Este campo es requerido");
+        if (textDecision1.isEmpty()) {
+            decision1.setError("This field is required");
             return false;
         }
 
-        if (textoDecision2.isEmpty()) {
-            decision2.setError("Este campo es requerido");
+        if (textDecision2.isEmpty()) {
+            decision2.setError("This field is required");
             return false;
         }
 

@@ -99,7 +99,17 @@ public class EmailActivity extends Activity {
     }
 
 
-    /*Method to change email by asking the user for the actual email, new email and actual password*/
+    /**
+     * The method begins by retrieving the values entered in the actual email, new email, and actual password input fields.
+     *
+     * It then performs several checks to validate the input:
+     * It checks if the actual email matches the email pattern using the matches() method. If it doesn't match, an error is set on the actual email input field, indicating that the actual email is not entered correctly.
+     * It checks if the actual email is empty. If it is, an error is set on the actual email input field, indicating that the email is empty.
+     * It checks if the new email matches the email pattern. If it doesn't match, an error is set on the new email input field, indicating that the email is not in the correct format.
+     * It checks if the actual password is empty. If it is, an error is set on the actual password input field, indicating that the actual password is not entered.
+     *
+     * If all the input validations pass, the changesEmail() method is called to execute the asynchronous task for changing the email.
+     */
     private void changeEmail() {
         actualEmail = inputActualEmail.getText().toString();
         newEmail = inputNewEmail.getText().toString();
@@ -129,8 +139,22 @@ public class EmailActivity extends Activity {
     }
 
 
-    /*Method to execute post change email for user*/
-
+    /**
+     * The EmailChangeTask is an asynchronous task that performs the email change request. Here's an explanation of the code:
+     *
+     * The doInBackground() method is executed in the background thread and performs the email change request using the provided input values.
+     * It creates an instance of OkHttpClient and prepares the request with the necessary headers and request body.
+     * The request body includes the new email, current email, and current password.
+     * The response from the server is obtained, and if the response is successful, the response body is returned as a string. Otherwise, an error message is returned.
+     *
+     * The onPostExecute() method is executed on the main UI thread after the background task completes. It receives the result from the doInBackground() method.
+     *
+     * If the result is "Successful email change," it indicates that the email change was successful.
+     * A toast message is displayed to notify the user about the successful email change, and the user is redirected to the SettingsActivity.
+     *
+     * If the result is an error message, it indicates that the email change was unsuccessful.
+     * Error messages are set on the input fields to indicate the specific error, such as entering the actual email or password incorrectly.
+     */
 
     private class EmailChangeTask extends AsyncTask<String, Void, String> {
 
@@ -175,7 +199,21 @@ public class EmailActivity extends Activity {
         }
     }
 
-    /*Method to read the login token for use in the activity*/
+    /**
+     * The readUser() method reads the user's authentication token from a file named "token.txt" stored in the app's private file directory. Here's an explanation of the code:
+     *
+     * The method creates a File object filename representing the file "token.txt" in the app's private file directory using the getFilesDir() method.
+     *
+     * Inside a try-catch block, it creates a FileReader object reader to read the contents of the file.
+     *
+     * It wraps the FileReader in a BufferedReader object bufferedReader for efficient reading.
+     *
+     * It reads the token from the file by calling readLine() on the bufferedReader object and assigns it to the token variable.
+     *
+     * After reading the token, it closes the bufferedReader and reader using the close() method.
+     *
+     * If an IOException occurs during the file reading process, it is caught in the catch block, and a RuntimeException is thrown.
+     */
     private void readUser() {
         File filename = new File(getFilesDir(), "token.txt");
         try {

@@ -8,6 +8,7 @@
     android:layout_gravity="center"
     >
 
+
     <LinearLayout
         android:id="@+id/plays"
         android:layout_width="wrap_content"
@@ -75,6 +76,8 @@
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
+
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/backButtons"

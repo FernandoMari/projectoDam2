@@ -345,4 +345,22 @@
     <string name="recover_password">Recuperar contrasenya</string>
     <string name="temporal_code">Codi temporal</string>
     <string name="return_to">Tornar a</string>
+
+
+    <string name="retry">Torna-ho a provar</string>
+    <string name="check_your_connection">Comprova la teva connexió i torna-ho a provar.</string>
+    <string name="no_internet_connection">No hi ha connexió a internet</string>
+    <string name="close_app">Tanca l\'aplicació</string>
+    <string name="error_connect_server">Error en connectar amb el servidor</string>
+    <string name="problem_with_server">Hi ha hagut un problema amb el servidor. Torna a intentar-ho més tard.</string>
+    <string name="please_wait_register">Espereu mentre es registra...</string>
+    <string name="invalid_code">Codi de recuperació no vàlid</string>
+    <string name="successful_registration">Registre exitós</string>
+    <string name="welcome_decisions">Benvingut a l\'aplicació Decisions</string>
+    <string name="password_change">Contrasenya actualitzada amb èxit</string>
+
+    <string name="restore_password">Restaura la contrasenya</string>
+    <string name="your_code_is">El teu codi per restablir la teva contrasenya és:</string>
+    <string name="cc_license">Llicència Creative Commons</string>
+    <string name="cc_licence_text">Aquesta obra està subjecta a la llicència Creative Commons Reconeixement-NoComercial 4.0 Internacional (CC BY-NC 4.0).\n\nÉs lliure de:\n\n· Compartir: copiar i redistribuir el material en qualsevol mitjà o format.\n · Adaptar: remesclar, transformar i construir sobre el material.\n\nEn els termes següents:\n\n· Atribució: heu de donar el crèdit adequat, proporcionar un enllaç a la llicència i indicar si s\'han fet canvis. Podeu fer-ho de qualsevol manera raonable, però no de cap manera que suggereixi que el llicenciant us avala o el vostre ús.\n· No comercial: no podeu utilitzar el material amb finalitats comercials.\n· Sense restriccions addicionals: no podeu aplicar termes legals o mesures tecnològiques que restringeixen legalment els altres de fer qualsevol cosa que la llicència permet.\n\nPer obtenir més informació sobre aquesta llicència, visiteu el lloc web de Creative Commons a https://creativecommons.org/licenses/by-nc/4.0/.</string>
 </resources>

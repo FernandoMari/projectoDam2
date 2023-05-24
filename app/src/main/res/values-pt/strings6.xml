@@ -342,4 +342,20 @@
     <string name="recover_password">Recuperar senha</string>
     <string name="temporal_code">Código temporal</string>
     <string name="return_to">Retornar a</string>
+
+    <string name="retry">Tentar novamente</string>
+    <string name="check_your_connection">Verifique sua conexão e tente novamente.</string>
+    <string name="no_internet_connection">Não há conexão com a internet</string>
+    <string name="close_app">Fechar aplicativo</string>
+    <string name="error_connect_server">Erro ao conectar com o servidor</string>
+    <string name="problem_with_server">Houve um problema com o servidor, tente fazer login mais tarde.</string>
+    <string name="please_wait_register">Aguarde enquanto realiza o registro...</string>
+    <string name="invalid_code">Código de recuperação inválido</string>
+    <string name="successful_registration">Registro bem-sucedido</string>
+    <string name="welcome_decisions">Bem-vindo ao aplicativo Decisions</string>
+    <string name="password_change">Senha atualizada com sucesso</string>
+    <string name="restore_password">Restaurar senha</string>
+    <string name="your_code_is">Seu código para redefinir sua senha é:</string>
+    <string name="cc_license">Licença Creative Commons</string>
+    <string name="cc_licence_text">Este trabalho está licenciado sob a Licença Creative Commons Atribuição-NãoComercial 4.0 Internacional (CC BY-NC 4.0).\n\nVocê é livre para:\n\n· Compartilhar: Copiar e redistribuir o material em qualquer meio ou formato.\n · Adaptar: Remixar, transformar e desenvolver a partir do material.\n\nSob os seguintes termos:\n\n· Atribuição: Você deve dar o devido crédito, fornecer um link para a licença e indicar se foram feitas alterações. Você pode fazê-lo de qualquer maneira razoável, mas não de forma que sugira que o licenciante endossa você ou seu uso.\n· Não comercial: você não pode usar o material para fins comerciais.\n· Sem restrições adicionais: você não pode se inscrever termos legais ou medidas tecnológicas que restringem legalmente outras pessoas de fazer qualquer coisa que a licença permita.\n\nPara obter mais informações sobre esta licença, visite o site Creative Commons em https://creativecommons.org/licenses/by-nc/4.0/.</string>
 </resources>

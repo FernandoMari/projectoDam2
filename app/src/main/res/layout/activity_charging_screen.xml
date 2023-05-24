@@ -23,6 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"></androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <ImageView
         android:id="@+id/logoDecisions"
         android:layout_width="240dp"
@@ -37,6 +38,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5" />
 
+    //Title
     <TextView
         android:id="@+id/titleName"
         android:layout_width="wrap_content"

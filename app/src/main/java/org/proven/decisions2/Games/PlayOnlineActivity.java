@@ -52,7 +52,7 @@ public class PlayOnlineActivity extends Activity {
     ListView listFriend,listOfPetitions;
     CustomListAdapter mFriendsAdapter;
     String selectedUsername;
-    //String url = "http://143.47.249.102:7070/getFriends";
+
     String url = "http://5.75.251.56:7070/getFriends";
     String url2 = "http://5.75.251.56:7070/getNameOfUser";
 
@@ -488,23 +488,22 @@ public class PlayOnlineActivity extends Activity {
                 }
 
                 AlertDialog.Builder builder= new AlertDialog.Builder(PlayOnlineActivity.this);
-                builder.setTitle("Confirm");
-                builder.setMessage(" Play with "+ selectedUsername +"?");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder.setTitle(R.string.btConfirm);
+                builder.setMessage(getString(R.string.play_with) + " " + selectedUsername + "?");
+                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         assignPlayerToRoom();
                         asignSecondPlayer(selectedUsername);
 
-                        PlayOnlineActivity.this.dialog.setMessage("Waiting for the opponent to accept");
+                        PlayOnlineActivity.this.dialog.setMessage(getString(R.string.waiting));
                         PlayOnlineActivity.this.dialog.setCanceledOnTouchOutside(false);
                         PlayOnlineActivity.this.dialog.show();
 
                         checkCanPlay = database.getReference("rooms/"+roomName+"/status");
                         setCheckCanPlay(roomName);
                         selectedUsr = selectedUsername;
-                        System.out.println("onItemClick: "+roomName);
 
                         checkCanPlay.setValue("waiting");
                         waiting=true;
@@ -525,7 +524,7 @@ public class PlayOnlineActivity extends Activity {
 
                     }
                 });
-                builder.setNegativeButton("No",null);
+                builder.setNegativeButton(R.string.no,null);
                 builder.show();
 
             }
@@ -568,7 +567,6 @@ public class PlayOnlineActivity extends Activity {
                     if(snapshot.getValue(String.class).contains("game:")){
                         dialog.dismiss();
                         int ele = Integer.parseInt(snapshot.getValue(String.class).replace("game:",""));
-
                         if(ele == 0){
                             Intent intent = new Intent(getApplicationContext(), QuestionQuizGameOnline.class);
                             intent.putExtra("roomName", roomNa);
@@ -654,21 +652,18 @@ public class PlayOnlineActivity extends Activity {
                 Log.d("Selected username", selectedUsername);
 
                 if (selectedUsername == null) {
-                    Toast.makeText(getApplicationContext(), "Please select a username", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 AlertDialog.Builder builder= new AlertDialog.Builder(PlayOnlineActivity.this);
                 builder.setTitle(R.string.btConfirm);
-                builder.setMessage(" Play with "+ selectedUsername +"?");
+                builder.setMessage(getString(R.string.play_with) + " " + selectedUsername + "?");
                 builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // introducir codigo de ver el estado
                         checkCanPlay = database.getReference("rooms/"+selectedUsername+"/status");
                         setCheckCanPlay(selectedUsername);
                         checkCanPlay.setValue("start");
 
-                        //codigo
                     }
                 });
                 builder.setNegativeButton(R.string.no,null);

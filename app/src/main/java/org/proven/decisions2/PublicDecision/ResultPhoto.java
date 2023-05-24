@@ -11,16 +11,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
-import org.proven.decisions2.Friends.AddFriendsActivity;
 import org.proven.decisions2.R;
 import org.proven.decisions2.SocialInterface;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.OutputStream;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -37,19 +36,23 @@ public class ResultPhoto extends Activity {
 
     private Button btNo, btYes;
     private Bitmap bitmap;
-    String textoDecision1;
+    String textDecision1;
+    String token;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result_photo_layout);
-
+        /*Initialize the elements*/
         instantiateElements();
-
+        //call the method for the result
         showResultPhoto();
+        //intent for the text decision
         Intent intent = getIntent();
-        textoDecision1 = intent.getStringExtra("decision1");
-        System.out.println(textoDecision1);
+        textDecision1 = intent.getStringExtra("decision1");
+        System.out.println(textDecision1);
+        //call the method for read token user
+        readUser();
         btNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,10 +69,10 @@ public class ResultPhoto extends Activity {
             public void onClick(View v) {
                 uploadImage();
                 Intent intent = getIntent();
-                textoDecision1 = intent.getStringExtra("decision1");
+                textDecision1 = intent.getStringExtra("decision1");
                 Intent intent2 = new Intent(ResultPhoto.this, SocialInterface.class);
-                intent2.putExtra("decision1", textoDecision1);
-                System.out.println("ResultPhoto: "+textoDecision1);
+                intent2.putExtra("decision1", textDecision1);
+                System.out.println("ResultPhoto: " + textDecision1);
                 //intent2.putExtra("decision2", textoDecision2);
                 startActivity(intent2);
             }
@@ -82,19 +85,19 @@ public class ResultPhoto extends Activity {
         ImageView imageView = findViewById(R.id.bitmapResult);
         imageView.setImageBitmap(bitmap);
     }
-
+    /* Initialize the elements */
     private void instantiateElements() {
         btNo = findViewById(R.id.btNo);
         btYes = findViewById(R.id.btYes);
     }
-
+    /* Method for the upload image in the server*/
     private void uploadImage() {
-        // Comprueba si tienes un bitmap válido para cargar
+        // Check if you have a valid bitmap to load
         if (bitmap == null) {
             return;
         }
 
-        // Comprime el bitmap en un archivo JPEG en la caché externa
+        // Compress the bitmap into a JPEG file in the external cache
         File cacheDir = getExternalCacheDir();
         File imageFile = new File(cacheDir, "result_photo.jpg");
         try {
@@ -106,33 +109,34 @@ public class ResultPhoto extends Activity {
             e.printStackTrace();
         }
 
-        // Crea una instancia de OkHttpClient
+        // Create an instance of OkHttpClient
         OkHttpClient client = new OkHttpClient();
 
-        // Crea una instancia de MultipartBody.Builder para construir el cuerpo de la solicitud HTTP
+        // Create an instance of MultipartBody.Builder to build the HTTP request body
         MultipartBody.Builder builder = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("textFile", "result_photo.jpg",
                         RequestBody.create(MediaType.parse("image/jpg"), imageFile))
-                .addFormDataPart("textDecision1", textoDecision1); // Agrega el valor de textoDecision1
+                .addFormDataPart("textDecision1", textDecision1); // Add the text value Decision1
 
-        // Crea la solicitud HTTP con la URL del servidor
+        // Create the HTTP request with the URL of the server
         Request request = new Request.Builder()
                 .url("http://5.75.251.56:7070/upload")
+                .header("Authorization", token)
                 .post(builder.build())
                 .build();
 
-        // Ejecuta la solicitud HTTP en un hilo en segundo plano
+        // Execute the HTTP request in a background thread
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                // Maneja el error en caso de que la solicitud HTTP falle
+                // Handle the error in case the HTTP request fails
                 e.printStackTrace();
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                // Maneja la respuesta del servidor
+                // Handle the response from the server
                 if (response.isSuccessful()) {
                     String responseBody = response.body().string();
                     Log.i("TAG", "Response: " + responseBody);
@@ -144,63 +148,19 @@ public class ResultPhoto extends Activity {
     }
 
 
-
-    ////Esto funciona sin la id
-//    private void uploadImage() {
-//        // Comprueba si tienes un bitmap válido para cargar
-//        if (bitmap == null) {
-//            return;
-//        }
-//
-//        // Comprime el bitmap en un archivo JPEG en la caché externa
-//        File cacheDir = getExternalCacheDir();
-//        File imageFile = new File(cacheDir, "result_photo.jpg");
-//        try {
-//            FileOutputStream out = new FileOutputStream(imageFile);
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-//            out.flush();
-//            out.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        // Crea una instancia de OkHttpClient
-//        OkHttpClient client = new OkHttpClient();
-//
-//        // Crea una instancia de MultipartBody.Builder para construir el cuerpo de la solicitud HTTP
-//        MultipartBody.Builder builder = new MultipartBody.Builder()
-//                .setType(MultipartBody.FORM)
-//                .addFormDataPart("textFile", "result_photo.jpg",
-//                        RequestBody.create(MediaType.parse("image/jpg"), imageFile));
-//
-//        // Crea la solicitud HTTP con la URL del servidor
-//        Request request = new Request.Builder()
-//                .url("http://5.75.251.56:7070/upload")
-//                .post(builder.build())
-//                .build();
-//
-//        // Ejecuta la solicitud HTTP en un hilo en segundo plano
-//        client.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                // Maneja el error en caso de que la solicitud HTTP falle
-//                e.printStackTrace();
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                // Maneja la respuesta del servidor
-//                if (response.isSuccessful()) {
-//                    String responseBody = response.body().string();
-//                    Log.i("TAG", "Response: " + responseBody);
-//                } else {
-//                    Log.e("TAG", "Error: " + response.code() + " " + response.message());
-//                }
-//            }
-//        });
-//    }
-
-
+    /*Method to read the login token for use in the activity*/
+    private void readUser() {
+        File filename = new File(getFilesDir(), "token.txt");
+        try {
+            FileReader reader = new FileReader(filename);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            token = bufferedReader.readLine();
+            bufferedReader.close();
+            reader.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 }

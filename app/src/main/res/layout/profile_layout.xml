@@ -7,7 +7,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/light_blue">
 
-
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -32,6 +31,8 @@
             >
         </TextView>
     </RelativeLayout>
+
+
 
     <RelativeLayout
         android:id="@+id/footer"
@@ -87,6 +88,8 @@
         </LinearLayout>
 
     </RelativeLayout>
+
+
 
     <ScrollView
         android:id="@+id/scroll_view"

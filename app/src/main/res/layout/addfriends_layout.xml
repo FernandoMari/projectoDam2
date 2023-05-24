@@ -7,6 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/light_blue">
 
+
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -33,6 +34,8 @@
             >
         </TextView>
     </RelativeLayout>
+
+
 
     <RelativeLayout
         android:id="@+id/footer"
@@ -89,6 +92,7 @@
 
     </RelativeLayout>
 
+
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="wrap_content"
@@ -106,6 +110,8 @@
             android:orientation="vertical"
             android:gravity="center_horizontal"
             >
+
+
 
             <EditText
                 android:id="@+id/etSearch"

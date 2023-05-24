@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:background="@color/light_blue">
+
+
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -30,6 +32,7 @@
             >
         </TextView>
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
@@ -84,6 +87,8 @@
         </LinearLayout>
 
     </RelativeLayout>
+
+
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="wrap_content"
@@ -283,7 +288,7 @@
             <TextView
                 android:layout_width="275dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="400dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
                 android:drawableStart="@drawable/ic_info"
                 android:fontFamily="@font/montserrat_semibold"
@@ -301,6 +306,30 @@
                 android:fontFamily="@font/montserrat_medium"
                 android:gravity="left|center_vertical"
                 android:text="@string/creators"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="19dp"
+                android:paddingStart="18dp"
+                android:stateListAnimator="@null"
+                ></Button>
+
+            <View
+                android:layout_width="255dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:background="@color/medium_blue"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
+            <Button
+                android:id="@+id/btLicense"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/button_style2"
+                android:drawableEnd="@drawable/custom_right_icon"
+                android:fontFamily="@font/montserrat_medium"
+                android:gravity="left|center_vertical"
+                android:text="@string/cc_license"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="19dp"

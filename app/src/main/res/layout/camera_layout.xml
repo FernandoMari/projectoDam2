@@ -5,6 +5,8 @@
     android:background="@color/light_blue"
     >
 
+
+
     <FrameLayout
         android:id="@+id/camera_preview"
         android:layout_width="match_parent"

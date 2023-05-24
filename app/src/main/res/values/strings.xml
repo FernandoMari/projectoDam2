@@ -339,5 +339,20 @@
     <string name="recover_your_password">Recover your password?</string>
     <string name="recover_password">Recover password</string>
     <string name="temporal_code">Temporal code</string>
-    <string name="return_to">Return to</string>
+    <string name="return_to">Return to </string>
+    <string name="retry">Retry</string>
+    <string name="check_your_connection">Check your connection and try again.</string>
+    <string name="no_internet_connection">There is no internet connection</string>
+    <string name="close_app">Close app</string>
+    <string name="error_connect_server">Error to connect with server</string>
+    <string name="problem_with_server">There was a problem with the server try to log in later.</string>
+    <string name="please_wait_register">Please wait while register...</string>
+    <string name="invalid_code">Invalid recovery code</string>
+    <string name="successful_registration">Successful registration</string>
+    <string name="welcome_decisions">Welcome to the app Decisions</string>
+    <string name="password_change">Password updated successfully</string>
+    <string name="restore_password">Restore password</string>
+    <string name="your_code_is">Your code to reset your password is:</string>
+    <string name="cc_license">Creative commons license</string>
+    <string name="cc_licence_text">This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) License.\n\nYou are free to:\n\n· Share: Copy and redistribute the material in any medium or format.\n· Adapt: Remix, transform, and build upon the material.\n\nUnder the following terms:\n\n· Attribution: You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.\n· NonCommercial: You may not use the material for commercial purposes.\n· No additional restrictions: You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.\n\nFor more information about this license, please visit the Creative Commons website at https://creativecommons.org/licenses/by-nc/4.0/.</string>
 </resources>
