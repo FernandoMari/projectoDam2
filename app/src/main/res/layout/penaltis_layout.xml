@@ -367,15 +367,16 @@
             android:padding="5dp">
 
             <TextView
+                android:id="@+id/youUsr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginRight="10dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:padding="15dp"
                 android:text="USER1"
                 android:textColor="@color/black"
-                android:textSize="20dp"
-                android:layout_marginRight="10dp"></TextView>
+                android:textSize="20dp"></TextView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/marcador"
@@ -434,15 +435,16 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
+                android:id="@+id/hesUsr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:padding="15dp"
                 android:text="USER2"
                 android:textColor="@color/black"
-                android:textSize="20dp"
-                android:layout_marginLeft="10dp"></TextView>
+                android:textSize="20dp"></TextView>
 
         </LinearLayout>
 

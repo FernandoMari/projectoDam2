@@ -87,60 +87,6 @@ public class ResultPhoto extends Activity {
         btNo = findViewById(R.id.btNo);
         btYes = findViewById(R.id.btYes);
     }
-////Esto funciona sin la id
-//    private void uploadImage() {
-//        // Comprueba si tienes un bitmap válido para cargar
-//        if (bitmap == null) {
-//            return;
-//        }
-//
-//        // Comprime el bitmap en un archivo JPEG en la caché externa
-//        File cacheDir = getExternalCacheDir();
-//        File imageFile = new File(cacheDir, "result_photo.jpg");
-//        try {
-//            FileOutputStream out = new FileOutputStream(imageFile);
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-//            out.flush();
-//            out.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        // Crea una instancia de OkHttpClient
-//        OkHttpClient client = new OkHttpClient();
-//
-//        // Crea una instancia de MultipartBody.Builder para construir el cuerpo de la solicitud HTTP
-//        MultipartBody.Builder builder = new MultipartBody.Builder()
-//                .setType(MultipartBody.FORM)
-//                .addFormDataPart("textFile", "result_photo.jpg",
-//                        RequestBody.create(MediaType.parse("image/jpg"), imageFile));
-//
-//        // Crea la solicitud HTTP con la URL del servidor
-//        Request request = new Request.Builder()
-//                .url("http://5.75.251.56:7070/upload")
-//                .post(builder.build())
-//                .build();
-//
-//        // Ejecuta la solicitud HTTP en un hilo en segundo plano
-//        client.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                // Maneja el error en caso de que la solicitud HTTP falle
-//                e.printStackTrace();
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                // Maneja la respuesta del servidor
-//                if (response.isSuccessful()) {
-//                    String responseBody = response.body().string();
-//                    Log.i("TAG", "Response: " + responseBody);
-//                } else {
-//                    Log.e("TAG", "Error: " + response.code() + " " + response.message());
-//                }
-//            }
-//        });
-//    }
 
     private void uploadImage() {
         // Comprueba si tienes un bitmap válido para cargar
@@ -196,6 +142,63 @@ public class ResultPhoto extends Activity {
             }
         });
     }
+
+
+
+    ////Esto funciona sin la id
+//    private void uploadImage() {
+//        // Comprueba si tienes un bitmap válido para cargar
+//        if (bitmap == null) {
+//            return;
+//        }
+//
+//        // Comprime el bitmap en un archivo JPEG en la caché externa
+//        File cacheDir = getExternalCacheDir();
+//        File imageFile = new File(cacheDir, "result_photo.jpg");
+//        try {
+//            FileOutputStream out = new FileOutputStream(imageFile);
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+//            out.flush();
+//            out.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        // Crea una instancia de OkHttpClient
+//        OkHttpClient client = new OkHttpClient();
+//
+//        // Crea una instancia de MultipartBody.Builder para construir el cuerpo de la solicitud HTTP
+//        MultipartBody.Builder builder = new MultipartBody.Builder()
+//                .setType(MultipartBody.FORM)
+//                .addFormDataPart("textFile", "result_photo.jpg",
+//                        RequestBody.create(MediaType.parse("image/jpg"), imageFile));
+//
+//        // Crea la solicitud HTTP con la URL del servidor
+//        Request request = new Request.Builder()
+//                .url("http://5.75.251.56:7070/upload")
+//                .post(builder.build())
+//                .build();
+//
+//        // Ejecuta la solicitud HTTP en un hilo en segundo plano
+//        client.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                // Maneja el error en caso de que la solicitud HTTP falle
+//                e.printStackTrace();
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                // Maneja la respuesta del servidor
+//                if (response.isSuccessful()) {
+//                    String responseBody = response.body().string();
+//                    Log.i("TAG", "Response: " + responseBody);
+//                } else {
+//                    Log.e("TAG", "Error: " + response.code() + " " + response.message());
+//                }
+//            }
+//        });
+//    }
 
 
 

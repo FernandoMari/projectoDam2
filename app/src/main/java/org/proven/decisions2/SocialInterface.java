@@ -49,9 +49,10 @@ public class SocialInterface extends FragmentActivity {
     // User authentication token
     String token;
     TextView decisions;
-    String username="ismael3";
     SecureConnection secureConnection = new SecureConnection();
     private int[] imageIds; // Arreglo de IDs de imágenes
+
+    int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,62 +126,6 @@ public class SocialInterface extends FragmentActivity {
         }
     }
 
-//    private void getPhotos() {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                OkHttpClient client = new OkHttpClient();
-//                Request request = new Request.Builder()
-//                        .url("http://5.75.251.56:7070/imagen")
-//                        .get()
-//                        .build();
-//
-//                try {
-//                    Response response = client.newCall(request).execute();
-//                    if (response.isSuccessful()) {
-//                        String jsonResponse = response.body().string();
-//                        JSONArray jsonArray = new JSONArray(jsonResponse);
-//
-//                        List<Integer> ids = new ArrayList<>();
-//                        List<String> decisions = new ArrayList<>(); // Lista para almacenar los textos de las decisiones
-//
-//                        for (int i = 0; i < jsonArray.length(); i++) {
-//                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                            int id = jsonObject.getInt("id");
-//                            String decision = jsonObject.getString("decision");
-//
-//                            ids.add(id);
-//                            decisions.add(decision);
-//                        }
-//
-//                        // Actualizar el arreglo imageIds y notificar al adaptador
-//                        imageIds = new int[ids.size()];
-//                        for (int i = 0; i < ids.size(); i++) {
-//                            imageIds[i] = ids.get(i);
-//                        }
-//                        updateAdapterWithImageIds();
-//
-//                        // Mostrar el texto de la decisión en el TextView (asumiendo que solo hay una imagen mostrada)
-//                        if (!decisions.isEmpty()) {
-//                            String decisionText = decisions.get(0);
-//                            runOnUiThread(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    SocialInterface.this.decisions.setText(decisionText);
-//                                }
-//                            });
-//                        }
-//                    } else {
-//                        // Manejar la respuesta no exitosa
-//                        System.out.println("Error en la respuesta: " + response.code() + " " + response.message());
-//                    }
-//                } catch (IOException | JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        }).start();
-//    }
 //Esto funciona correctamente no borrar !!!!
 //    private void getPhotos() {
 //        new Thread(new Runnable() {
@@ -273,7 +218,7 @@ public class SocialInterface extends FragmentActivity {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://5.75.251.56:7070/imagen")
+                        .url("http://5.75.251.56:7070/friendIDs/" + userId)
                         .get()
                         .build();
 
@@ -281,23 +226,21 @@ public class SocialInterface extends FragmentActivity {
                     Response response = client.newCall(request).execute();
                     if (response.isSuccessful()) {
                         String jsonResponse = response.body().string();
-                        JSONArray jsonArray = new JSONArray(jsonResponse);
+                        JSONArray friendIDs = new JSONArray(jsonResponse);
 
                         List<Integer> ids = new ArrayList<>();
                         List<String> decisions = new ArrayList<>(); // Lista para almacenar los textos de las decisiones
 
-                        // Step 1: Get the list of friends for the user
-                        List<String> friendList = getFriends(username); // Replace 'userID' with the actual user ID
+                        // Step 1: Filter the JSON array to include only photos from friends
+                        for (int i = 0; i < friendIDs.length(); i++) {
+                            int friendID = friendIDs.getInt(i);
+                            JSONArray friendPhotos = getFriendPhotos(friendID); // Replace with your method to get photos for a friend
+                            // Process the friend's photos
+                            for (int j = 0; j < friendPhotos.length(); j++) {
+                                JSONObject photo = friendPhotos.getJSONObject(j);
+                                int id = photo.getInt("id");
+                                String decision = photo.getString("decision");
 
-                        // Step 2: Filter the JSON array to include only photos from friends
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            int id = jsonObject.getInt("id");
-                            String decision = jsonObject.getString("decision");
-                            String username = jsonObject.getString("username");
-
-                            // Check if the username is in the friend list
-                            if (friendList.contains(username)) {
                                 ids.add(id);
                                 decisions.add(decision);
                             }
@@ -359,46 +302,22 @@ public class SocialInterface extends FragmentActivity {
         }).start();
     }
 
-    private List<String> getFriends(String username) {
-        new FriendsAsyncTask().execute(username);
-        return null;
-    }
-
-
-    /*Method to execute the post requests for the friends*/
-    @SuppressLint("StaticFieldLeak")
-    private class FriendsAsyncTask extends AsyncTask<String, Void, ArrayList<String>> {
-
-        @Override
-        protected ArrayList<String> doInBackground(String... params) {
-            token = params[0];
-            ArrayList<String> friendsList = new ArrayList<>();
-            OkHttpClient client =secureConnection.getClient();
-            MediaType mediaType = MediaType.parse("application/json");
-            if (token != null) {
-                String requestBodyString = "username=" + token;
-                RequestBody requestBody = RequestBody.create(mediaType, requestBodyString);
-                Request request = new Request.Builder()
-                        .url("https://5.75.251.56:8443/getFriends")
-                        .post(requestBody)
-                        .addHeader("content-type", "application/json")
-                        .addHeader("cache-control", "no-cache")
-                        .addHeader("Authorization", token)
-                        .build();
-
-                try {
-                    Response response = client.newCall(request).execute();
-                    String toSplit = response.body().string();
-                    String textoSinComillas = toSplit.replace("\"", "");
-                    String textoSinCorchetes = textoSinComillas.replace("[", "").replace("]", "");
-                    friendsList.addAll(Arrays.asList(textoSinCorchetes.split(",")));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return friendsList;
+    private JSONArray getFriendPhotos(int friendID) throws IOException, JSONException {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("http://5.75.251.56:7070/imageIDs/"+userId)
+                .get()
+                .build();
+        System.out.println("FriendId: "+friendID);
+        Response response = client.newCall(request).execute();
+        if (response.isSuccessful()) {
+            String jsonResponse = response.body().string();
+            return new JSONArray(jsonResponse);
+        } else {
+            // Manejar la respuesta no exitosa
+            System.out.println("Error en la respuesta: " + response.code() + " " + response.message());
+            return new JSONArray();
         }
-
     }
 
 

@@ -165,15 +165,20 @@ public class RecoverPassword extends Activity {
         protected void onPostExecute(String responseData) {
             String textWithoutQuotes = responseData.replace("\"", "");
 
-            if (textWithoutQuotes == "" || textWithoutQuotes.isEmpty()) {
-
+            if (responseData.equals("Invalid email")){
+                inputemail.setError("email invalid");
+            }
+            else if (textWithoutQuotes == "" || textWithoutQuotes.isEmpty()) {
+                // No se recibió ningún código de recuperación válido
+                // Aquí puedes manejar la lógica para mostrar un mensaje de error o realizar otras acciones si es necesario
             } else {
+                // El correo electrónico es válido y se recibió un código de recuperación
                 MailSender sender = new MailSender();
                 sender.setmRecipient(email);
                 sender.setmSubject("Contraseña olvidada");
                 sender.setmMessage("<html><body style=\\\"text-align: center;\\\">\n" + "        " +
                         "<h1>Restablecer contraseña</h1>\n" + "        " +
-                        "<p>Su code para restablecer su contraseña es: " + textWithoutQuotes + "</p>\n" + "      " +
+                        "<p>Su código para restablecer su contraseña es: " + textWithoutQuotes + "</p>\n" + "      " +
                         "  </body></html>");
 
                 sender.execute();
