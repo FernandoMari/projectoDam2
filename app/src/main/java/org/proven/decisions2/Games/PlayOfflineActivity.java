@@ -50,7 +50,7 @@ public class PlayOfflineActivity extends Activity {
         btPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validarEditText()) {
+                if (validateEditText()) {
                     Random rand = new Random();
                     int num = rand.nextInt(3);
                     String textoDecision1 = decision1.getText().toString();
@@ -86,17 +86,17 @@ public class PlayOfflineActivity extends Activity {
 
     }
     //Method Validate editText
-    private boolean validarEditText() {
+    private boolean validateEditText() {
         String textDecision1 = decision1.getText().toString();
         String textDecision2 = decision2.getText().toString();
 
         if (textDecision1.isEmpty()) {
-            decision1.setError("This field is required");
+            decision1.setError(getString(R.string.write_first_decision));
             return false;
         }
 
         if (textDecision2.isEmpty()) {
-            decision2.setError("This field is required");
+            decision2.setError(getString(R.string.write_second_decision));
             return false;
         }
 

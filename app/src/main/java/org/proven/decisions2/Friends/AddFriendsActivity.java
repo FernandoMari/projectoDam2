@@ -123,7 +123,7 @@ public class AddFriendsActivity extends Activity {
         btFriends = findViewById(R.id.btFriends);
         btSettings = findViewById(R.id.btSettings);
         listFriend = findViewById(R.id.lvPersons);
-        searchFriend = findViewById(R.id.etSearch);
+        searchFriend = findViewById(R.id.etdecision);
     }
 
     /* Method to instantiate the FriendsAsyncTask and start it */
@@ -341,7 +341,7 @@ public class AddFriendsActivity extends Activity {
         @Override
         protected void onPostExecute(Boolean result) {
             if (result) {
-                Toast.makeText(getApplicationContext(), getString(R.string.request_sent) + selectedUsername, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.request_sent)+" "+ selectedUsername, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), "Error sending friend request to " + selectedUsername, Toast.LENGTH_SHORT).show();
             }

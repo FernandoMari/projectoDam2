@@ -620,27 +620,31 @@ public class QuestionQuizGameOnline extends AppCompat {
                             intent.putExtra("result", 0);
                             startActivity(intent2);
                             finish();
+                            deleteRoom(roomName);
                         }else{
                             Intent intent = new Intent(QuestionQuizGameOnline.this, ResultGame.class);
                             intent.putExtra("result", 1);
                             startActivity(intent);
                             finish();
+                            deleteRoom(roomName);
                         }
                     } else if(snapshot.getValue(String.class).replace("winner:","").equals("host")){
                         if(role.equals("host")){
                             Intent intent = getIntent();
-                            String textoDecision2 = intent.getStringExtra("decision2");
-                            System.out.println("QuestionQuizGameOnline "+textoDecision2);
+                            String textoDecision1 = intent.getStringExtra("decision1");
+                            System.out.println("QuestionQuizGameOnline "+textoDecision1);
                             Intent intent2 = new Intent(QuestionQuizGameOnline.this, ResultGame.class);
-                            intent2.putExtra("decision2", textoDecision2);
+                            intent2.putExtra("decision1", textoDecision1);
                             intent.putExtra("result", 0);
                             startActivity(intent2);
                             finish();
+                            deleteRoom(roomName);
                         }else{
                             Intent intent = new Intent(QuestionQuizGameOnline.this, ResultGame.class);
                             intent.putExtra("result", 1);
                             startActivity(intent);
                             finish();
+                            deleteRoom(roomName);
                         }
                     }
                 }
@@ -781,12 +785,8 @@ public class QuestionQuizGameOnline extends AppCompat {
     public void onBackPressed() {
         if (charge){
             super.onBackPressed();
-            value = 5;
             // Cancels the countdown timer associated with the activity
             countDownTimer.cancel();
-            Intent intent = new Intent(QuestionQuizGameOnline.this, ResultGame.class);
-            intent.putExtra("result", value);
-            startActivity(intent);
             finish();
             deleteRoom(roomName);
         }

@@ -25,7 +25,10 @@ import org.proven.decisions2.SecureConnection;
 import org.proven.decisions2.Settings.AppCompat;
 import org.proven.decisions2.SocialInterface;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -128,6 +131,7 @@ public class MainActivity extends AppCompat {
 
                 // Call the method for login
                 perforLogin();
+
 
             }
         });
@@ -384,6 +388,8 @@ public class MainActivity extends AppCompat {
         }
 
     }
+
+
 
     //Return if is network available
     private boolean isNetworkAvailable() {

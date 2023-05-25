@@ -929,9 +929,6 @@ public class PenaltiesGameOnline extends Activity {
         value = 5;
         // Cancels the countdown timer associated with the activity
         countDownTimer.cancel();
-        Intent intent = new Intent(PenaltiesGameOnline.this, ResultGame.class);
-        intent.putExtra("result", value);
-        startActivity(intent);
         finish();
         deleteRoom(roomName);
 

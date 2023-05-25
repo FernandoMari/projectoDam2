@@ -110,7 +110,7 @@
     <string name="tec4">Which one is not a programming language?</string>
     <string name="ast1">Which planet in our solar system is the largest?</string>
     <string name="ast2">What is the smallest planet in our solar system?</string>
-    <string name="request_sent">\"Request sent to: \"</string>
+    <string name="request_sent">Request sent to:</string>
     <string name="friend_deleted">\"The friend has been deleted: \"</string>
     <string name="accept_friend">\"Accepted friend: \"</string>
     <string name="yes">Yes</string>

@@ -114,7 +114,7 @@
 
 
             <EditText
-                android:id="@+id/etSearch"
+                android:id="@+id/etdecision"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:inputType="text"

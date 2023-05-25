@@ -111,7 +111,7 @@
     <string name="tec4">¿Cuál de estas opciones no es un lenguaje de programación?</string>
     <string name="ast1">¿Qué planeta en nuestro sistema solar es el más grande?</string>
     <string name="ast2">¿Cuál es el planeta más pequeño de nuestro sistema solar?</string>
-    <string name="request_sent">"Solicitud enviada a: "</string>
+    <string name="request_sent">Solicitud enviada a:</string>
     <string name="friend_deleted">"El amigo ha sido eliminado: "</string>
     <string name="accept_friend">"Aceptada la amistad con: "</string>
     <string name="yes">Sí</string>

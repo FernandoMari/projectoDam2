@@ -152,7 +152,7 @@ public class RemoveFriendsActivity extends Activity {
         btFriends = findViewById(R.id.btFriends);
         btSettings = findViewById(R.id.btSettings);
         listFriend = findViewById(R.id.lvPersons);
-        searchFriend = findViewById(R.id.etSearch);
+        searchFriend = findViewById(R.id.etdecision);
         infoText = findViewById(R.id.infoText);
         line = findViewById(R.id.line);
     }

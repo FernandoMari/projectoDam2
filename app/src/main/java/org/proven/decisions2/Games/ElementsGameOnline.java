@@ -431,9 +431,6 @@ public class ElementsGameOnline extends Activity {
             super.onBackPressed();
             // Cancels the countdown timer associated with the activity
             countDownTimer.cancel();
-            Intent intent = new Intent(ElementsGameOnline.this, ResultGame.class);
-            intent.putExtra("result", value);
-            startActivity(intent);
             finish();
             deleteRoom(roomName);
         }

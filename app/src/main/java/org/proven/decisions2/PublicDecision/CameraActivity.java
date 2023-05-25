@@ -1,14 +1,13 @@
 package org.proven.decisions2.PublicDecision;
 
-import static java.security.AccessController.getContext;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.AlertDialog;
+
 import android.content.Context;
-import android.content.DialogInterface;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -18,8 +17,8 @@ import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.Manifest;
-import android.os.Environment;
-import android.preference.PreferenceManager;
+
+
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -27,7 +26,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,14 +34,9 @@ import androidx.core.content.ContextCompat;
 
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
-import java.security.spec.ECField;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
-import org.apache.commons.io.FileUtils;
 import org.proven.decisions2.R;
 
 

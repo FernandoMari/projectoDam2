@@ -1,16 +1,20 @@
 package org.proven.decisions2;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.AsyncTask;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -30,16 +34,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
@@ -61,17 +61,16 @@ public class SocialInterface extends FragmentActivity {
         setContentView(R.layout.activity_social_interface);
         // Initialize the elements
         initializeElements();
-        readUser();
         // Request WRITE_EXTERNAL_STORAGE permission at runtime if not granted
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-        } else {
-            //call the method
+        if (isWriteStoragePermissionGranted()) {
+            // Call the method to read the user token
             readUser();
+            System.out.println("ON CREATE despues de readUser: "+token);
+            // Call the method to get the photos
+            getPhotos();
+            System.out.println("ON CREATE despues de getPhotos: "+token);
         }
 
-        // Descargar las imágenes antes de establecer el adaptador en el ViewPager
-        getPhotos();
 
         btFriends.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +82,7 @@ public class SocialInterface extends FragmentActivity {
                 finish();
             }
         });
+
 
         btDecisions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +102,70 @@ public class SocialInterface extends FragmentActivity {
         });
     }
 
+    private boolean isWriteStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU) {
+            // If you are on Android 13 or higher, no need to request the permission directly
+            // Use MediaStore.createWriteRequest instead
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, "filename.txt");
+            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "text/plain");
+
+            ContentResolver resolver = getContentResolver();
+            Uri contentUri = MediaStore.Files.getContentUri("external");
+            Uri itemUri = resolver.insert(contentUri, contentValues);
+
+            if (itemUri != null) {
+                try {
+                    OutputStream outputStream = resolver.openOutputStream(itemUri);
+                    outputStream.close();
+                    resolver.delete(itemUri, null, null);
+                    return true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            // If you are on a version earlier than Android 13, continue using WRITE_EXTERNAL_STORAGE
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        } else {
+            // Permission is automatically granted on devices below API 23
+            return true;
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    // You are on Android 13 or higher, WRITE_EXTERNAL_STORAGE permission is not needed
+                    // Call the method to read the user and get the photos
+                    readUser();
+                    getPhotos();
+                } else {
+                    // You are on a version earlier than Android 13, WRITE_EXTERNAL_STORAGE permission has been granted
+                    // You can perform the write operations to the storage here
+                }
+            } else {
+                // Permission denied, handle the scenario accordingly
+                Toast.makeText(this, "Write storage permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
     /* Initialize the elements */
     private void initializeElements() {
         viewPager = (VerticalViewPager) findViewById(R.id.viewPager);
@@ -113,31 +177,25 @@ public class SocialInterface extends FragmentActivity {
         decisions = findViewById(R.id.decision);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permiso concedido, puedes acceder al archivo token.txt aquí
-                readUser();
-
-            } else {
-                // Permiso denegado, maneja el escenario en consecuencia
-            }
-        }
-    }
 
     private void getPhotos() {
+        System.out.println("Funcion getPhotos antes del Thread"+token);
         new Thread(new Runnable() {
             @Override
             public void run() {
+
                 OkHttpClient client = new OkHttpClient();
-                Request request = new Request.Builder()
+                Request.Builder requestBuilder = new Request.Builder()
                         .url("http://5.75.251.56:7070/friendPhotos")
-                        .header("Authorization", token)
-                        .get()
-                        .build();
-                System.out.println(token);
+                        .addHeader("content-type", "application/json");
+
+                // Verificar si el token no es nulo y agregarlo al encabezado
+                if (token != null) {
+                    requestBuilder.addHeader("Authorization", token);
+                    System.out.println("Funcion getPhotos: "+token);
+                }
+
+                Request request = requestBuilder.get().build();
                 try {
                     Response response = client.newCall(request).execute();
                     if (response.isSuccessful()) {
@@ -225,17 +283,23 @@ public class SocialInterface extends FragmentActivity {
 
     /*Method to read the login token for use in the activity*/
     private void readUser() {
-        File filename = new File(getFilesDir(), "token.txt");
+        File file = new File(getFilesDir(), "token.txt");
         try {
-            FileReader reader = new FileReader(filename);
+            if (!file.exists()) {
+                return;
+            }
+            FileReader reader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(reader);
-            token = bufferedReader.readLine();
+            String tokenValue = bufferedReader.readLine();
             bufferedReader.close();
             reader.close();
+
+            if (tokenValue != null && !tokenValue.isEmpty()) {
+                token = tokenValue;
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 
