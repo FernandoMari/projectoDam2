@@ -35,14 +35,7 @@
     <string name="new_email_adress">न्यू ईमेल पता</string>
     <string name="search_friends">दोस्तों को खोजें</string>
     <string name="select_your_language">अपनी भाषा का चयन करें</string>
-    <string name="spanish">स्पैनिश</string>
-    <string name="english">अंग्रेज़ी</string>
-    <string name="chinese">चीनी</string>
     <string name="friends">दोस्त</string>
-    <string name="catalan">कातालान</string>
-    <string name="hindi">हिंदी</string>
-    <string name="german">जर्मन</string>
-    <string name="portuguese">पुर्तगाली</string>
     <string name="you_lost">तुम हारे</string>
     <string name="you_win">आप जीतते हैं</string>
     <string name="draw">खींचना</string>

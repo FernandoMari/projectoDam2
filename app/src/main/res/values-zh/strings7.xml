@@ -36,14 +36,7 @@
     <string name="new_email_adress">新邮件</string>
     <string name="search_friends">搜索好友</string>
     <string name="select_your_language">选择语言</string>
-    <string name="spanish">西班牙语</string>
-    <string name="english">英语</string>
-    <string name="chinese">中国人</string>
     <string name="friends">朋友们</string>
-    <string name="catalan">加泰罗尼亚语</string>
-    <string name="hindi">印地语</string>
-    <string name="german">德语</string>
-    <string name="portuguese">葡萄牙语</string>
     <string name="you_lost">你输了</string>
     <string name="you_win">你赢了</string>
     <string name="draw">画</string>

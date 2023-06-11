@@ -75,6 +75,7 @@ public class ResultPhoto extends Activity {
                 System.out.println("ResultPhoto: " + textDecision1);
                 //intent2.putExtra("decision2", textoDecision2);
                 startActivity(intent2);
+                finishAffinity();
             }
         });
     }

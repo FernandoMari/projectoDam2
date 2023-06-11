@@ -35,14 +35,7 @@
     <string name="new_email_adress">Nova adreça de correu electrònic</string>
     <string name="search_friends">Buscar amics</string>
     <string name="select_your_language">Seleccioni l\'idioma</string>
-    <string name="spanish">Espanyol</string>
-    <string name="english">Anglès</string>
-    <string name="chinese">Xinès</string>
     <string name="friends">Amics</string>
-    <string name="catalan">Català</string>
-    <string name="hindi">Hindi</string>
-    <string name="german">Alemany</string>
-    <string name="portuguese">Portuguès</string>
     <string name="you_lost">Tu perds</string>
     <string name="you_win">Tu guanyes</string>
     <string name="draw">Empat</string>

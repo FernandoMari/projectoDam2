@@ -40,6 +40,11 @@ public class SettingsActivity extends Activity {
         btHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check if the network is available
+                if (!isNetworkAvailable()) {
+                    showNoInternetDialog();
+                    return; // Exit the method if there is no internet connection
+                }
                 startActivity(new Intent(SettingsActivity.this, SocialInterface.class));
                 readUser();
                 finish();
@@ -49,6 +54,11 @@ public class SettingsActivity extends Activity {
         btFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check if the network is available
+                if (!isNetworkAvailable()) {
+                    showNoInternetDialog();
+                    return; // Exit the method if there is no internet connection
+                }
                 startActivity(new Intent(SettingsActivity.this, FriendsActivity.class));
                 finish();
             }
@@ -57,6 +67,11 @@ public class SettingsActivity extends Activity {
         btProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check if the network is available
+                if (!isNetworkAvailable()) {
+                    showNoInternetDialog();
+                    return; // Exit the method if there is no internet connection
+                }
                 readUser();
                 startActivity(new Intent(SettingsActivity.this, ProfileActivity.class));
                 finish();
@@ -66,6 +81,11 @@ public class SettingsActivity extends Activity {
         btPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check if the network is available
+                if (!isNetworkAvailable()) {
+                    showNoInternetDialog();
+                    return; // Exit the method if there is no internet connection
+                }
                 readUser();
                 startActivity(new Intent(SettingsActivity.this, PasswordActivity.class));
                 finish();
@@ -83,6 +103,11 @@ public class SettingsActivity extends Activity {
         btEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check if the network is available
+                if (!isNetworkAvailable()) {
+                    showNoInternetDialog();
+                    return; // Exit the method if there is no internet connection
+                }
                 startActivity(new Intent(SettingsActivity.this, EmailActivity.class));
             }
         });
@@ -104,9 +129,12 @@ public class SettingsActivity extends Activity {
         btlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check if the network is available
+                if (!isNetworkAvailable()) {
+                    showNoInternetDialog();
+                    return; // Exit the method if there is no internet connection
+                }
                 clearNamePref();
-
-
                 startActivity(new Intent(SettingsActivity.this, MainActivity.class));
                 //change the checkbox in false for the logout the app
                 SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);

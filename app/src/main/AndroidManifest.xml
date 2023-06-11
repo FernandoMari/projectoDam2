@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-
-
 
 
     <application
@@ -22,12 +24,13 @@
         android:theme="@style/Theme.Decisions2"
         android:usesCleartextTraffic="true"
         android:enableOnBackInvokedCallback="true"
+
         tools:targetApi="33">
         <activity
             android:name=".PublicDecision.CameraActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.app.lib_name"
@@ -76,6 +79,7 @@
         <activity
             android:name=".PublicDecision.ResultPhoto"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.lib_name"
@@ -84,6 +88,7 @@
         <activity
             android:name=".Games.ElementsGameOnline"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.lib_name"
@@ -92,6 +97,7 @@
         <activity
             android:name=".Settings.LanguageActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.lib_name"
@@ -100,6 +106,7 @@
         <activity
             android:name=".Games.ChooseModality"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.lib_name"
@@ -108,6 +115,7 @@
         <activity
             android:name=".Games.QuestionQuizGame"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.lib_name"
@@ -116,6 +124,7 @@
         <activity
             android:name=".Games.PlayOfflineActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.lib_name"
@@ -124,6 +133,7 @@
         <activity
             android:name=".Games.PlayOnlineActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.lib_name"
@@ -132,6 +142,7 @@
         <activity
             android:name=".Games.PenaltisGame"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.lib_name"
@@ -140,6 +151,7 @@
         <activity
             android:name=".Games.ElementsGame"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.lib_name"
@@ -148,6 +160,7 @@
         <activity
             android:name=".Games.ResultGame"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.lib_name"
@@ -155,16 +168,9 @@
         </activity>
 
         <activity
-            android:name=".ThemeActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustPan">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".Friends.FriendsActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.lib_name"
@@ -172,6 +178,7 @@
         </activity>
         <activity
             android:name=".Settings.SettingsActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -179,6 +186,7 @@
         </activity>
         <activity
             android:name=".Settings.ProfileActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -187,6 +195,7 @@
         </activity>
         <activity
             android:name=".Settings.PasswordActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -195,6 +204,7 @@
         </activity>
         <activity
             android:name=".Settings.GuideActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -205,6 +215,7 @@
 
         <activity
             android:name=".Friends.AddFriendsActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -213,6 +224,7 @@
         </activity>
         <activity
             android:name=".Friends.RemoveFriendsActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -221,6 +233,7 @@
         </activity>
         <activity
             android:name=".Friends.RequestsFriendsActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -229,6 +242,7 @@
         </activity>
         <activity
             android:name=".SocialInterface"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -237,6 +251,7 @@
         </activity>
         <activity
             android:name=".LoginAndRegister.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:windowSoftInputMode="adjustPan"
             android:fitsSystemWindows="true">
@@ -246,6 +261,7 @@
         </activity>
         <activity
             android:name=".Settings.EmailActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -254,6 +270,7 @@
         </activity>
         <activity
             android:name=".Settings.CreatorsActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
             <meta-data
@@ -262,6 +279,7 @@
         </activity>
         <activity
             android:name=".LoginAndRegister.Register"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -269,6 +287,7 @@
         </activity>
         <activity
             android:name=".ChargingScreen"
+            android:screenOrientation="portrait"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"

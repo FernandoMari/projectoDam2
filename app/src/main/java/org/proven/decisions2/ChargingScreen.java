@@ -1,7 +1,12 @@
 package org.proven.decisions2;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -51,6 +56,11 @@ public class ChargingScreen extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                // Check if the network is available
+                if (!isNetworkAvailable()) {
+                    showNoInternetDialog();
+                    return; // Exit the method if there is no internet connection
+                }
                 //Create an Intent to move on to the next activity
                 Intent intent = new Intent(ChargingScreen.this, MainActivity.class);
                 //Start the new activity
@@ -59,5 +69,53 @@ public class ChargingScreen extends Activity {
                 finish();
             }
         }, Duration);
+    }
+
+    //Return if is network available
+    private boolean isNetworkAvailable() {
+        // Get the ConnectivityManager system service
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        // Get the active network info
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        // Check if network info is not null and network is connected
+        return networkInfo != null && networkInfo.isConnected();
+    }
+
+    //Show a dialog for internet connection error
+    private void showNoInternetDialog() {
+        // Create an AlertDialog builder with the MainActivity context
+        AlertDialog.Builder builder = new AlertDialog.Builder(ChargingScreen.this);
+        // Set the title of the dialog
+        builder.setTitle(R.string.no_internet_connection);
+        // Set the message of the dialog
+        builder.setMessage(R.string.check_your_connection);
+
+        // Set the positive button for retrying
+        builder.setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Check if network is available
+                if (isNetworkAvailable()) {
+                    dialogInterface.dismiss();
+                } else {
+                    showNoInternetDialog();
+                }
+            }
+        });
+
+        // Set the negative button for canceling
+        builder.setNegativeButton(R.string.close_app, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                finishAffinity();
+            }
+        });
+
+        // Create and show the dialog
+        AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false); // Prevent the dialog from being closed by touching outside of it
+        dialog.show();
     }
 }

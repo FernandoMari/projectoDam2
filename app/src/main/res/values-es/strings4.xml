@@ -36,14 +36,7 @@
     <string name="new_email_adress">Nuevo correo</string>
     <string name="search_friends">Buscar amigos</string>
     <string name="select_your_language">Selecciona el idioma</string>
-    <string name="spanish">Español</string>
-    <string name="english">Inglés</string>
-    <string name="chinese">Chino</string>
     <string name="friends">Amigos</string>
-    <string name="catalan">Catalán</string>
-    <string name="hindi">Hindi</string>
-    <string name="german">Alemán</string>
-    <string name="portuguese">Portugués</string>
     <string name="you_lost">Has perdido</string>
     <string name="you_win">Has ganado</string>
     <string name="draw">Empate</string>

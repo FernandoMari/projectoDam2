@@ -35,14 +35,7 @@
     <string name="new_email_adress">Neue Email Adresse</string>
     <string name="search_friends">Freunde suchen</string>
     <string name="select_your_language">Wähle deine Sprache</string>
-    <string name="spanish">Spanisch</string>
-    <string name="english">Englisch</string>
-    <string name="chinese">Chinesisch</string>
     <string name="friends">Freunde</string>
-    <string name="catalan">Katalanisch</string>
-    <string name="hindi">Hindi</string>
-    <string name="german">Deutsch</string>
-    <string name="portuguese">Portugiesisch</string>
     <string name="you_lost">Du verlierst</string>
     <string name="you_win">Du gewinnst</string>
     <string name="draw">Binden</string>
@@ -359,5 +352,5 @@
     <string name="restore_password">Passwort wiederherstellen</string>
     <string name="your_code_is">Ihr Code zum Zurücksetzen Ihres Passworts lautet:</string>
     <string name="cc_license">Creative commons license</string>
-    <string name="cc_licence_text"></string>
+    <string name="cc_licence_text">Dieses Werk ist unter der Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)-Lizenz lizenziert.\n\nEs steht Ihnen frei:\n\n· Teilen: Das Material in einem beliebigen Medium oder Format kopieren und weiterverbreiten.\n · Anpassen: Das Material neu mischen, transformieren und darauf aufbauen.\n\nUnter den folgenden Bedingungen:\n\n· Namensnennung: Sie müssen eine entsprechende Quellenangabe angeben, einen Link zur Lizenz angeben und angeben, ob Änderungen vorgenommen wurden. Sie können dies in jeder angemessenen Weise tun, jedoch nicht in einer Weise, die den Eindruck erweckt, dass der Lizenzgeber Sie oder Ihre Nutzung befürwortet.\n· Nichtkommerziell: Sie dürfen das Material nicht für kommerzielle Zwecke verwenden.\n· Keine zusätzlichen Einschränkungen: Sie dürfen sich nicht bewerben rechtliche Bestimmungen oder technische Maßnahmen, die andere rechtlich daran hindern, alles zu tun, was die Lizenz erlaubt.\n\nWeitere Informationen zu dieser Lizenz finden Sie auf der Creative Commons-Website unter https://creativecommons.org/licenses/by-nc/4.0/.</string>
 </resources>

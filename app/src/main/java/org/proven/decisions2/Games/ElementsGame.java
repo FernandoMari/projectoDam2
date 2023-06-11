@@ -203,7 +203,7 @@ public class ElementsGame extends Activity {
                     Intent intent2 = new Intent(ElementsGame.this, ResultGame.class);
                     intent2.putExtra("decision1", textoDecision1);
                     intent2.putExtra("decision2", textoDecision2);
-                    intent.putExtra("result", value);
+                    intent2.putExtra("result", value);
                     startActivity(intent2);
                     finish();
                 }

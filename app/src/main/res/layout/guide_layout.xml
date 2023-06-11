@@ -90,29 +90,41 @@
 
     </RelativeLayout>
 
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:layout_below="@+id/header"
-        android:layout_above="@id/footer"
-        android:overScrollMode="never"
-        android:scrollIndicators="left"
-        android:scrollbars="none">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:layout_above="@id/footer"
+        android:layout_below="@+id/header"
         android:orientation="vertical"
         android:overScrollMode="never"
-        android:scrollbars="vertical"
         android:scrollIndicators="left"
-        android:layout_below="@+id/header"
-        android:layout_above="@id/footer"
+        android:scrollbars="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
         >
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/footer"
+        android:layout_below="@+id/header"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:scrollIndicators="left"
+        android:scrollbars="none"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/footer"
+            android:layout_below="@+id/header"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:scrollIndicators="left"
+            android:scrollbars="vertical"
+            >
 
             <ScrollView
                 android:id="@+id/scroll_view"
@@ -120,17 +132,17 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/scrollviewPenaltis"
                 android:layout_centerHorizontal="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
                 android:overScrollMode="never"
                 android:scrollIndicators="left"
                 android:scrollbars="none">
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/GuideElements"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:onClick="expandElements"
+                    app:strokeColor="@color/blue"
+                    app:strokeWidth="2dp"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="20dp"
                     app:contentPadding="20dp">
@@ -154,7 +166,7 @@
 
                         <TextView
                             android:id="@+id/tvDetails"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/montserrat_medium"
@@ -200,11 +212,10 @@
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
 
             </ScrollView>
-
 
 
             <ScrollView
@@ -212,20 +223,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="30dp"
                 android:fillViewport="true"
                 android:overScrollMode="never"
                 android:scrollIndicators="left"
                 android:scrollbars="none">
 
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/GuidePenaltis"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:onClick="expandPenaltis"
+                    app:strokeColor="@color/blue"
+                    app:strokeWidth="2dp"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="20dp"
                     app:contentPadding="20dp">
@@ -249,7 +260,7 @@
 
                         <TextView
                             android:id="@+id/tvDetailsPenaltis"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/montserrat_medium"
@@ -261,30 +272,28 @@
 
                         <LinearLayout
                             android:id="@+id/layoutImgPenaltis"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_marginTop="20dp"
                             android:animateLayoutChanges="true"
                             android:gravity="center"
                             android:orientation="horizontal"
-                            android:visibility="gone"
-                            android:layout_marginTop="20dp">
+                            android:visibility="gone">
 
                             <ImageView
                                 android:id="@+id/robot"
-                                android:layout_width="420dp"
-                                android:layout_height="340dp"
-                                android:scaleType="centerCrop"
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
                                 android:src="@drawable/robot"></ImageView>
 
                         </LinearLayout>
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
             </ScrollView>
-
 
 
             <ScrollView
@@ -293,20 +302,20 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/footer"
                 android:layout_centerHorizontal="true"
-                android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="30dp"
                 android:fillViewport="true"
                 android:overScrollMode="never"
                 android:scrollIndicators="left"
                 android:scrollbars="none">
 
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/GuideQuiz"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:onClick="expandQuiz"
+                    app:strokeColor="@color/blue"
+                    app:strokeWidth="2dp"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="20dp"
                     app:contentPadding="20dp">
@@ -330,7 +339,7 @@
 
                         <TextView
                             android:id="@+id/tvDetailsQuiz"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/montserrat_medium"
@@ -342,7 +351,7 @@
 
                         <LinearLayout
                             android:id="@+id/layoutImgQuiz"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:animateLayoutChanges="true"
@@ -360,12 +369,14 @@
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
             </ScrollView>
 
         </LinearLayout>
 
     </ScrollView>
+
+    </LinearLayout>
 
 </RelativeLayout>

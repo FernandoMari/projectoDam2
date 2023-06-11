@@ -51,7 +51,6 @@ public class SocialInterface extends FragmentActivity {
     // User authentication token
     String token;
     TextView decisions;
-    SecureConnection secureConnection = new SecureConnection();
     private int[] imageIds; // Arreglo de IDs de imágenes
 
 
